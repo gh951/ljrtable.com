@@ -1,658 +1,524 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LJR TAVIVI — The Living Table</title>
+<meta name="theme-color" content="#0A0A0A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!--
+==================================================================
+ LJR TAVIVI · GitHub Pages ready
+------------------------------------------------------------------
+ 영상/사진: 이 파일 옆 assets/ 폴더에 아래 이름으로 넣으면 자동 표시
+   hero / dining / conference / four / two / floor / ai  (.mp4 또는 .jpg)
+ 언론: 아래 <script> PRESS 배열에 {o:매체, u:링크} 추가
+ 기능: FEATURES 배열 수정 · 총판: DISTRIB 배열 수정
+==================================================================
+-->
 <style>
   :root{
-    --ink:#0A0A0A;          /* Obsidian Black */
-    --ink-2:#111114;
-    --card:#1A1A1E;         /* Quantum Shadow */
-    --card-2:#212127;
-    --alab:#F8F9FA;         /* Raw Alabaster */
-    --grey:#8E8E93;         /* Titanium Grey */
-    --grey-2:#5b5b61;
-    --blue:#00E5FF;         /* Eco Kinetic Blue */
-    --gold:#E5A93B;         /* Plant Flora Gold */
-    --line:rgba(248,249,250,.09);
-    --line-blue:rgba(0,229,255,.30);
-
+    --ink:#0A0A0A; --ink-2:#111114; --card:#16161b; --card-2:#1c1c22;
+    --alab:#F8F9FA; --grey:#8E8E93; --grey-2:#5b5b61;
+    --blue:#00E5FF; --gold:#E5A93B;
+    --line:rgba(248,249,250,.10);
     --serif:'Cormorant Garamond',Georgia,serif;
     --sans:'Inter',-apple-system,"Malgun Gothic",sans-serif;
-
     --gut:clamp(22px,5vw,72px);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-  body{background:var(--ink);color:var(--alab);font-family:var(--sans);
-    font-weight:300;line-height:1.7;letter-spacing:.005em;overflow-x:hidden;
-    -webkit-font-smoothing:antialiased}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--ink);color:var(--alab);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  img{max-width:100%;display:block}
+  img,video{display:block;max-width:100%}
   ::selection{background:var(--blue);color:var(--ink)}
+  .scroller{height:100vh;overflow-y:scroll;overflow-x:hidden;scroll-snap-type:y proximity}
 
-  /* snap scroll container */
-  .scroller{height:100vh;overflow-y:scroll;overflow-x:hidden;
-    scroll-snap-type:y proximity;scroll-behavior:smooth;perspective:1px}
-  .snap{min-height:100vh;scroll-snap-align:start;position:relative;
-    display:flex;align-items:center;padding:110px var(--gut) 90px}
-  .snap.tall{align-items:flex-start;padding-top:120px}
-  .inner{width:100%;max-width:1280px;margin:0 auto}
+  /* header */
+  header{position:fixed;inset:0 0 auto 0;z-index:90;height:66px;display:flex;align-items:center;transition:background .5s,backdrop-filter .5s,border-color .5s;border-bottom:1px solid transparent}
+  header.solid{background:rgba(10,10,10,.66);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+  .nav{width:100%;max-width:1320px;margin:0 auto;padding:0 var(--gut);display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--serif);font-weight:500;font-size:21px;letter-spacing:.34em;padding-left:.34em;cursor:pointer}
+  .nav-right{display:flex;align-items:center;gap:12px}
+  .dd{position:relative}
+  .dd-btn{background:transparent;border:1px solid rgba(248,249,250,.26);color:#fff;font-family:var(--sans);font-size:11.5px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;padding:9px 16px;border-radius:40px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.3s;white-space:nowrap}
+  .dd-btn:hover,.dd.open .dd-btn{border-color:#fff}
+  .dd-btn i{font-style:normal;font-size:9px;opacity:.8;transition:transform .3s}
+  .dd.open .dd-btn i{transform:rotate(180deg)}
+  .dd-panel{position:absolute;right:0;top:calc(100% + 10px);min-width:178px;max-height:70vh;overflow-y:auto;background:rgba(14,14,17,.97);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:12px;padding:8px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(-8px);transition:.28s cubic-bezier(.2,.7,.3,1);z-index:100}
+  .dd.open .dd-panel{opacity:1;visibility:visible;transform:none}
+  .dd-panel a{font-size:12.5px;color:rgba(248,249,250,.82);padding:10px 14px;border-radius:7px;cursor:pointer;transition:.2s;letter-spacing:.01em;white-space:nowrap}
+  .dd-panel a:hover{background:rgba(248,249,250,.08);color:#fff}
+  .dd-menu{min-width:216px}
+  .dd-menu .sep{height:1px;background:var(--line);margin:6px 8px}
+  @media(max-width:480px){.dd-btn{padding:8px 13px;letter-spacing:.08em}}
 
-  /* ---- type helpers ---- */
-  .eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.4em;
-    text-transform:uppercase;color:var(--blue);display:inline-flex;align-items:center;gap:14px}
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--blue);opacity:.8}
-  .eyebrow.gold{color:var(--gold)}
-  .eyebrow.gold::before{background:var(--gold)}
-  .h-serif{font-family:var(--serif);font-weight:400;line-height:1.06;
-    letter-spacing:-.005em;font-size:clamp(32px,5.6vw,68px)}
-  .h-serif em{font-style:italic;color:var(--gold)}
-  .h-serif .b{color:var(--blue);font-style:normal}
-  .body{color:var(--grey);font-weight:300;font-size:clamp(14px,1.35vw,16px);
-    line-height:1.85;max-width:60ch}
-  .data-num{font-family:var(--sans);font-weight:600;letter-spacing:-.02em}
-  .mono{font-variant-numeric:tabular-nums}
+  .dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:80;display:flex;flex-direction:column;gap:13px}
+  .dots button{width:7px;height:7px;border-radius:50%;border:1px solid rgba(248,249,250,.5);background:transparent;cursor:pointer;padding:0;transition:.35s}
+  .dots button.on{background:#fff;border-color:#fff;transform:scale(1.25)}
+  @media(max-width:960px){.dots{display:none}}
 
-  /* ---- fixed header ---- */
-  header{position:fixed;inset:0 0 auto 0;z-index:80;height:72px;
-    display:flex;align-items:center;transition:background .5s,border-color .5s,backdrop-filter .5s;
-    border-bottom:1px solid transparent}
-  header.solid{background:rgba(10,10,10,.72);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
-  .nav{width:100%;max-width:1280px;margin:0 auto;padding:0 var(--gut);
-    display:flex;align-items:center;justify-content:space-between}
-  .logo{font-family:var(--serif);font-weight:500;font-size:23px;letter-spacing:.34em;padding-left:.34em}
-  .logo small{font-size:9px;letter-spacing:.34em;color:var(--grey);display:block;margin-top:-4px;font-family:var(--sans)}
-  .menu{display:flex;gap:34px;align-items:center}
-  .menu a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);transition:color .3s}
-  .menu a:hover{color:var(--alab)}
-  .cta{border:1px solid var(--blue);color:var(--blue);padding:9px 20px;border-radius:2px;
-    font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;transition:.4s}
-  .cta:hover{background:var(--blue);color:var(--ink)}
-  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
-  .burger span{width:22px;height:1.5px;background:var(--alab)}
-  @media(max-width:900px){.menu .lnk{display:none}.burger{display:flex}}
+  /* panel */
+  .panel{position:relative;height:100vh;min-height:560px;scroll-snap-align:start;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .ph{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(120% 90% at 50% 30%,#12303a 0%,#0c161b 45%,var(--ink) 78%)}
+  .ph .glyph{width:64px;height:64px;border:1px solid rgba(248,249,250,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(248,249,250,.55);font-size:18px;padding-left:3px}
+  .ph .fn{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey-2)}
+  .panel video.bg{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover}
+  .scrim{position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.12) 26%,rgba(10,10,10,.10) 60%,rgba(10,10,10,.72) 100%)}
+  .pc{position:relative;z-index:4;width:100%;max-width:1000px;padding:clamp(88px,13vh,150px) var(--gut) 0;display:flex;flex-direction:column;align-items:center}
+  .pc .kicker{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#fff;opacity:.9;margin-bottom:16px}
+  .pc h2{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.01em;font-size:clamp(38px,6.4vw,80px);color:#fff;text-shadow:0 2px 40px rgba(0,0,0,.4)}
+  .pc h2 em{font-style:italic;color:var(--gold)}
+  .pc .tagline{margin-top:16px;font-size:clamp(14px,1.7vw,18px);color:rgba(248,249,250,.92);font-weight:300;max-width:34ch;text-shadow:0 1px 20px rgba(0,0,0,.5)}
+  .pc .btns{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-width:238px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:14px 26px;border-radius:40px;cursor:pointer;transition:.35s;backdrop-filter:blur(4px);border:1px solid transparent}
+  .btn-light{background:rgba(248,249,250,.92);color:var(--ink)}
+  .btn-light:hover{background:#fff}
+  .btn-dark{background:rgba(20,20,22,.55);color:#fff;border-color:rgba(248,249,250,.35)}
+  .btn-dark:hover{background:rgba(20,20,22,.8)}
+  @media(max-width:560px){.btn{min-width:80vw}}
+  .pfoot{position:absolute;z-index:4;bottom:26px;left:0;right:0;padding:0 var(--gut);font-size:11px;color:rgba(248,249,250,.72)}
+  .pfoot b{color:#fff;font-weight:500}
 
-  /* ---- right-side snap dots ---- */
-  .dots{position:fixed;right:26px;top:50%;transform:translateY(-50%);z-index:70;
-    display:flex;flex-direction:column;gap:14px}
-  .dots button{width:8px;height:8px;border-radius:50%;border:1px solid var(--grey-2);
-    background:transparent;cursor:pointer;padding:0;transition:.35s}
-  .dots button.on{background:var(--blue);border-color:var(--blue);box-shadow:0 0 10px var(--blue)}
-  @media(max-width:900px){.dots{display:none}}
-
-  /* ---- reveal ---- */
-  .rv{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.7,.3,1),transform 1s cubic-bezier(.2,.7,.3,1)}
-  .rv.in{opacity:1;transform:none}
-  .rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.36s}
-
-  /* ================= PAGE 1 · HERO ================= */
-  #hero{background:radial-gradient(130% 100% at 50% 30%,#0d1418 0%,#0a0d0f 40%,var(--ink) 74%);
-    text-align:center;flex-direction:column;justify-content:center;overflow:hidden}
-  .hero-glow{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.6;
-    background:
-      radial-gradient(38% 46% at 50% 34%,rgba(0,229,255,.14),transparent 62%),
-      radial-gradient(30% 40% at 66% 24%,rgba(229,169,59,.07),transparent 60%);
-    filter:blur(4px);animation:breathe 8s ease-in-out infinite alternate}
-  @keyframes breathe{from{opacity:.42;transform:scale(1)}to{opacity:.72;transform:scale(1.05)}}
-  .hero-curtain{position:absolute;left:0;right:0;bottom:0;height:44%;z-index:0;opacity:.10;
-    background:repeating-linear-gradient(0deg,transparent 0 24px,var(--blue) 24px 25px);
-    -webkit-mask-image:linear-gradient(to top,#000,transparent);mask-image:linear-gradient(to top,#000,transparent);
-    animation:fall 7s linear infinite}
-  @keyframes fall{from{background-position-y:0}to{background-position-y:25px}}
-  .hero-in{position:relative;z-index:2;max-width:960px;margin:0 auto}
-  #hero .eyebrow{justify-content:center;margin-bottom:30px}
-  #hero h1{font-family:var(--serif);font-weight:400;line-height:1.04;
-    font-size:clamp(38px,8vw,96px);letter-spacing:-.01em}
-  #hero h1 em{font-style:italic;color:var(--gold)}
-  #hero .sub{margin:32px auto 0;max-width:640px;color:var(--grey);
-    font-size:clamp(14px,1.7vw,17px);line-height:1.85}
-  #hero .sub b{color:var(--alab);font-weight:400}
-  .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:44px}
-  .btn{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.16em;
-    text-transform:uppercase;padding:15px 30px;border-radius:2px;cursor:pointer;
-    border:1px solid transparent;transition:.5s cubic-bezier(.2,.7,.3,1)}
-  .btn-out{border-color:rgba(248,249,250,.3);color:var(--alab)}
-  .btn-out:hover{background:var(--blue);border-color:var(--blue);color:var(--ink)}
-  .btn-solid{background:var(--blue);color:var(--ink);font-weight:500}
-  .btn-solid:hover{background:#5cf0ff;transform:translateY(-2px)}
-  .hero-stat{margin-top:52px;display:flex;gap:clamp(24px,5vw,64px);justify-content:center;flex-wrap:wrap}
-  .hero-stat div{display:flex;flex-direction:column;gap:4px}
-  .hero-stat .n{font-family:var(--serif);font-size:clamp(26px,3.4vw,38px);color:var(--alab)}
+  #hero .pc{padding-top:clamp(120px,20vh,220px)}
+  #hero h2{font-size:clamp(40px,8vw,104px)}
+  .hero-stat{margin-top:40px;display:flex;gap:clamp(22px,5vw,58px);justify-content:center;flex-wrap:wrap}
+  .hero-stat div{display:flex;flex-direction:column;gap:3px}
+  .hero-stat .n{font-family:var(--serif);font-size:clamp(24px,3.2vw,34px);color:#fff}
   .hero-stat .n span{color:var(--blue);font-size:.55em}
-  .hero-stat .l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-2)}
-  .cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;
-    font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--grey-2);
-    display:flex;flex-direction:column;align-items:center;gap:10px}
-  .cue::after{content:"";width:1px;height:40px;background:linear-gradient(var(--blue),transparent);
-    animation:cue 2.2s ease-in-out infinite}
+  .hero-stat .l{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,249,250,.6)}
+  .cue{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:4;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(248,249,250,.6);display:flex;flex-direction:column;align-items:center;gap:9px}
+  .cue::after{content:"";width:1px;height:36px;background:linear-gradient(#fff,transparent);animation:cue 2.2s ease-in-out infinite}
   @keyframes cue{0%{opacity:0;transform:scaleY(.2);transform-origin:top}40%{opacity:1}100%{opacity:0;transform:scaleY(1);transform-origin:top}}
 
-  /* ================= generic two-column ================= */
-  .cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:center;width:100%}
-  @media(max-width:900px){.cols{grid-template-columns:1fr;gap:40px}}
-  .stage{position:relative;aspect-ratio:1/1;border:1px solid var(--line);border-radius:6px;
-    background:linear-gradient(160deg,#101014,#17171d);overflow:hidden;
-    display:flex;align-items:center;justify-content:center}
-  .stage .tag{position:absolute;left:16px;top:14px;font-size:9.5px;letter-spacing:.24em;
-    text-transform:uppercase;color:var(--grey-2)}
-  .hl-gold{color:var(--gold)}
-  .hl-blue{color:var(--blue)}
+  /* REEL · 진품 영상 */
+  .reel{background:#060608}
+  .reel .reel-bg{position:absolute;inset:0;z-index:1;background:radial-gradient(120% 90% at 50% 18%,#12303a 0%,#0b1418 55%,#060608 100%)}
+  .reel-pc{z-index:4;padding-top:clamp(84px,11vh,120px);gap:20px}
+  .reel-frame{height:min(64vh,580px);aspect-ratio:9/16;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 90px rgba(0,0,0,.65);background:#000}
+  .reel-frame iframe{width:100%;height:100%;border:0;display:block}
+  .reel-cap{font-size:clamp(14px,1.7vw,18px);color:rgba(248,249,250,.9);font-weight:300;text-align:center}
+  .reel-cap b{color:#fff;font-weight:500}
+  .reel-badge{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:8px}
+  .reel-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
 
-  /* ---- 30평 → 1평 compression svg ---- */
-  .compress svg{width:100%;height:100%}
-  .grid-cell{fill:none;stroke:rgba(248,249,250,.14);stroke-width:.5}
-  .plant{fill:var(--gold);opacity:.85}
-  .core{fill:none;stroke:var(--blue);stroke-width:1.4}
+  /* blocks */
+  .block{padding:clamp(80px,11vw,150px) var(--gut);max-width:1320px;margin:0 auto}
+  .block.alt{background:var(--ink-2)}
+  .eyebrow{font-size:11px;font-weight:500;letter-spacing:.4em;text-transform:uppercase;color:var(--blue);display:inline-flex;align-items:center;gap:14px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--blue)}
+  .eyebrow.gold{color:var(--gold)}
+  .eyebrow.gold::before{background:var(--gold)}
+  .h-serif{font-family:var(--serif);font-weight:500;line-height:1.06;font-size:clamp(30px,5vw,58px)}
+  .h-serif em{font-style:italic;color:var(--gold)}
+  .h-serif .b{color:var(--blue);font-style:normal}
+  .body{color:var(--grey);font-size:clamp(14px,1.35vw,16px);line-height:1.85;max-width:64ch}
+  .body b{color:var(--alab);font-weight:400}
 
-  /* ---- power section ---- */
-  .power-graph{width:100%;height:100%}
-  .ln-red{fill:none;stroke:#ff4d4d;stroke-width:2;stroke-dasharray:1400;stroke-dashoffset:1400}
-  .ln-red.go{animation:draw 2.2s ease forwards}
-  .ln-blue{fill:none;stroke:var(--blue);stroke-width:2;stroke-dasharray:900;stroke-dashoffset:900}
-  .ln-blue.go{animation:draw 1.6s .5s ease forwards}
-  @keyframes draw{to{stroke-dashoffset:0}}
-  .redglow{filter:drop-shadow(0 0 5px rgba(255,77,77,.6))}
-  .blueglow{filter:drop-shadow(0 0 6px rgba(0,229,255,.7))}
-  .appliance-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-  .chip{border:1px solid var(--line);border-radius:40px;padding:7px 15px;font-size:11.5px;
-    color:var(--grey);letter-spacing:.02em}
-  .chip s{color:#ff6b6b;text-decoration-color:rgba(255,107,107,.5)}
-  .spec-list{list-style:none;margin-top:26px;display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
-  .spec-list li{background:var(--ink);padding:16px 20px;display:flex;justify-content:space-between;
-    align-items:baseline;gap:16px;flex-wrap:wrap}
-  .spec-list .k{font-size:12px;letter-spacing:.06em;color:var(--grey)}
-  .spec-list .v{font-family:var(--serif);font-size:22px;color:var(--alab)}
-  .spec-list .v span{font-size:13px;color:var(--blue);margin-left:4px;font-family:var(--sans)}
+  /* FEATURES */
+  .feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:44px}
+  .feat{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:22px 20px;transition:.4s}
+  .feat:hover{border-color:rgba(0,229,255,.32);background:var(--card-2);transform:translateY(-3px)}
+  .feat .fc{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .feat .fn{font-family:var(--serif);font-size:21px;color:#fff;line-height:1.2;margin-bottom:8px}
+  .feat .fd{font-size:12.5px;color:var(--grey);line-height:1.6}
+  .feat.blue .fc{color:var(--blue)}
+  .note{margin-top:34px;font-size:11.5px;color:var(--grey-2);line-height:1.8;padding-left:16px;border-left:1px solid var(--line)}
 
-  /* ---- B2B highlight box ---- */
-  .b2b{margin-top:26px;border:1px solid rgba(229,169,59,.35);background:rgba(229,169,59,.06);
-    border-radius:4px;padding:22px 24px}
-  .b2b .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-  .b2b p{color:#e9cf9a;font-size:13.5px;line-height:1.75}
+  /* 3-VALUE */
+  .val3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:46px}
+  @media(max-width:820px){.val3{grid-template-columns:1fr}}
+  .val{background:var(--ink);padding:38px 30px}
+  .val .vk{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}
+  .val .vh{font-family:var(--serif);font-weight:500;font-size:26px;line-height:1.15;color:#fff;margin-bottom:12px}
+  .val .vh em{font-style:normal;color:var(--gold)}
+  .val p{font-size:13px;color:var(--grey);line-height:1.7}
 
-  /* ---- security section ---- */
-  .sec-diagram{position:relative}
-  .pulse-core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-  .pulse-core .ring{position:absolute;width:60px;height:60px;border:1px solid var(--blue);border-radius:50%;
-    animation:pulse 3s ease-out infinite}
-  .pulse-core .ring:nth-child(2){animation-delay:1s}
-  .pulse-core .ring:nth-child(3){animation-delay:2s}
-  @keyframes pulse{0%{transform:scale(.4);opacity:.9}100%{transform:scale(4.4);opacity:0}}
-  .chip-core{width:74px;height:74px;border:1px solid var(--line-blue);border-radius:8px;
-    display:flex;align-items:center;justify-content:center;background:rgba(0,229,255,.05);position:relative;z-index:2}
-  .chip-core b{font-family:var(--serif);color:var(--blue);font-size:20px;letter-spacing:.1em}
-
-  /* ---- AI matrix ---- */
-  .ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-top:44px}
-  .ai-card{border:1px solid var(--line);border-radius:5px;background:var(--card);padding:22px 20px;
-    transition:.4s;position:relative;overflow:hidden}
-  .ai-card:hover{border-color:var(--line-blue);background:var(--card-2);transform:translateY(-3px)}
-  .ai-card .nm{font-family:var(--serif);font-size:21px;color:var(--alab)}
-  .ai-card .st{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-top:4px}
-  .ai-card .lk{margin-top:18px;display:flex;flex-direction:column;gap:8px}
-  .ai-card .lk a{font-size:11.5px;color:var(--grey);display:flex;justify-content:space-between;
-    padding:8px 0;border-top:1px solid var(--line);transition:color .3s}
-  .ai-card .lk a:hover{color:var(--blue)}
-  .ai-card .lk a span{color:var(--grey-2);transition:.3s}
-  .ai-card .lk a:hover span{color:var(--blue);transform:translateX(3px)}
-
-  /* ---- vortex chart ---- */
-  .vortex{width:100%;height:100%}
-  .vx-line{fill:none;stroke:var(--blue);stroke-width:1.6;stroke-dasharray:1200;stroke-dashoffset:1200}
-  .vx-line.go{animation:draw 2.4s ease forwards}
-  .vx-thresh{fill:none;stroke:#ff5c5c;stroke-width:1;stroke-dasharray:5 5;opacity:.5}
-  .timeline{display:flex;justify-content:space-between;margin-bottom:20px;gap:8px;flex-wrap:wrap}
-  .timeline .t{font-size:10.5px;color:var(--grey-2);letter-spacing:.04em}
-  .timeline .t b{display:block;color:var(--gold);font-family:var(--serif);font-size:16px;font-weight:500}
-
-  /* ================= PAGE 3 · LINEUP ================= */
-  .lineup{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
-  @media(max-width:900px){.lineup{grid-template-columns:1fr}}
-  .prod{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--card);
-    display:flex;flex-direction:column;transition:.5s}
-  .prod:hover{border-color:var(--line-blue);transform:translateY(-5px)}
-  .prod .pimg{aspect-ratio:4/3;background:linear-gradient(155deg,#121216,#1c1c22);
-    position:relative;display:flex;align-items:center;justify-content:center}
-  .prod .pimg .ph{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--grey-2)}
-  .prod .pimg::after{content:"";position:absolute;inset:0;
-    background:radial-gradient(120% 100% at 50% 130%,rgba(229,169,59,.10),transparent 55%)}
-  .prod .pbody{padding:26px 24px 28px;flex:1;display:flex;flex-direction:column}
-  .prod .seg{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-  .prod h3{font-family:var(--serif);font-size:26px;font-weight:500;color:var(--alab);line-height:1.2}
-  .prod .heal{font-family:var(--serif);font-style:italic;color:var(--grey);font-size:16px;margin:6px 0 16px}
-  .prod .desc{font-size:12.5px;color:var(--grey);line-height:1.7;margin-bottom:auto}
-  .prod .price{font-family:var(--serif);font-size:25px;color:var(--alab);padding-top:20px;
-    margin-top:20px;border-top:1px solid var(--line)}
-  .prod .price span{font-size:13px;color:var(--grey);font-family:var(--sans);display:block;letter-spacing:.04em}
-
-  /* ================= PAGE 4 · GLOBAL ================= */
-  .globe-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,64px);align-items:center;width:100%}
-  @media(max-width:900px){.globe-wrap{grid-template-columns:1fr}}
-  .globe{aspect-ratio:1/1;border-radius:50%;position:relative;overflow:hidden;
-    background:radial-gradient(circle at 38% 32%,#12303a,#0a0f12 70%);border:1px solid var(--line)}
-  .globe::before{content:"";position:absolute;inset:0;border-radius:50%;
-    background:repeating-linear-gradient(90deg,transparent 0 28px,rgba(0,229,255,.10) 28px 29px),
-      repeating-linear-gradient(0deg,transparent 0 28px,rgba(0,229,255,.07) 28px 29px);
-    animation:spin 40s linear infinite;-webkit-mask:radial-gradient(circle,#000 60%,transparent 72%);mask:radial-gradient(circle,#000 60%,transparent 72%)}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .globe .beam{position:absolute;left:50%;top:50%;width:46%;height:1px;transform-origin:left center;
-    background:linear-gradient(90deg,var(--blue),transparent);opacity:.8;transition:transform .6s}
-  .mk-tabs{display:flex;flex-direction:column;gap:10px}
-  .mk{border:1px solid var(--line);border-radius:5px;padding:20px 22px;cursor:pointer;
-    transition:.4s;background:var(--card)}
-  .mk:hover,.mk.on{border-color:var(--line-blue);background:var(--card-2)}
-  .mk .flag{font-size:20px;margin-bottom:10px;letter-spacing:.1em}
-  .mk h4{font-family:var(--serif);font-size:21px;font-weight:500;color:var(--alab);margin-bottom:2px}
-  .mk .rg{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-  .mk .pt{font-size:12.5px;color:var(--grey);line-height:1.7;display:none}
-  .mk.on .pt{display:block}
-  .mk .lang{font-size:10px;color:var(--grey-2);letter-spacing:.1em;margin-top:10px;display:none}
-  .mk.on .lang{display:block}
-
-  /* ================= PAGE 5 · ORDER ================= */
-  .order-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,70px);align-items:center;width:100%}
-  @media(max-width:900px){.order-grid{grid-template-columns:1fr}}
-  .config{border:1px solid var(--line);border-radius:6px;background:var(--card);padding:34px 32px}
-  .config h3{font-family:var(--serif);font-size:26px;font-weight:500;margin-bottom:4px}
-  .config .ch{font-size:12.5px;color:var(--grey);margin-bottom:26px}
-  .opt-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin:22px 0 10px}
-  .opt-row{display:flex;gap:8px;flex-wrap:wrap}
-  .opt{border:1px solid var(--line);border-radius:3px;padding:11px 16px;font-size:12.5px;color:var(--grey);
-    cursor:pointer;transition:.3s;background:var(--ink)}
-  .opt.on{border-color:var(--blue);color:var(--alab);background:rgba(0,229,255,.06)}
-  .check{display:flex;align-items:center;gap:12px;margin-top:22px;cursor:pointer;user-select:none}
-  .check .box{width:20px;height:20px;border:1px solid var(--line);border-radius:3px;
-    display:flex;align-items:center;justify-content:center;transition:.3s;color:var(--ink);font-size:12px}
-  .check.on .box{background:var(--blue);border-color:var(--blue)}
-  .check span{font-size:13px;color:var(--grey)}
-  .total{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);
-    display:flex;justify-content:space-between;align-items:baseline}
-  .total .tl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
-  .total .tv{font-family:var(--serif);font-size:34px;color:var(--alab)}
-  .order-btns{display:flex;flex-direction:column;gap:12px;margin-top:26px}
-  .order-btns .btn{width:100%;justify-content:center}
-
-  /* warranty cards */
-  .warr{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:44px}
-  .wcard{border:1px solid var(--line);border-radius:5px;background:var(--card);padding:28px 24px}
-  .wcard .seal{width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:var(--serif);
-    font-size:18px;margin-bottom:20px}
-  .wcard h4{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:8px}
-  .wcard p{font-size:12.5px;color:var(--grey);line-height:1.7}
-
-  /* footer */
-  footer{background:var(--ink);border-top:1px solid var(--line);padding:64px var(--gut) 46px}
-  .foot{max-width:1280px;margin:0 auto}
-  .lang-bar{display:flex;gap:22px;flex-wrap:wrap;padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid var(--line)}
-  .lang-bar a{font-size:12.5px;color:var(--grey);letter-spacing:.04em;transition:color .3s;cursor:pointer}
-  .lang-bar a:hover,.lang-bar a.on{color:var(--alab)}
-  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:34px;align-items:flex-start}
-  .foot .flogo{font-family:var(--serif);font-size:30px;letter-spacing:.3em;padding-left:.3em;margin-bottom:12px}
-  .foot .ft{font-size:12px;color:var(--grey);max-width:52ch;line-height:1.8}
-  .foot .ft b{color:var(--grey-2);font-weight:400}
-  .foot-mini{margin-top:40px;font-size:10.5px;color:var(--grey-2);letter-spacing:.05em;line-height:1.8}
-
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none!important}
-    .rv{opacity:1;transform:none;transition:none}
-    .ln-red,.ln-blue,.vx-line{stroke-dashoffset:0}
-    .scroller{scroll-behavior:auto}
+  /* POWER STAIRCASE */
+  .stair{margin-top:20px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:end}
+  @media(max-width:820px){.stair{grid-template-columns:1fr;gap:8px}}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:7px;padding:18px 16px;transition:.5s;position:relative}
+  .step:hover{border-color:rgba(0,229,255,.35)}
+  .step .su{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-2);margin-bottom:8px}
+  .step .sv{font-family:var(--serif);font-size:22px;color:#fff;line-height:1.1}
+  .step .sv span{font-size:12px;color:var(--grey);font-family:var(--sans);display:block;margin-top:4px}
+  .step.peak{border-color:var(--gold);background:linear-gradient(180deg,rgba(229,169,59,.10),var(--card))}
+  .step.peak .sv{color:var(--gold)}
+  @media(min-width:821px){
+    .step:nth-child(1){transform:translateY(48px)}
+    .step:nth-child(2){transform:translateY(36px)}
+    .step:nth-child(3){transform:translateY(24px)}
+    .step:nth-child(4){transform:translateY(12px)}
+    .step:nth-child(5){transform:translateY(0)}
   }
+
+  /* PRESS */
+  .press-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px;margin-top:44px}
+  .pcard{border:1px solid var(--line);border-radius:7px;background:var(--card);padding:22px 20px;transition:.4s;display:flex;flex-direction:column;gap:12px;min-height:130px}
+  .pcard:hover{border-color:rgba(248,249,250,.26);transform:translateY(-3px)}
+  .pcard .po{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  .pcard .pt{font-family:var(--serif);font-size:22px;line-height:1.2;color:#fff}
+  .pcard .plink{margin-top:auto;font-size:11.5px;color:var(--grey);padding-top:12px;border-top:1px solid var(--line);display:flex;justify-content:space-between}
+  .pcard:hover .plink{color:var(--blue)}
+  .pcard.empty{align-items:center;justify-content:center;border-style:dashed;color:var(--grey-2);font-size:11.5px;letter-spacing:.1em;gap:0}
+
+  /* AI proof */
+  .ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:13px;margin-top:44px}
+  .ai-card{border:1px solid var(--line);border-radius:7px;background:var(--card);padding:20px 18px;transition:.4s}
+  .ai-card:hover{border-color:rgba(0,229,255,.35);transform:translateY(-3px)}
+  .ai-card .nm{font-family:var(--serif);font-size:20px;color:#fff}
+  .ai-card .lk{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+  .ai-card .lk a{font-size:11px;color:var(--grey);display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--line);transition:color .3s}
+  .ai-card .lk a:hover{color:var(--blue)}
+
+  /* TECH (CGO / MUFE) */
+  .tech-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px}
+  @media(max-width:700px){.tech-row{grid-template-columns:1fr}}
+  .tech{border:1px solid var(--line);border-radius:8px;background:var(--card);padding:30px 28px;transition:.4s;display:block}
+  .tech:hover{border-color:rgba(0,229,255,.35);background:var(--card-2);transform:translateY(-3px)}
+  .tech .tk{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+  .tech .tn{font-family:var(--serif);font-size:25px;color:#fff;margin-bottom:8px}
+  .tech .td{font-size:12.5px;color:var(--grey);line-height:1.7}
+  .tech .tgo{margin-top:16px;font-size:11.5px;color:var(--gold);letter-spacing:.06em}
+
+  /* DISTRIBUTOR */
+  .dist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:44px}
+  .dcard{border:1px solid var(--line);border-radius:7px;background:var(--card);padding:20px 18px;transition:.4s;display:flex;flex-direction:column;gap:6px}
+  .dcard:hover{border-color:rgba(229,169,59,.4);transform:translateY(-3px)}
+  .dcard .df{font-size:22px;line-height:1}
+  .dcard .dn{font-size:14px;color:#fff;margin-top:4px}
+  .dcard .ds{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:6px;display:flex;align-items:center;gap:6px}
+  .dcard .ds::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+  .dcard .dq{margin-top:10px;font-size:11px;color:var(--grey);padding-top:10px;border-top:1px solid var(--line)}
+  .dcard:hover .dq{color:var(--blue)}
+
+  /* pricing */
+  .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid var(--line);margin-top:46px}
+  .price-cell{padding:28px 24px;border-bottom:1px solid var(--line)}
+  .price-cell:not(:last-child){border-right:1px solid var(--line)}
+  .price-cell .pn{font-family:var(--serif);font-size:22px;color:#fff;margin-bottom:6px}
+  .price-cell .pv{font-family:var(--serif);font-size:19px;color:var(--gold)}
+  .price-cell .ps{font-size:12px;color:var(--grey);margin-top:10px;line-height:1.6}
+  @media(max-width:560px){.price-cell:not(:last-child){border-right:0}}
+  .order-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:44px}
+  .order-btns .btn{min-width:auto;padding:15px 32px}
+  .order-btns .btn-blue{background:var(--blue);color:var(--ink)}
+  .order-btns .btn-blue:hover{background:#5cf0ff}
+  .order-btns .btn-line{border:1px solid var(--line);color:#fff;background:transparent}
+  .order-btns .btn-line:hover{border-color:#fff}
+
+  footer{border-top:1px solid var(--line);padding:60px var(--gut) 44px}
+  .foot{max-width:1320px;margin:0 auto}
+  .lang-bar{display:flex;gap:16px 22px;flex-wrap:wrap;padding-bottom:26px;margin-bottom:26px;border-bottom:1px solid var(--line)}
+  .lang-bar a{font-size:12.5px;color:var(--grey);cursor:pointer;transition:color .3s}
+  .lang-bar a:hover,.lang-bar a.on{color:#fff}
+  .flogo{font-family:var(--serif);font-size:28px;letter-spacing:.3em;padding-left:.3em;margin-bottom:12px}
+  .foot .ft{font-size:12px;color:var(--grey);max-width:56ch;line-height:1.8}
+  .foot-mini{margin-top:34px;font-size:10.5px;color:var(--grey-2);line-height:1.8}
+  .foot-mini b{color:var(--grey)}
+
+  .rv{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1)}
+  .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none;transition:none}.scroller{scroll-snap-type:none}.step{transform:none!important}}
 </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
 <header id="hdr">
   <nav class="nav">
-    <a href="#hero" class="logo" onclick="go('hero')">LJR<small>TAVIVI</small></a>
-    <div class="menu">
-      <a class="lnk" onclick="go('proof')">Science</a>
-      <a class="lnk" onclick="go('lineup')">Collection</a>
-      <a class="lnk" onclick="go('global')">Global</a>
-      <a class="lnk" onclick="go('order')">Order</a>
+    <a class="logo" onclick="go('hero')">LJR TAVIVI</a>
+    <div class="nav-right">
+      <div class="dd" id="langDD">
+        <button class="dd-btn" onclick="toggleDD('langDD',event)"><span id="langLabel">한국어</span> <i>▾</i></button>
+        <div class="dd-panel" id="langPanel"></div>
+      </div>
+      <div class="dd" id="menuDD">
+        <button class="dd-btn" onclick="toggleDD('menuDD',event)">메뉴 <i>▾</i></button>
+        <div class="dd-panel dd-menu">
+          <a onclick="go('reel')">▶ 진품 실물 영상</a>
+          <div class="sep"></div>
+          <a onclick="go('dining')">식탁 · 1,170포기</a>
+          <a onclick="go('conference')">회의실</a>
+          <a onclick="go('four')">4인용</a>
+          <a onclick="go('two')">2인용</a>
+          <a onclick="go('floor')">좌식</a>
+          <a onclick="go('ai')">AI 디자인</a>
+          <div class="sep"></div>
+          <a onclick="go('features')">기능 (Features)</a>
+          <a onclick="go('value3')">왜 LJR인가</a>
+          <a onclick="go('press')">미디어</a>
+          <a onclick="go('proof')">공학 실증</a>
+          <a onclick="go('tech')">탑재 기술</a>
+          <a onclick="go('distributor')">글로벌 총판</a>
+          <div class="sep"></div>
+          <a onclick="go('order')">주문 · 문의</a>
+        </div>
+      </div>
     </div>
-    <a class="cta" onclick="go('order')">문의 · 주문</a>
-    <div class="burger" onclick="var m=document.querySelector('.menu');m.style.display=(getComputedStyle(m).display==='none'?'flex':'flex')"><span></span><span></span><span></span></div>
   </nav>
 </header>
 
-<!-- ===== SNAP DOTS ===== -->
 <div class="dots" id="dots"></div>
 
-<!-- ===== SCROLLER ===== -->
 <main class="scroller" id="scroller">
 
-  <!-- ========== PAGE 1 · SECTION 1 · HERO ========== -->
-  <section class="snap" id="hero" data-dot="Genesis">
-    <div class="hero-glow"></div>
-    <div class="hero-curtain"></div>
-    <div class="hero-in">
-      <span class="eyebrow">The Living Table · 인류 최초의 에너지 중립 생태계</span>
-      <h1>4,500년 문명의 비용을<br><em>삭제하다.</em></h1>
-      <p class="sub">추가 전력 제로 <b>(Δ P = 0)</b>. 기저 전력 <b>20W 고정</b>으로 실내 거주 공간을 상시 자정하는 인류 최초의 에너지 중립형 물리 생태계 플랫폼, <b>LJR TAVIVI</b>.</p>
-      <div class="hero-cta">
-        <a class="btn btn-solid" onclick="go('lineup')">나만의 테이블 설계</a>
-        <a class="btn btn-out" onclick="go('proof')">9대 AI 공학 실증 →</a>
+  <!-- HERO -->
+  <section class="panel" id="hero" data-dot="LJR TAVIVI">
+    <div class="ph"><div class="glyph">▶</div><div class="fn">assets / hero.mp4</div></div>
+    <video class="bg" autoplay muted loop playsinline preload="metadata" poster="assets/hero.jpg"><source src="assets/hero.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="pc">
+      <div class="kicker">The Living Table</div>
+      <h2>물이 살아 있는<br><em>식탁.</em></h2>
+      <p class="tagline">기저 전력 20W로 공기를 씻고, 채소를 기르고, 물고기를 살립니다.</p>
+      <div class="btns">
+        <a class="btn btn-light" onclick="go('reel')">▶ 실물 영상 보기</a>
+        <a class="btn btn-dark" onclick="go('features')">무엇을 하나요</a>
       </div>
       <div class="hero-stat">
-        <div><div class="n">20<span>W</span></div><div class="l">기저 전력 고정</div></div>
-        <div><div class="n">96.9<span>%</span></div><div class="l">에너지 절감률</div></div>
-        <div><div class="n">&lt;0.1<span>%</span></div><div class="l">오염물 잔류율</div></div>
-        <div><div class="n">4,500<span>Y</span></div><div class="l">난제 파괴</div></div>
+        <div><div class="n">20<span>W</span></div><div class="l">기저 전력</div></div>
+        <div><div class="n">20<span>+</span></div><div class="l">통합 기능</div></div>
+        <div><div class="n">&lt;0.1<span>%</span></div><div class="l">오염 잔류</div></div>
+        <div><div class="n">1,170<span>P</span></div><div class="l">연간 자급</div></div>
       </div>
     </div>
     <div class="cue">Scroll</div>
   </section>
 
-  <!-- ========== PAGE 1 · SECTION 2 · SPATIAL COMPRESSION ========== -->
-  <section class="snap" id="spatial" data-dot="Spatial Grid">
-    <div class="inner">
-      <div class="cols">
-        <div class="stage compress rv">
-          <span class="tag">30py → 1py · Spatial Morph</span>
-          <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet" aria-label="30평 농지가 1평으로 응축되는 다이어그램">
-            <g id="fieldGrid" opacity=".9">
-              <!-- outer field grid -->
-              <g class="fieldG">
-                <rect class="grid-cell" x="40" y="40" width="320" height="320"/>
-                <line class="grid-cell" x1="40" y1="120" x2="360" y2="120"/><line class="grid-cell" x1="40" y1="200" x2="360" y2="200"/><line class="grid-cell" x1="40" y1="280" x2="360" y2="280"/>
-                <line class="grid-cell" x1="120" y1="40" x2="120" y2="360"/><line class="grid-cell" x1="200" y1="40" x2="200" y2="360"/><line class="grid-cell" x1="280" y1="40" x2="280" y2="360"/>
-              </g>
-              <g id="plants"></g>
-            </g>
-            <!-- condensed core -->
-            <rect class="core" id="coreRect" x="170" y="170" width="60" height="60" rx="4" opacity="0"/>
-            <text id="coreLbl" x="200" y="205" fill="#00E5FF" font-size="10" font-family="Inter" text-anchor="middle" letter-spacing="1" opacity="0">1py CORE</text>
-          </svg>
-        </div>
-        <div>
-          <span class="eyebrow rv">Section 02 · The Spatial Grid</span>
-          <h2 class="h-serif rv d1" style="margin-top:22px">거실 1평,<br>외곽 농지 <em>30평</em>을 삼키다.</h2>
-          <p class="body rv d2" style="margin-top:24px">대한민국 농가 표준 노지 유실률과 휴경지 로테이션(2모작)을 정밀 역산한 결과, 연간 <b class="hl-blue">1,170포기</b>의 고품질 식생 자급은 외곽의 금값 같은 대지 30평을 아파트 실내 전용 면적으로 편입한 것과 완벽히 동일한 물리적 성취입니다.</p>
-          <div class="b2b rv d3">
-            <div class="t">B2B · 건설사 · 시행사 독점 소구</div>
-            <p>거실 전용 1평의 LJR 빌트인 탑재만으로 30평형을 실체적 60평형 하이엔드 웰니스 가치로 격상, 세대당 프리미엄 분양가를 유도합니다. 단지 공급 시 시행 마진과 녹색건축인증 최고 등급 용적률 보너스를 독점하십시오.</p>
-          </div>
-        </div>
+  <!-- REEL · 진품 실물 영상 -->
+  <section class="panel reel" id="reel" data-dot="진품 영상">
+    <div class="reel-bg"></div>
+    <div class="pc reel-pc">
+      <div class="reel-badge">The Real Thing · 진품</div>
+      <div class="reel-frame">
+        <iframe src="https://www.youtube.com/embed/x4hzkBpZd48?autoplay=1&mute=1&loop=1&playlist=x4hzkBpZd48&controls=1&playsinline=1&rel=0&modestbranding=1" title="LJR 식탁 실물 영상" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
       </div>
+      <p class="reel-cap">렌더링이 아닙니다. <b>실제로 작동하는 식탁</b>입니다.</p>
     </div>
   </section>
 
-  <!-- ========== PAGE 1 · SECTION 3 · POWER SYNC ========== -->
-  <section class="snap" id="power" data-dot="Power Sync">
-    <div class="inner">
-      <div class="cols">
-        <div>
-          <span class="eyebrow rv">Section 03 · The Power Sync</span>
-          <h2 class="h-serif rv d1" style="margin-top:22px">기능은 <em>2.7배</em> 확장하고,<br>전력은 <span class="b">1/30</span>로 삭제하다.</h2>
-          <p class="body rv d2" style="margin-top:24px">기능이 추가될 때마다 전력이 선형적으로 늘던 250년 산업 문명의 공식 파괴. 관상어 필수 전력 20W만으로 실내를 상시 정화하고, 매월 전기세·필터비를 절감하여 <b class="hl-blue">1.5년 내 구입비 전액 회수(Payback 1.5 Years)</b>하는 수익 창출형 가구 자산입니다.</p>
-          <div class="appliance-row rv d2">
-            <span class="chip"><s>공기청정기</s></span><span class="chip"><s>가습기</s></span><span class="chip"><s>제습기</s></span><span class="chip"><s>수족관</s></span><span class="chip"><s>식물재배기</s></span><span class="chip"><s>탈취기</s></span>
-          </div>
-          <ul class="spec-list rv d3">
-            <li><span class="k">기존 환경가전 6종</span><span class="v" style="color:#ff6b6b">635<span style="color:#ff6b6b">W</span></span></li>
-            <li><span class="k">LJR TAVIVI 통합 · Δ P ≈ 0</span><span class="v">20<span>W</span></span></li>
-            <li><span class="k">CADR 정화 성능</span><span class="v">120<span>m³/h</span></span></li>
-            <li><span class="k">CO₂ 흡착</span><span class="v">456<span>mg/h</span></span></li>
-          </ul>
-        </div>
-        <div class="stage rv d1">
-          <span class="tag">Power Draw · 635W → 20W</span>
-          <svg class="power-graph" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="전력 소비 그래프">
-            <line x1="40" y1="250" x2="380" y2="250" stroke="rgba(248,249,250,.12)" stroke-width="1"/>
-            <line x1="40" y1="60" x2="40" y2="250" stroke="rgba(248,249,250,.12)" stroke-width="1"/>
-            <text x="30" y="70" fill="#8E8E93" font-size="9" font-family="Inter" text-anchor="end">635W</text>
-            <text x="30" y="238" fill="#8E8E93" font-size="9" font-family="Inter" text-anchor="end">20W</text>
-            <!-- chaotic red -->
-            <path class="ln-red redglow" id="lnRed" d="M40,235 L70,90 L95,150 L120,70 L150,140 L180,80 L210,120 L240,95 L270,130 L300,85 L330,110 L360,100"/>
-            <!-- flat blue -->
-            <path class="ln-blue blueglow" id="lnBlue" d="M40,237 L360,236"/>
-            <text x="360" y="228" fill="#00E5FF" font-size="9" font-family="Inter" text-anchor="end">Δ P ≈ 0</text>
-          </svg>
-        </div>
+  <!-- 1 · 식탁 -->
+  <section class="panel" id="dining" data-dot="식탁 · 1,170포기">
+    <div class="ph"><div class="glyph">▶</div><div class="fn">assets / dining.mp4</div></div>
+    <video class="bg" autoplay muted loop playsinline preload="none" poster="assets/dining.jpg"><source src="assets/dining.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="pc">
+      <div class="kicker">Signature · Dining</div>
+      <h2>식탁, <em>1,170포기</em>를 담다</h2>
+      <p class="tagline">거실 단 1평에 외곽 농지 30평의 식생을 이식하다.</p>
+      <div class="btns"><a class="btn btn-light" onclick="go('order')">주문하기</a><a class="btn btn-dark" onclick="go('features')">기능 보기 →</a></div>
+    </div>
+    <div class="pfoot"><b>이중 재배 시스템</b> · 상단 수경재배(잎채소) + 이중수조 아쿠아포닉스(무비료 유기순환)</div>
+  </section>
+
+  <!-- 2 · 회의실 -->
+  <section class="panel" id="conference" data-dot="회의실 테이블">
+    <div class="ph"><div class="glyph">▶</div><div class="fn">assets / conference.mp4</div></div>
+    <video class="bg" autoplay muted loop playsinline preload="none" poster="assets/conference.jpg"><source src="assets/conference.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="pc">
+      <div class="kicker">B2B / B2G · Climate Asset</div>
+      <h2>회의실 테이블</h2>
+      <p class="tagline">공간·전력·탄소를 동시에 되돌리는 기후 자산.</p>
+      <div class="btns"><a class="btn btn-light" onclick="go('order')">B2B 제안 요청</a><a class="btn btn-dark" onclick="go('value3')">3중 가치 →</a></div>
+    </div>
+    <div class="pfoot"><b>공조 유지비 절감</b> · 무전력 순환 · ESG 지표 연동</div>
+  </section>
+
+  <!-- 3 · 4인용 -->
+  <section class="panel" id="four" data-dot="4인용 다이닝">
+    <div class="ph"><div class="glyph">▶</div><div class="fn">assets / four.mp4</div></div>
+    <video class="bg" autoplay muted loop playsinline preload="none" poster="assets/four.jpg"><source src="assets/four.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="pc">
+      <div class="kicker">Family · Smart Home</div>
+      <h2>4인용 <em>다이닝</em></h2>
+      <p class="tagline">매일의 식탁이 가족의 웰니스 허브가 되다.</p>
+      <div class="btns"><a class="btn btn-light" onclick="go('order')">주문하기</a><a class="btn btn-dark" onclick="go('two')">다음 →</a></div>
+    </div>
+    <div class="pfoot"><b>비접촉 웰니스 모니터링(참고용)</b> · 실내환경 데이터 · 구글 허브 연동</div>
+  </section>
+
+  <!-- 4 · 2인용 -->
+  <section class="panel" id="two" data-dot="2인용">
+    <div class="ph"><div class="glyph">▶</div><div class="fn">assets / two.mp4</div></div>
+    <video class="bg" autoplay muted loop playsinline preload="none" poster="assets/two.jpg"><source src="assets/two.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="pc">
+      <div class="kicker">Compact · Entry</div>
+      <h2>2인용</h2>
+      <p class="tagline">작은 공간에 들이는, 살아 있는 자연.</p>
+      <div class="btns"><a class="btn btn-light" onclick="go('order')">주문하기</a><a class="btn btn-dark" onclick="go('floor')">다음 →</a></div>
+    </div>
+    <div class="pfoot"><b>1~2인 · 미니멀 홈파밍</b> · 무청소 순환 · 아쿠아 블루 테라피</div>
+  </section>
+
+  <!-- 5 · 좌식 -->
+  <section class="panel" id="floor" data-dot="좌식 테이블">
+    <div class="ph"><div class="glyph">▶</div><div class="fn">assets / floor.mp4</div></div>
+    <video class="bg" autoplay muted loop playsinline preload="none" poster="assets/floor.jpg"><source src="assets/floor.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="pc">
+      <div class="kicker">Wellness · Floor</div>
+      <h2>좌식 <em>테이블</em></h2>
+      <p class="tagline">바닥에서, 자연과 가장 가까이 공명하다.</p>
+      <div class="btns"><a class="btn btn-light" onclick="go('order')">주문하기</a><a class="btn btn-dark" onclick="go('ai')">다음 →</a></div>
+    </div>
+    <div class="pfoot"><b>원목 좌식 · 플라워 식생</b> · 12만 색 AR 웰니스 (잔상 없는 비전)</div>
+  </section>
+
+  <!-- 6 · AI 미래형 -->
+  <section class="panel" id="ai" data-dot="AI DESIGN">
+    <div class="ph"><div class="glyph">▶</div><div class="fn">assets / ai.mp4</div></div>
+    <video class="bg" autoplay muted loop playsinline preload="none" poster="assets/ai.jpg"><source src="assets/ai.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="pc">
+      <div class="kicker">Concept · Generative Design</div>
+      <h2>AI <em>DESIGN</em></h2>
+      <p class="tagline">인공지능이 그린, 아직 세상에 없는 미래형 테이블.</p>
+      <div class="btns"><a class="btn btn-light" onclick="go('order')">비스포크 상담</a><a class="btn btn-dark" onclick="go('features')">기능 보기 →</a></div>
+    </div>
+    <div class="pfoot"><b>Generative Concept</b> · 천장형 전등 · 4D 액자 · 차세대 라인업</div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="block" id="features">
+    <div style="max-width:820px">
+      <span class="eyebrow">What It Does</span>
+      <h2 class="h-serif rv" style="margin-top:20px">가전 여러 대를,<br>테이블 <em>하나가</em> 대신합니다.</h2>
+      <p class="body rv" style="margin-top:20px">물고기 생존에 필요한 <b>20W 하나</b>로 아래 기능들이 함께 작동합니다. 사면 살수록 전기세·필터비·식비가 줄어드는, 세상에 없던 통합 생태 테이블입니다.</p>
+    </div>
+    <div class="feat-grid rv" id="featGrid"></div>
+    <p class="note">모든 웰니스·건강 관련 기능은 <b>참고용</b>이며 의료기기가 아닙니다. 질병의 진단·치료·예방을 대체하지 않습니다.</p>
+  </section>
+
+  <!-- 3-VALUE + POWER STAIRCASE -->
+  <section class="block alt" id="value3">
+    <div style="max-width:820px">
+      <span class="eyebrow gold">Why LJR</span>
+      <h2 class="h-serif rv" style="margin-top:20px">사면, <em>세 가지</em>가 돌아옵니다.</h2>
+      <p class="body rv" style="margin-top:20px">가구는 늘 소비였습니다. LJR은 <b>공간·전력·탄소</b>를 되돌려주는 첫 가구입니다.</p>
+    </div>
+
+    <div class="val3 rv">
+      <div class="val">
+        <div class="vk">Space · 공간</div>
+        <div class="vh">거실 1평이<br><em>텃밭 30평</em>이 된다</div>
+        <p>노지 유실률·2모작을 역산하면 연 1,170포기는 외곽 농지 15~30평에 해당합니다. 천장형은 연 1,500포기까지. 30평 아파트를 실체적으로 넓히는 분양 가치.</p>
       </div>
+      <div class="val">
+        <div class="vk">Power · 전력</div>
+        <div class="vh">1억 대면<br><em>원전 약 5기</em></div>
+        <p>1대당 순증분 절감 약 480kWh/년. 보급이 늘수록 대체 전력이 발전소 단위로 커집니다. (아래 계단 참고)</p>
+      </div>
+      <div class="val">
+        <div class="vk">Carbon · 탄소</div>
+        <div class="vh">흡착 + 발전소<br><em>+ 물류 소멸</em></div>
+        <p>테이블의 CO₂ 흡착에 더해, 무전력이 발전소 탄소를 줄이고, 식탁 자급이 농장→운송→냉장→배송의 푸드 마일리지를 없앱니다. 3겹 탄소 가치.</p>
+      </div>
+    </div>
+
+    <div class="body rv" style="margin-top:56px;max-width:none">
+      <span class="eyebrow" style="margin-bottom:8px">Power Impact · 보급 규모별</span>
+    </div>
+    <div class="stair rv">
+      <div class="step"><div class="su">10만 대</div><div class="sv">48<span>GWh / 년</span></div></div>
+      <div class="step"><div class="su">100만 대</div><div class="sv">480<span>GWh / 년</span></div></div>
+      <div class="step"><div class="su">500만 대</div><div class="sv">2.4<span>TWh / 년</span></div></div>
+      <div class="step"><div class="su">1,000만 대</div><div class="sv">4.8<span>TWh / 년 · 원전 ~0.5기</span></div></div>
+      <div class="step peak"><div class="su">1억 대</div><div class="sv">48<span>TWh / 년 · 원전 약 5기</span></div></div>
+    </div>
+    <p class="note">산정 기준 — 1대당 순증분 절감 480kWh/년(기존 환경가전 대체분에서 LJR 자체 소비 차감), 원전은 APR-1400급(1.4GW·이용률 90%, 연 약 11TWh) 기준. 가전 총 대체 기준으로는 약 2배(최대 원전 10기 안팎).</p>
+  </section>
+
+  <!-- PRESS -->
+  <section class="block" id="press">
+    <div style="max-width:800px">
+      <span class="eyebrow">In the Press</span>
+      <h2 class="h-serif rv" style="margin-top:20px">이미 <em>언론</em>이 지켜본 기술.</h2>
+      <p class="body rv" style="margin-top:20px">2021년과 2024년, 다수 매체가 실물로 다뤄온 기술입니다. 미사여구가 아니라, 작동하는 제품에 대한 기록입니다.</p>
+    </div>
+    <div class="press-grid rv" id="pressGrid"></div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="block alt" id="proof">
+    <div style="max-width:760px">
+      <span class="eyebrow">Independent Proof</span>
+      <h2 class="h-serif rv" style="margin-top:20px">9대 AI가 같은 결론에 <em>도달하다.</em></h2>
+      <p class="body rv" style="margin-top:20px">서로 다른 9개 AI가 순수 공학 시뮬레이션으로 <b>무전력(Δ P=0)</b>·<b>무청소(잔류율 &lt;0.1%)</b>를 독립 교차 검토했습니다.</p>
+    </div>
+    <div class="ai-grid rv" id="aiGrid"></div>
+  </section>
+
+  <!-- TECH (CGO / MUFE) -->
+  <section class="block" id="tech">
+    <div style="max-width:820px">
+      <span class="eyebrow">Inside the Table</span>
+      <h2 class="h-serif rv" style="margin-top:20px">테이블 안에 담긴 <em>원천 기술.</em></h2>
+      <p class="body rv" style="margin-top:20px">LJR은 순수 자기 기술로 만들되, 검증된 두 원천 기술을 탑재합니다. 각 기술은 독립된 사업으로 운영됩니다.</p>
+    </div>
+    <div class="tech-row rv">
+      <a class="tech" href="https://www.c-go-fuli.com" target="_blank" rel="noopener">
+        <div class="tk">Vision AI</div>
+        <div class="tn">CGO-FULI</div>
+        <div class="td">잔상 없는 12만 색 비전과 비접촉 웰니스 모니터링(참고용). 거울·화면이 살아있는 인터페이스가 됩니다.</div>
+        <div class="tgo">c-go-fuli.com →</div>
+      </a>
+      <a class="tech" href="https://www.mufe-baeksin.com" target="_blank" rel="noopener">
+        <div class="tk">Security</div>
+        <div class="tn">MUFE</div>
+        <div class="td">양자내성 표준 암호(ML-KEM-768)와 실시간 카오스 키, 무저장(서버리스) 구조로 데이터를 지킵니다.</div>
+        <div class="tgo">mufe-baeksin.com →</div>
+      </a>
     </div>
   </section>
 
-  <!-- ========== PAGE 2 · SECTION 4 · SECURITY ========== -->
-  <section class="snap" id="proof" data-dot="Self-Purify">
-    <div class="inner">
-      <div class="cols">
-        <div class="stage sec-diagram rv">
-          <span class="tag">Layer 0 · MUFE Deception Core</span>
-          <div class="pulse-core">
-            <span class="ring"></span><span class="ring"></span><span class="ring"></span>
-            <div class="chip-core"><b>MUFE</b></div>
-          </div>
-        </div>
-        <div>
-          <span class="eyebrow gold rv">Section 04 · The Heart of Security</span>
-          <h2 class="h-serif rv d1" style="margin-top:22px">차단이 아닌 <em>자정.</em><br>명령의 오염을 심장에서 걸러내다.</h2>
-          <p class="body rv d2" style="margin-top:24px">해킹의 원인 1위인 서버 DB 자체를 부존재화하고, 기기 내부(온디바이스)에서 <b class="hl-blue">0.03초 주기</b>로 카오스 키를 상시 독립 생성합니다. 유입된 해킹 명령어가 NPU에 닿기 전에 스스로 자원을 소모하며 소멸하도록 유도하는 최초의 기만 보안 플랫폼. 위성·국방 드론 방공망·휴머노이드 로봇의 오염된 명령 체계를 원천 자정합니다.</p>
-        </div>
-      </div>
+  <!-- DISTRIBUTOR -->
+  <section class="block alt" id="distributor">
+    <div style="max-width:820px">
+      <span class="eyebrow gold">Global · Distributors Wanted</span>
+      <h2 class="h-serif rv" style="margin-top:20px">국가별 <em>총판</em>을 모집합니다.</h2>
+      <p class="body rv" style="margin-top:20px">식량과 전기는 국경이 없습니다. 아래 국가에서 독점 총판 파트너를 찾고 있습니다. 계약된 총판은 아직 없으며, 문의를 환영합니다.</p>
+    </div>
+    <div class="dist-grid rv" id="distGrid"></div>
+  </section>
+
+  <!-- ORDER -->
+  <section class="block" id="order">
+    <div style="max-width:760px">
+      <span class="eyebrow">Order</span>
+      <h2 class="h-serif rv" style="margin-top:20px">원클릭 <em>비스포크</em> 주문.</h2>
+      <p class="body rv" style="margin-top:18px">규격은 공간에 맞춰 자유롭게 제작됩니다.</p>
+    </div>
+    <div class="price-grid rv">
+      <div class="price-cell"><div class="pn">2인용</div><div class="pv">₩2,500,000</div><div class="ps">소규모 · 카페 · 오피스</div></div>
+      <div class="price-cell"><div class="pn">좌식</div><div class="pv">₩3,500,000</div><div class="ps">가정 · 호텔</div></div>
+      <div class="price-cell"><div class="pn">4인용</div><div class="pv">₩4,500,000</div><div class="ps">4인 가정 · 휴게실</div></div>
+      <div class="price-cell"><div class="pn">식탁</div><div class="pv">₩6,000,000</div><div class="ps">하이엔드 · 1,170포기</div></div>
+      <div class="price-cell"><div class="pn">업무</div><div class="pv">₩5,000,000</div><div class="ps">임원 · CEO 데스크</div></div>
+      <div class="price-cell"><div class="pn">회의실</div><div class="pv">₩10,000,000~</div><div class="ps">기업 · 관공서</div></div>
+    </div>
+    <div class="order-btns rv">
+      <a class="btn btn-blue" onclick="alert('결제 창으로 연동됩니다. (결제 링크를 넣으세요)')">지금 주문하기</a>
+      <a class="btn btn-line" onclick="alert('B2B 빌트인 제안서 PDF 링크를 연결하세요.')">B2B 제안서 다운로드</a>
+      <a class="btn btn-line" onclick="go('distributor')">총판 문의</a>
     </div>
   </section>
 
-  <!-- ========== PAGE 2 · SECTION 5 · 9-AI MATRIX ========== -->
-  <section class="snap tall" id="matrix" data-dot="9-AI Proof">
-    <div class="inner">
-      <div style="max-width:760px">
-        <span class="eyebrow rv">Section 05 · The Pentagon of Logic</span>
-        <h2 class="h-serif rv d1" style="margin-top:22px">할루시네이션 제로.<br>전 세계 <em>9대 지능</em>의 교차 실증.</h2>
-        <p class="body rv d2" style="margin-top:22px">재무·밸류에이션 과장을 일절 배제하고, 오직 순수 공학 시뮬레이션 결과값만 대조합니다. 각 카드에서 <b class="hl-blue">무전력(Δ P=0)</b>·<b class="hl-blue">무청소(잔류율 &lt;0.1%)</b> 검증 원문을 실시간으로 확인하십시오.</p>
-      </div>
-      <div class="ai-grid rv d2" id="aiGrid"></div>
-      <p class="body rv d3" style="margin-top:26px;font-size:11.5px;color:var(--grey-2)">각 결과는 AI가 하드웨어 구조 역학으로 역산한 개념 검토이며, 실제 제품 실측으로 확인 중입니다.</p>
-    </div>
-  </section>
-
-  <!-- ========== PAGE 2 · SECTION 6 · REFLECTED VORTEX ========== -->
-  <section class="snap" id="vortex" data-dot="Reflected Vortex">
-    <div class="inner">
-      <div class="cols">
-        <div>
-          <span class="eyebrow rv">Section 06 · The Reflected Vortex</span>
-          <h2 class="h-serif rv d1" style="margin-top:22px">수메르 문명 이후 <em>4,500년</em>,<br>닫힌 수계의 공식을 깨다.</h2>
-          <p class="body rv d2" style="margin-top:24px">화학 처리나 외부 고전력 필터 없이, 오직 구조 역학적 <b class="hl-blue">반사 와류(Reflected Vortex)</b>와 7단계 미생물 질소 순환만으로 오염물 잔류율 &lt;0.1%, 물 사용 제로(Zero-Water Change), 슬러지 누적 제로를 <b>4년간</b> 완벽하게 실증했습니다.</p>
-          <div class="timeline rv d3" style="margin-top:30px">
-            <div class="t"><b>BC 3000</b>수메르 수계</div>
-            <div class="t"><b>Roman</b>고대 하수도</div>
-            <div class="t"><b>Modern</b>고전력 역삼투압</div>
-            <div class="t"><b>LJR</b>무전력 자정</div>
-          </div>
-        </div>
-        <div class="stage rv d1">
-          <span class="tag">Sludge Residual · 4-Year Data</span>
-          <svg class="vortex" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="오염물 잔류량 4년 실증 차트">
-            <line x1="40" y1="250" x2="380" y2="250" stroke="rgba(248,249,250,.12)" stroke-width="1"/>
-            <line x1="40" y1="50" x2="40" y2="250" stroke="rgba(248,249,250,.12)" stroke-width="1"/>
-            <line class="vx-thresh" x1="40" y1="90" x2="380" y2="90"/>
-            <text x="376" y="84" fill="#ff5c5c" font-size="8.5" font-family="Inter" text-anchor="end">부패 임계</text>
-            <path class="vx-line blueglow" id="vxLine" d="M40,230 C90,232 100,150 140,175 C180,200 195,120 235,168 C275,210 290,140 330,175 C355,196 368,182 380,188"/>
-            <text x="200" y="278" fill="#8E8E93" font-size="9" font-family="Inter" text-anchor="middle">Y1 — Y2 — Y3 — Y4  ·  잔류율 &lt; 0.1%</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PAGE 3 · LINEUP ========== -->
-  <section class="snap tall" id="lineup" data-dot="Collection">
-    <div class="inner">
-      <div style="max-width:760px">
-        <span class="eyebrow gold rv">Page 03 · The Custom Space</span>
-        <h2 class="h-serif rv d1" style="margin-top:22px">공간을 위한 <em>비스포크</em> 컬렉션.</h2>
-        <p class="body rv d2" style="margin-top:20px">소형 웰니스 홈치유부터 기업·관공서 기후 자산까지. 규격은 자유롭게 맞춤 제작됩니다.</p>
-      </div>
-      <div class="lineup">
-        <div class="prod rv">
-          <div class="pimg"><span class="ph">좌식 원목 · 플라워 식생</span></div>
-          <div class="pbody">
-            <div class="seg">B2C · 웰니스 홈치유</div>
-            <h3>소형 · 거실 좌식</h3>
-            <div class="heal">"자연과 공명하다"</div>
-            <p class="desc">1~2인 · 미니멀 홈파밍 엔트리. 거실 1평에 노지 15~30평 식생 가치를 이식. 고개를 돌려도 잔상 없는 온디바이스 비전 AI로 12만 색 플라워 웰니스 메이크업 + 아쿠아 블루 테라피.</p>
-            <div class="price">₩3,000,000<span>한화 300만 원</span></div>
-          </div>
-        </div>
-        <div class="prod rv d1">
-          <div class="pimg"><span class="ph">빌트인 식탁 · rPPG 센싱</span></div>
-          <div class="pbody">
-            <div class="seg">B2C / B2B · 스마트홈 인프라</div>
-            <h3>중형 · 프리미엄 식탁</h3>
-            <div class="heal">"가족의 보건 안심망"</div>
-            <p class="desc">4~6인 빌트인 표준. 실내환경 4종+헬스케어 6종+행동 2종 빅데이터를 연속 생성. 비접촉 rPPG 혈류 센싱, 독거노인 안심 케어·복약 비서. MUFE 9겹 양자 기만 보안칩(TEE) 암호화.</p>
-            <div class="price">₩5,000,000<span>한화 500만 원</span></div>
-          </div>
-        </div>
-        <div class="prod rv d2">
-          <div class="pimg"><span class="ph">시스템 데스크 · 탄소 포집</span></div>
-          <div class="pbody">
-            <div class="seg">B2B / B2G · 기후 자산</div>
-            <h3>대형 · 회의실 시스템</h3>
-            <div class="heal">"탄소 배출권을 상쇄하다"</div>
-            <p class="desc">대기업 사옥·청사·호텔 로비 독점. 대당 연간 2,575kg 온실가스 흡착(소나무 390그루). 공조 유지비 96.9% 삭감, ESG Scope 2 지표 상승. VCM 거래 DB API 실시간 연동.</p>
-            <div class="price">₩10,000,000 ~ 30,000,000<span>사양별 변동</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PAGE 4 · GLOBAL ========== -->
-  <section class="snap" id="global" data-dot="Global Order">
-    <div class="inner">
-      <div class="globe-wrap">
-        <div class="globe rv"><div class="beam" id="beam"></div></div>
-        <div>
-          <span class="eyebrow rv">Page 04 · The Global Order</span>
-          <h2 class="h-serif rv d1" style="margin:18px 0 26px">글로벌 4대 <em>표적 시장</em>.</h2>
-          <div class="mk-tabs rv d2">
-            <div class="mk on" data-deg="-18" onclick="mkPick(this)">
-              <div class="flag">🇸🇦 🇦🇪</div>
-              <h4>중동 사막 국가 벨트</h4>
-              <div class="rg">Food Security · العربية / English</div>
-              <p class="pt">연중 45도 사막 기후로 신선 식생 수입 의존도 90% 돌파. 거실 1평에서 노지 30평 규모 플라워·채소를 영구 무전력 자급하는 '식량 안보용 기축 가구'로 독점 제안.</p>
-              <div class="lang">헤드라인 지원: العربية · English</div>
-            </div>
-            <div class="mk" data-deg="14" onclick="mkPick(this)">
-              <div class="flag">🇩🇪 🇫🇷</div>
-              <h4>서유럽 에너지 쇼크 벨트</h4>
-              <div class="rg">Energy Paradox · Deutsch / Français</div>
-              <p class="pt">살인적 전기세·가전 유지비 쇼크. 환경가전 대비 소비전력 96.9% 원천 삭제(635W→20W). 1.5년 내 단가 100% 회수하는 기후테크 재테크 자산으로 포지셔닝.</p>
-              <div class="lang">헤드라인 지원: Deutsch · Français · English</div>
-            </div>
-            <div class="mk" data-deg="52" onclick="mkPick(this)">
-              <div class="flag">🇯🇵</div>
-              <h4>아시아 아쿠아 · 실버 벨트</h4>
-              <div class="rg">No-Clean Care · 日本語</div>
-              <p class="pt">관상어 취미 최고 밀집국의 환수·청소 지옥 피로. 초고령 돌봄 비용 폭등. 반사 와류 무청소(잔류율 &lt;0.1%) + 구글 허브 연동 독거노인 안심 케어 데이터 자산 매칭.</p>
-              <div class="lang">헤드라인 지원: 日本語</div>
-            </div>
-            <div class="mk" data-deg="-58" onclick="mkPick(this)">
-              <div class="flag">🇺🇸</div>
-              <h4>북미 글로벌 자본 벨트</h4>
-              <div class="rg">Deep-Tech Capital · English</div>
-              <p class="pt">BEV 기금·룩스 캐피탈 등 원천 기술 독점성만 보는 딥테크 자본 집중지. 1억 대 침투 시 연간 25억 톤 온실가스 감축(대당 소나무 390그루)하는 VCM 데이터 결합 가치.</p>
-              <div class="lang">헤드라인 지원: English</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PAGE 5 · ORDER ========== -->
-  <section class="snap tall" id="order" data-dot="BTO Studio">
-    <div class="inner">
-      <div style="max-width:760px;margin-bottom:44px">
-        <span class="eyebrow rv">Page 05 · The BTO Studio</span>
-        <h2 class="h-serif rv d1" style="margin-top:22px">원클릭 <em>비스포크</em> 주문.</h2>
-      </div>
-      <div class="order-grid">
-        <div class="stage rv" style="aspect-ratio:4/3">
-          <span class="tag">Bespoke Preview</span>
-          <span class="ph" style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--grey-2)">Selected Table · Image</span>
-        </div>
-        <div class="config rv d1">
-          <h3>구성 선택</h3>
-          <p class="ch">테슬라식 원클릭 사양 · 실시간 견적</p>
-
-          <div class="opt-label">크기</div>
-          <div class="opt-row" data-group="size">
-            <div class="opt on" data-price="3000000">소형 · 좌식 (300만)</div>
-            <div class="opt" data-price="5000000">중형 · 식탁 (500만)</div>
-            <div class="opt" data-price="10000000">대형 · 시스템 (1,000만~)</div>
-          </div>
-
-          <div class="opt-label">원목</div>
-          <div class="opt-row" data-group="wood">
-            <div class="opt on" data-add="0">월넛 (기본)</div>
-            <div class="opt" data-add="400000">오크</div>
-            <div class="opt" data-add="800000">티타늄 매트</div>
-          </div>
-
-          <label class="check" onclick="toggleHub(this)">
-            <span class="box">✓</span><span>구글 허브 스마트 디스플레이 매립 (+80만)</span>
-          </label>
-
-          <div class="total">
-            <span class="tl">예상 견적</span>
-            <span class="tv" id="totalOut">₩3,000,000</span>
-          </div>
-
-          <div class="order-btns">
-            <a class="btn btn-solid" onclick="alert('글로벌 결제 창으로 연동됩니다. (결제 연동 링크를 넣으세요)')">지금 주문하기</a>
-            <a class="btn btn-out" onclick="alert('B2B 빌트인 제안서 PDF 다운로드 링크를 연결하세요.')">B2B 빌트인 제안서 다운로드</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- warranty -->
-      <div class="warr">
-        <div class="wcard rv"><div class="seal">✦</div><h4>평생 생태 자정 워런티</h4><p>배설물 잔류량 0.1% 미만의 반사 와류 물리 설계로 환수·청소 노동 자체를 삭제. 시간을 선물합니다.</p></div>
-        <div class="wcard rv d1"><div class="seal">✦</div><h4>96.9% 에너지 절감 보증</h4><p>기존 환경가전 635W → 20W. 4년 실증 완료된 에너지 역설을 공식 보증합니다.</p></div>
-        <div class="wcard rv d2"><div class="seal">✦</div><h4>6개 국어 구독 케어</h4><p>필터 및 식생 소모품 정기 구독 케어를 글로벌 6개 국어 지원망을 통해 상시 제공합니다.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== FOOTER ========== -->
+  <!-- FOOTER -->
   <footer>
     <div class="foot">
-      <div class="lang-bar" id="langBar">
-        <a class="on">한국어</a><a>English</a><a>العربية</a><a>Deutsch</a><a>Français</a><a>日本語</a>
-      </div>
-      <div class="foot-grid">
-        <div style="max-width:460px">
-          <div class="flogo">LJR TAVIVI</div>
-          <p class="ft">테슬라의 미니멀 인포테인먼트와 뱅앤올룹슨의 하이엔드 럭셔리를 믹스한, 전 세계 6개 국어 지원 프리미엄 생태 가구 플랫폼.</p>
-        </div>
-        <div style="display:flex;gap:60px;flex-wrap:wrap">
-          <div>
-            <div class="ft" style="color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;margin-bottom:14px">Collection</div>
-            <p class="ft" style="cursor:pointer" onclick="go('lineup')">소형 · 좌식</p>
-            <p class="ft" style="cursor:pointer" onclick="go('lineup')">중형 · 식탁</p>
-            <p class="ft" style="cursor:pointer" onclick="go('lineup')">대형 · 시스템</p>
-          </div>
-          <div>
-            <div class="ft" style="color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;margin-bottom:14px">Inquiry</div>
-            <p class="ft">문의 · 주문 상담</p>
-            <p class="ft" style="color:var(--blue)">(연락처를 넣으세요)</p>
-          </div>
-        </div>
-      </div>
+      <div class="lang-bar" id="langBar"></div>
+      <div class="flogo">LJR TAVIVI</div>
+      <p class="ft">전기 없이 흐르는 물로 공기를 씻고, 채소를 기르고, 물고기를 살리는 무전력 생태 테이블. 8년의 연구로 완성한 세계 최초 기술.</p>
+      <p class="ft" style="margin-top:14px;color:var(--blue)">문의 · 주문 · 총판 : (연락처를 넣으세요)</p>
       <div class="foot-mini">
-        LJR INNOVATION © 2026. 전 세계 9대 AI 공학 시뮬레이션 실증 완료.<br>
-        발명의 명칭: 실질적인 무전력 기반 다기능 스마트 이중 수족관 테이블 시스템 · <b>특허출원번호: PCT/KR2025/003</b>
+        LJR INNOVATION © 2026 · 세계 최초 국가 인증 진행 중.<br>
+        발명의 명칭: 실질적인 무전력 기반 다기능 스마트 이중 수족관 테이블 시스템 · <b>PCT/KR2025/002347 (153개국 출원)</b>
       </div>
     </div>
   </footer>
@@ -662,88 +528,111 @@
 <script>
 var scroller=document.getElementById('scroller');
 var hdr=document.getElementById('hdr');
-var sections=[].slice.call(document.querySelectorAll('.snap'));
+function go(id){var el=document.getElementById(id);if(el)scroller.scrollTo({top:el.offsetTop,behavior:'smooth'});closeDD();}
+function toggleDD(id,ev){ev.stopPropagation();var d=document.getElementById(id);var was=d.classList.contains('open');closeDD();if(!was)d.classList.add('open');}
+function closeDD(){document.querySelectorAll('.dd').forEach(function(x){x.classList.remove('open')});}
+function setLang(name){document.getElementById('langLabel').textContent=name;closeDD();}
+document.addEventListener('click',closeDD);
 
-/* smooth-scroll to a section id inside the scroller */
-function go(id){
-  var el=document.getElementById(id);
-  if(el) scroller.scrollTo({top:el.offsetTop,behavior:'smooth'});
-}
-
-/* build right-side dots */
+/* dots */
+var panels=[].slice.call(document.querySelectorAll('.panel'));
 var dotWrap=document.getElementById('dots');
-sections.forEach(function(s,i){
-  var b=document.createElement('button');
-  b.title=s.getAttribute('data-dot')||'';
-  b.onclick=function(){scroller.scrollTo({top:s.offsetTop,behavior:'smooth'})};
-  dotWrap.appendChild(b);
-});
+panels.forEach(function(p){var b=document.createElement('button');b.title=p.getAttribute('data-dot')||'';b.onclick=function(){scroller.scrollTo({top:p.offsetTop,behavior:'smooth'})};dotWrap.appendChild(b);});
 var dots=[].slice.call(dotWrap.children);
+scroller.addEventListener('scroll',function(){hdr.classList.toggle('solid',scroller.scrollTop>40)},{passive:true});
+var panelIO=new IntersectionObserver(function(es){es.forEach(function(e){
+  var i=panels.indexOf(e.target);
+  if(e.isIntersecting){dots.forEach(function(d,j){d.classList.toggle('on',j===i)});}
+  var v=e.target.querySelector('video.bg');
+  if(v){if(e.isIntersecting){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}else{v.pause();}}
+});},{root:scroller,threshold:.55});
+panels.forEach(function(p){panelIO.observe(p)});
+var rvIO=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');rvIO.unobserve(e.target)}})},{root:scroller,threshold:.12});
+document.querySelectorAll('.rv').forEach(function(el){rvIO.observe(el)});
 
-/* header + dots + reveal on scroll */
-var reveals=[].slice.call(document.querySelectorAll('.rv'));
-var io=new IntersectionObserver(function(es){
-  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
-},{root:scroller,threshold:.16});
-reveals.forEach(function(el){io.observe(el)});
+/* ===== 21개 언어 (CGO-FULI 동일) — 라벨만 전환 ===== */
+var LANGS=["한국어","English","中文","廣東話","日本語","Русский","العربية","Türkçe","हिन्दी","Español","Deutsch","Français","Italiano","Português","Nederlands","Українська","Tiếng Việt","ภาษาไทย","Indonesia","Melayu","Filipino"];
+var lp=document.getElementById('langPanel'), lb=document.getElementById('langBar');
+LANGS.forEach(function(n,i){
+  var a=document.createElement('a');a.textContent=n;a.onclick=function(){setLang(n)};lp.appendChild(a);
+  var f=document.createElement('a');f.textContent=n;if(i===0)f.className='on';
+  f.onclick=function(){document.querySelectorAll('#langBar a').forEach(function(x){x.classList.remove('on')});f.classList.add('on');};
+  lb.appendChild(f);
+});
 
-/* section-in-view → dots + trigger graph draws */
-var secIO=new IntersectionObserver(function(es){
-  es.forEach(function(e){
-    if(e.isIntersecting){
-      var i=sections.indexOf(e.target);
-      dots.forEach(function(d,j){d.classList.toggle('on',j===i)});
-      if(e.target.id==='power')drawPower();
-      if(e.target.id==='vortex')drawVortex();
-      if(e.target.id==='spatial')drawCompress();
-    }
-  });
-},{root:scroller,threshold:.5});
-sections.forEach(function(s){secIO.observe(s)});
+/* ===== LJR 기능 (소비자용) — 여기에 추가/수정 {c:분류, n:이름, d:한줄} ===== */
+var FEATURES=[
+  {c:"Air · 공기", n:"실질적 무전력 공기정화", d:"관상어 20W 모터 하나로 상시 정화. 필터 포함, 추가 전력 0W.", blue:1},
+  {c:"Air · 공기", n:"자연 기화식 가습", d:"수막 증발로 가습. 세균이 공기 중으로 나갈 수 없는 물리 구조.", blue:1},
+  {c:"Air · 공기", n:"냄새 · 가스 제거", d:"공기청정기가 못 잡는 CO₂·CO·VOCs·암모니아를 수막이 흡착.", blue:1},
+  {c:"Air · 공기", n:"무전력 디퓨저", d:"흐르는 물에 향을 실어 은은하게. 전자식 디퓨저 대체."},
+  {c:"Grow · 재배", n:"아쿠아포닉스 채소 재배", d:"물고기 배설물이 영양이 되는 무비료 유기순환. 식탁 연 1,170포기."},
+  {c:"Grow · 재배", n:"상단 수경재배", d:"천장까지 붙이면 연 1,500포기. 잎채소 대량 자급."},
+  {c:"Water · 물", n:"이중수조 무청소 순환", d:"반사 와류 물리 설계로 잔류율 <0.1%. 환수·청소 노동 제거."},
+  {c:"Water · 물", n:"살아 있는 수족관", d:"관상어가 헤엄치는 식탁. 매일의 식사가 하나의 풍경이 됩니다."},
+  {c:"Wellness", n:"비접촉 웰니스 모니터링", d:"카메라 기반 심박·혈류 참고 측정. 의료 진단 아님, 참고용."},
+  {c:"Wellness", n:"스마트 약통 · 알림", d:"복약 시간 알림과 가족 케어 연동. 어르신 안심 케어."},
+  {c:"Living", n:"4K 빔 · 홈시네마", d:"공간을 차지하지 않는 빌트인 홈 시네마."},
+  {c:"Living", n:"인클로저 스피커", d:"TV 연동 인클로저 스피커로 최상의 음질."},
+  {c:"Living", n:"지능형 라이팅 · 상판 색변화", d:"분위기에 따라 바뀌는 조명과 상판. 살아있는 오브제."},
+  {c:"Data", n:"실시간 실내환경 데이터", d:"공기질·온습도·에너지 소비를 대시보드로 한눈에."},
+  {c:"Data", n:"구글 넥스트 허브 연동", d:"음성·앱으로 제어하는 스마트홈 인프라."},
+  {c:"Data", n:"탄소 저감 → 크레딧", d:"IoT 데이터 기반으로 탄소 감축을 자산화(VCM 연동)."},
+  {c:"Core", n:"CGO 비전 · 12만 색", d:"잔상 없는 AR 비전. 거울·화면이 살아있는 인터페이스로.", blue:1},
+  {c:"Core", n:"MUFE 양자보안", d:"양자내성 암호·무저장 구조로 데이터 보안. 애플·구글 다음 레벨.", blue:1},
+  {c:"Core", n:"자가발전 LED · 광섬유", d:"흐르는 물의 터빈 회전으로 조명 일부를 자가 구동."},
+  {c:"Core", n:"AI 웰니스 리포트", d:"측정·환경 데이터를 묶어 생활 습관 참고 리포트로(참고용)."}
+];
+var fg=document.getElementById('featGrid');
+FEATURES.forEach(function(f){
+  var el=document.createElement('div');el.className='feat'+(f.blue?' blue':'');
+  el.innerHTML='<div class="fc">'+f.c+'</div><div class="fn">'+f.n+'</div><div class="fd">'+f.d+'</div>';
+  fg.appendChild(el);
+});
 
-scroller.addEventListener('scroll',function(){
-  hdr.classList.toggle('solid',scroller.scrollTop>40);
-},{passive:true});
+/* ===== 언론보도 {o:매체, u:링크} ===== */
+var PRESS=[
+  {o:"스포츠동아",    u:"https://sports.donga.com/economy/article/all/20240218/123570797/2"},
+  {o:"한국무역신문",  u:"https://www.weeklytrade.co.kr/m/content/view.html?section=1&category=160&no=90581"},
+  {o:"데일리카",      u:"https://www.dailycar.co.kr/content/news.html?type=view&autoId=51677"},
+  {o:"세계비즈",      u:"https://m.segyebiz.com/newsView/20240216511348"},
+  {o:"스포츠경향",    u:"https://n.news.naver.com/article/144/0000944098?type=journalists"},
+  {o:"뷰어스 viewus", u:"https://feed.viewus.co.kr/ai/article/60696/"},
+  {o:"브릿지경제",    u:"https://www.viva100.com/20240216010004622"},
+  {o:"일간스포츠",    u:"https://isplus.com/article/view/isp202402160087"},
+  {o:"네이트 뉴스",   u:"https://news.nate.com/view/20240218n16918"},
+  {o:"위메이크뉴스",  u:"https://wemakenews.co.kr/news/view.php?no=18097"},
+  {o:"비즈니스포스트", u:"https://www.businesspost.co.kr/BP?command=article_view&num=342913"},
+  {o:"OSEN",         u:"https://www.osen.co.kr/article/G1112276629"},
+  {o:"에이빙 AVING",  u:"https://kr.aving.net/news/articleView.html?idxno=1650839"},
+  {o:"서울파이낸스",  u:"https://www.seoulfn.com/news/articleView.html?idxno=436602"},
+  {o:"", u:""}
+];
+var pg=document.getElementById('pressGrid');
+PRESS.forEach(function(a){
+  if(!a.o){var e=document.createElement('div');e.className='pcard empty';e.textContent='+ 기사 추가';pg.appendChild(e);return;}
+  var el=document.createElement('a');el.className='pcard';el.href=a.u;el.target='_blank';el.rel='noopener';
+  el.innerHTML='<div class="po">Media</div><div class="pt">'+a.o+'</div><div class="plink"><span>언론 보도</span><span>원문 →</span></div>';
+  pg.appendChild(el);
+});
 
-/* power graph draw */
-function drawPower(){
-  var r=document.getElementById('lnRed'),b=document.getElementById('lnBlue');
-  if(r&&!r.classList.contains('go')){r.classList.add('go');}
-  if(b&&!b.classList.contains('go')){b.classList.add('go');}
-}
-/* vortex draw */
-function drawVortex(){
-  var v=document.getElementById('vxLine');
-  if(v&&!v.classList.contains('go'))v.classList.add('go');
-}
-/* compression: scatter plants, then reveal core */
-var compressDone=false;
-function drawCompress(){
-  if(compressDone)return;compressDone=true;
-  var g=document.getElementById('plants');if(!g)return;
-  var pts=[];
-  for(var y=60;y<=340;y+=22){for(var x=60;x<=340;x+=22){
-    if(Math.random()<.62)pts.push([x+(Math.random()*8-4),y+(Math.random()*8-4)]);
-  }}
-  pts.forEach(function(p,i){
-    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',1.7);
-    c.setAttribute('class','plant');c.style.opacity=0;
-    c.style.transition='opacity .5s '+(i*6)+'ms';
-    g.appendChild(c);requestAnimationFrame(function(){c.style.opacity=.85});
-  });
-  // after scatter, morph to core
-  setTimeout(function(){
-    g.style.transition='opacity 1.1s ease, transform 1.1s cubic-bezier(.6,0,.2,1)';
-    g.style.transformOrigin='200px 200px';
-    g.style.transform='scale(.16)';g.style.opacity='.5';
-    var cr=document.getElementById('coreRect'),cl=document.getElementById('coreLbl');
-    cr.style.transition='opacity 1s .6s';cl.style.transition='opacity 1s .8s';
-    cr.style.opacity=1;cl.style.opacity=1;
-  },pts.length*6+700);
-}
+/* ===== 글로벌 총판 모집 {f:국기, n:국가} ===== */
+var DISTRIB=[
+  {f:"🇸🇦",n:"사우디아라비아"},{f:"🇦🇪",n:"아랍에미리트"},{f:"🇩🇪",n:"독일"},{f:"🇫🇷",n:"프랑스"},
+  {f:"🇮🇹",n:"이탈리아"},{f:"🇳🇱",n:"네덜란드"},{f:"🇯🇵",n:"일본"},{f:"🇺🇸",n:"미국"},
+  {f:"🇮🇳",n:"인도"},{f:"🇻🇳",n:"베트남"},{f:"🇹🇭",n:"태국"},{f:"🇮🇩",n:"인도네시아"},
+  {f:"🇲🇾",n:"말레이시아"},{f:"🇵🇭",n:"필리핀"},{f:"🇨🇳",n:"중국"},{f:"🇭🇰",n:"홍콩"},
+  {f:"🇷🇺",n:"러시아"},{f:"🇹🇷",n:"튀르키예"},{f:"🇪🇸",n:"스페인"},{f:"🇧🇷",n:"브라질"},
+  {f:"🇺🇦",n:"우크라이나"},{f:"🇰🇷",n:"대한민국"}
+];
+var dg=document.getElementById('distGrid');
+DISTRIB.forEach(function(d){
+  var el=document.createElement('a');el.className='dcard';el.onclick=function(){go('order')};
+  el.innerHTML='<div class="df">'+d.f+'</div><div class="dn">'+d.n+'</div><div class="ds">총판 모집 중</div><div class="dq">문의하기 →</div>';
+  dg.appendChild(el);
+});
 
-/* ===== 9-AI matrix — real verification links ===== */
+/* ===== 9-AI ===== */
 var AIS=[
   {n:"Gemini",    p:"https://gemini.google.com/share/583b1dbd11f6", c:"https://gemini.google.com/share/5548b7d3d0be"},
   {n:"ChatGPT",   p:"https://chatgpt.com/share/698564b8-2e80-800e-9a30-cc028951b101", c:"https://chatgpt.com/share/69858a8d-30d8-800e-9677-5c738ac6a1ce"},
@@ -758,45 +647,10 @@ var AIS=[
 var ag=document.getElementById('aiGrid');
 AIS.forEach(function(a){
   var el=document.createElement('div');el.className='ai-card';
-  el.innerHTML='<div class="nm">'+a.n+'</div><div class="st">Verified</div>'+
-    '<div class="lk">'+
-      '<a href="'+a.p+'" target="_blank" rel="noopener">무전력 Δ P=0 <span>→</span></a>'+
-      '<a href="'+a.c+'" target="_blank" rel="noopener">무청소 &lt;0.1% <span>→</span></a>'+
-    '</div>';
+  el.innerHTML='<div class="nm">'+a.n+'</div><div class="lk">'+
+    '<a href="'+a.p+'" target="_blank" rel="noopener">무전력 Δ P=0 <span>→</span></a>'+
+    '<a href="'+a.c+'" target="_blank" rel="noopener">무청소 &lt;0.1% <span>→</span></a></div>';
   ag.appendChild(el);
-});
-
-/* ===== global market beam ===== */
-var beam=document.getElementById('beam');
-function mkPick(el){
-  document.querySelectorAll('.mk').forEach(function(m){m.classList.remove('on')});
-  el.classList.add('on');
-  if(beam)beam.style.transform='rotate('+(el.getAttribute('data-deg')||0)+'deg)';
-}
-
-/* ===== order configurator ===== */
-var order={size:3000000,wood:0,hub:0};
-document.querySelectorAll('.opt-row').forEach(function(row){
-  var group=row.getAttribute('data-group');
-  row.querySelectorAll('.opt').forEach(function(o){
-    o.onclick=function(){
-      row.querySelectorAll('.opt').forEach(function(x){x.classList.remove('on')});
-      o.classList.add('on');
-      if(group==='size')order.size=+o.getAttribute('data-price');
-      if(group==='wood')order.wood=+o.getAttribute('data-add');
-      updateTotal();
-    };
-  });
-});
-function toggleHub(el){el.classList.toggle('on');order.hub=el.classList.contains('on')?800000:0;updateTotal();}
-function updateTotal(){
-  var t=order.size+order.wood+order.hub;
-  document.getElementById('totalOut').textContent='₩'+t.toLocaleString('ko-KR');
-}
-
-/* ===== footer language bar (visual toggle) ===== */
-document.querySelectorAll('#langBar a').forEach(function(a){
-  a.onclick=function(){document.querySelectorAll('#langBar a').forEach(function(x){x.classList.remove('on')});a.classList.add('on');};
 });
 </script>
 </body>
