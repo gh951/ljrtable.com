@@ -609,9 +609,8 @@ function setHash(id){
 function readHash(){
   try{ return (location.hash||'#home').slice(1)||'home'; }catch(e){ return 'home'; }
 }
-var PRODUCT_IDS=PRODUCTS.map(function(p){return p.id});
 function go(id){
-  var isProduct=PRODUCT_IDS.indexOf(id)>-1;
+  var isProduct=PRODUCTS&&PRODUCTS.map(function(p){return p.id}).indexOf(id)>-1;
   var pageId=isProduct?'products':id;
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
   var el=document.getElementById('page-'+pageId);
