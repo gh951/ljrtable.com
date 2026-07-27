@@ -118,10 +118,10 @@
   .ph{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(120% 90% at 50% 28%,#12303a 0%,#0c161b 46%,var(--ink) 80%)}
   .ph .glyph{width:60px;height:60px;border:1px solid rgba(248,249,250,.28);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(248,249,250,.5);font-size:17px;padding-left:3px}
   .ph .fn{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--grey-2)}
-  .hero video.bg{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:contain;background:radial-gradient(120% 90% at 50% 30%,#12303a 0%,#0c161b 48%,var(--ink) 82%)}
+  .hero video.bg{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover}
   .scrim{position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(10,10,10,.6) 0%,rgba(10,10,10,.12) 32%,rgba(10,10,10,.62) 100%)}
   .hs-badge{position:absolute;left:0;right:0;top:calc(var(--hd) + 18px);z-index:6;text-align:center;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:rgba(248,249,250,.8)}
-  .car-track{position:absolute;inset:0;z-index:4;display:flex;width:100%;height:100%;transition:transform .8s cubic-bezier(.5,0,.15,1)}
+  .car-track{position:absolute;inset:0;z-index:4;display:flex;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1);will-change:transform;backface-visibility:hidden}
   .car-slide{position:relative;flex:0 0 100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:120px clamp(40px,9vw,130px) 90px}
   .car-slide .s-en{font-size:clamp(10px,1.4vw,12px);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
   .car-slide .s-ko{font-family:var(--serif);font-weight:500;line-height:1.1;font-size:clamp(28px,5.4vw,64px);color:#fff;text-shadow:0 2px 40px rgba(0,0,0,.45)}
@@ -606,12 +606,25 @@ function go(id){
   window.scrollTo({top:0,behavior:'auto'});
   closeDD(); markActive(id); syncVideo(el); revealScan();
   document.getElementById('hdr').classList.toggle('solid',id!=='home');
+  /* 보이는 것만 작동: 홈일 때만 슬라이더 가동, 아니면 정지 */
+  if(window.__slider){ id==='home' ? window.__slider.start() : window.__slider.stop(); }
 }
 function syncVideo(page){
-  document.querySelectorAll('video.bg').forEach(function(v){v.pause()});
+  document.querySelectorAll('video.bg').forEach(function(v){try{v.pause()}catch(e){}});
+  if(document.hidden) return;               /* 화면이 꺼져 있으면 재생 안 함 */
   var v=page.querySelector('video.bg');
   if(v){var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});}
 }
+/* 탭·화면이 숨겨지면 전부 끄고, 돌아오면 보이는 것만 다시 켬 */
+document.addEventListener('visibilitychange',function(){
+  var cur=document.querySelector('.page.on');
+  if(document.hidden){
+    if(window.__slider) window.__slider.stop();
+    document.querySelectorAll('video.bg').forEach(function(v){try{v.pause()}catch(e){}});
+  }else{
+    if(cur){ syncVideo(cur); if(window.__slider && cur.id==='page-home') window.__slider.start(); }
+  }
+});
 function markActive(id){
   document.querySelectorAll('.mi').forEach(function(li){
     var ids=(li.getAttribute('data-ids')||'').split(',');
@@ -841,18 +854,21 @@ var LANGS=["한국어","English","中文","廣東話","日本語","Русски�
     d.innerHTML='<div class="s-en">'+s.en+'</div><h2 class="s-ko">'+s.ko+'</h2><div class="s-data">'+s.d+'</div>';
     tr.appendChild(d);
   });
-  var dotsWrap=document.getElementById('sDots'), i=0, t;
+  var dotsWrap=document.getElementById('sDots'), i=0, t, running=false;
   SLIDES.forEach(function(s,k){var b=document.createElement('button');b.onclick=function(e){e.stopPropagation();jump(k)};dotsWrap.appendChild(b);});
   var sd=[].slice.call(dotsWrap.children);
   function draw(){tr.style.transform='translateX('+(-i*100)+'%)';sd.forEach(function(d,k){d.classList.toggle('on',k===i)});}
   function jump(k){i=(k+SLIDES.length)%SLIDES.length;draw();rest();}
-  function rest(){clearInterval(t);t=setInterval(function(){jump(i+1)},5600);}
+  function rest(){clearInterval(t); if(running){t=setInterval(function(){jump(i+1)},5600);}}
+  function startSlider(){ if(running) return; running=true; rest(); }
+  function stopSlider(){ running=false; clearInterval(t); }
+  window.__slider={start:startSlider, stop:stopSlider};
   document.getElementById('sPrev').onclick=function(e){e.stopPropagation();jump(i-1)};
   document.getElementById('sNext').onclick=function(e){e.stopPropagation();jump(i+1)};
   var x0=null;
   tr.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
   tr.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40){dx<0?jump(i+1):jump(i-1)}x0=null;});
-  draw(); rest();
+  draw();
 
   /* 홈 요약 */
   var sg=document.getElementById('sumGrid');
