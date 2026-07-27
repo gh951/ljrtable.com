@@ -167,6 +167,8 @@
   .spec .v small{display:block;font-family:var(--sans);font-size:12px;color:var(--grey);margin-top:6px}
   @media(max-width:560px){.spec div:not(:last-child){border-right:0}}
   .p-cta{display:flex;gap:13px;flex-wrap:wrap;margin-top:40px}
+  #page-products section+section{margin-top:clamp(48px,7vw,90px);border-top:1px solid var(--line);padding-top:clamp(48px,7vw,90px)}
+  #page-products section{scroll-margin-top:calc(var(--hd) + 10px)}
 
   /* ---------- 카드류 ---------- */
   .feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:44px}
@@ -447,7 +449,13 @@
 
   <!-- ================= 대표자 인사말 ================= -->
   <div class="page" id="page-greeting">
-    <div class="page-head">
+    <section class="p-hero">
+      <div class="ph"><div class="glyph">▶</div><div class="fn">greeting.mp4</div></div>
+      <video class="bg" muted loop playsinline preload="none" poster="greeting.jpg"><source src="greeting.mp4" type="video/mp4"></video>
+      <div class="scrim"></div>
+      <div class="cap"><div class="k">Message from the CEO</div><h2>대표자 <em>인사말</em></h2></div>
+    </section>
+    <div class="page-head" style="padding-top:clamp(40px,5vw,70px)">
       <span class="eyebrow gold">Message</span>
       <h2 class="h-serif">대표자 <em>인사말</em></h2>
     </div>
@@ -601,23 +609,30 @@ function setHash(id){
 function readHash(){
   try{ return (location.hash||'#home').slice(1)||'home'; }catch(e){ return 'home'; }
 }
+var PRODUCT_IDS=PRODUCTS.map(function(p){return p.id});
 function go(id){
+  var isProduct=PRODUCT_IDS.indexOf(id)>-1;
+  var pageId=isProduct?'products':id;
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
-  var el=document.getElementById('page-'+id);
-  if(!el){el=document.getElementById('page-home');id='home';}
+  var el=document.getElementById('page-'+pageId);
+  if(!el){el=document.getElementById('page-home');pageId='home';id='home';}
   el.classList.add('on');
   setHash(id);
-  window.scrollTo({top:0,behavior:'auto'});
+  if(isProduct){
+    var sec=document.getElementById('prod-'+id);
+    if(sec){setTimeout(function(){sec.scrollIntoView({behavior:'smooth'})},80);}
+  }else{
+    window.scrollTo({top:0,behavior:'auto'});
+  }
   closeDD(); markActive(id); syncVideo(el); revealScan();
-  document.getElementById('hdr').classList.toggle('solid',id!=='home');
-  /* 보이는 것만 작동: 홈일 때만 슬라이더 가동, 아니면 정지 */
-  if(window.__slider){ id==='home' ? window.__slider.start() : window.__slider.stop(); }
+  document.getElementById('hdr').classList.toggle('solid',pageId!=='home');
+  if(window.__slider){ pageId==='home' ? window.__slider.start() : window.__slider.stop(); }
 }
 function syncVideo(page){
   document.querySelectorAll('video.bg').forEach(function(v){try{v.pause()}catch(e){}});
-  if(document.hidden) return;               /* 화면이 꺼져 있으면 재생 안 함 */
-  var v=page.querySelector('video.bg');
-  if(v){var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});}
+  if(document.hidden) return;
+  var vids=page.querySelectorAll('video.bg');
+  if(vids.length===1){var pr=vids[0].play(); if(pr&&pr.catch)pr.catch(function(){});}
 }
 /* 탭·화면이 숨겨지면 전부 끄고, 돌아오면 보이는 것만 다시 켬 */
 document.addEventListener('visibilitychange',function(){
@@ -828,28 +843,31 @@ var LANGS=["한국어","English","中文","廣東話","日本語","Русски�
     mn.appendChild(g);
   });
 
-  /* 제품 페이지 */
+  /* 제품 페이지 — 한 페이지에 전체 */
   var pp=document.getElementById('productPages');
+  var prodPage=document.createElement('div'); prodPage.className='page'; prodPage.id='page-products';
+  prodPage.innerHTML='<div class="page-head"><span class="eyebrow gold">Products</span><h2 class="h-serif">LJR TABLE <em>제품 라인업</em></h2><p class="body">모든 제품은 공간에 맞춰 자유롭게 제작됩니다.</p></div>';
   PRODUCTS.forEach(function(p){
-    var d=document.createElement('div'); d.className='page'; d.id='page-'+p.id;
+    var sec=document.createElement('section'); sec.id='prod-'+p.id;
     var spec=p.s.map(function(x){
       return '<div><div class="k">'+x[0]+'</div><div class="v">'+x[1]+(x[2]?'<small>'+x[2]+'</small>':'')+'</div></div>';
     }).join('');
-    d.innerHTML=
-      '<section class="p-hero'+(p.fit==='contain'?' contain':'')+'">'+
+    sec.innerHTML=
+      '<div class="p-hero'+(p.fit==='contain'?' contain':'')+'">'+
         '<div class="ph"><div class="glyph">▶</div><div class="fn">'+p.id+'.mp4</div></div>'+
         '<video class="bg" muted loop playsinline preload="none" poster="'+p.id+'.jpg"><source src="'+p.id+'.mp4" type="video/mp4"></video>'+
         '<div class="scrim"></div>'+
         '<div class="cap"><div class="k">'+p.k+'</div><h2>'+p.t+'</h2></div>'+
-      '</section>'+
+      '</div>'+
       '<div class="block">'+
         '<p class="body">'+p.d+'</p>'+
         '<div class="spec">'+spec+'</div>'+
         '<div class="p-cta"><a class="btn btn-blue" onclick="go(\'order\')">주문 · 문의</a>'+
         '<a class="btn btn-line" onclick="go(\'features\')">기능 보기</a></div>'+
       '</div>';
-    pp.appendChild(d);
+    prodPage.appendChild(sec);
   });
+  pp.appendChild(prodPage);
 
   /* 홈 슬라이더 */
   var tr=document.getElementById('carTrack');
