@@ -449,11 +449,10 @@
 
   <!-- ================= 대표자 인사말 ================= -->
   <div class="page" id="page-greeting">
-    <section class="p-hero">
+    <section class="p-hero" style="margin-top:var(--hd)">
       <div class="ph"><div class="glyph">▶</div><div class="fn">greeting.mp4</div></div>
       <video class="bg" muted loop playsinline preload="none" poster="greeting.jpg"><source src="greeting.mp4" type="video/mp4"></video>
       <div class="scrim"></div>
-      <div class="cap"><div class="k">Message from the CEO</div><h2>대표자 <em>인사말</em></h2></div>
     </section>
     <div class="page-head" style="padding-top:clamp(40px,5vw,70px)">
       <span class="eyebrow gold">Message</span>
@@ -630,8 +629,7 @@ function go(id){
 function syncVideo(page){
   document.querySelectorAll('video.bg').forEach(function(v){try{v.pause()}catch(e){}});
   if(document.hidden) return;
-  var vids=page.querySelectorAll('video.bg');
-  if(vids.length===1){var pr=vids[0].play(); if(pr&&pr.catch)pr.catch(function(){});}
+  page.querySelectorAll('video.bg').forEach(function(v){var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){});});
 }
 /* 탭·화면이 숨겨지면 전부 끄고, 돌아오면 보이는 것만 다시 켬 */
 document.addEventListener('visibilitychange',function(){
