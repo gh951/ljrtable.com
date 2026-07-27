@@ -152,6 +152,7 @@
   /* ---------- 제품 페이지 ---------- */
   .p-hero{position:relative;height:clamp(360px,54vh,560px);overflow:hidden;margin-top:0}
   .p-hero video.bg{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover}
+  .p-hero.contain video.bg{object-fit:contain;background:radial-gradient(120% 90% at 50% 30%,#12303a 0%,#0c161b 48%,var(--ink) 82%)}
   .p-hero .cap{position:absolute;z-index:5;left:0;right:0;bottom:34px;text-align:center;padding:0 var(--gut)}
   .p-hero .cap .k{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
   .p-hero .cap h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,5.4vw,64px);color:#fff;line-height:1.06;margin-top:10px;text-shadow:0 2px 40px rgba(0,0,0,.5)}
@@ -681,7 +682,7 @@ var PRODUCTS=[
   {id:"dining", k:"Signature · Dining", t:"식탁, <em>1,170포기</em>를 담다",
    d:"상단은 수경재배, 이중구조 수족관부는 아쿠아포닉스. 두 재배 방식이 한 테이블 안에서 함께 돌아갑니다. 천장까지 확장하면 연 1,500포기까지 가능합니다.",
    s:[["가격","₩6,000,000"],["규격","1,800 × 900 × 750","(+1,150)"],["연간 수확","1,170포기","천장형 1,500포기"],["대상","4인 가정 · 하이엔드 오피스"]]},
-  {id:"conference", k:"B2B / B2G · Climate Asset", t:"회의실 <em>테이블</em>",
+  {id:"conference", k:"B2B / B2G · Climate Asset", t:"회의실 <em>테이블</em>", fit:"contain",
    d:"공간·전력·탄소를 동시에 되돌리는 기후 자산. 임원 회의실, PB센터, 로펌, 프리미엄 갤러리 접견실을 위한 규격입니다.",
    s:[["가격","₩10,000,000~"],["규격","2,200 × 1,100 × 750"],["식생","생화 35본"],["기본 탑재","4K 빔 · 인클로저 스피커"]]},
   {id:"four", k:"Family · Smart Home", t:"4인용 <em>다이닝</em>",
@@ -832,8 +833,8 @@ var LANGS=["한국어","English","中文","廣東話","日本語","Русски�
       return '<div><div class="k">'+x[0]+'</div><div class="v">'+x[1]+(x[2]?'<small>'+x[2]+'</small>':'')+'</div></div>';
     }).join('');
     d.innerHTML=
-      '<section class="p-hero">'+
-        '<div class="ph"><div class="glyph">▶</div><div class="fn">assets / '+p.id+'.mp4</div></div>'+
+      '<section class="p-hero'+(p.fit==='contain'?' contain':'')+'">'+
+        '<div class="ph"><div class="glyph">▶</div><div class="fn">'+p.id+'.mp4</div></div>'+
         '<video class="bg" muted loop playsinline preload="none" poster="'+p.id+'.jpg"><source src="'+p.id+'.mp4" type="video/mp4"></video>'+
         '<div class="scrim"></div>'+
         '<div class="cap"><div class="k">'+p.k+'</div><h2>'+p.t+'</h2></div>'+
