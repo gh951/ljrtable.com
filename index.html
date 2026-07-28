@@ -148,6 +148,8 @@
   .home-cta h3{font-family:var(--serif);font-size:clamp(24px,3.6vw,42px);color:#fff;line-height:1.2}
   .home-cta p{color:var(--grey);margin-top:16px;font-size:14.5px}
   .home-cta .row{margin-top:32px;display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+  .d-br{display:inline}
+  @media(max-width:640px){.d-br{display:none}}
 
   /* ---------- 제품 페이지 ---------- */
   .p-hero{position:relative;height:clamp(360px,54vh,560px);overflow:hidden;margin-top:0}
@@ -274,6 +276,35 @@
   .rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
   .rv.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}.step{transform:none!important}}
+
+  /* ---------- 스마트폰 가독성 보정 (폰에서만 적용, PC 영향 없음) ---------- */
+  @media(max-width:560px){
+    /* 제품 캡션: 한 줄 고정 해제 → 화면 밖으로 넘치지 않고 줄바꿈됨 */
+    .p-hero .cap h2{white-space:normal;font-size:clamp(27px,7.6vw,44px)}
+    .p-hero .cap{bottom:24px}
+    /* 상단 배지: 자간 줄여 한 줄 유지 */
+    .hs-badge{letter-spacing:.14em;font-size:10px;padding:0 14px;line-height:1.5}
+    /* 본문·설명 글씨 키우기 */
+    .body{font-size:15px;line-height:1.8}
+    .val p{font-size:14px}
+    .val .vh{font-size:23px}
+    .feat .fd,.tech .td{font-size:13.5px}
+    .feat .fn{font-size:20px}
+    .qa .q{font-size:19px}
+    .qa .a{font-size:14px}
+    .sum .sl{font-size:14px}
+    .sum .sn{font-size:12.5px}
+    .step .sv span{font-size:12.5px}
+    .spec .v small,.dcard .dq,.ai-card .lk a,.pcard .plink,.tech .tgo{font-size:12.5px}
+    /* 안내·약관 등 작은 글씨 키우기 */
+    .note{font-size:12.5px;line-height:1.8}
+    .foot .ft{font-size:13px}
+    .foot-mini{font-size:12px;line-height:1.9}
+    .lang-bar a{font-size:13px}
+    /* 카드 안쪽 여백 살짝 확보 */
+    .val{padding:30px 24px}
+    .tech{padding:26px 22px}
+  }
 </style>
 </head>
 <body>
@@ -321,7 +352,8 @@
     <div class="sum-grid" id="sumGrid"></div>
 
     <div class="home-cta">
-      <h3>가구는 늘 소비였습니다.<br>LJR은 <span style="color:var(--gold)">돌려주는 가구</span>입니다.</h3>
+      <p style="color:rgba(248,249,250,.74);font-size:clamp(15px,1.9vw,19px);line-height:1.75;max-width:640px;margin:0 auto 24px">역사상 시간이 지날수록 스스로 가치를 만들고 비용을 돌려주는 혁신적인 제품이 무엇이 있을까요?<br>가정용 태양광? 실링팬? 가정용 식물 재배기?</p>
+      <h3>감히, 소비의 대상이었던 공간을<br class="d-br"><span style="color:var(--gold)">'생산의 기지'</span>로 바꿨다고 자부합니다.</h3>
       <p>제품과 기능, 근거가 되는 수치를 직접 확인해 보세요.</p>
       <div class="row">
         <a class="btn btn-light" onclick="go('dining')">제품 보기</a>
@@ -337,7 +369,7 @@
   <div class="page" id="page-features">
     <div class="page-head">
       <span class="eyebrow">What It Does</span>
-      <h2 class="h-serif">가전 여러 대를,<br>테이블 <em>하나가</em> 대신합니다.</h2>
+      <h2 class="h-serif">가전 여러 대를,<br class="d-br">테이블 <em>하나가</em> 대신합니다.</h2>
       <p class="body">물고기 생존에 필요한 <b>20W 하나</b>로 아래 기능들이 함께 작동합니다. 쓸수록 전기세·필터비·식비가 줄어드는 통합 생태 테이블입니다.</p>
     </div>
     <div class="block">
@@ -389,7 +421,7 @@
   <div class="page" id="page-core">
     <div class="page-head">
       <span class="eyebrow gold">Core Technology</span>
-      <h2 class="h-serif">LJR의 원천기술 —<br><em>실질적인 무전력.</em></h2>
+      <h2 class="h-serif">LJR의 원천기술 —<br class="d-br"><em>실질적인 무전력.</em></h2>
       <p class="body">에너지를 새로 만들지 않습니다. <b>이미 존재하는 흐름을 재배치</b>합니다. 물레방아가 물의 위치에너지로 곡식을 찧듯, LJR은 관상어 생존에 필요한 최소 전력이 만든 물의 낙하 에너지를 실내로 끌어들였습니다.</p>
     </div>
 
@@ -417,7 +449,7 @@
 
     <div class="block alt">
       <span class="eyebrow">Circulation · 순환 구조</span>
-      <h2 class="h-serif" style="font-size:clamp(24px,3.4vw,38px)">한 방향으로 흐르는<br><em>닫힌 생태 순환.</em></h2>
+      <h2 class="h-serif" style="font-size:clamp(24px,3.4vw,38px)">한 방향으로 흐르는<br class="d-br"><em>닫힌 생태 순환.</em></h2>
       <div class="spec" style="margin-top:38px">
         <div><div class="k">Step 1</div><div class="v">내부 수족관<small>관상어 서식 · 유출홀로 넘침</small></div></div>
         <div><div class="k">Step 2</div><div class="v">수막 낙하<small>공기 정화 · 자연 기화 가습</small></div></div>
