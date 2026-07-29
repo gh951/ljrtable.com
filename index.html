@@ -869,7 +869,10 @@ class Component extends DCLogic {
       const raw = el.getAttribute('src') || '';
       const base = raw.replace(/\.[a-z0-9]+$/i, '');
       const exts = ['png','PNG','jpg','JPG','jpeg','JPEG','webp','WEBP','gif','GIF'];
-      const cands = [raw].concat(exts.map(e => base + '.' + e)).filter((v, i, a) => a.indexOf(v) === i);
+      const stems = [base, raw];
+      let cands = [raw];
+      stems.forEach(s => exts.forEach(e => cands.push(s + '.' + e)));
+      cands = cands.filter((v, i, a) => a.indexOf(v) === i);
       let i = 0;
       const tryNext = () => {
         if (i >= cands.length) { el.__resolving = false; return; }
