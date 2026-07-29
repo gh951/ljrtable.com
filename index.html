@@ -860,8 +860,33 @@ const PRODUCT_IDS = PRODUCTS.map(p => p.id);
 class Component extends DCLogic {
   state = { page: "home", idx: 0, open: null, langOpen: false, lang: "한국어" };
 
+  componentDidUpdate() { this.resolveImages(); }
+
+  resolveImages() {
+    document.querySelectorAll('image-slot[src]').forEach(el => {
+      if (el.__resolving) return;
+      el.__resolving = true;
+      const raw = el.getAttribute('src') || '';
+      const base = raw.replace(/\.[a-z0-9]+$/i, '');
+      const exts = ['png','PNG','jpg','JPG','jpeg','JPEG','webp','WEBP','gif','GIF'];
+      const cands = [raw].concat(exts.map(e => base + '.' + e)).filter((v, i, a) => a.indexOf(v) === i);
+      let i = 0;
+      const tryNext = () => {
+        if (i >= cands.length) { el.__resolving = false; return; }
+        const url = cands[i++];
+        const im = new Image();
+        im.onload = () => { if (el.getAttribute('src') !== url) el.setAttribute('src', url); el.__resolving = false; };
+        im.onerror = tryNext;
+        im.src = url;
+      };
+      tryNext();
+    });
+  }
+
   componentDidMount() {
     this.timer();
+    this.resolveImages();
+    setTimeout(() => this.resolveImages(), 900);
     this.scan();
     this.close = () => { if (this.state.open !== null || this.state.langOpen) this.setState({ open: null, langOpen: false }); };
     document.addEventListener("click", this.close);
