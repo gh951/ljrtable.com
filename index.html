@@ -81,7 +81,7 @@
             <div style="width:62px;height:62px;border:1px solid rgba(31,34,39,.24);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(31,34,39,.8);font-size:15px;padding-left:3px">▶</div>
             <div style="font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.2em;color:rgba(31,34,39,.4)">hero.mp4</div>
           </div>
-          <video muted="" loop="" playsinline="" preload="metadata" poster="hero.jpg" style="position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#E3F3F2;opacity:1"><source src="hero.mp4" type="video/mp4"></video>
+          <video muted="" loop="" playsinline="" preload="metadata" data-seamless="1" poster="hero.jpg" style="position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#E3F3F2;opacity:1"><source src="hero.mp4" type="video/mp4"></video>
           <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.34) 0%,rgba(227,243,242,.14) 42%,rgba(227,243,242,.86) 100%)"></div>
 
           <div style="position:absolute;left:0;right:0;top:calc(clamp(64px,7vw,86px) + 26px);z-index:6;text-align:center;font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.44em;text-transform:uppercase;color:#7E6110">The Living Table</div>
@@ -151,6 +151,7 @@
               <div style="position:absolute;z-index:5;left:0;right:0;bottom:clamp(26px,4vw,44px);text-align:center;padding:0 24px">
                 <div style="font-family:'Cormorant Garamond',serif;font-size:13.5px;letter-spacing:.32em;text-transform:uppercase;color:#6E5408">{{ p.k }}</div>
                 <h2 style="font-family:'Gowun Batang',serif;font-weight:400;font-size:clamp(26px,4.4vw,52px);color:#1F2227;line-height:1.28;margin-top:14px">{{ p.t }}</h2>
+                <sc-if value="{{ p.note }}" hint-placeholder-val="{{ true }}"><div style="font-size:13px;font-weight:400;letter-spacing:.12em;color:rgba(31,34,39,.62);margin-top:10px">{{ p.note }}</div></sc-if>
               </div>
             </div>
             <p style="color:rgba(31,34,39,.88);font-size:clamp(16px,1.45vw,18px);line-height:1.95;max-width:66ch;margin-top:clamp(32px,4vw,52px);font-weight:400">{{ p.d }}</p>
@@ -301,7 +302,7 @@
 
             <div data-rv="1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));background:#FFFFFF;border:1px solid rgba(31,34,39,.12);box-shadow:0 10px 26px rgba(31,34,39,.07)">
               <div style="position:relative;align-self:start;height:clamp(260px,30vw,420px);background:#F1F5F4">
-                <image-slot id="core-01-waterwheel" src="core1.png" shape="rect" fit="cover" placeholder="LJR 위치에너지 구조 이미지"></image-slot>
+                <image-slot id="core-01-waterwheel" src="core1.jpg" shape="rect" fit="cover" placeholder="LJR 위치에너지 구조 이미지"></image-slot>
               </div>
               <div style="padding:clamp(32px,3.6vw,52px) clamp(26px,3vw,44px);display:flex;flex-direction:column;justify-content:center">
                 <div style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:#6E5408">01 · 기저 전력</div>
@@ -317,6 +318,14 @@
                 <div style="font-family:'Gowun Batang',serif;font-size:clamp(21px,2.3vw,29px);line-height:1.45;color:#1F2227;margin-top:20px">내부 수족관이 넘치며<br><span style="color:#6E5408">벽면에 수막을 만든다</span></div>
                 <div style="width:30px;height:1px;background:#C19702;margin:22px 0"></div>
                 <p style="font-size:15.5px;color:rgba(31,34,39,.95);line-height:1.9">이중 수족관의 내부 수조 상부 둘레에 있는 유출홀로 물이 넘쳐, 벽면을 따라 얇게 흘러내리며 수막을 형성합니다. 펌프를 더 돌리는 것이 아니라, 이미 올라간 물이 내려오는 힘만 씁니다.</p>
+                <div style="margin-top:30px;padding-top:22px;border-top:1px solid rgba(31,34,39,.14)">
+                  <div style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#6E5408">산출 근거 · 4인용 테이블 기준</div>
+                  <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+                    <div style="font-size:13.5px;line-height:1.75;color:rgba(31,34,39,.72)">습식 세정(Wet Scrubber) 관성충돌 모델 단일 접촉 포집효율 12% (PM10 친수성 입자 10~15% 범위), 실내 표준 기류 0.2m/s, 수막 표면적 1.0㎡.</div>
+                    <div style="font-size:13.5px;line-height:1.75;color:rgba(31,34,39,.72)">전기요금은 한국전력 주택용 저압 2단계 166.0원/kWh에 기본요금·부가세·기금·기후환경요금을 합산한 실질 단가 200원/kWh 기준 (2026.07.28.).</div>
+                  </div>
+                  <div style="font-size:12.5px;line-height:1.7;color:rgba(31,34,39,.5);margin-top:14px">국가 공인 시험성적서 값이 아닌 공학적 산출값입니다.</div>
+                </div>
               </div>
               <div style="position:relative;align-self:start;height:clamp(260px,30vw,420px);background:#F1F5F4;order:-1">
                 <image-slot id="core-02-waterfilm" src="core2.png" shape="rect" fit="cover" placeholder="수막 형성 GIF — 내부 수조 넘침"></image-slot>
@@ -698,7 +707,7 @@
 const NAV = [
   {n:"홈", go:"home"},
   {n:"회사소개", sub:[{n:"대표자 인사말",go:"greeting"},{n:"원천기술 · 실질적 무전력",go:"core"},{n:"원천기술 · 실질적 무청소",go:"clean"},{n:"탑재 기술 (CGO · MUFE)",go:"tech"},{n:"공학 실증 (9대 AI)",go:"proof"}]},
-  {n:"제품", sub:[{n:"식탁 · 1,170포기",go:"dining"},{n:"회의실 테이블",go:"conference"},{n:"4인용",go:"four"},{n:"2인용",go:"two"},{n:"좌식",go:"floor"},{n:"AI 디자인",go:"ai"}]},
+  {n:"제품", sub:[{n:"식탁",go:"dining"},{n:"회의실 테이블",go:"conference"},{n:"4인용",go:"four"},{n:"2인용",go:"two"},{n:"좌식",go:"floor"},{n:"T 테이블",go:"ttable"}]},
   {n:"제품효과", sub:[{n:"기능 20가지",go:"features"},{n:"왜 LJR인가",go:"value3"}]},
   {n:"미디어", go:"press"},
   {n:"총판·대리점", go:"distributor"},
@@ -707,12 +716,12 @@ const NAV = [
 ];
 
 const PRODUCTS = [
-  {id:"dining",k:"Signature · Dining",t:"식탁, 1,170포기를 담다",d:"상단은 수경재배, 이중구조 수족관부는 아쿠아포닉스. 두 재배 방식이 한 테이블 안에서 함께 돌아갑니다. 연 9회전으로 약 1,170포기를 실측했습니다.",s:[{k:"가격",v:"₩6,000,000",sub:""},{k:"규격",v:"1,800 × 900 × 750",sub:"(+1,150)"},{k:"연간 수확",v:"1,170포기",sub:"130포기 × 9회전"},{k:"대상",v:"4인 가정 · 하이엔드 오피스",sub:""}]},
+  {id:"dining",k:"Signature · Dining",t:"식탁",d:"상단은 수경재배, 이중구조 수족관부는 아쿠아포닉스. 두 재배 방식이 한 테이블 안에서 함께 돌아갑니다. 연 9회전으로 약 1,170포기를 실측했습니다.",s:[{k:"가격",v:"₩6,000,000",sub:""},{k:"규격",v:"1,800 × 900 × 750",sub:"(+1,150)"},{k:"연간 수확",v:"1,170포기",sub:"130포기 × 9회전"},{k:"대상",v:"4인 가정 · 하이엔드 오피스",sub:""}]},
   {id:"conference",k:"B2B / B2G · Climate Asset",t:"회의실 테이블",d:"공간·전력·탄소를 동시에 되돌리는 기후 자산. 임원 회의실, PB센터, 로펌, 프리미엄 갤러리 접견실을 위한 규격입니다.",s:[{k:"가격",v:"₩10,000,000~",sub:""},{k:"규격",v:"2,200 × 1,100 × 750",sub:""},{k:"식생",v:"생화 35본",sub:""},{k:"기본 탑재",v:"4K 빔 · 인클로저 스피커",sub:""}]},
   {id:"four",k:"Family · Smart Home",t:"4인용 다이닝",d:"매일의 식탁이 가족의 웰니스 허브가 됩니다. 연 270~275포기의 채소가 식탁에서 바로 자랍니다.",s:[{k:"가격",v:"₩4,500,000",sub:""},{k:"규격",v:"1,500 × 1,000 × 750",sub:""},{k:"연간 수확",v:"270~275포기",sub:""},{k:"연간 순이익",v:"약 68만 원",sub:"전기·필터·채소 합산"}]},
   {id:"two",k:"Compact · Entry",t:"2인용",d:"작은 공간에 들이는 살아 있는 자연. 1~2인 가정, 소규모 오피스, 호텔, 커피숍에 적합합니다.",s:[{k:"가격",v:"₩2,500,000",sub:""},{k:"규격",v:"800 × 850 × 750",sub:""},{k:"연간 수확",v:"약 180포기",sub:""},{k:"대상",v:"가정 · 오피스 · 호텔",sub:""}]},
   {id:"floor",k:"Wellness · Floor",t:"좌식 테이블",d:"바닥에서 자연과 가장 가까이. 원목 좌식 구조에 플라워 식생과 아쿠아스케이핑을 더할 수 있습니다.",s:[{k:"가격",v:"₩3,500,000",sub:""},{k:"규격",v:"1,200 × 700 × 550",sub:""},{k:"연간 수확",v:"약 225포기",sub:""},{k:"대상",v:"가정 · 호텔 · 카페",sub:""}]},
-  {id:"ai",k:"Concept · Generative Design",t:"AI DESIGN",d:"인공지능이 그린, 아직 세상에 없는 미래형 테이블. 규격과 형태를 공간에 맞춰 자유롭게 제작합니다.",s:[{k:"가격",v:"상담",sub:""},{k:"규격",v:"자유 제작",sub:""},{k:"형태",v:"천장형 · 4D 액자 등",sub:""},{k:"대상",v:"비스포크 주문",sub:""}]}
+  {id:"ttable",k:"Bespoke · T Table",t:"T 테이블",note:"ai 영상 샘플",d:"T자 구조로 공간의 중심을 잡는 비스포크 라인. 규격과 형태를 공간에 맞춰 자유롭게 제작합니다.",s:[{k:"가격",v:"상담",sub:""},{k:"규격",v:"자유 제작",sub:""},{k:"형태",v:"천장형 · 4D 액자 등",sub:""},{k:"대상",v:"비스포크 주문",sub:""}]}
 ];
 
 const SLIDES = [
@@ -858,6 +867,9 @@ class Component extends DCLogic {
     document.addEventListener("click", this.close);
     this.vis = () => { if (document.hidden) this.pauseAll(); else this.syncVideo(); };
     document.addEventListener("visibilitychange", this.vis);
+    this.onEnded = (e) => { const v = e.target; if (v && v.tagName === "VIDEO" && !v.hasAttribute("data-buddy") && !v.hasAttribute("data-seamless")) { v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(() => {}); } };
+    document.addEventListener("ended", this.onEnded, true);
+    this.seamless();
     this.onScroll = () => this.syncVideo();
     window.addEventListener("scroll", this.onScroll, { passive: true });
     this.syncVideo();
@@ -867,13 +879,49 @@ class Component extends DCLogic {
     document.removeEventListener("click", this.close);
     document.removeEventListener("visibilitychange", this.vis);
     window.removeEventListener("scroll", this.onScroll);
+    clearInterval(this.sfTimer);
+    document.removeEventListener("ended", this.onEnded, true);
   }
-  pauseAll() { document.querySelectorAll("video").forEach(v => { if (!v.paused) v.pause(); }); }
+  seamless() {
+    clearInterval(this.sfTimer);
+    this.sfTimer = setInterval(() => {
+      document.querySelectorAll('video[data-seamless]').forEach(a => {
+        let b = a.__buddy;
+        if (!b) {
+          b = a.cloneNode(true);
+          b.removeAttribute('data-seamless');
+          b.setAttribute('data-buddy', '1');
+          b.loop = false;
+          b.muted = true; b.style.opacity = '0';
+          b.style.transition = 'opacity .9s linear';
+          a.style.transition = 'opacity .9s linear';
+          a.parentNode.insertBefore(b, a.nextSibling);
+          a.__buddy = b; b.__buddy = a;
+          a.__active = true; b.__active = false;
+          a.loop = true;
+        }
+        const v = a.__active ? a : b;
+        if (v.paused || !v.duration || !isFinite(v.duration) || v.__fading) return;
+        if (v.duration - v.currentTime < 1.0) {
+          const o = v.__buddy;
+          v.__fading = true;
+          o.loop = true; v.loop = false;
+          try { o.currentTime = 0; } catch (e) {}
+          const pr = o.play(); if (pr && pr.catch) pr.catch(() => {});
+          o.style.opacity = '1'; v.style.opacity = '0';
+          v.__active = false; o.__active = true;
+          setTimeout(() => { v.pause(); try { v.currentTime = 0; } catch (e) {} v.__fading = false; }, 950);
+        }
+      });
+    }, 250);
+  }
+  pauseAll() { document.querySelectorAll("video").forEach(v => { if (v.hasAttribute("data-buddy") && !v.__active) return; if (!v.paused) v.pause(); }); }
   syncVideo() {
     clearTimeout(this.vt);
     this.vt = setTimeout(() => {
       const vh = window.innerHeight || 800;
       document.querySelectorAll("video").forEach(v => {
+        if ((v.hasAttribute("data-buddy") || v.hasAttribute("data-seamless")) && v.__active === false) { if (!v.paused) v.pause(); return; }
         const r = v.getBoundingClientRect();
         const visible = r.height > 0 && r.bottom > 0 && r.top < vh && !document.hidden;
         if (visible) { if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } }
