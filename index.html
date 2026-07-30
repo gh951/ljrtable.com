@@ -925,7 +925,7 @@ class Component extends DCLogic {
     this.scan();
     this.close = () => { if (this.zoomBox) return; if (this.state.open !== null || this.state.langOpen) this.setState({ open: null, langOpen: false }); };
     document.addEventListener("click", this.close);
-    this.vis = () => { if (document.hidden) this.pauseAll(); else this.syncVideo(); };
+    this.vis = () => { if (document.hidden) this.pauseAll(); else if (!this.zoomBox) this.syncVideo(); };
     document.addEventListener("visibilitychange", this.vis);
     this.onEnded = (e) => { const v = e.target; if (v && v.tagName === "VIDEO" && !v.hasAttribute("data-buddy") && !v.hasAttribute("data-seamless")) { v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(() => {}); } };
     document.addEventListener("ended", this.onEnded, true);
@@ -947,6 +947,7 @@ class Component extends DCLogic {
       const ov = document.createElement("div");
       ov.setAttribute("style", "position:fixed;inset:0;z-index:9999;background:rgba(8,10,12,.94);display:flex;align-items:center;justify-content:center;cursor:zoom-out;animation:ljrFade .3s ease");
       const big = document.createElement("video");
+      big.setAttribute("data-zoom", "1");
       big.muted = true; big.loop = true; big.autoplay = true; big.defaultMuted = true;
       big.setAttribute("playsinline", "");
       big.setAttribute("webkit-playsinline", "");
@@ -965,8 +966,9 @@ class Component extends DCLogic {
       document.body.style.overflow = "hidden";
       this.zoomBox = ov;
       const reveal = () => { big.style.opacity = "1"; };
+      big.addEventListener("pause", () => { if (this.zoomBox && !big.ended) { const p3 = big.play(); if (p3 && p3.catch) p3.catch(() => {}); } });
       big.addEventListener("playing", reveal);
-      big.addEventListener("loadeddata", () => { try { big.currentTime = v.currentTime || 0; } catch (e) {} });
+      big.addEventListener("loadeddata", () => { if (big.__seeked) return; big.__seeked = true; try { big.currentTime = v.currentTime || 0; } catch (e) {} }, { once: true });
       big.addEventListener("ended", () => { try { big.currentTime = 0; } catch (e) {} const p2 = big.play(); if (p2 && p2.catch) p2.catch(() => {}); });
       const pr = big.play(); if (pr && pr.catch) pr.catch(() => {});
       setTimeout(reveal, 1200);
@@ -993,6 +995,7 @@ class Component extends DCLogic {
     // crossfade the hero so the loop has no visible cut
     clearInterval(this.sfTimer);
     this.sfTimer = setInterval(() => {
+      if (this.zoomBox) return;
       document.querySelectorAll('video[data-seamless]').forEach(a => {
         let b = a.__buddy;
         if (!b) {
@@ -1023,12 +1026,12 @@ class Component extends DCLogic {
       });
     }, 250);
   }
-  pauseAll() { document.querySelectorAll("video").forEach(v => { if (v.hasAttribute("data-buddy") && !v.__active) return; if (!v.paused) v.pause(); }); }
+  pauseAll() { document.querySelectorAll("video:not([data-zoom])").forEach(v => { if (v.hasAttribute("data-buddy") && !v.__active) return; if (!v.paused) v.pause(); }); }
   syncVideo() {
     clearTimeout(this.vt);
     this.vt = setTimeout(() => {
       const vh = window.innerHeight || 800;
-      const vids = Array.from(document.querySelectorAll("video"));
+      const vids = Array.from(document.querySelectorAll("video:not([data-zoom])"));
       let nextUp = null;
       vids.forEach(v => {
         const rr = v.getBoundingClientRect();
