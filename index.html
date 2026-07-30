@@ -68,9 +68,7 @@
   </sc-if>
 </header>
 
-<audio id="bgm" loop="" preload="none" style="display:none">
-  <source src="bgm.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgm" loop="" preload="none" style="display:none"></audio>
 
 <div style="position:fixed;right:clamp(14px,2vw,26px);bottom:clamp(16px,2.4vw,30px);z-index:130;display:flex;gap:8px">
   <button onClick="{{ back }}" title="{{ backTitle }}" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:18px;font-weight:600;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(7,16,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#FFFFFF;cursor:{{ backCursor }};opacity:{{ backOpacity }};transition:all .3s ease" style-hover="border-color:rgba(87,195,154,.7)">←</button>
@@ -901,9 +899,28 @@ class Component extends DCLogic {
 
   bgm() { return document.getElementById("bgm"); }
 
+  resolveBgm() {
+    const a = this.bgm();
+    if (!a || a.__probing || a.__resolved) return;
+    a.__probing = true;
+    const cands = ["bgm", "bgm.mp3", "bgm.MP3", "bgm.m4a", "bgm.mp3.mp3", "bgm.ogg", "bgm.wav"];
+    let i = 0;
+    const next = () => {
+      if (i >= cands.length) { a.__probing = false; a.__resolved = true; return; }
+      const url = cands[i++];
+      const t = new Audio();
+      t.preload = "metadata";
+      t.oncanplay = t.onloadedmetadata = () => { a.src = url; a.__resolved = true; a.__probing = false; this.applySound(); };
+      t.onerror = next;
+      t.src = url;
+    };
+    next();
+  }
+
   applySound() {
     const a = this.bgm();
     if (!a) return;
+    if (!a.src) { this.resolveBgm(); return; }
     a.volume = 0.16;
     a.muted = !this.state.sound;
     if (this.state.sound) {
@@ -953,6 +970,7 @@ class Component extends DCLogic {
     let snd = null;
     try { snd = localStorage.getItem("ljr_sound"); } catch (e) {}
     if (snd === "on") this.setState({ sound: true });
+    this.resolveBgm();
     this.applySound();
     this.firstGesture = () => { this.applySound(); document.removeEventListener("pointerdown", this.firstGesture); };
     document.addEventListener("pointerdown", this.firstGesture);
