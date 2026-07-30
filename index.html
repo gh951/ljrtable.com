@@ -947,10 +947,15 @@ class Component extends DCLogic {
       const ov = document.createElement("div");
       ov.setAttribute("style", "position:fixed;inset:0;z-index:9999;background:rgba(8,10,12,.94);display:flex;align-items:center;justify-content:center;cursor:zoom-out;animation:ljrFade .3s ease");
       const big = document.createElement("video");
-      big.src = src;
-      big.muted = true; big.loop = true; big.autoplay = true;
+      big.muted = true; big.loop = true; big.autoplay = true; big.defaultMuted = true;
       big.setAttribute("playsinline", "");
-      big.setAttribute("style", "max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;background:#000;cursor:zoom-out");
+      big.setAttribute("webkit-playsinline", "");
+      big.setAttribute("preload", "auto");
+      big.removeAttribute("controls");
+      big.controls = false;
+      if (v.poster) big.poster = v.poster;
+      big.src = src;
+      big.setAttribute("style", "max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;background:#000;cursor:zoom-out;opacity:0;transition:opacity .45s ease");
       try { big.currentTime = v.currentTime || 0; } catch (err) {}
       const hint = document.createElement("div");
       hint.textContent = "화면을 누르면 닫힙니다";
@@ -959,7 +964,12 @@ class Component extends DCLogic {
       document.body.appendChild(ov);
       document.body.style.overflow = "hidden";
       this.zoomBox = ov;
+      const reveal = () => { big.style.opacity = "1"; };
+      big.addEventListener("playing", reveal);
+      big.addEventListener("loadeddata", () => { try { big.currentTime = v.currentTime || 0; } catch (e) {} });
+      big.addEventListener("ended", () => { try { big.currentTime = 0; } catch (e) {} const p2 = big.play(); if (p2 && p2.catch) p2.catch(() => {}); });
       const pr = big.play(); if (pr && pr.catch) pr.catch(() => {});
+      setTimeout(reveal, 1200);
       const close = (e2) => { if (e2) { e2.preventDefault(); e2.stopPropagation(); } ov.remove(); document.body.style.overflow = ""; this.zoomBox = null; this.syncVideo(); };
       ov.addEventListener("click", close);
       this.zoomClose = close;
