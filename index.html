@@ -33,14 +33,14 @@
 
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#07100D"/></svg></template>
 
-<header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:120;transition:background .4s ease,border-color .4s ease;border-bottom:1px solid rgba(255,255,255,0)">
+<header id="hdr" style="position:fixed;top:0;left:0;right:0;z-index:120;border-bottom:1px solid rgba(255,255,255,0)">
   <div style="max-width:1360px;margin:0 auto;padding:0 clamp(18px,3vw,40px);height:clamp(56px,6vh,68px);display:flex;align-items:center;justify-content:space-between;gap:18px">
-    <a onClick="{{ goHome }}" id="wordmark" style="font-weight:800;font-size:clamp(17px,1.5vw,20px);letter-spacing:-.02em;color:#FFFFFF;cursor:pointer;transition:color .4s ease;flex:none">LJR</a>
+    <a onClick="{{ goHome }}" id="wordmark" style="font-weight:800;font-size:clamp(17px,1.5vw,20px);letter-spacing:-.02em;color:#FFFFFF;cursor:pointer;flex:none">LJR</a>
 
     <nav id="navwrap" style="display:flex;align-items:center;gap:clamp(10px,1.4vw,24px)">
       <sc-for list="{{ nav }}" as="it" hint-placeholder-count="8">
         <div style="position:relative">
-          <a onClick="{{ it.click }}" class="navlink" style="display:block;font-size:13.5px;font-weight:500;padding:8px 2px;color:rgba(255,255,255,.82);white-space:nowrap;cursor:pointer;transition:color .4s ease,opacity .2s ease" style-hover="opacity:.62">{{ it.label }}</a>
+          <a onClick="{{ it.click }}" class="navlink" style="display:block;font-size:13.5px;font-weight:500;padding:8px 2px;color:rgba(255,255,255,.82);white-space:nowrap;cursor:pointer;transition:opacity .2s ease" style-hover="opacity:.62">{{ it.label }}</a>
           <sc-if value="{{ it.open }}" hint-placeholder-val="{{ false }}">
             <div style="position:absolute;top:calc(100% + 8px);left:-14px;min-width:250px;background:#FFFFFF;border:1px solid rgba(31,34,39,.12);border-radius:12px;box-shadow:0 18px 50px rgba(7,16,13,.2);padding:8px;display:flex;flex-direction:column;animation:ljrFade .2s ease">
               <sc-for list="{{ it.sub }}" as="s" hint-placeholder-count="5">
@@ -53,8 +53,8 @@
     </nav>
 
     <div style="display:flex;align-items:center;gap:9px;flex:none">
-      <button onClick="{{ toggleSound }}" id="sndbtn" title="{{ soundTitle }}" style="font-family:inherit;font-size:13px;font-weight:600;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer;transition:all .4s ease" style-hover="background:rgba(255,255,255,.14)">{{ soundIcon }}</button>
-      <button onClick="{{ toggleLang }}" id="langbtn" style="font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer;transition:all .4s ease" style-hover="background:rgba(255,255,255,.14)">{{ langLabel }}</button>
+      <button onClick="{{ toggleSound }}" id="sndbtn" title="{{ soundTitle }}" style="font-family:inherit;font-size:13px;font-weight:600;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer" style-hover="background:rgba(255,255,255,.14)">{{ soundIcon }}</button>
+      <button onClick="{{ toggleLang }}" id="langbtn" style="font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer" style-hover="background:rgba(255,255,255,.14)">{{ langLabel }}</button>
       <button onClick="{{ toggleMenu }}" id="menubtn" style="display:none;font-family:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer">MENU</button>
     </div>
   </div>
@@ -258,7 +258,7 @@
           <sc-for list="{{ core }}" as="c" hint-placeholder-count="3">
             <article data-rv="1" style="border:1px solid rgba(255,255,255,.14);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:#0A1613">
               <div style="position:relative;aspect-ratio:16/10;background:#0B1512">
-                <img data-fb="1" src="{{ c.img }}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.9">
+                <img data-fb="1" data-src="{{ c.img }}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.9">
               </div>
               <div style="padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:12px">
                 <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(87,195,154,.85)">{{ c.k }}</span>
@@ -307,7 +307,7 @@
           <sc-for list="{{ clean }}" as="c" hint-placeholder-count="3">
             <article data-rv="1" style="border:1px solid rgba(31,34,39,.13);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;background:#FBFDFC">
               <div style="position:relative;aspect-ratio:16/10;background:#E3F3F2">
-                <img data-fb="1" src="{{ c.img }}" alt="" style="width:100%;height:100%;object-fit:cover">
+                <img data-fb="1" data-src="{{ c.img }}" alt="" style="width:100%;height:100%;object-fit:cover">
               </div>
               <div style="padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:12px">
                 <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:#6E5408">{{ c.k }}</span>
@@ -586,58 +586,39 @@
           </sc-for>
         </div>
 
-        <div data-rv="1" style="margin-top:clamp(46px,7vh,84px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px">
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <span data-i18n="bd_k" style="font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:500;letter-spacing:.38em;text-transform:uppercase;color:#6E5408">Guestbook</span>
-            <h2 data-i18n="bd_t" style="margin:0;font-size:clamp(24px,3.2vw,46px);font-weight:700;letter-spacing:-.035em;line-height:1.08;text-wrap:balance">Ask us anything. We answer in public.</h2>
-            <p data-i18n="bd_b" style="margin:0;font-size:clamp(14.5px,1.5vw,17px);line-height:1.8;color:rgba(31,34,39,.66);max-width:62ch;text-wrap:pretty">Questions, doubts and requests are posted here as they come. Nothing is hidden — if a question is hard, we would rather answer it where everyone can read it.</p>
-          </div>
-          <button onClick="{{ openPost }}" data-i18n="bd_new" style="flex:none;font-family:inherit;padding:15px 30px;border-radius:999px;border:0;background:#1F2227;color:#FFFFFF;font-size:15px;font-weight:600;cursor:pointer;transition:background .3s ease" style-hover="background:#0A1613">Write a post</button>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(22px,3vh,34px)">
-          <sc-for list="{{ board }}" as="p" hint-placeholder-count="4">
-            <div style="background:#FFFFFF;padding:clamp(20px,2.4vw,32px);display:flex;flex-direction:column;gap:11px">
-              <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px">
-                <span style="font-size:12px;font-weight:600;letter-spacing:.1em;padding:5px 11px;border-radius:999px;background:{{ p.tagBg }};color:{{ p.tagFg }}">{{ p.tag }}</span>
-                <span style="font-size:clamp(15px,1.6vw,17.5px);font-weight:600;letter-spacing:-.018em;line-height:1.45;color:#1F2227">{{ p.t }}</span>
-              </div>
-              <p style="margin:0;font-size:14.5px;line-height:1.85;color:rgba(31,34,39,.7);text-wrap:pretty">{{ p.b }}</p>
-              <sc-if value="{{ p.reply }}" hint-placeholder-val="{{ false }}">
-                <div style="margin-top:4px;padding:16px 18px;border-radius:12px;background:#F2F8F7;border-left:2px solid #57C39A">
-                  <div data-i18n="bd_reply" style="font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6E5408">LJR</div>
-                  <p style="margin:9px 0 0;font-size:14.5px;line-height:1.85;color:rgba(31,34,39,.78);text-wrap:pretty">{{ p.reply }}</p>
-                </div>
-              </sc-if>
-              <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:rgba(31,34,39,.45)">
-                <span>{{ p.who }}</span>
-                <span>{{ p.when }}</span>
-              </div>
-            </div>
-          </sc-for>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(13px,1.5vw,22px);margin-top:clamp(40px,6vh,72px)">
+          <button onClick="{{ openBoard }}" data-rv="1" style="font-family:inherit;text-align:left;background:#FFFFFF;border:1px solid rgba(31,34,39,.14);border-radius:18px;padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:11px;cursor:pointer;transition:all .3s ease" style-hover="border-color:#C19702;transform:translateY(-3px)">
+            <span data-i18n="bd_k" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:#C19702">Guestbook</span>
+            <span data-i18n="bd_t2" style="font-size:clamp(18px,1.9vw,24px);font-weight:700;letter-spacing:-.028em;line-height:1.25;color:#1F2227">Ask us anything</span>
+            <span data-i18n="bd_d" style="font-size:13.5px;line-height:1.7;color:rgba(31,34,39,.6)">Questions and our answers, in public.</span>
+            <span data-i18n="bd_open" style="margin-top:4px;font-size:13px;font-weight:600;color:#6E5408">Open the guestbook →</span>
+          </button>
+          <button onClick="{{ openPost }}" data-rv="1" style="font-family:inherit;text-align:left;background:#FFFFFF;border:1px solid rgba(31,34,39,.14);border-radius:18px;padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:11px;cursor:pointer;transition:all .3s ease" style-hover="border-color:#C19702;transform:translateY(-3px)">
+            <span data-i18n="pf_k2" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:#C19702">Enquiry</span>
+            <span data-i18n="pf_t2" style="font-size:clamp(18px,1.9vw,24px);font-weight:700;letter-spacing:-.028em;line-height:1.25;color:#1F2227">Write to us</span>
+            <span data-i18n="pf_d" style="font-size:13.5px;line-height:1.7;color:rgba(31,34,39,.6)">Send a question straight to us.</span>
+            <span data-i18n="pf_open" style="margin-top:4px;font-size:13px;font-weight:600;color:#6E5408">Open the form →</span>
+          </button>
         </div>
       </div>
     </div>
   </sc-if>
 
-  <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;z-index:200;background:rgba(5,11,9,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:clamp(14px,4vw,40px);animation:ljrFade .26s ease">
-      <div onClick="{{ stop }}" style="width:100%;max-width:680px;max-height:88vh;overflow-y:auto;background:#FFFFFF;border-radius:20px;padding:clamp(26px,3.4vw,46px);display:flex;flex-direction:column;gap:20px;box-shadow:0 30px 80px rgba(5,11,9,.4)">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
-          <div style="display:flex;flex-direction:column;gap:9px">
-            <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#6E5408">{{ sheetK }}</span>
-            <h3 style="margin:0;font-size:clamp(22px,2.6vw,34px);font-weight:700;letter-spacing:-.032em;line-height:1.14">{{ sheetT }}</h3>
-          </div>
-          <button onClick="{{ closeSheet }}" style="flex:none;width:34px;height:34px;font-family:inherit;font-size:17px;border:0;border-radius:999px;background:#EDF6F5;color:#1F2227;cursor:pointer">✕</button>
+  <sc-if value="{{ openA }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#EDF6F5;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">{{ kA }}</span>
+          <h1 style="margin:0;font-size:clamp(28px,4.4vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1.06;text-wrap:balance">{{ tA }}</h1>
         </div>
 
-        <sc-if value="{{ sheetIntro }}" hint-placeholder-val="{{ false }}">
-          <p style="margin:0;font-size:clamp(14.5px,1.5vw,17px);line-height:1.85;color:rgba(31,34,39,.72);text-wrap:pretty">{{ sheetIntro }}</p>
+        <sc-if value="{{ introA }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:clamp(14.5px,1.5vw,17px);line-height:1.85;color:rgba(31,34,39,.72);text-wrap:pretty">{{ introA }}</p>
         </sc-if>
 
-        <sc-if value="{{ sheetHasRows }}" hint-placeholder-val="{{ true }}">
+        <sc-if value="{{ hasRowsA }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden">
-            <sc-for list="{{ sheetRows }}" as="r" hint-placeholder-count="6">
+            <sc-for list="{{ rowsA }}" as="r" hint-placeholder-count="6">
               <div style="background:#FFFFFF;padding:15px 17px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px">
                 <span style="font-size:13px;font-weight:500;color:rgba(31,34,39,.55);white-space:nowrap">{{ r.k }}</span>
                 <span style="font-size:14.5px;font-weight:600;letter-spacing:-.015em;text-align:right;line-height:1.55">{{ r.v }}</span>
@@ -646,15 +627,15 @@
           </div>
         </sc-if>
 
-        <sc-if value="{{ sheetHasNotes }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ hasNotesA }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;flex-direction:column;gap:10px">
-            <sc-for list="{{ sheetNotes }}" as="n" hint-placeholder-count="3">
+            <sc-for list="{{ notesA }}" as="n" hint-placeholder-count="3">
               <p style="margin:0;padding-left:15px;border-left:2px solid rgba(87,195,154,.5);font-size:14px;line-height:1.8;color:rgba(31,34,39,.7);text-wrap:pretty">{{ n.t }}</p>
             </sc-for>
           </div>
         </sc-if>
 
-        <sc-if value="{{ sheetForm }}" hint-placeholder-val="{{ false }}">
+        <sc-if value="{{ formA }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;flex-direction:column;gap:13px">
             <label style="display:flex;flex-direction:column;gap:7px">
               <span data-i18n="df_co" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Company</span>
@@ -676,23 +657,242 @@
         </sc-if>
 
         <div style="display:flex;flex-wrap:wrap;gap:10px">
-          <button onClick="{{ sheetSend }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ sheetCta }}</button>
-          <button onClick="{{ closeSheet }}" data-i18n="df_close" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Close</button>
+          <button onClick="{{ sendA }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaA }}</button>
+          <button onClick="{{ closeA }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
         </div>
         <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
       </div>
     </div>
   </sc-if>
 
-  <sc-if value="{{ postOpen }}" hint-placeholder-val="{{ false }}">
-    <div onClick="{{ closePost }}" style="position:fixed;inset:0;z-index:200;background:rgba(5,11,9,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:clamp(16px,4vw,40px);animation:ljrFade .26s ease">
-      <div onClick="{{ stop }}" style="width:100%;max-width:560px;max-height:88vh;overflow-y:auto;background:#FFFFFF;border-radius:20px;padding:clamp(26px,3.4vw,44px);display:flex;flex-direction:column;gap:18px;box-shadow:0 30px 80px rgba(5,11,9,.4)">
-        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <span data-i18n="pf_k" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:#6E5408">New post</span>
-            <h3 data-i18n="pf_t" style="margin:0;font-size:clamp(21px,2.4vw,30px);font-weight:700;letter-spacing:-.03em;line-height:1.15">What would you like to ask?</h3>
+  <sc-if value="{{ openB }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#FFFFFF;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">{{ kB }}</span>
+          <h1 style="margin:0;font-size:clamp(28px,4.4vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1.06;text-wrap:balance">{{ tB }}</h1>
+        </div>
+
+        <sc-if value="{{ introB }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:clamp(14.5px,1.5vw,17px);line-height:1.85;color:rgba(31,34,39,.72);text-wrap:pretty">{{ introB }}</p>
+        </sc-if>
+
+        <sc-if value="{{ hasRowsB }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden">
+            <sc-for list="{{ rowsB }}" as="r" hint-placeholder-count="6">
+              <div style="background:#FFFFFF;padding:15px 17px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px">
+                <span style="font-size:13px;font-weight:500;color:rgba(31,34,39,.55);white-space:nowrap">{{ r.k }}</span>
+                <span style="font-size:14.5px;font-weight:600;letter-spacing:-.015em;text-align:right;line-height:1.55">{{ r.v }}</span>
+              </div>
+            </sc-for>
           </div>
-          <button onClick="{{ closePost }}" style="flex:none;width:34px;height:34px;font-family:inherit;font-size:17px;border:0;border-radius:999px;background:#EDF6F5;color:#1F2227;cursor:pointer">✕</button>
+        </sc-if>
+
+        <sc-if value="{{ hasNotesB }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ notesB }}" as="n" hint-placeholder-count="3">
+              <p style="margin:0;padding-left:15px;border-left:2px solid rgba(87,195,154,.5);font-size:14px;line-height:1.8;color:rgba(31,34,39,.7);text-wrap:pretty">{{ n.t }}</p>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ formB }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_co" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Company</span>
+              <input id="df-co" type="text" placeholder="{{ phCo }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_country" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Country / territory</span>
+              <input id="df-country" type="text" placeholder="{{ phCountry }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_contact" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Contact (email or phone)</span>
+              <input id="df-contact" type="text" placeholder="{{ phDContact }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_msg" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Order or enquiry details</span>
+              <textarea id="df-msg" rows="4" placeholder="{{ phDMsg }}" style="font-family:inherit;font-size:15px;line-height:1.7;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none;resize:vertical"></textarea>
+            </label>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button onClick="{{ sendB }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaB }}</button>
+          <button onClick="{{ closeB }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
+        </div>
+        <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ openC }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#EDF6F5;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">{{ kC }}</span>
+          <h1 style="margin:0;font-size:clamp(28px,4.4vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1.06;text-wrap:balance">{{ tC }}</h1>
+        </div>
+
+        <sc-if value="{{ introC }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:clamp(14.5px,1.5vw,17px);line-height:1.85;color:rgba(31,34,39,.72);text-wrap:pretty">{{ introC }}</p>
+        </sc-if>
+
+        <sc-if value="{{ hasRowsC }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden">
+            <sc-for list="{{ rowsC }}" as="r" hint-placeholder-count="6">
+              <div style="background:#FFFFFF;padding:15px 17px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px">
+                <span style="font-size:13px;font-weight:500;color:rgba(31,34,39,.55);white-space:nowrap">{{ r.k }}</span>
+                <span style="font-size:14.5px;font-weight:600;letter-spacing:-.015em;text-align:right;line-height:1.55">{{ r.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasNotesC }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ notesC }}" as="n" hint-placeholder-count="3">
+              <p style="margin:0;padding-left:15px;border-left:2px solid rgba(87,195,154,.5);font-size:14px;line-height:1.8;color:rgba(31,34,39,.7);text-wrap:pretty">{{ n.t }}</p>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ formC }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_co" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Company</span>
+              <input id="df-co" type="text" placeholder="{{ phCo }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_country" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Country / territory</span>
+              <input id="df-country" type="text" placeholder="{{ phCountry }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_contact" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Contact (email or phone)</span>
+              <input id="df-contact" type="text" placeholder="{{ phDContact }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_msg" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Order or enquiry details</span>
+              <textarea id="df-msg" rows="4" placeholder="{{ phDMsg }}" style="font-family:inherit;font-size:15px;line-height:1.7;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none;resize:vertical"></textarea>
+            </label>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button onClick="{{ sendC }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaC }}</button>
+          <button onClick="{{ closeC }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
+        </div>
+        <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ openD }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#FFFFFF;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">{{ kD }}</span>
+          <h1 style="margin:0;font-size:clamp(28px,4.4vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1.06;text-wrap:balance">{{ tD }}</h1>
+        </div>
+
+        <sc-if value="{{ introD }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:clamp(14.5px,1.5vw,17px);line-height:1.85;color:rgba(31,34,39,.72);text-wrap:pretty">{{ introD }}</p>
+        </sc-if>
+
+        <sc-if value="{{ hasRowsD }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden">
+            <sc-for list="{{ rowsD }}" as="r" hint-placeholder-count="6">
+              <div style="background:#FFFFFF;padding:15px 17px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:14px">
+                <span style="font-size:13px;font-weight:500;color:rgba(31,34,39,.55);white-space:nowrap">{{ r.k }}</span>
+                <span style="font-size:14.5px;font-weight:600;letter-spacing:-.015em;text-align:right;line-height:1.55">{{ r.v }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasNotesD }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ notesD }}" as="n" hint-placeholder-count="3">
+              <p style="margin:0;padding-left:15px;border-left:2px solid rgba(87,195,154,.5);font-size:14px;line-height:1.8;color:rgba(31,34,39,.7);text-wrap:pretty">{{ n.t }}</p>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ formD }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_co" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Company</span>
+              <input id="df-co" type="text" placeholder="{{ phCo }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_country" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Country / territory</span>
+              <input id="df-country" type="text" placeholder="{{ phCountry }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_contact" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Contact (email or phone)</span>
+              <input id="df-contact" type="text" placeholder="{{ phDContact }}" style="font-family:inherit;font-size:15px;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span data-i18n="df_msg" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Order or enquiry details</span>
+              <textarea id="df-msg" rows="4" placeholder="{{ phDMsg }}" style="font-family:inherit;font-size:15px;line-height:1.7;padding:13px 15px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none;resize:vertical"></textarea>
+            </label>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button onClick="{{ sendD }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaD }}</button>
+          <button onClick="{{ closeD }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
+        </div>
+        <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ boardOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#EDF6F5;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span data-i18n="bd_k" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">Guestbook</span>
+          <h1 data-i18n="bd_t" style="margin:0;font-size:clamp(28px,4.2vw,60px);font-weight:700;letter-spacing:-.04em;line-height:1.06;text-wrap:balance">Ask us anything. We answer in public.</h1>
+          <p data-i18n="bd_b" style="margin:0;font-size:clamp(14.5px,1.5vw,17.5px);line-height:1.8;color:rgba(31,34,39,.66);max-width:66ch;text-wrap:pretty">Questions, doubts and requests are posted here as they come. Nothing is hidden — if a question is hard, we would rather answer it where everyone can read it.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden">
+          <sc-for list="{{ board }}" as="p" hint-placeholder-count="4">
+            <div style="background:#FFFFFF;padding:clamp(18px,2.2vw,28px);display:flex;flex-direction:column;gap:11px">
+              <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px">
+                <span style="font-size:11.5px;font-weight:600;letter-spacing:.1em;padding:5px 11px;border-radius:999px;background:{{ p.tagBg }};color:{{ p.tagFg }}">{{ p.tag }}</span>
+                <span style="font-size:clamp(15px,1.6vw,17px);font-weight:600;letter-spacing:-.018em;line-height:1.45;color:#1F2227">{{ p.t }}</span>
+              </div>
+              <p style="margin:0;font-size:14px;line-height:1.85;color:rgba(31,34,39,.7);text-wrap:pretty">{{ p.b }}</p>
+              <sc-if value="{{ p.reply }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:2px;padding:15px 17px;border-radius:12px;background:#F2F8F7;border-left:2px solid #57C39A">
+                  <div data-i18n="bd_reply" style="font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6E5408">LJR</div>
+                  <p style="margin:9px 0 0;font-size:14px;line-height:1.85;color:rgba(31,34,39,.78);text-wrap:pretty">{{ p.reply }}</p>
+                </div>
+              </sc-if>
+              <div style="display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:rgba(31,34,39,.45)">
+                <span>{{ p.who }}</span>
+                <span>{{ p.when }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button onClick="{{ boardToPost }}" data-i18n="bd_new" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">Write a post</button>
+          <button onClick="{{ closeBoard }}" data-i18n="df_back2" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to support</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ postOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#FFFFFF;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span data-i18n="pf_k" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">New post</span>
+          <h1 data-i18n="pf_t" style="margin:0;font-size:clamp(28px,4.2vw,58px);font-weight:700;letter-spacing:-.04em;line-height:1.06;text-wrap:balance">What would you like to ask?</h1>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:14px">
@@ -721,6 +921,7 @@
         <div style="display:flex;flex-wrap:wrap;gap:10px">
           <button onClick="{{ submitPost }}" data-i18n="pf_send" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">Post it</button>
           <button onClick="{{ mailPost }}" data-i18n="pf_mail" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Send by email instead</button>
+          <button onClick="{{ closePost }}" data-i18n="df_back2" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:rgba(31,34,39,.6);font-size:15px;font-weight:600;cursor:pointer">Back to support</button>
         </div>
         <p data-i18n="pf_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">Posts are kept in your browser and shown here. To be sure we see it, use “Send by email instead” — it opens your mail app with the message filled in.</p>
       </div>
@@ -825,13 +1026,15 @@ const DICT = {
   k_media: "미디어", pz_t: "언론 보도.",
   k_dist: "총판·대리점", ds_t: "153개국 특허, 22개국 오픈.",
   df_co: "회사명", df_country: "국가 / 권역", df_contact: "연락처 (이메일 또는 전화)", df_msg: "주문 또는 문의 내용",
-  df_close: "닫기",
+  df_close: "닫기", df_back: "총판·대리점으로 돌아가기", df_back2: "고객지원으로 돌아가기",
   df_note: "모든 파트너 문서는 최초 상담 이후 발행됩니다. 권역과 물량, 조건은 계약 서명 전에 서면으로 합의합니다.",
   ds_b: "국가 총판과 지역 대리점을 엽니다. 독점 권역, 기술 교육 일체, 그리고 4년간 축적한 현장 운용 데이터를 모든 파트너와 공유합니다.",
   k_support: "고객지원", sp_t: "가장 많이 받는 질문.",
   bd_k: "고객 게시판", bd_t: "무엇이든 물어보십시오. 공개로 답합니다.",
   bd_b: "질문과 의심, 요청을 들어온 그대로 이곳에 올립니다. 감출 것이 없습니다. 어려운 질문이라면 오히려 모두가 읽을 수 있는 자리에서 답하고 싶습니다.",
   bd_new: "글쓰기", bd_reply: "LJR 답변",
+  bd_t2: "무엇이든 물어보십시오", bd_d: "고객의 질문과 우리의 답변을 공개합니다.", bd_open: "게시판 열기 →",
+  pf_k2: "문의", pf_t2: "직접 문의하기", pf_d: "궁금한 점을 바로 보내주십시오.", pf_open: "문의 폼 열기 →",
   pf_k: "새 글", pf_t: "무엇을 물어보시겠습니까?",
   pf_name: "이름", pf_contact: "이메일 또는 연락처 (선택)", pf_title: "제목", pf_body: "내용",
   pf_send: "등록하기", pf_mail: "이메일로 보내기",
@@ -857,8 +1060,17 @@ const NAV = [
   { go: "products", en: "Products", ko: "제품" },
   { go: "features", en: "Effects", ko: "제품효과" },
   { go: "press", en: "Media", ko: "미디어" },
-  { go: "distributor", en: "Distribution", ko: "총판·대리점" },
-  { go: "support", en: "Support", ko: "고객지원" },
+  { key: "distributor", go: "distributor", en: "Distribution", ko: "총판·대리점", sub: [
+    { sheet: "terms", en: "Terms of opening", ko: "개설 조건" },
+    { sheet: "catalog", en: "Catalogue", ko: "카탈로그" },
+    { sheet: "contract", en: "Agreement", ko: "계약서" },
+    { sheet: "dorder", en: "Place an order", ko: "총판·대리점 주문" }
+  ] },
+  { key: "support", go: "support", en: "Support", ko: "고객지원", sub: [
+    { go: "support", en: "Frequently asked questions", ko: "자주 묻는 질문" },
+    { board: true, en: "Guestbook", ko: "고객 게시판" },
+    { post: true, en: "Write an enquiry", ko: "문의 글쓰기" }
+  ] },
   { go: "order", en: "Order", ko: "주문·문의" }
 ];
 
@@ -1164,7 +1376,7 @@ const SHEETS = {
     cta: { en: "Request the draft agreement", ko: "계약서 초안 요청" },
     subject: { en: "Agreement request", ko: "계약서 초안 요청" }
   },
-  order: {
+  dorder: {
     k: { en: "04 · Order", ko: "04 · 주문" },
     t: { en: "Distributor and dealer order", ko: "총판·대리점 주문" },
     intro: { en: "For existing partners. Tell us the models and quantities and we will confirm lead time and freight within two business days.", ko: "기존 파트너용입니다. 모델과 수량을 알려주시면 2영업일 내에 납기와 운송 조건을 확정해 드립니다." },
@@ -1191,7 +1403,7 @@ const PRICES = [
 ];
 
 class Component extends DCLogic {
-  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null };
+  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null, boardOpen: false };
 
   bgm() { return document.getElementById("bgm"); }
 
@@ -1234,7 +1446,7 @@ class Component extends DCLogic {
     this.applyLang(); this.resolveImages(); this.reveal();
     setTimeout(() => this.resolveImages(), 900);
     this.seamless();
-    this.revealTimer = setInterval(() => { this.reveal(); this.syncVideo(); }, 400);
+    this.revealTimer = setInterval(() => { this.reveal(); this.syncVideo(); this.resolveImages(); this.chrome(); }, 400);
     [0, 120, 400, 900, 1800, 3000].forEach(t => setTimeout(() => this.syncVideo(), t));
 
     this.slideTimer = setInterval(() => {
@@ -1282,7 +1494,7 @@ class Component extends DCLogic {
 
     this.stack = ["home"]; this.pos = 0;
     const fromHash = (location.hash || "").replace("#", "");
-    const valid = ["home","greeting","core","clean","tech","proof","products","features","press","distributor","support","order"];
+    const valid = ["home","greeting","core","clean","tech","proof","products","features","press","distributor","support","order","terms","catalog","contract","dorder","board","post"];
     try { history.replaceState({ ljr: 1, i: 0, p: "home" }, "", location.hash || "#home"); } catch (e) {}
     if (fromHash && valid.indexOf(fromHash) >= 0 && fromHash !== "home") this.go(fromHash);
 
@@ -1304,8 +1516,8 @@ class Component extends DCLogic {
   componentDidUpdate(prevProps, prevState) {
     this.applyLang(); this.resolveImages(); this.reveal(); this.applySound();
     this.__small = null; this.responsive();
-    const h = document.getElementById("hdr"); if (h) h.__dark = null;
     this.chrome();
+    [0, 40, 160, 400].forEach(t => setTimeout(() => this.chrome(), t));
     if (prevState && prevState.page !== this.state.page) {
       window.scrollTo(0, 0);
       setTimeout(() => { this.syncVideo(); this.chrome(); }, 60);
@@ -1354,7 +1566,8 @@ class Component extends DCLogic {
     try { list = JSON.parse(localStorage.getItem("ljr_board") || "[]"); } catch (e) {}
     list.push(f);
     try { localStorage.setItem("ljr_board", JSON.stringify(list.slice(-40))); } catch (e) {}
-    this.setState({ postOpen: false, postErr: "" });
+    this.setState({ postErr: "" });
+    this.go("board");
   }
 
   mailPost(ko) {
@@ -1364,8 +1577,33 @@ class Component extends DCLogic {
     window.location.href = "mailto:ljrtable@gmail.com?subject=" + encodeURIComponent(subj) + "&body=" + encodeURIComponent(body);
   }
 
+  subGo(s) {
+    if (s.sheet) { this.go(s.sheet); return; }
+    if (s.board) { this.go("board"); return; }
+    if (s.post) { this.setState({ postErr: "" }); this.go("post"); return; }
+    this.go(s.go);
+  }
+
+  sheetVals(key, N, ko) {
+    const S = SHEETS[key];
+    const o = {};
+    o["open" + N] = this.state.page === key;
+    o["k" + N] = ko ? S.k.ko : S.k.en;
+    o["t" + N] = ko ? S.t.ko : S.t.en;
+    o["intro" + N] = S.intro ? (ko ? S.intro.ko : S.intro.en) : "";
+    o["hasRows" + N] = !!S.rows;
+    o["rows" + N] = S.rows ? S.rows.map(r => ({ k: ko ? r.k.ko : r.k.en, v: ko ? r.v.ko : r.v.en })) : [];
+    o["hasNotes" + N] = !!S.notes;
+    o["notes" + N] = S.notes ? S.notes.map(n => ({ t: ko ? n.ko : n.en })) : [];
+    o["form" + N] = !!S.form;
+    o["cta" + N] = ko ? S.cta.ko : S.cta.en;
+    o["close" + N] = () => this.go("distributor");
+    o["send" + N] = () => this.sendSheet(ko);
+    return o;
+  }
+
   sendSheet(ko) {
-    const S = SHEETS[this.state.sheet];
+    const S = SHEETS[this.state.page];
     if (!S) return;
     const g = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ""; };
     const parts = [];
@@ -1404,11 +1642,11 @@ class Component extends DCLogic {
   }
 
   resolveImages() {
-    document.querySelectorAll("img[data-fb]").forEach(el => {
+    document.querySelectorAll("img[data-fb],img[data-src]").forEach(el => {
       if (el.__done || el.__busy) return;
       el.__busy = true;
-      const raw = el.getAttribute("src") || "";
-      if (!raw || raw.indexOf("{{") === 0) { el.__busy = false; return; }
+      const raw = el.getAttribute("data-src") || el.getAttribute("src") || "";
+      if (!raw || raw.indexOf("{{") >= 0) { el.__busy = false; return; }
       const base = raw.replace(/\.[a-z0-9]+$/i, "");
       const exts = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "webp", "WEBP", "gif", "GIF"];
       let cands = [raw, base];
@@ -1451,22 +1689,24 @@ class Component extends DCLogic {
     const op = document.getElementById("op");
     const dark = this.state.page === "home"
       ? (!op || window.scrollY < op.offsetHeight * 0.72)
-      : (this.state.page === "core" || this.state.page === "proof" || this.state.page === "order");
-    if (hdr.__dark === dark) return;
+      : ["core", "proof", "order"].indexOf(this.state.page) >= 0;
     hdr.__dark = dark;
-    hdr.style.background = dark ? "rgba(7,16,13,.5)" : "rgba(255,255,255,.9)";
-    hdr.style.backdropFilter = "saturate(180%) blur(18px)";
-    hdr.style.webkitBackdropFilter = hdr.style.backdropFilter;
-    hdr.style.borderBottomColor = dark ? "rgba(255,255,255,.08)" : "rgba(31,34,39,.12)";
-    if (this.state.page === "home" && dark && window.scrollY < 40) hdr.style.background = "rgba(7,16,13,0)";
+    const bg = (this.state.page === "home" && dark && window.scrollY < 40)
+      ? "rgba(7,16,13,0)" : (dark ? "rgba(7,16,13,.5)" : "rgba(255,255,255,.9)");
+    hdr.style.setProperty("background", bg, "important");
+    hdr.style.setProperty("backdrop-filter", "saturate(180%) blur(18px)", "important");
+    hdr.style.setProperty("-webkit-backdrop-filter", "saturate(180%) blur(18px)", "important");
+    hdr.style.setProperty("border-bottom-color", dark ? "rgba(255,255,255,.08)" : "rgba(31,34,39,.12)", "important");
     const wm = document.getElementById("wordmark");
-    if (wm) wm.style.color = dark ? "#FFFFFF" : "#1F2227";
-    document.querySelectorAll(".navlink").forEach(a => { a.style.color = dark ? "rgba(255,255,255,.82)" : "rgba(31,34,39,.72)"; });
+    if (wm) wm.style.setProperty("color", dark ? "#FFFFFF" : "#1F2227", "important");
+    document.querySelectorAll(".navlink").forEach(a => {
+      a.style.setProperty("color", dark ? "rgba(255,255,255,.82)" : "rgba(31,34,39,.72)", "important");
+    });
     ["langbtn", "menubtn", "sndbtn"].forEach(id => {
       const b = document.getElementById(id);
       if (!b) return;
-      b.style.color = dark ? "#FFFFFF" : "#1F2227";
-      b.style.borderColor = dark ? "rgba(255,255,255,.34)" : "rgba(31,34,39,.24)";
+      b.style.setProperty("color", dark ? "#FFFFFF" : "#1F2227", "important");
+      b.style.setProperty("border-color", dark ? "rgba(255,255,255,.34)" : "rgba(31,34,39,.24)", "important");
     });
   }
 
@@ -1564,7 +1804,7 @@ class Component extends DCLogic {
     if (this.zoomBox) return;
     let el = ev.target;
     if (!el || !el.closest) return;
-    if (this.state.postOpen || this.state.sheet) return;
+    if (["post", "board", "terms", "catalog", "contract", "dorder"].indexOf(this.state.page) >= 0) return;
     if (el.closest("a,button,input,textarea,select,header,label")) return;
     let v = null;
     const x = ev.clientX, y = ev.clientY;
@@ -1624,7 +1864,7 @@ class Component extends DCLogic {
     const flat = [];
     NAV.forEach(n => {
       flat.push({ label: ko ? n.ko : n.en, size: "17px", weight: "600", color: "rgba(255,255,255,.95)", pad: "12px 0", click: n.go ? () => this.go(n.go) : () => {} });
-      (n.sub || []).forEach(s => flat.push({ label: ko ? s.ko : s.en, size: "14.5px", weight: "400", color: "rgba(255,255,255,.62)", pad: "10px 0 10px 16px", click: () => this.go(s.go) }));
+      (n.sub || []).forEach(s => flat.push({ label: ko ? s.ko : s.en, size: "14.5px", weight: "400", color: "rgba(255,255,255,.62)", pad: "10px 0 10px 16px", click: () => this.subGo(s) }));
     });
 
     return {
@@ -1669,7 +1909,7 @@ class Component extends DCLogic {
       nav: NAV.map((n, k) => ({
         label: ko ? n.ko : n.en,
         open: this.state.open === k,
-        sub: (n.sub || []).map(s => ({ label: ko ? s.ko : s.en, click: () => this.go(s.go) })),
+        sub: (n.sub || []).map(s => ({ label: ko ? s.ko : s.en, click: () => this.subGo(s) })),
         click: n.sub ? () => this.setState(st => ({ open: st.open === k ? null : k })) : () => this.go(n.go)
       })),
       flatNav: flat,
@@ -1678,6 +1918,7 @@ class Component extends DCLogic {
       isClean: page === "clean", isTech: page === "tech", isProof: page === "proof",
       isProducts: page === "products", isFeatures: page === "features", isPress: page === "press",
       isDist: page === "distributor", isSupport: page === "support", isOrder: page === "order",
+
 
       slideEn: sl.en,
       slideKo: ko ? sl.ko : sl.en,
@@ -1742,10 +1983,14 @@ class Component extends DCLogic {
         reply: ko ? p.reply.ko : p.reply.en, who: ko ? p.who.ko : p.who.en, when: ko ? p.when.ko : p.when.en,
         tagBg: "#EDF6F5", tagFg: "#6E5408"
       }))),
-      postOpen: this.state.postOpen,
+      boardOpen: page === "board",
+      openBoard: () => this.go("board"),
+      closeBoard: () => this.go("support"),
+      boardToPost: () => { this.setState({ postErr: "" }); this.go("post"); },
+      postOpen: page === "post",
       postErr: this.state.postErr || "",
-      openPost: () => this.setState({ postOpen: true, postErr: "" }),
-      closePost: () => this.setState({ postOpen: false, postErr: "" }),
+      openPost: () => { this.setState({ postErr: "" }); this.go("post"); },
+      closePost: () => { this.setState({ postErr: "" }); this.go("support"); },
       stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
       phName: ko ? "성함" : "Your name",
       phContact: ko ? "회신받을 이메일 또는 전화번호" : "Where we can reply",
@@ -1758,21 +2003,13 @@ class Component extends DCLogic {
         { key: "terms", k: "01", ten: "Terms of opening", tko: "개설 조건", den: "Territory, term, training and what we ask of a partner.", dko: "권역과 기간, 교육, 그리고 파트너에게 요청하는 것.", cen: "Open →", cko: "열어보기 →" },
         { key: "catalog", k: "02", ten: "Catalogue", tko: "카탈로그", den: "All models with prices and dimensions.", dko: "전 모델의 가격과 규격.", cen: "Open →", cko: "열어보기 →" },
         { key: "contract", k: "03", ten: "Agreement", tko: "계약서", den: "What the distribution agreement covers.", dko: "총판 계약서에 담기는 내용.", cen: "Open →", cko: "열어보기 →" },
-        { key: "order", k: "04", ten: "Place an order", tko: "총판·대리점 주문", den: "For existing partners. Lead time and terms.", dko: "기존 파트너용. 납기와 조건.", cen: "Open →", cko: "열어보기 →" }
-      ].map(t => ({ k: t.k, t: ko ? t.tko : t.ten, d: ko ? t.dko : t.den, cta: ko ? t.cko : t.cen, click: () => this.setState({ sheet: t.key }) })),
+        { key: "dorder", k: "04", ten: "Place an order", tko: "총판·대리점 주문", den: "For existing partners. Lead time and terms.", dko: "기존 파트너용. 납기와 조건.", cen: "Open →", cko: "열어보기 →" }
+      ].map(t => ({ k: t.k, t: ko ? t.tko : t.ten, d: ko ? t.dko : t.den, cta: ko ? t.cko : t.cen, click: () => this.go(t.key) })),
 
-      sheetOpen: !!this.state.sheet,
-      sheetK: S ? (ko ? S.k.ko : S.k.en) : "",
-      sheetT: S ? (ko ? S.t.ko : S.t.en) : "",
-      sheetIntro: S && S.intro ? (ko ? S.intro.ko : S.intro.en) : "",
-      sheetHasRows: !!(S && S.rows),
-      sheetRows: S && S.rows ? S.rows.map(r => ({ k: ko ? r.k.ko : r.k.en, v: ko ? r.v.ko : r.v.en })) : [],
-      sheetHasNotes: !!(S && S.notes),
-      sheetNotes: S && S.notes ? S.notes.map(n => ({ t: ko ? n.ko : n.en })) : [],
-      sheetForm: !!(S && S.form),
-      sheetCta: S ? (ko ? S.cta.ko : S.cta.en) : "",
-      closeSheet: () => this.setState({ sheet: null }),
-      sheetSend: () => this.sendSheet(ko),
+      ...this.sheetVals("terms", "A", ko),
+      ...this.sheetVals("catalog", "B", ko),
+      ...this.sheetVals("contract", "C", ko),
+      ...this.sheetVals("dorder", "D", ko),
       phCo: ko ? "회사명" : "Company name",
       phCountry: ko ? "국가 또는 권역" : "Country or region",
       phDContact: ko ? "회신받을 이메일 또는 전화번호" : "Where we can reply",
