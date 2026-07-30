@@ -403,10 +403,10 @@
           <p data-i18n="fn_b2" style="margin:0;font-size:clamp(15px,1.6vw,19px);line-height:1.8;color:#6E5408;font-weight:500;text-wrap:pretty">With AI-assisted design, we now build refined, simple forms — and any structure a space asks for.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(14px,1.7vw,26px);margin-top:clamp(28px,4vh,48px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(14px,1.7vw,26px);margin-top:clamp(28px,4vh,48px);align-items:stretch">
           <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
-            <article data-rv="1" style="background:#FFFFFF;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 30px rgba(31,34,39,.06)">
-              <div style="position:relative;aspect-ratio:16/10;background:#0B1512">
+            <article data-rv="1" style="background:#FFFFFF;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;height:100%;box-shadow:0 1px 30px rgba(31,34,39,.06)">
+              <div style="position:relative;aspect-ratio:16/10;flex:none;background:#0B1512">
                 <video muted="" loop="" playsinline="" preload="none" poster="{{ p.poster }}" style="width:100%;height:100%;object-fit:cover">
                   <source src="{{ p.src }}" type="video/mp4">
                 </video>
