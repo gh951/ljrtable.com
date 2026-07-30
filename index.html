@@ -110,12 +110,12 @@
       <div>
         <section style="position:relative;height:clamp(600px,92vh,940px);overflow:hidden;display:flex;align-items:center;justify-content:center">
           <div style="position:absolute;inset:0;z-index:1;background:radial-gradient(120% 95% at 50% 24%,#F3FBFA 0%,#E3F3F2 48%,#D3ECEB 90%);animation:ljrDrift 26s ease-in-out infinite alternate"></div>
-          <div style="position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:.5">
+          <div style="position:absolute;pointer-events:none;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;opacity:.5">
             <div style="width:62px;height:62px;border:1px solid rgba(31,34,39,.24);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(31,34,39,.8);font-size:15px;padding-left:3px">▶</div>
-            <div style="font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.2em;color:rgba(31,34,39,.4)">hero.mp4</div>
+            <div style="font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.2em;color:rgba(31,34,39,.4)">영상 불러오는 중…</div>
           </div>
-          <video muted="" loop="" playsinline="" preload="metadata" data-seamless="1" poster="hero.jpg" style="position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#E3F3F2;opacity:1"><source src="hero.mp4" type="video/mp4"></video>
-          <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.34) 0%,rgba(227,243,242,.14) 42%,rgba(227,243,242,.86) 100%)"></div>
+          <video muted="" loop="" playsinline="" preload="auto" data-seamless="1" poster="hero.jpg" style="position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#E3F3F2;opacity:1"><source src="hero.mp4" type="video/mp4"></video>
+          <div style="position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.34) 0%,rgba(227,243,242,.14) 42%,rgba(227,243,242,.86) 100%)"></div>
 
           <div style="position:absolute;left:0;right:0;top:calc(clamp(64px,7vw,86px) + 26px);z-index:6;text-align:center;font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.44em;text-transform:uppercase;color:#7E6110">The Living Table</div>
 
@@ -175,12 +175,12 @@
         <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
           <section id="{{ p.anchor }}" style="max-width:1360px;margin:clamp(64px,9vw,120px) auto 0;padding:0 clamp(24px,6vw,90px);scroll-margin-top:110px">
             <div style="position:relative;height:clamp(340px,50vh,540px);overflow:hidden;background:#D3ECEB">
-              <div style="position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(115% 90% at 50% 28%,#F3FBFA 0%,#E3F3F2 58%,#D3ECEB 100%)">
+              <div style="position:absolute;pointer-events:none;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(115% 90% at 50% 28%,#F3FBFA 0%,#E3F3F2 58%,#D3ECEB 100%)">
                 <div style="width:54px;height:54px;border:1px solid rgba(31,34,39,.22);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(31,34,39,.4);font-size:14px;padding-left:3px">▶</div>
-                <div style="font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.2em;color:rgba(31,34,39,.78)">{{ p.file }}</div>
+                <div style="font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.2em;color:rgba(31,34,39,.78)">영상 불러오는 중…</div>
               </div>
               <video muted="" loop="" playsinline="" preload="metadata" poster="{{ p.poster }}" style="position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#E3F3F2;opacity:1"><source src="{{ p.src }}" type="video/mp4"></video>
-              <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.12) 0%,rgba(227,243,242,.06) 45%,rgba(227,243,242,.8) 100%)"></div>
+              <div style="position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.12) 0%,rgba(227,243,242,.06) 45%,rgba(227,243,242,.8) 100%)"></div>
               <div style="position:absolute;z-index:5;left:0;right:0;bottom:clamp(26px,4vw,44px);text-align:center;padding:0 24px">
                 <div style="font-family:'Cormorant Garamond',serif;font-size:13.5px;letter-spacing:.32em;text-transform:uppercase;color:#6E5408">{{ p.k }}</div>
                 <h2 style="font-family:'Gowun Batang',serif;font-weight:400;font-size:clamp(26px,4.4vw,52px);color:#1F2227;line-height:1.28;margin-top:14px">{{ p.t }}</h2>
@@ -543,12 +543,12 @@
     <sc-if value="{{ isGreeting }}" hint-placeholder-val="{{ false }}">
       <div>
         <section style="position:relative;height:clamp(300px,44vh,470px);overflow:hidden;margin-top:clamp(64px,7vw,86px);background:#D3ECEB">
-          <div style="position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(115% 90% at 50% 28%,#F3FBFA 0%,#E3F3F2 58%,#D3ECEB 100%)">
+          <div style="position:absolute;pointer-events:none;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(115% 90% at 50% 28%,#F3FBFA 0%,#E3F3F2 58%,#D3ECEB 100%)">
             <div style="width:54px;height:54px;border:1px solid rgba(31,34,39,.22);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(31,34,39,.4);font-size:14px;padding-left:3px">▶</div>
-            <div style="font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.2em;color:rgba(31,34,39,.78)">greeting.mp4</div>
+            <div style="font-family:ui-monospace,monospace;font-size:12.5px;letter-spacing:.2em;color:rgba(31,34,39,.78)">영상 불러오는 중…</div>
           </div>
           <video muted="" loop="" playsinline="" preload="metadata" poster="greeting.jpg" style="position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#E3F3F2;opacity:1"><source src="greeting.mp4" type="video/mp4"></video>
-          <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.2) 0%,rgba(227,243,242,.08) 45%,rgba(227,243,242,.82) 100%)"></div>
+          <div style="position:absolute;inset:0;pointer-events:none;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.2) 0%,rgba(227,243,242,.08) 45%,rgba(227,243,242,.82) 100%)"></div>
           <div style="position:absolute;right:clamp(16px,2.4vw,30px);bottom:clamp(14px,2vw,24px);z-index:4;pointer-events:none;font-size:12.5px;font-weight:400;letter-spacing:.12em;color:rgba(31,34,39,.55)">ai 영상 샘플</div>
         </section>
         <div style="max-width:860px;margin:0 auto;padding:clamp(56px,7vw,92px) clamp(24px,6vw,60px) clamp(80px,10vw,140px)">
@@ -923,24 +923,46 @@ class Component extends DCLogic {
     this.resolveImages();
     setTimeout(() => this.resolveImages(), 900);
     this.scan();
-    this.close = () => { if (this.state.open !== null || this.state.langOpen) this.setState({ open: null, langOpen: false }); };
+    this.close = () => { if (this.zoomBox) return; if (this.state.open !== null || this.state.langOpen) this.setState({ open: null, langOpen: false }); };
     document.addEventListener("click", this.close);
     this.vis = () => { if (document.hidden) this.pauseAll(); else this.syncVideo(); };
     document.addEventListener("visibilitychange", this.vis);
     this.onEnded = (e) => { const v = e.target; if (v && v.tagName === "VIDEO" && !v.hasAttribute("data-buddy") && !v.hasAttribute("data-seamless")) { v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(() => {}); } };
     document.addEventListener("ended", this.onEnded, true);
-    this.onVideoClick = (e) => {
-      const v = e.target;
-      if (!v || v.tagName !== "VIDEO") return;
-      const fs = document.fullscreenElement || document.webkitFullscreenElement;
-      if (fs) {
-        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
-        return;
+    this.onVideoClick = (ev) => {
+      if (this.zoomBox) return;
+      let el = ev.target;
+      if (!el || !el.closest) return;
+      if (el.closest("a,button,input,textarea,select,header,[data-noflip]")) return;
+      let v = el.tagName === "VIDEO" ? el : null;
+      let box = el.closest("section,div");
+      while (box && !v) { v = box.querySelector("video"); box = box.parentElement; }
+      if (!v) return;
+      if (v.hasAttribute("data-buddy") || v.hasAttribute("data-seamless")) {
+        if (v.__active === false && v.__buddy) v = v.__buddy;
       }
-      const t = (v.hasAttribute("data-buddy") || v.hasAttribute("data-seamless")) && v.__active === false && v.__buddy ? v.__buddy : v;
-      const req = t.requestFullscreen || t.webkitRequestFullscreen || t.webkitEnterFullscreen;
-      if (req) { const p = req.call(t); if (p && p.catch) p.catch(() => {}); }
-      const pr = t.play(); if (pr && pr.catch) pr.catch(() => {});
+      const src = (v.currentSrc || (v.querySelector("source") || {}).src || "");
+      if (!src) return;
+      ev.preventDefault(); ev.stopPropagation();
+      const ov = document.createElement("div");
+      ov.setAttribute("style", "position:fixed;inset:0;z-index:9999;background:rgba(8,10,12,.94);display:flex;align-items:center;justify-content:center;cursor:zoom-out;animation:ljrFade .3s ease");
+      const big = document.createElement("video");
+      big.src = src;
+      big.muted = true; big.loop = true; big.autoplay = true;
+      big.setAttribute("playsinline", "");
+      big.setAttribute("style", "max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;background:#000;cursor:zoom-out");
+      try { big.currentTime = v.currentTime || 0; } catch (err) {}
+      const hint = document.createElement("div");
+      hint.textContent = "화면을 누르면 닫힙니다";
+      hint.setAttribute("style", "position:absolute;left:0;right:0;bottom:26px;text-align:center;font-family:'Noto Sans KR',sans-serif;font-size:13px;letter-spacing:.14em;color:rgba(255,255,255,.62);pointer-events:none");
+      ov.appendChild(big); ov.appendChild(hint);
+      document.body.appendChild(ov);
+      document.body.style.overflow = "hidden";
+      this.zoomBox = ov;
+      const pr = big.play(); if (pr && pr.catch) pr.catch(() => {});
+      const close = (e2) => { if (e2) { e2.preventDefault(); e2.stopPropagation(); } ov.remove(); document.body.style.overflow = ""; this.zoomBox = null; this.syncVideo(); };
+      ov.addEventListener("click", close);
+      this.zoomClose = close;
     };
     document.addEventListener("click", this.onVideoClick);
     this.seamless();
@@ -958,6 +980,7 @@ class Component extends DCLogic {
     document.removeEventListener("click", this.onVideoClick);
   }
   seamless() {
+    // crossfade the hero so the loop has no visible cut
     clearInterval(this.sfTimer);
     this.sfTimer = setInterval(() => {
       document.querySelectorAll('video[data-seamless]').forEach(a => {
@@ -995,7 +1018,15 @@ class Component extends DCLogic {
     clearTimeout(this.vt);
     this.vt = setTimeout(() => {
       const vh = window.innerHeight || 800;
-      document.querySelectorAll("video").forEach(v => {
+      const vids = Array.from(document.querySelectorAll("video"));
+      let nextUp = null;
+      vids.forEach(v => {
+        const rr = v.getBoundingClientRect();
+        if (rr.top > window.innerHeight * 0.9 && (!nextUp || rr.top < nextUp.getBoundingClientRect().top)) nextUp = v;
+      });
+      if (nextUp && nextUp.getAttribute("preload") !== "auto") { nextUp.setAttribute("preload", "auto"); try { nextUp.load(); } catch (e) {} }
+      vids.forEach(v => {
+        if (this.zoomBox) { if (!v.paused) v.pause(); return; }
         if ((v.hasAttribute("data-buddy") || v.hasAttribute("data-seamless")) && v.__active === false) { if (!v.paused) v.pause(); return; }
         const r = v.getBoundingClientRect();
         const visible = r.height > 0 && r.bottom > 0 && r.top < vh && !document.hidden;
