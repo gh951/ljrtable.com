@@ -397,7 +397,13 @@
         <span data-i18n="k_products" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">Products</span>
         <h1 data-i18n="pr_t" style="margin:20px 0 0;font-size:clamp(30px,4.8vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.04;text-wrap:balance">Six tables. One principle.</h1>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(14px,1.7vw,26px);margin-top:clamp(38px,5.5vh,64px)">
+        <div data-rv="1" style="margin-top:clamp(34px,5vh,58px);background:#FFFFFF;border-radius:20px;padding:clamp(26px,3.2vw,48px);display:flex;flex-direction:column;gap:16px;max-width:920px;box-shadow:0 1px 26px rgba(31,34,39,.05)">
+          <h2 data-i18n="fn_t" style="margin:0;font-size:clamp(22px,2.8vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.1;text-wrap:balance">Function came first.</h2>
+          <p data-i18n="fn_b" style="margin:0;font-size:clamp(15px,1.6vw,19px);line-height:1.8;color:rgba(31,34,39,.72);text-wrap:pretty">All six are real, built to prove the principle. We put the completion of the mechanism ahead of the finish, so the build is crude — but the function is finished.</p>
+          <p data-i18n="fn_b2" style="margin:0;font-size:clamp(15px,1.6vw,19px);line-height:1.8;color:#6E5408;font-weight:500;text-wrap:pretty">With AI-assisted design, we now build refined, simple forms — and any structure a space asks for.</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(14px,1.7vw,26px);margin-top:clamp(28px,4vh,48px)">
           <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
             <article data-rv="1" style="background:#FFFFFF;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 30px rgba(31,34,39,.06)">
               <div style="position:relative;aspect-ratio:16/10;background:#0B1512">
@@ -618,6 +624,9 @@ const DICT = {
   vf_b: "서로 다른 9개 AI가 순수 공학 시뮬레이션으로 무전력(ΔP=0)·무청소(잔류율 &lt;0.1%)를 독립 검토했습니다. 각 대화 원문을 질문지까지 그대로 공개합니다.",
   vf_b2: "국가 인증은 진행 중입니다. 식량을 기르면서 동시에 공기를 씻는 식탁을 담을 범주가 아직 없는 지금, 공개된 공학 검증이 우리가 드릴 수 있는 가장 정직한 증거입니다.",
   k_products: "제품", pr_t: "여섯 개의 식탁, 하나의 원리.",
+  fn_t: "기능이 먼저였습니다.",
+  fn_b: "여섯 대 모두 기능 검증을 목적으로 제작한 실물입니다. 디자인보다 원리의 완성을 앞세웠기에 마감은 조잡하지만, 기능은 완성되었습니다.",
+  fn_b2: "이제 AI 설계의 도움으로 세련되고 단순한 형태, 그리고 공간이 요구하는 어떤 구조든 제작할 수 있습니다.",
   k_features: "제품효과", fe_t: "하나의 식탁, 스무 가지 기능.",
   db_k: "실시간 대시보드", db_t: "공간을, 숫자로.", db_n: "예시 값 · 구글 넥스트 허브 연동",
   sc_t: "한 대는 방을 바꾸고, 백만 대는 전력망을 바꿉니다.",
