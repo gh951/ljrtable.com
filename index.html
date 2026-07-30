@@ -72,13 +72,18 @@
   <source src="bgm.mp3" type="audio/mpeg">
 </audio>
 
+<div style="position:fixed;right:clamp(14px,2vw,26px);bottom:clamp(16px,2.4vw,30px);z-index:130;display:flex;gap:8px">
+  <button onClick="{{ back }}" title="{{ backTitle }}" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:18px;font-weight:600;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(7,16,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#FFFFFF;cursor:{{ backCursor }};opacity:{{ backOpacity }};transition:all .3s ease" style-hover="border-color:rgba(87,195,154,.7)">←</button>
+  <button onClick="{{ fwd }}" title="{{ fwdTitle }}" style="width:46px;height:46px;display:flex;align-items:center;justify-content:center;font-family:inherit;font-size:18px;font-weight:600;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(7,16,13,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#FFFFFF;cursor:{{ fwdCursor }};opacity:{{ fwdOpacity }};transition:all .3s ease" style-hover="border-color:rgba(87,195,154,.7)">→</button>
+</div>
+
 <main style="display:block;min-height:100vh">
 
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div>
       <section id="op" style="position:relative;background:#07100D;padding-top:clamp(56px,6vh,68px)">
         <div style="position:relative;width:100%;height:clamp(520px,92vh,1000px);overflow:hidden;background:#0B1512">
-          <video muted="" loop="" playsinline="" preload="auto" data-seamless="1" poster="hero.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <video muted="" loop="" playsinline="" webkit-playsinline="" autoplay="" preload="auto" data-seamless="1" poster="hero.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
             <source src="hero.mp4" type="video/mp4">
           </video>
           <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,16,13,.62) 0%,rgba(7,16,13,.1) 30%,rgba(7,16,13,.2) 55%,rgba(7,16,13,.94) 100%)"></div>
@@ -867,7 +872,8 @@ class Component extends DCLogic {
     this.applyLang(); this.resolveImages(); this.reveal();
     setTimeout(() => this.resolveImages(), 900);
     this.seamless();
-    this.revealTimer = setInterval(() => this.reveal(), 400);
+    this.revealTimer = setInterval(() => { this.reveal(); this.syncVideo(); }, 400);
+    [0, 120, 400, 900, 1800, 3000].forEach(t => setTimeout(() => this.syncVideo(), t));
 
     this.slideTimer = setInterval(() => {
       if (this.zoomBox || this.state.page !== "home") return;
@@ -902,6 +908,24 @@ class Component extends DCLogic {
     this.firstGesture = () => { this.applySound(); document.removeEventListener("pointerdown", this.firstGesture); };
     document.addEventListener("pointerdown", this.firstGesture);
 
+    this.stack = ["home"]; this.pos = 0;
+    const fromHash = (location.hash || "").replace("#", "");
+    const valid = ["home","greeting","core","clean","tech","proof","products","features","press","distributor","support","order"];
+    try { history.replaceState({ ljr: 1, i: 0, p: "home" }, "", location.hash || "#home"); } catch (e) {}
+    if (fromHash && valid.indexOf(fromHash) >= 0 && fromHash !== "home") this.go(fromHash);
+
+    this.onPop = (e) => {
+      const st = e.state;
+      if (st && st.ljr) {
+        this.pos = st.i;
+        this.setState({ page: st.p, menu: false, open: null });
+      } else {
+        this.pos = 0;
+        this.setState({ page: "home", menu: false, open: null });
+      }
+    };
+    window.addEventListener("popstate", this.onPop);
+
     this.chrome(); this.responsive(); this.syncVideo();
   }
 
@@ -922,10 +946,22 @@ class Component extends DCLogic {
     document.removeEventListener("visibilitychange", this.onVis);
     document.removeEventListener("ended", this.onEnded, true);
     document.removeEventListener("click", this.onClick);
+    window.removeEventListener("popstate", this.onPop);
     clearInterval(this.sfTimer); clearInterval(this.slideTimer); clearInterval(this.revealTimer);
   }
 
-  go(page) { this.setState({ page: page, menu: false, open: null }); }
+  go(page) {
+    if (page === this.state.page) { this.setState({ menu: false, open: null }); return; }
+    if (!this.stack) { this.stack = ["home"]; this.pos = 0; }
+    this.stack = this.stack.slice(0, this.pos + 1);
+    this.stack.push(page);
+    this.pos = this.stack.length - 1;
+    try { history.pushState({ ljr: 1, i: this.pos, p: page }, "", "#" + page); } catch (e) {}
+    this.setState({ page: page, menu: false, open: null });
+  }
+
+  canBack() { return !!this.stack && this.pos > 0; }
+  canFwd() { return !!this.stack && this.pos < this.stack.length - 1; }
 
   applyLang() {
     const ko = this.state.lang === "ko";
@@ -1085,8 +1121,12 @@ class Component extends DCLogic {
       if (this.zoomBox) { if (!v.paused) v.pause(); return; }
       if ((v.hasAttribute("data-buddy") || v.hasAttribute("data-seamless")) && v.__active === false) { if (!v.paused) v.pause(); return; }
       const r = v.getBoundingClientRect();
-      const visible = r.bottom > 0 && r.top < window.innerHeight;
-      if (visible) { if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } }
+      const visible = r.bottom > 0 && r.top < window.innerHeight && r.width > 4;
+      if (visible) {
+        v.muted = true; v.defaultMuted = true;
+        if (v.getAttribute("preload") === "none") { v.setAttribute("preload", "auto"); try { v.load(); } catch (e) {} }
+        if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      }
       else if (!v.paused) v.pause();
     });
   }
@@ -1166,6 +1206,14 @@ class Component extends DCLogic {
       goProof: () => this.go("proof"),
       goDist: () => this.go("distributor"),
       goFeatures: () => this.go("features"),
+      back: () => { if (this.canBack()) history.back(); },
+      fwd: () => { if (this.canFwd()) history.forward(); },
+      backTitle: ko ? "이전 페이지" : "Back",
+      fwdTitle: ko ? "다음 페이지" : "Forward",
+      backOpacity: this.canBack() ? "1" : "0.3",
+      fwdOpacity: this.canFwd() ? "1" : "0.3",
+      backCursor: this.canBack() ? "pointer" : "default",
+      fwdCursor: this.canFwd() ? "pointer" : "default",
       soundIcon: this.state.sound ? "♪" : "✕",
       soundTitle: this.state.sound ? (ko ? "음악 끄기" : "Turn music off") : (ko ? "음악 켜기" : "Turn music on"),
       toggleSound: () => {
