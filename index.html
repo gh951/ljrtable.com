@@ -22,6 +22,16 @@
   ::selection{background:#8A6A0E;color:#EFFAFA}
   @keyframes ljrFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
   @keyframes ljrDrift{from{transform:scale(1.04)}to{transform:scale(1.12)}}
+  @media (max-width:1080px){
+    [data-navlist]{flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 8px!important;justify-content:flex-start!important}
+    [data-navlist]::-webkit-scrollbar{display:none}
+  }
+  @media (max-width:760px){
+    [data-navlist]{display:none!important}
+    [data-mobmenu]{display:inline-flex!important}
+    [data-split]{flex-direction:column!important;align-items:stretch!important}
+    [data-split] > span{align-self:flex-start}
+  }
 </style>
 </helmet>
 
@@ -34,7 +44,7 @@
         <span style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.42em;color:rgba(31,34,39,.9);text-transform:uppercase">Table</span>
       </div>
 
-      <ul style="display:flex;align-items:center;gap:clamp(4px,1.6vw,30px);margin:0 auto;padding:0;flex-wrap:wrap;justify-content:center">
+      <ul data-navlist="1" style="display:flex;align-items:center;gap:clamp(4px,1.6vw,30px);margin:0 auto;padding:0;flex-wrap:wrap;justify-content:center">
         <sc-for list="{{ nav }}" as="m" hint-placeholder-count="8">
           <li style="position:relative;list-style:none">
             <a onClick="{{ m.click }}" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:300;letter-spacing:.1em;padding:10px 2px;cursor:pointer;white-space:nowrap;transition:color .35s;color:{{ m.col }}" style-hover="color:#1F2227">{{ m.n }}</a>
@@ -56,6 +66,12 @@
         </sc-for>
       </ul>
 
+      <button data-mobmenu="1" onClick="{{ toggleMob }}" style="display:none;flex-shrink:0;align-items:center;justify-content:center;width:42px;height:42px;background:transparent;border:1px solid rgba(31,34,39,.22);cursor:pointer;margin-left:auto;margin-right:10px;flex-direction:column;gap:5px">
+        <span style="display:block;width:18px;height:1px;background:#1F2227"></span>
+        <span style="display:block;width:18px;height:1px;background:#1F2227"></span>
+        <span style="display:block;width:18px;height:1px;background:#1F2227"></span>
+      </button>
+
       <div style="position:relative;flex-shrink:0">
         <button onClick="{{ toggleLang }}" style="background:transparent;border:1px solid rgba(31,34,39,.22);color:rgba(31,34,39,.95);font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:300;letter-spacing:.14em;padding:9px 16px;cursor:pointer;transition:.35s;white-space:nowrap" style-hover="border-color:#6E5408;color:#1F2227">{{ lang }}</button>
         <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
@@ -67,6 +83,22 @@
         </sc-if>
       </div>
     </nav>
+    <sc-if value="{{ mobOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid rgba(31,34,39,.14);background:#FFFFFF;max-height:72vh;overflow-y:auto;padding:8px 0 18px;animation:ljrFade .3s ease">
+        <sc-for list="{{ nav }}" as="m" hint-placeholder-count="8">
+          <div style="border-bottom:1px solid rgba(31,34,39,.08)">
+            <a onClick="{{ m.click }}" style="display:block;font-size:16px;font-weight:400;letter-spacing:.06em;color:{{ m.col }};padding:15px clamp(20px,5vw,40px);cursor:pointer">{{ m.n }}</a>
+            <sc-if value="{{ m.open }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;padding:2px 0 10px;background:rgba(154,119,18,.05)">
+                <sc-for list="{{ m.sub }}" as="s" hint-placeholder-count="4">
+                  <a onClick="{{ s.click }}" style="font-size:15px;color:rgba(31,34,39,.9);padding:12px clamp(34px,8vw,60px);cursor:pointer">{{ s.n }}</a>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
   </header>
 
   <main style="padding-top:0">
@@ -273,7 +305,7 @@
             <p data-rv="1" style="font-family:'Gowun Batang',serif;font-size:clamp(18px,2.1vw,26px);line-height:1.65;color:#1F2227;text-align:center;max-width:44ch;margin:clamp(16px,2vw,26px) auto clamp(10px,1.4vw,20px)">LJR은 같은 원리를 실외에서 실내로 가져왔습니다.<br><span style="color:#6E5408">관상어의 생존에 이미 쓰이는 20W</span>가 만든 물의 낙하를 그대로 씁니다.</p>
 
             <div data-rv="1" style="background:#FFFFFF;border:1px solid rgba(31,34,39,.12);box-shadow:0 10px 26px rgba(31,34,39,.07);padding:clamp(28px,3vw,44px) clamp(24px,2.8vw,40px)">
-              <div onClick="{{ toggleSim }}" style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;cursor:pointer">
+              <div data-split="1" onClick="{{ toggleSim }}" style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;cursor:pointer">
                 <div>
                   <div style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:#6E5408">Simulation Conditions · 시뮬레이션 조건</div>
                   <div style="font-family:'Gowun Batang',serif;font-size:clamp(19px,2vw,25px);line-height:1.5;color:#1F2227;margin-top:16px">앞의 수치는 아래 조건을<br>그대로 입력해 계산한 값입니다</div>
@@ -514,6 +546,7 @@
           </div>
           <video muted="" loop="" playsinline="" preload="metadata" poster="greeting.jpg" style="position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;background:#E3F3F2;opacity:1"><source src="greeting.mp4" type="video/mp4"></video>
           <div style="position:absolute;inset:0;z-index:3;background:linear-gradient(180deg,rgba(227,243,242,.2) 0%,rgba(227,243,242,.08) 45%,rgba(227,243,242,.82) 100%)"></div>
+          <div style="position:absolute;right:clamp(16px,2.4vw,30px);bottom:clamp(14px,2vw,24px);z-index:4;pointer-events:none;font-size:12.5px;font-weight:400;letter-spacing:.12em;color:rgba(31,34,39,.55)">ai 영상 샘플</div>
         </section>
         <div style="max-width:860px;margin:0 auto;padding:clamp(56px,7vw,92px) clamp(24px,6vw,60px) clamp(80px,10vw,140px)">
           <span style="font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.4em;text-transform:uppercase;color:#6E5408">Message</span>
@@ -856,7 +889,7 @@ const LANGS = ["한국어","English","中文","廣東話","日本語","Русс�
 const PRODUCT_IDS = PRODUCTS.map(p => p.id);
 
 class Component extends DCLogic {
-  state = { page: "home", idx: 0, open: null, langOpen: false, lang: "한국어" };
+  state = { page: "home", idx: 0, open: null, langOpen: false, mobOpen: false, lang: "한국어" };
 
   resolveImages() {
     document.querySelectorAll('img[data-fb]').forEach(el => {
@@ -985,7 +1018,7 @@ class Component extends DCLogic {
   go(id) {
     const isProduct = PRODUCT_IDS.indexOf(id) > -1;
     const page = isProduct ? "products" : id;
-    this.setState({ page, open: null, langOpen: false });
+    this.setState({ page, open: null, langOpen: false, mobOpen: false });
     setTimeout(() => {
       if (isProduct) {
         const el = document.getElementById("prod-" + id);
@@ -1011,6 +1044,8 @@ class Component extends DCLogic {
         };
       }),
       lang: st.lang, langOpen: st.langOpen,
+      mobOpen: st.mobOpen,
+      toggleMob: stop(() => this.setState({ mobOpen: !st.mobOpen, open: null, langOpen: false })),
       toggleLang: stop(() => this.setState({ langOpen: !st.langOpen, open: null })),
       langs: LANGS.map(n => ({ n, col: n === st.lang ? "#1F2227" : "rgba(31,34,39,.58)", click: stop(() => this.setState({ lang: n, langOpen: false })) })),
 
