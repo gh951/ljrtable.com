@@ -21,6 +21,8 @@
   img,video{display:block;max-width:100%}
   video{cursor:zoom-in}
   ::selection{background:#57C39A;color:#07100D}
+  html[lang="ko"] body{word-break:keep-all;overflow-wrap:break-word;line-break:strict}
+  html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] p,html[lang="ko"] span,html[lang="ko"] a,html[lang="ko"] div{word-break:keep-all;overflow-wrap:break-word}
   @keyframes ljrFade{from{opacity:0}to{opacity:1}}
   @keyframes ljrRise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
   @keyframes ljrHint{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:.7;transform:translateY(7px)}}
@@ -51,6 +53,7 @@
     </nav>
 
     <div style="display:flex;align-items:center;gap:9px;flex:none">
+      <button onClick="{{ toggleSound }}" id="sndbtn" title="{{ soundTitle }}" style="font-family:inherit;font-size:13px;font-weight:600;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer;transition:all .4s ease" style-hover="background:rgba(255,255,255,.14)">{{ soundIcon }}</button>
       <button onClick="{{ toggleLang }}" id="langbtn" style="font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.06em;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer;transition:all .4s ease" style-hover="background:rgba(255,255,255,.14)">{{ langLabel }}</button>
       <button onClick="{{ toggleMenu }}" id="menubtn" style="display:none;font-family:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.34);background:transparent;color:#FFFFFF;cursor:pointer">MENU</button>
     </div>
@@ -64,6 +67,10 @@
     </div>
   </sc-if>
 </header>
+
+<audio id="bgm" loop="" preload="none" style="display:none">
+  <source src="bgm.mp3" type="audio/mpeg">
+</audio>
 
 <main style="display:block;min-height:100vh">
 
@@ -836,7 +843,21 @@ const PRICES = [
 ];
 
 class Component extends DCLogic {
-  state = { lang: "en", page: "home", menu: false, open: null, idx: 0 };
+  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: false };
+
+  bgm() { return document.getElementById("bgm"); }
+
+  applySound() {
+    const a = this.bgm();
+    if (!a) return;
+    a.volume = 0.16;
+    a.muted = !this.state.sound;
+    if (this.state.sound) {
+      if (a.getAttribute("preload") !== "auto") { a.setAttribute("preload", "auto"); try { a.load(); } catch (e) {} }
+      if (a.paused) { const p = a.play(); if (p && p.catch) p.catch(() => {}); }
+    } else if (!a.paused) a.pause();
+    document.querySelectorAll("video").forEach(v => { v.muted = true; v.volume = 0; });
+  }
 
   componentDidMount() {
     let saved = null;
@@ -845,14 +866,15 @@ class Component extends DCLogic {
 
     this.applyLang(); this.resolveImages(); this.reveal();
     setTimeout(() => this.resolveImages(), 900);
-    this.opening(); this.seamless();
+    this.seamless();
+    this.revealTimer = setInterval(() => this.reveal(), 400);
 
     this.slideTimer = setInterval(() => {
       if (this.zoomBox || this.state.page !== "home") return;
       this.setState(s => ({ idx: (s.idx + 1) % SLIDES.length }));
     }, 6500);
 
-    this.onScroll = () => { this.opening(); this.syncVideo(); this.chrome(); this.responsive(); };
+    this.onScroll = () => { this.reveal(); this.syncVideo(); this.chrome(); this.responsive(); };
     window.addEventListener("scroll", this.onScroll, { passive: true });
     window.addEventListener("resize", this.onScroll);
 
@@ -873,11 +895,18 @@ class Component extends DCLogic {
     };
     document.addEventListener("click", this.onClick);
 
+    let snd = null;
+    try { snd = localStorage.getItem("ljr_sound"); } catch (e) {}
+    if (snd === "on") this.setState({ sound: true });
+    this.applySound();
+    this.firstGesture = () => { this.applySound(); document.removeEventListener("pointerdown", this.firstGesture); };
+    document.addEventListener("pointerdown", this.firstGesture);
+
     this.chrome(); this.responsive(); this.syncVideo();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.applyLang(); this.resolveImages(); this.reveal();
+    this.applyLang(); this.resolveImages(); this.reveal(); this.applySound();
     this.__small = null; this.responsive();
     const h = document.getElementById("hdr"); if (h) h.__dark = null;
     this.chrome();
@@ -893,8 +922,7 @@ class Component extends DCLogic {
     document.removeEventListener("visibilitychange", this.onVis);
     document.removeEventListener("ended", this.onEnded, true);
     document.removeEventListener("click", this.onClick);
-    clearInterval(this.sfTimer); clearInterval(this.slideTimer);
-    if (this.io) this.io.disconnect();
+    clearInterval(this.sfTimer); clearInterval(this.slideTimer); clearInterval(this.revealTimer);
   }
 
   go(page) { this.setState({ page: page, menu: false, open: null }); }
@@ -935,12 +963,11 @@ class Component extends DCLogic {
   }
 
   reveal() {
-    if (!this.io) {
-      this.io = new IntersectionObserver(es => {
-        es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); this.io.unobserve(e.target); } });
-      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
-    }
-    document.querySelectorAll("[data-rv]:not(.in)").forEach(el => this.io.observe(el));
+    const h = window.innerHeight;
+    document.querySelectorAll("[data-rv]:not(.in)").forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < h * 0.94 && r.bottom > -40) el.classList.add("in");
+    });
   }
 
   responsive() {
@@ -970,7 +997,7 @@ class Component extends DCLogic {
     const wm = document.getElementById("wordmark");
     if (wm) wm.style.color = dark ? "#FFFFFF" : "#1F2227";
     document.querySelectorAll(".navlink").forEach(a => { a.style.color = dark ? "rgba(255,255,255,.82)" : "rgba(31,34,39,.72)"; });
-    ["langbtn", "menubtn"].forEach(id => {
+    ["langbtn", "menubtn", "sndbtn"].forEach(id => {
       const b = document.getElementById(id);
       if (!b) return;
       b.style.color = dark ? "#FFFFFF" : "#1F2227";
@@ -1139,6 +1166,13 @@ class Component extends DCLogic {
       goProof: () => this.go("proof"),
       goDist: () => this.go("distributor"),
       goFeatures: () => this.go("features"),
+      soundIcon: this.state.sound ? "♪" : "✕",
+      soundTitle: this.state.sound ? (ko ? "음악 끄기" : "Turn music off") : (ko ? "음악 켜기" : "Turn music on"),
+      toggleSound: () => {
+        const next = !this.state.sound;
+        try { localStorage.setItem("ljr_sound", next ? "on" : "off"); } catch (e) {}
+        this.setState({ sound: next });
+      },
       goProducts: () => this.go("products"),
       aiNames: AIS.map(a => ({ n: a.n })),
       toggleLang: () => {
