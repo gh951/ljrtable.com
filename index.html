@@ -447,7 +447,7 @@
             <p data-i18n="ec_b" style="margin:0;font-size:15px;line-height:1.8;color:rgba(31,34,39,.7);text-wrap:pretty">Two returns, counted separately: the electricity the table no longer spends, and the produce it grows. Both are annual, at conservative prices.</p>
           </div>
 
-          <h3 data-i18n="ec_h1" style="margin:clamp(28px,4vh,44px) 0 0;font-size:clamp(16px,1.7vw,20px);font-weight:700;letter-spacing:-.02em">Electricity replaced — four-seater</h3>
+          <h3 data-i18n="ec_h1" style="margin:clamp(28px,4vh,44px) 0 0;font-size:clamp(16px,1.7vw,20px);font-weight:700;letter-spacing:-.02em">Electricity replaced, and what that electricity grew — four-seater</h3>
           <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden;margin-top:14px">
             <sc-for list="{{ ecPower }}" as="r" hint-placeholder-count="6">
               <div style="background:{{ r.bg }};padding:14px 16px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px">
@@ -1083,7 +1083,7 @@ const DICT = {
   fn_b2: "이제 AI 설계의 도움으로 세련되고 단순한 형태, 그리고 공간이 요구하는 어떤 구조든 제작할 수 있습니다.",
   ec_k: "경제성", ec_t: "이 식탁이 1년에 돌려주는 것.",
   ec_b: "두 가지를 따로 계산했습니다. 더 이상 쓰지 않게 된 전기, 그리고 직접 길러 얻는 수확. 모두 연간 기준이며 가장 보수적인 가격을 적용했습니다.",
-  ec_h1: "대체되는 전기 — 4인용 기준",
+  ec_h1: "대체되는 전기와 그 전기가 만든 것 — 4인용 식탁 기준",
   ec_h2: "모델별 연간 이익",
   k_features: "제품효과", fe_t: "하나의 식탁, 스무 가지 기능.",
   db_k: "실시간 대시보드", db_t: "공간을, 숫자로.", db_n: "예시 값 · 구글 넥스트 허브 연동",
@@ -1460,17 +1460,19 @@ const SHEETS = {
 
 const EC_POWER = [
   { k: { en: "Air purifier — power and filters", ko: "공기청정기 — 전기세 + 필터비" }, v: "₩121,600" },
-  { k: { en: "Heated humidifier (400W)", ko: "가열식 가습기 (400W)" }, v: "₩216,000" },
+  { k: { en: "Heated humidifier, 400W — heated, after the Oxy disinfectant scandal", ko: "가열식 가습기 400W — 옥시 사태 이후 가열식 기준" }, v: "₩216,000" },
   { k: { en: "Deodorizer, diffuser, grow LED, pump", ko: "탈취기 · 디퓨저 · 재배 LED · 모터" }, v: "₩70,830" },
   { k: { en: "Conventional total", ko: "기존 방식 합계" }, v: "₩408,430", sub: true },
   { k: { en: "LJR total (six grow LED bars only)", ko: "LJR 합계 (재배 LED 6개만)" }, v: "₩52,290", sub: true },
-  { k: { en: "Saved each year", ko: "연간 절감액" }, v: "₩356,140", total: true }
+  { k: { en: "Saved each year — electricity alone", ko: "연간 전기 절감액" }, v: "₩356,140", total: true },
+  { k: { en: "Crop the grow LED returns (30 standing, 9 cycles)", ko: "그 LED가 길러낸 채소 (상시 30포기 · 연 9회전)" }, v: "₩683,710", crop: true },
+  { k: { en: "Annual return together", ko: "연간 합계 이익" }, v: "₩1,039,850", total: true }
 ];
 
 const EC_ROWS = [
-  { nen: "Two-seater", nko: "2인용", p: "₩2,500,000", gen: "20 standing", gko: "상시 20포기", pw: 300000, gv: 455800 },
+  { nen: "Folding, two to four", nko: "접이식 2인용 → 4인용", p: "₩2,500,000", gen: "20 standing", gko: "상시 20포기", pw: 300000, gv: 455800 },
   { nen: "Floor table", nko: "좌식", p: "₩3,500,000", gen: "25 standing", gko: "상시 25포기", pw: 320000, gv: 569800 },
-  { nen: "Four-seater", nko: "4인용", p: "₩4,500,000", gen: "30 standing", gko: "상시 30포기", pw: 356140, gv: 683710, plan: true },
+  { nen: "Four-seater", nko: "4인용 식탁", p: "₩4,500,000", gen: "30 standing", gko: "상시 30포기", pw: 356140, gv: 683710, plan: true },
   { nen: "Dining table", nko: "식탁", p: "₩6,000,000", gen: "130 standing", gko: "상시 130포기", pw: 390000, gv: 2962700 },
   { nen: "Executive desk", nko: "업무 테이블", p: "₩5,000,000", gen: "30 stems, flowers", gko: "생화 30본", pw: 356000, gv: 0 },
   { nen: "Conference table", nko: "회의실", p: "₩10,000,000", gen: "35 stems, flowers", gko: "생화 35본", pw: 400000, gv: 0 }
@@ -2063,11 +2065,11 @@ class Component extends DCLogic {
 
       ecPower: EC_POWER.map(r => ({
         k: ko ? r.k.ko : r.k.en, v: r.v,
-        bg: r.total ? "#F2F8F7" : "#FFFFFF",
-        w: r.total ? "700" : (r.sub ? "600" : "400"),
-        fg: r.total ? "#1F2227" : "rgba(31,34,39,.7)",
-        vw: r.total ? "700" : "600",
-        vfg: r.total ? "#6E5408" : "#1F2227"
+        bg: r.total ? "#F2F8F7" : (r.crop ? "#FBFDF6" : "#FFFFFF"),
+        w: (r.total || r.crop) ? "700" : (r.sub ? "600" : "400"),
+        fg: (r.total || r.crop) ? "#1F2227" : "rgba(31,34,39,.7)",
+        vw: "700",
+        vfg: (r.total || r.crop) ? "#6E5408" : "#1F2227"
       })),
       ecHead: [
         { t: ko ? "모델" : "Model", a: "left" },
@@ -2091,8 +2093,8 @@ class Component extends DCLogic {
       ecNotes: [
         { t: ko ? "기준일 2026.07.31 · 전력 단가 1kWh당 150원(누진세 미적용) · 하루 8시간 사용 기준, 수중 모터와 재배 LED는 24시간 기준."
               : "As of 31 Jul 2026 · electricity at ₩150/kWh (no progressive tier) · appliances at 8 h/day, pump and grow LED at 24 h/day." },
-        { t: ko ? "채소는 버터헤드 기준, 시장가 1,500~3,500원 중 가장 보수적인 2,000원을 적용했습니다. 사업계획서와 동일하게 ‘상시 재배 포기 수 × 2,000원 × 12개월 − 종자·양액비’로 계산했습니다."
-              : "Vegetables priced as butterhead at ₩2,000 — the most conservative point in a ₩1,500–3,500 market range. Calculated on the plan's basis: heads standing at any time × ₩2,000 × 12 months, less seed and nutrient cost." },
+        { t: ko ? "채소는 버터헤드 기준, 시장가 1,500~3,500원 중 가장 보수적인 2,000원을 적용했습니다. 연 9회전(약 40일 주기) 기준이며, 위 표의 재배 LED 전기세를 이미 차감한 뒤의 값입니다."
+              : "Vegetables priced as butterhead at ₩2,000 — the most conservative point in a ₩1,500–3,500 market range. Nine cycles a year, roughly forty days each, with the grow-LED electricity in the table above already deducted." },
         { t: ko ? "업무·회의실 테이블은 채소 대신 생화를 재배합니다. 생화는 품종과 회전율에 따라 가치 차이가 커서 임의로 금액을 적지 않았습니다. 상담 시 조건에 맞춰 산정해 드립니다."
               : "The executive and conference tables grow cut flowers rather than vegetables. Flower value varies too widely by variety and turnover to state a figure here; we calculate it with you." },
         { t: ko ? "4인용의 전기 절감 356,140원과 재배 가치 683,710원(합계 1,039,850원)은 사업계획서 실측값입니다. 나머지 모델은 상시 재배 포기 수와 재배 LED 수량에 비례해 산출했습니다. 회수 기간은 제품 가격을 연간 이익으로 나눈 값이며 설치비·관세를 제외합니다."
