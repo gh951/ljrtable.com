@@ -1375,11 +1375,7 @@ const DICT = {
   fn_t: "기능이 먼저였습니다.",
   fn_b: "여섯 대 모두 기능 검증을 목적으로 제작한 실물입니다. 디자인보다 원리의 완성을 앞세웠기에 마감은 조잡하지만, 기능은 완성되었습니다.",
   fn_b2: "이제 AI 설계의 도움으로 세련되고 단순한 형태, 그리고 공간이 요구하는 어떤 구조든 제작할 수 있습니다.",
-  ec_k: "경제성", ec_t: "이 식탁이 1년에 돌려주는 것.",
-  ec_b: "두 가지를 따로 계산했습니다. 더 이상 쓰지 않게 된 전기, 그리고 직접 길러 얻는 수확. 모두 연간 기준이며 가장 보수적인 가격을 적용했습니다.",
-  ec_h1: "대체되는 전기와 그 전기가 만든 것 — 4인용 다이닝 기준",
-  ec_h2: "모델별 연간 이익",
-  k_features: "제품효과", fe_t: "하나의 식탁, 스무 가지 기능.",
+  k_features: "제품효과", fe_t: "하나의 테이블, 스무 가지 기능.",
   db_k: "실시간 대시보드", db_t: "공간을, 숫자로.", db_n: "예시 값 · 구글 넥스트 허브 연동",
   sc_t: "한 대는 방을 바꾸고, 백만 대는 전력망을 바꿉니다.",
   k_media: "미디어", pz_t: "언론 보도.",
@@ -1582,8 +1578,8 @@ const PRODUCTS = [
 
 const FN20 = [
   { cen: "Space", cko: "공간", ten: "Table function", tko: "식탁 / 테이블 기능",
-    den: "Before any of the above, it is a table you eat and work at. Every function listed here occupies the space the table already takes — which is the whole point: nothing was added to the room.",
-    dko: "앞의 모든 것에 앞서, 먹고 일하는 테이블입니다. 여기 적힌 모든 기능은 테이블이 이미 차지한 공간 안에서 이루어집니다. 그것이 핵심입니다 — 방에 새로 들인 것이 없습니다." },
+    den: "An air purifier, a humidifier, an aquarium, a plant grower, a speaker — each of these would otherwise claim its own corner of the living room. Here they are built into the place a table already stands, so a smart home gains all of it and loses no floor.",
+    dko: "원래대로라면 거실과 방 안의 공간을 제각각 차지했을 공기청정기, 가습기, 수족관, 식물 재배기, 스피커 등 수많은 가전을 따로 둘 필요가 없습니다. 기존 가구의 자리에 이 모든 기능을 완벽하게 빌트인하여, 스마트홈 공간을 혁신적으로 확보해 주는 완전히 새로운 개념의 테이블입니다." },
   { cen: "Air", cko: "공기", ten: "Air purification", tko: "공기 청정기 기능",
     den: "A four-sided falling water film washes the air of the room. Dust and hydrophilic particles are captured on the wet interface and carried down into the tank rather than accumulating in a filter. The nine AI systems put substitution of a 50W purifier at an average of 87.1%.",
     dko: "4면에서 흘러내리는 수막이 실내 공기를 씻습니다. 먼지와 친수성 입자가 젖은 계면에 포집되어 필터에 쌓이지 않고 수조로 실려 내려갑니다. 9개 AI는 50W 공기청정기 대체율을 평균 87.1%로 평가했습니다." },
@@ -1600,71 +1596,49 @@ const FN20 = [
     den: "Carbon monoxide from cooking and heating is drawn onto the wet interface as the film descends. It is a mechanism a dry HEPA filter has no route to — capture requires a liquid surface.",
     dko: "조리와 난방에서 발생하는 일산화탄소가 하강하는 수막의 젖은 계면에 흡착됩니다. 건식 HEPA 필터로는 경로가 없는 방식이며, 포집에는 액체 표면이 필요합니다." },
   { cen: "Water", cko: "물", ten: "A living aquarium", tko: "수족관 기능",
-    den: "The dual-tank structure is a full aquarium in its own right — ornamental fish, aquascaping, planted rock. It is the part of the table that is alive, and the reason the other nineteen functions can run on 20W.",
-    dko: "이중 수조 구조는 그 자체로 완전한 수족관입니다. 관상어, 아쿠아스케이핑, 수초와 돌. 이 테이블에서 살아 있는 부분이며, 나머지 열아홉 가지 기능이 20W로 돌아갈 수 있는 이유입니다." },
+    den: "The distinctive dual-tank structure is a full aquarium in its own right. Ornamental fish, planted rock and aquascaping compose a living ecosystem inside the table, and the two-layer form gives the room a depth of design a single pane of glass cannot.",
+    dko: "독창적인 이중 수조 구조는 그 자체로 완전한 수족관이 됩니다. 관상어와 수초, 돌이 어우러진 아름다운 아쿠아스케이핑을 즐길 수 있습니다. 테이블 안에서 살아 숨 쉬는 자연 생태계를 구현하며, 이중 구조 특유의 입체적이고 감각적인 공간 디자인을 완성합니다." },
   { cen: "Water", cko: "물", ten: "Self-cleaning tank", tko: "수조 자동 청소 기능",
-    den: "Waste settles, as in any tank — the difference is that no hand removes it. The currents the fish make as they swim, together with the rising flow, carry it out of the inner tank; the roots above take up and purify the nitrogen, and seven filtration stages return clean water. Four years running, with no water change.",
-    dko: "배설물은 어느 수조에서나 가라앉습니다. 다른 점은 사람의 손이 그것을 걷어내지 않는다는 것입니다. 관상어가 헤엄치며 만드는 물의 흐름과 상승하는 물길이 배설물을 내부 수조 밖으로 실어 내고, 위층 뿌리가 질소를 흡수해 정화하며, 7단계 여과가 정화수를 되돌립니다. 4년간 물갈이 없이 가동해 왔습니다." },
+    den: "Still water grows moss; running water does not. The water in this tank never stops. The currents the fish make as they swim, together with the rising flow, carry waste out of the inner tank, and the surplus leaves by overflow, descending the outer wall as a film. Nitrogen is taken up and purified by the roots of the flowers and vegetables above, and seven filtration stages return clean water. All a person does is replace the filter box and top up the water that has evaporated. No water changes, no deep cleaning.",
+    dko: "고인 물에는 이끼가 끼고, 흐르는 물에는 끼지 않습니다. 이 수조의 물은 멈추지 않습니다. 관상어가 헤엄치며 만드는 흐름과 상승하는 물길이 배설물을 내부 수조 밖으로 실어 내고, 넘친 물은 오버플로우로 벽면을 타고 내려갑니다. 질소 성분은 위층 생화와 채소의 뿌리가 흡수해 정화하고, 7단계 여과가 물을 정화해 되돌립니다. 사람이 하는 일은 필터 박스 교체와, 기화된 만큼의 물 보충뿐입니다. 물갈이도 대청소도 없습니다." },
   { cen: "Grow", cko: "재배", ten: "Growing flowers and vegetables", tko: "생화 및 채소 재배 기능",
-    den: "Hydroponics above, aquaponics in the tank below. Both methods run inside one table, with the fish waste as the only fertiliser. The largest model yields approximately 1,170 heads a year over nine cycles.",
-    dko: "상단은 수경재배, 하단 수조부는 아쿠아포닉스. 두 방식이 한 테이블 안에서 돌아가며 비료는 관상어의 배설물뿐입니다. 최상위 모델은 연 9회전으로 약 1,170포기를 생산합니다." },
+    den: "One table runs hydroponics and aquaponics at the same time — growing above, aquaponics in the structure below. The dining model produces approximately 1,170 heads a year over about nine cycles. Choose flowers instead and the automatic circulation frees you from watering and tending altogether.",
+    dko: "테이블 하나로 수경재배와 아쿠아포닉스를 동시에 구동합니다. 식탁형 모델의 경우 상단에서는 수경재배를, 하단 구조에서는 아쿠아포닉스 방식을 적용해 연간 약 9회전, 총 약 1,170포기의 채소를 생산합니다. 기호에 따라 생화를 재배하더라도, 자동 순환 시스템 덕분에 물 주기와 관리의 번거로움에서 자유로워집니다." },
   { cen: "Smart", cko: "스마트", ten: "AI speaker, enclosure effect", tko: "Ai 스피커 기능 (인클로저 효과)",
-    den: "The tank body acts as an acoustic enclosure, so an AI speaker mounted in the table gains the low-end response a small standalone unit cannot produce. The structure does the work a cabinet would.",
-    dko: "수조 본체가 음향 인클로저로 작동하므로, 테이블에 내장된 AI 스피커가 소형 단품으로는 낼 수 없는 저역을 얻습니다. 별도 캐비닛이 할 일을 구조가 대신합니다." },
+    den: "The speaker sits in a dedicated chamber inside the tank body, with precisely calculated perforation, so the table itself becomes the cabinet. What a standalone unit cannot produce — depth and body in the low end — the structure supplies.",
+    dko: "수조 본체에 내장된 전용 박스에 스피커를 배치하고, 정밀한 타공 설계를 적용하여 완벽한 인클로저 음향을 구현했습니다. 테이블 자체를 스피커 울림통으로 활용하여 깊고 풍부한 사운드를 제공합니다." },
   { cen: "Smart", cko: "스마트", ten: "IoT smart home hub", tko: "IOT 스마트 홈 구축 기능",
-    den: "The table is where the household's devices meet — lighting, climate, appliances — because it is the one object already sensing the room's air and water. Google Nest and equivalent platforms connect directly.",
-    dko: "테이블이 가정 내 기기 — 조명, 공조, 가전 — 가 만나는 지점이 됩니다. 이미 실내 공기와 물을 감지하고 있는 유일한 사물이기 때문입니다. 구글 넥스트 등 플랫폼과 직접 연동됩니다." },
+    den: "The table is where the household's devices meet — aquarium automation, lighting, climate, appliances — because it is the one object already sensing the room's air and water. It connects directly to platforms such as the Google Nest Hub smart display.",
+    dko: "테이블이 가정 내 기기 — 수족관 자동화 및 홈 조명, 공조, 가전 — 가 만나는 지점이 됩니다. 이미 실내 공기와 물을 감지하고 있는 유일한 사물이기 때문입니다. 구글 네스트 허브 스마트 디스플레이 등 플랫폼과 직접 연동됩니다." },
   { cen: "Smart", cko: "스마트", ten: "Digital dashboard", tko: "디지털 대시보드 기능",
-    den: "An embedded display shows what the room is actually doing: particulates, CO₂, humidity, water temperature, power drawn, crop cycle. Numbers you can check while you eat, not a report you have to open.",
-    dko: "내장 디스플레이가 지금 이 공간의 상태를 보여줍니다. 미세먼지, CO₂, 습도, 수온, 소비 전력, 재배 회전. 따로 열어봐야 하는 보고서가 아니라, 식사하며 확인하는 숫자입니다." },
+    den: "The linked Google Nest Hub smart display shows what the room is doing right now — particulates, CO₂, humidity, water temperature, power drawn, crop cycle. Not a report you have to open, but everyday numbers you notice while talking.",
+    dko: "연동된 구글 네스트 허브의 스마트 디스플레이가 지금 이 공간의 상태를 실시간으로 보여줍니다. 미세먼지, CO₂, 습도, 수온, 소비 전력, 재배 회전율 등은 따로 열어봐야 하는 보고서가 아니라, 대화하며 자연스럽게 확인하는 일상의 숫자가 됩니다." },
   { cen: "Smart", cko: "스마트", ten: "Phone sterilising and charging", tko: "스마트폰 살균/충전 기능",
-    den: "A UV-C sterilising cradle with wireless charging, built into the tabletop. The object you touch most often is cleaned in the place you set it down anyway.",
-    dko: "UV-C 살균 크래들과 무선 충전을 상판에 내장했습니다. 가장 자주 만지는 물건이, 어차피 내려놓는 자리에서 살균됩니다." },
+    den: "A high-output UV-C sterilising cradle and fast wireless charging are built into the tabletop. The phone you touch more than anything else is sterilised and charged in the very place you set it down to eat or work.",
+    dko: "상판에 고성능 UV-C 살균 크래들과 고속 무선 충전 기능을 내장했습니다. 일상에서 가장 자주 만지는 스마트폰이, 식사나 업무를 위해 어차피 테이블 위에 내려놓는 그 자리에서 자동으로 살균되고 충전됩니다." },
   { cen: "Smart", cko: "스마트", ten: "Smart pill box", tko: "스마트 약통 기능",
-    den: "A compartmented dispenser with scheduled reminders, in the place a household actually sits down together. Medication is remembered at the table rather than in a drawer.",
-    dko: "칸이 나뉜 디스펜서와 시간 알림을, 가족이 실제로 함께 앉는 자리에 두었습니다. 약을 서랍이 아니라 식탁에서 기억하게 됩니다." },
+    den: "Scheduled reminders, built into the seat a family already shares, and synchronised with the LJR app. Supplements and medication are remembered on the table you face every day rather than in a drawer.",
+    dko: "시간 알림 기능을 가족이 함께 앉는 테이블 자리에 내장했습니다. 전용 LJR 앱 알림과 완벽히 연동되어, 잊기 쉬운 영양제와 약을 서랍 속이 아니라 매일 마주하는 테이블 위에서 자연스럽게 기억하고 제때 챙길 수 있습니다." },
   { cen: "Data", cko: "데이터", ten: "Indoor environment analysis", tko: "실내 환경 데이터 분석 기능",
-    den: "Readings are logged over time, not just displayed, so the table can show which hours and which activities load the air — and how quickly the film clears it.",
-    dko: "측정값을 표시만 하지 않고 시간에 따라 기록합니다. 어느 시간대와 어떤 활동이 공기를 나쁘게 하는지, 수막이 그것을 얼마나 빠르게 걷어내는지 보여줍니다." },
+    den: "Environmental readings are not merely displayed but logged over time. The accumulated data links to the smart-home IoT system, so you can see at a glance how your home's environment is changing and how it is being managed.",
+    dko: "실내 환경 측정값을 단순히 표시하는 것에 그치지 않고 시간에 따라 기록합니다. 누적된 데이터는 스마트홈 IoT 시스템과 연동되어, 우리 집 환경이 어떻게 변화하고 관리되고 있는지 한눈에 분석할 수 있습니다." },
   { cen: "Data", cko: "데이터", ten: "Energy monitoring", tko: "에너지 사용량 모니터링 기능",
-    den: "The motor and grow lights are metered separately from the appliances they replace, so the saving is a measured figure in your own home rather than a claim on a website.",
-    dko: "모터와 재배 LED를 대체 대상 가전과 분리해 계측합니다. 절감액이 웹사이트의 주장이 아니라, 자기 집에서 측정된 숫자가 됩니다." },
+    den: "Consumption is monitored as a whole — the lighting, climate and appliances of the linked smart home together with the table's own draw. Cumulative use is logged and analysed over time, showing the household's power efficiency and its economic effect at a glance.",
+    dko: "테이블과 연동된 스마트홈 전체의 조명·공조·가전과 테이블 자체의 전력 소비량을 통합하여 모니터링합니다. 시간에 따른 누적 에너지 사용량을 기록하고 분석하여, 가정 전체의 전력 효율과 경제적 효과를 직관적으로 보여줍니다." },
   { cen: "Health", cko: "건강", ten: "Fingertip health check", tko: "손가락 건강 체크 기능",
-    den: "A fingertip sensor in the tabletop reads pulse and blood oxygen in seconds. No wearable to charge, no appointment — you measure while you sit.",
-    dko: "상판의 손가락 센서가 몇 초 만에 맥박과 혈중 산소를 읽습니다. 충전할 웨어러블도, 예약도 없이 앉은 자리에서 측정합니다." },
-  { cen: "Health", cko: "건강", ten: "Personal health report", tko: "맞춤형 건강 리포트 제공 기능",
-    den: "Fingertip readings are combined with the room's air data and the produce harvested, then returned as a periodic report. Air, diet and body are read together rather than as three unrelated numbers.",
-    dko: "손가락 측정값을 실내 공기 데이터와 수확한 채소 기록과 결합해 주기적인 리포트로 돌려드립니다. 공기와 식단과 신체를 서로 무관한 세 숫자가 아니라 함께 읽습니다." },
+    den: "A high-precision optical sensor in the tabletop reads pulse and blood-oxygen saturation accurately in seconds. No wearable to keep charged, no appointment to book — rest a finger on the table and your daily condition is measured where you sit.",
+    dko: "상판에 내장된 고정밀 광학 센서가 단 몇 초 만에 맥박과 혈중 산소포화도를 정확히 측정합니다. 따로 충전해야 하는 웨어러블 기기를 착용하거나 병원을 예약할 필요 없이, 테이블에 앉아 손가락을 가볍게 올려두는 것만으로 일상의 건강을 실시간으로 관리할 수 있습니다." },
+  { cen: "Health", cko: "건강", ten: "Six-zone AI vitality scan", tko: "6부위 AI 생기 스캔 기능",
+    den: "A contactless scan through the display camera: face, tongue, eyes, skin and both sides of the hand — six zones in a single two-minute-forty pass. An rPPG algorithm and AI analyse the skin's vitality waveform to read both your present condition and the longer trend of your health.",
+    dko: "테이블 디스플레이의 카메라를 통해 얼굴, 혀, 눈, 피부, 손(손등·손바닥) 등 6개 부위를 단 한 번 스캔(2분 40초)하는 비접촉식 기능입니다. 첨단 rPPG 알고리즘과 AI 기술을 통해 피부 생기 파동을 정밀 분석하며, 사용자의 현재 컨디션은 물론 만성적인 건강 흐름까지 종합적으로 진단해 줍니다." },
   { cen: "Air", cko: "공기", ten: "Diffuser", tko: "디퓨저 기능",
-    den: "Scent is carried on the flowing water rather than pushed by a fan or heated by a plate. The diffusion is even and quiet, and it costs no additional power because the water is already moving.",
-    dko: "향을 팬으로 밀거나 발열판으로 데우지 않고, 흐르는 물에 실어 퍼뜨립니다. 확산이 고르고 조용하며, 물은 이미 흐르고 있으므로 추가 전력이 들지 않습니다." },
-  { cen: "Space", cko: "공간", ten: "Beam projector", tko: "빔 프로젝트 기능 (회의·교육·영화)",
-    den: "A 4K projector and speaker are fitted as standard in the conference model. A meeting room, a classroom and a cinema in one surface — no ceiling mount, no cabling across the floor.",
-    dko: "회의실 모델에는 4K 빔과 스피커가 기본 탑재됩니다. 회의실과 교실, 그리고 영화관이 하나의 면에 있습니다. 천장 설치도, 바닥을 지나는 배선도 없습니다." }
+    den: "Nothing is heated on a plate and nothing is pushed by a fan. Scent is diffused by the fine vibration of the tank motor and the sound waves of the AI speaker resonating through the enclosure — even, quiet, and drawing no additional power.",
+    dko: "열을 가해 데우거나 인위적인 팬으로 밀어내지 않고, 수조 모터의 미세한 진동과 AI 스피커의 소리 파동(인클로저 진동)을 활용해 향을 은은하게 확산시킵니다. 소음과 추가 전력 소모 없이 고르고 조용한 발향을 구현합니다." },
+  { cen: "Beauty", cko: "뷰티", ten: "AR AI makeup", tko: "AR AI 메이크업 기능",
+    den: "Try personal colour on your own face in real time through the display camera: a curated 600-shade palette, extended to 120,000 by hue, saturation and lightness adjustment — a range the industry has been held back from by ghosting. A patented ultra-light algorithm keeps the image locked as you turn your head sharply — no ghosting, no lag, no heat — across lip, cheek, eye and base. Scan the barcodes of the cosmetics you already own into the app and the AI composes the best combinations for your face from the products in your drawer.",
+    dko: "테이블 디스플레이의 카메라를 통해 퍼스널 컬러를 얼굴에 실시간으로 입혀보는 AR 메이크업 기능입니다. 600색 큐레이션 팔레트에 색조·채도·명도 미세 조정을 더해 12만 색을 구현합니다. 잔상 때문에 업계가 수백 색에 머물러 있는 영역입니다. 특허 기반의 초경량 알고리즘을 적용하여 고개를 심하게 움직여도 잔상이 남거나 화면이 밀리지 않고, 기기가 뜨거워지는 발열도 없이 립·볼·아이·베이스 메이크업을 가상으로 정밀하게 체험할 수 있습니다. 특히 내가 가진 화장품의 바코드를 스캔해 앱에 등록해 두면, 현재 보유한 제품들 안에서 내 얼굴에 가장 잘 어울리는 최적의 메이크업 조화와 연출법을 AI가 직접 조합하고 제안해 줍니다." }
 ];
 
-const FEATURES = [
-  { c: "Air", en: ["Power-free air purification", "Constant purification from one 20W fish motor. Filters included, 0W added."], ko: ["실질적 무전력 공기정화", "관상어 20W 모터 하나로 상시 정화. 필터 포함, 추가 전력 0W."] },
-  { c: "Air", en: ["Natural evaporative humidity", "Humidified by film evaporation — a physical structure that makes no droplets."], ko: ["자연 기화식 가습", "수막 증발로 가습. 물방울을 만들지 않는 물리 구조."] },
-  { c: "Air", en: ["Odor and gas removal", "The water film adsorbs CO₂, CO, VOCs and ammonia that purifiers miss."], ko: ["냄새 · 가스 제거", "공기청정기가 못 잡는 CO₂·CO·VOCs·암모니아를 수막이 흡착."] },
-  { c: "Air", en: ["Power-free diffuser", "Scent carried on flowing water. Replaces electric diffusers."], ko: ["무전력 디퓨저", "흐르는 물에 향을 실어 은은하게. 전자식 디퓨저 대체."] },
-  { c: "Grow", en: ["Aquaponic vegetables", "Ornamental fish waste becomes nutrient — an organic loop with no fertilizer."], ko: ["아쿠아포닉스 채소 재배", "관상어 배설물이 영양이 되는 무비료 유기순환."] },
-  { c: "Grow", en: ["Hydroponics on top", "Approximately 1,170 plants a year over nine cycles. Leafy greens at scale."], ko: ["상단 수경재배", "연 9회전으로 약 1,170포기. 잎채소 대량 자급."] },
-  { c: "Water", en: ["Dual-tank cleaning-free loop", "The flow carries waste out and the roots purify it, removing the labor of water changes."], ko: ["이중수조 무청소 순환", "물길이 실어 내고 뿌리가 정화하는 물리 설계. 환수·청소 노동 제거."] },
-  { c: "Water", en: ["A living aquarium", "Ornamental fish swimming in the table. Every meal becomes a landscape."], ko: ["살아 있는 수족관", "관상어가 헤엄치는 식탁. 매일의 식사가 하나의 풍경이 됩니다."] },
-  { c: "Wellness", en: ["Contactless wellness monitoring", "Camera-based reference measurement. Not a medical diagnosis."], ko: ["비접촉 웰니스 모니터링", "카메라 기반 참고 측정. 의료 진단이 아닌 참고용입니다."] },
-  { c: "Wellness", en: ["Smart pill box and reminders", "Medication reminders linked to family care."], ko: ["스마트 약통 · 알림", "복약 시간 알림과 가족 케어 연동."] },
-  { c: "Living", en: ["4K beam · home cinema", "A built-in home cinema that takes no floor space."], ko: ["4K 빔 · 홈시네마", "공간을 차지하지 않는 빌트인 홈 시네마."] },
-  { c: "Living", en: ["Enclosure speaker", "TV-linked enclosure structure for full sound."], ko: ["인클로저 스피커", "TV 연동 인클로저 구조로 최상의 음질."] },
-  { c: "Living", en: ["Intelligent lighting and surface color", "Light and tabletop that shift with the mood."], ko: ["지능형 라이팅 · 상판 색변화", "분위기에 따라 바뀌는 조명과 상판."] },
-  { c: "Data", en: ["Live indoor environment dashboard", "Air quality, temperature, humidity and energy on one dashboard."], ko: ["실시간 실내환경 데이터", "공기질·온습도·에너지 소비를 대시보드로."] },
-  { c: "Data", en: ["Google Nest Hub integration", "Smart-home control by voice or app."], ko: ["구글 넥스트 허브 연동", "음성·앱으로 제어하는 스마트홈 인프라."] },
-  { c: "Data", en: ["Carbon reduction to credits", "IoT data turns reduction into an asset (VCM-linked)."], ko: ["탄소 저감 → 크레딧", "IoT 데이터 기반으로 탄소 감축을 자산화(VCM 연동)."] },
-  { c: "Core", en: ["CGO vision · 120,000 colors", "Afterimage-free AR vision. The surface becomes a living interface."], ko: ["CGO 비전 · 12만 색", "잔상 없는 AR 비전. 화면이 살아 있는 인터페이스로."] },
-  { c: "Core", en: ["MUFE quantum security", "Post-quantum cryptography with a storage-free structure."], ko: ["MUFE 양자보안", "양자내성 암호·무저장 구조로 데이터 보안."] },
-  { c: "Core", en: ["Self-powered LED and fiber optics", "A turbine in the falling water drives part of the lighting."], ko: ["자가발전 LED · 광섬유", "흐르는 물의 터빈 회전으로 조명 일부를 자가 구동."] },
-  { c: "Core", en: ["AI wellness report", "A lifestyle reference report from measurement and environment data."], ko: ["AI 웰니스 리포트", "측정·환경 데이터를 묶은 생활 습관 참고 리포트."] }
-];
 
 const SCALE = [
   { uen: "100,000 units", uko: "10만 대", v: "48", n: "GWh / year", nko: "GWh / 년" },
@@ -1961,25 +1935,7 @@ const SHEETS = {
   }
 };
 
-const EC_POWER = [
-  { k: { en: "Air purifier — power and filters", ko: "공기청정기 — 전기세 + 필터비" }, v: "₩121,600" },
-  { k: { en: "Heated humidifier, 400W — heated, after the Oxy disinfectant scandal", ko: "가열식 가습기 400W — 옥시 사태 이후 가열식 기준" }, v: "₩216,000" },
-  { k: { en: "Deodorizer, diffuser, grow LED, pump", ko: "탈취기 · 디퓨저 · 재배 LED · 모터" }, v: "₩70,830" },
-  { k: { en: "Conventional total", ko: "기존 방식 합계" }, v: "₩408,430", sub: true },
-  { k: { en: "LJR total (six grow LED bars only)", ko: "LJR 합계 (재배 LED 6개만)" }, v: "₩52,290", sub: true },
-  { k: { en: "Saved each year — electricity alone", ko: "연간 전기 절감액" }, v: "₩356,140", total: true },
-  { k: { en: "Crop the grow LED returns (30 standing, 9 cycles)", ko: "그 LED가 길러낸 채소 (상시 30포기 · 연 9회전)" }, v: "₩683,710", crop: true },
-  { k: { en: "Annual return together", ko: "연간 합계 이익" }, v: "₩1,039,850", total: true }
-];
 
-const EC_ROWS = [
-  { nen: "T Table", nko: "T 테이블", p: "", gen: "bespoke", gko: "비스포크", pw: 0, gv: 0, quote: true },
-  { nen: "Two-Seater Table", nko: "2인용 테이블", p: "₩2,500,000", gen: "20 standing", gko: "상시 20포기", pw: 300000, gv: 455800 },
-  { nen: "Floor Table", nko: "좌식 테이블", p: "₩3,500,000", gen: "25 standing", gko: "상시 25포기", pw: 320000, gv: 569800 },
-  { nen: "Four-Seater Table", nko: "4인용 테이블", p: "₩4,500,000", gen: "30 standing", gko: "상시 30포기", pw: 356140, gv: 683710, plan: true },
-  { nen: "Four-to-Five-Seater Dining", nko: "4~5인용 식탁", p: "₩6,000,000", gen: "130 standing", gko: "상시 130포기", pw: 390000, gv: 2962700 },
-  { nen: "Conference Table", nko: "회의실 테이블", p: "", gen: "35 stems, flowers", gko: "생화 35본", pw: 400000, gv: 0 }
-];
 
 const PRICES = [
   { go: "products", nen: "T Table", nko: "T 테이블", v: "On consultation", vko: "상담 후 결정", sen: "Bespoke · any form", sko: "비스포크 · 자유 제작" },
@@ -2629,7 +2585,6 @@ class Component extends DCLogic {
         econNet: ECON[p.id] ? (ko ? "연 " : "") + w(ECON[p.id].total) + (ko ? "" : " a year") : "",
         openEcon: () => this.setState({ econ: p.id })
       })),
-      features: FEATURES.map(f => ({ c: f.c, n: (ko ? f.ko : f.en)[0], d: (ko ? f.ko : f.en)[1] })),
       scale: SCALE.map(s => ({ u: L(s, "u"), v: s.v, n: ko ? s.nko : s.n })),
       ais: AIS.map((a, n) => ({
         i: String(n + 1).padStart(2, "0"), n: a.n, p: a.p, c: a.c,
@@ -2659,44 +2614,6 @@ class Component extends DCLogic {
       }),
       prices: PRICES.map(p => ({ n: L(p, "n"), v: (ko && p.vko) ? p.vko : p.v, s: L(p, "s"), click: () => this.go(p.go) })),
 
-      ecPower: EC_POWER.map(r => ({
-        k: ko ? r.k.ko : r.k.en, v: r.v,
-        bg: r.total ? "#F2F8F7" : (r.crop ? "#FBFDF6" : "#FFFFFF"),
-        w: (r.total || r.crop) ? "700" : (r.sub ? "600" : "400"),
-        fg: (r.total || r.crop) ? "#1F2227" : "rgba(31,34,39,.7)",
-        vw: "700",
-        vfg: (r.total || r.crop) ? "#6E5408" : "#1F2227"
-      })),
-      ecHead: [
-        { t: ko ? "모델" : "Model", a: "left" },
-        { t: ko ? "전기 절감" : "Electricity", a: "right" },
-        { t: ko ? "재배 가치" : "Produce", a: "right" },
-        { t: ko ? "연간 이익" : "Annual return", a: "right" },
-        { t: ko ? "회수" : "Payback", a: "right" }
-      ],
-      ecRows: EC_ROWS.map(r => {
-        const won = (n) => "₩" + n.toLocaleString("en-US");
-        const tot = r.pw + r.gv;
-        const price = Number(r.p.replace(/[^0-9]/g, ""));
-        if (r.quote) return { n: ko ? r.nko : r.nen, p: "—", g: "— · " + (ko ? r.gko : r.gen), tot: "—", pb: ko ? "상담 시 산정" : "On consultation" };
-        return {
-          n: ko ? r.nko : r.nen,
-          p: won(r.pw),
-          g: (r.gv ? won(r.gv) : "—") + " · " + (ko ? r.gko : r.gen),
-          tot: r.gv ? won(tot) : won(r.pw) + " +",
-          pb: r.gv ? (price / tot).toFixed(1) + (ko ? "년" : " yrs") : (ko ? "상담 시 산정" : "On consultation")
-        };
-      }),
-      ecNotes: [
-        { t: ko ? "기준일 2026.07.31 · 전력 단가 1kWh당 150원(누진세 미적용) · 하루 8시간 사용 기준, 수중 모터와 재배 LED는 24시간 기준."
-              : "As of 31 Jul 2026 · electricity at ₩150/kWh (no progressive tier) · appliances at 8 h/day, pump and grow LED at 24 h/day." },
-        { t: ko ? "채소는 버터헤드 기준, 시장가 1,500~3,500원 중 가장 보수적인 2,000원을 적용했습니다. 연 9회전(약 40일 주기) 기준이며, 위 표의 재배 LED 전기세를 이미 차감한 뒤의 값입니다."
-              : "Vegetables priced as butterhead at ₩2,000 — the most conservative point in a ₩1,500–3,500 market range. Nine cycles a year, roughly forty days each, with the grow-LED electricity in the table above already deducted." },
-        { t: ko ? "회의실 테이블은 채소 대신 생화를 재배합니다. 생화는 품종과 회전율에 따라 가치 차이가 커서 임의로 금액을 적지 않았습니다. 상담 시 조건에 맞춰 산정해 드립니다."
-              : "The conference table grows cut flowers rather than vegetables. Flower value varies too widely by variety and turnover to state a figure here; we calculate it with you." },
-        { t: ko ? "4인용의 전기 절감 356,140원과 재배 가치 683,710원(합계 1,039,850원)은 사업계획서 실측값입니다. 나머지 모델은 상시 재배 포기 수와 재배 LED 수량에 비례해 산출했습니다. T 테이블은 비스포크 제작이므로 상담 시 산정합니다. 회수 기간은 제품 가격을 연간 이익으로 나눈 값이며 설치비·관세를 제외합니다."
-              : "The four-seater's ₩356,140 electricity and ₩683,710 produce (₩1,039,850 together) are measured plan data. Other models are derived proportionally from standing crop and grow-LED count; the bespoke T Table is quoted on consultation. Payback divides list price by annual return, excluding installation and duties." }
-      ],
 
       board: this.posts().concat(BOARD.map(p => ({
         tag: ko ? p.tag.ko : p.tag.en, t: ko ? p.t.ko : p.t.en, b: ko ? p.b.ko : p.b.en,
