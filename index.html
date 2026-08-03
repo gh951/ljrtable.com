@@ -638,6 +638,12 @@
                     </div>
                   </sc-for>
                 </div>
+                <sc-if value="{{ p.hasEcon }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ p.openEcon }}" style="font-family:inherit;width:100%;padding:14px 18px;border:1px solid rgba(31,34,39,.2);border-radius:999px;background:#FBFDFC;color:#1F2227;font-size:13.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:all .3s ease" style-hover="border-color:#C19702;background:#FFFFFF">
+                    <span>{{ p.econLabel }}</span>
+                    <span style="color:#6E5408">{{ p.econNet }}</span>
+                  </button>
+                </sc-if>
               </div>
             </article>
           </sc-for>
@@ -712,6 +718,36 @@
               <span style="font-size:13px;font-weight:400;line-height:1.68;color:rgba(31,34,39,.58)">{{ f.d }}</span>
             </div>
           </sc-for>
+        </div>
+
+        <div style="margin-top:clamp(50px,7.5vh,86px)">
+          <span data-i18n="ex_k" style="font-family:'Cormorant Garamond',serif;font-size:12.5px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:#C19702">Economics</span>
+          <h2 data-i18n="ex_t" style="margin:16px 0 0;font-size:clamp(24px,3.4vw,50px);font-weight:700;letter-spacing:-.035em;line-height:1.1;max-width:24ch;text-wrap:balance">And what those functions return each year.</h2>
+          <p data-i18n="ex_b" style="margin:16px 0 0;font-size:clamp(14.5px,1.6vw,18px);line-height:1.78;color:rgba(31,34,39,.66);max-width:76ch;text-wrap:pretty">Two returns, counted separately and conservatively: the electricity the table no longer spends, and the produce it grows. LJR's own consumption — motor 24 hours, grow lights 16 hours — is subtracted in full.</p>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:clamp(12px,1.4vw,20px);margin-top:clamp(24px,3.4vh,40px)">
+            <sc-for list="{{ exModels }}" as="m" hint-placeholder-count="4">
+              <div style="background:#FBFDFC;border:1px solid rgba(31,34,39,.13);border-radius:16px;padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:15px">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <span style="font-size:15px;font-weight:700;letter-spacing:-.022em;line-height:1.3;color:#1F2227">{{ m.n }}</span>
+                  <span style="font-size:13px;font-weight:500;color:rgba(31,34,39,.5)">{{ m.p }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px;padding:14px 0;border-top:1px solid rgba(31,34,39,.1);border-bottom:1px solid rgba(31,34,39,.1)">
+                  <span style="font-size:clamp(20px,2.2vw,27px);font-weight:800;letter-spacing:-.042em;line-height:1.05;color:#1F2227">{{ m.net }}</span>
+                  <span data-i18n="ex_net" style="font-size:12px;font-weight:500;color:rgba(31,34,39,.5)">annual net return</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <sc-for list="{{ m.rows }}" as="r" hint-placeholder-count="4">
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px">
+                      <span style="font-size:12.5px;font-weight:400;color:rgba(31,34,39,.52);line-height:1.4">{{ r.k }}</span>
+                      <span style="font-size:13px;font-weight:600;letter-spacing:-.012em;text-align:right;font-variant-numeric:tabular-nums;color:{{ r.c }}">{{ r.v }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <p data-i18n="ex_n" style="margin:clamp(18px,2.4vh,26px) 0 0;padding-left:15px;border-left:2px solid rgba(193,151,2,.4);font-size:12.5px;line-height:1.8;color:rgba(31,34,39,.55);max-width:80ch;text-wrap:pretty">Electricity at ₩150/kWh; produce at ₩1,500 a head, deliberately below the ₩2,500–3,500 market price. Substitution rates are the effective average of nine AI systems. An engineering and market estimate, not a certified test report. Full workings are in each model's card on the Products page.</p>
         </div>
 
         <h2 data-i18n="sc_t" style="margin:clamp(50px,7.5vh,86px) 0 0;font-size:clamp(24px,3.4vw,50px);font-weight:700;letter-spacing:-.035em;line-height:1.1;max-width:22ch;text-wrap:balance">One table changes a room. A million change a grid.</h2>
@@ -1106,6 +1142,60 @@
     </div>
   </sc-if>
 
+  <sc-if value="{{ econOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeEcon }}" style="position:fixed;inset:0;z-index:210;background:rgba(5,11,9,.66);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:clamp(12px,3.5vw,40px);animation:ljrFade .26s ease">
+      <div onClick="{{ stop }}" style="width:100%;max-width:760px;max-height:90vh;overflow-y:auto;background:#FFFFFF;border-radius:20px;padding:clamp(22px,3.2vw,44px);display:flex;flex-direction:column;gap:22px;box-shadow:0 30px 80px rgba(5,11,9,.42)">
+
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <span data-i18n="en_k" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#6E5408">Economics</span>
+            <h3 style="margin:0;font-size:clamp(21px,2.6vw,34px);font-weight:700;letter-spacing:-.034em;line-height:1.14">{{ econT }}</h3>
+            <span style="font-size:13.5px;font-weight:500;color:rgba(31,34,39,.55)">{{ econPrice }}</span>
+          </div>
+          <button onClick="{{ closeEcon }}" style="flex:none;width:34px;height:34px;font-family:inherit;font-size:17px;border:0;border-radius:999px;background:#EDF6F5;color:#1F2227;cursor:pointer">✕</button>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:14px;overflow:hidden">
+          <sc-for list="{{ econHero }}" as="s" hint-placeholder-count="3">
+            <div style="background:#FBFDFC;padding:clamp(18px,2.2vw,26px);display:flex;flex-direction:column;gap:7px">
+              <span style="font-size:12px;font-weight:500;color:rgba(31,34,39,.52)">{{ s.l }}</span>
+              <span style="font-size:clamp(19px,2.3vw,29px);font-weight:800;letter-spacing:-.045em;line-height:1;color:#1F2227">{{ s.v }}</span>
+              <span style="font-size:11.5px;line-height:1.55;color:rgba(31,34,39,.45)">{{ s.n }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-for list="{{ econBlocks }}" as="b" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:#1F2227">{{ b.h }}</span>
+            <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden">
+              <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="4">
+                <div style="background:{{ r.bg }};padding:13px 16px;display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px">
+                  <span style="font-size:13px;font-weight:{{ r.w }};color:{{ r.fg }};line-height:1.5">{{ r.k }}</span>
+                  <span style="font-size:14px;font-weight:{{ r.vw }};letter-spacing:-.015em;color:{{ r.vfg }};text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums">{{ r.v }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <p style="margin:0;font-size:13.5px;line-height:1.8;color:rgba(31,34,39,.7);text-wrap:pretty">{{ econRead }}</p>
+
+        <div style="display:flex;flex-direction:column;gap:9px;padding-top:16px;border-top:1px solid rgba(31,34,39,.1)">
+          <span data-i18n="en_basis" style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(31,34,39,.45)">Basis of calculation</span>
+          <sc-for list="{{ econBasis }}" as="n" hint-placeholder-count="5">
+            <p style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.55);text-wrap:pretty">{{ n.t }}</p>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a href="mailto:ljrtable@gmail.com" data-i18n="en_cta" style="padding:14px 28px;border-radius:999px;background:#1F2227;color:#FFFFFF;font-size:14.5px;font-weight:600">Ask about this model →</a>
+          <button onClick="{{ closeEcon }}" data-i18n="df_close" style="font-family:inherit;padding:14px 28px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:14.5px;font-weight:600;cursor:pointer">Close</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ postOpen }}" hint-placeholder-val="{{ false }}">
     <div style="background:#FFFFFF;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
       <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:20px">
@@ -1272,6 +1362,11 @@ const DICT = {
   sc_t: "한 대는 방을 바꾸고, 백만 대는 전력망을 바꿉니다.",
   k_media: "미디어", pz_t: "언론 보도.",
   k_dist: "총판·대리점", ds_t: "153개국 특허, 22개국 오픈.",
+  en_k: "경제성", en_basis: "산출 근거", en_cta: "이 모델 문의하기 →",
+  ex_k: "경제성", ex_t: "그 기능들이 1년에 돌려주는 것.",
+  ex_b: "두 가지를 따로, 그리고 보수적으로 계산했습니다. 더 이상 쓰지 않게 된 전기, 그리고 직접 길러 얻는 수확. LJR 자체 소비 전력 — 모터 24시간, 재배 LED 16시간 — 은 전액 차감했습니다.",
+  ex_net: "연간 총 순이익",
+  ex_n: "전기요금 150원/kWh, 채소는 포기당 1,500원으로 실제 시장가 2,500~3,500원보다 낮게 책정했습니다. 대체율은 9개 AI의 실효 평균입니다. 공학적·시장 자료에 근거한 추정치이며 국가 공인 시험성적서가 아닙니다. 전체 산출 내역은 제품 페이지의 각 모델 카드에서 확인하실 수 있습니다.",
   df_co: "회사명", df_country: "국가 / 권역", df_contact: "연락처 (이메일 또는 전화)", df_msg: "주문 또는 문의 내용",
   df_close: "닫기", df_back: "총판·대리점으로 돌아가기", df_back2: "고객지원으로 돌아가기",
   df_note: "모든 파트너 문서는 최초 상담 이후 발행됩니다. 권역과 물량, 조건은 계약 서명 전에 서면으로 합의합니다.",
@@ -1403,20 +1498,44 @@ const FILTERS = [
   { c: "→", en: ["Clean water reservoir", "Stored clean water is fed back into the inner aquarium."], ko: ["정화수 저장", "저장된 정화수가 다시 내부 수족관으로 재공급됩니다."] }
 ];
 
+const ECON = {
+  two: { price: 2500000, motor: "10W × 1", led: "4 × 10W = 40W", motorKwh: "87.6", ledKwh: "233.6", totKwh: "321.2",
+    netKwh: "1,398.57", elec: 209786, heads: 180, veg: 270000, total: 479786, mkTotal: 749786, pbCons: "5.2", pbMkt: "3.3",
+    ren: "The most power-efficient of the range: it saves more electricity than any other model, 1,398 kWh a year, because it runs the smallest motor and the fewest lights. Suited to one- and two-person homes, studios and small offices.",
+    rko: "전 모델 중 전력 효율이 가장 높습니다. 모터가 가장 작고 조명 수가 적어 연간 1,398 kWh — 어느 모델보다 많은 전기를 절감합니다. 1~2인 가구, 원룸, 오피스텔, 소형 사무실에 적합합니다." },
+  floor: { price: 3500000, motor: "20W × 1", led: "6 × 10W = 60W", motorKwh: "175.2", ledKwh: "350.4", totKwh: "525.6",
+    netKwh: "1,194.17", elec: 179126, heads: 225, veg: 337500, total: 516626, mkTotal: 854126, pbCons: "6.8", pbMkt: "4.1",
+    ren: "At 550mm it sits low enough for a sofa front or a multi-purpose room. It grows 25% more than the two-seater — 225 heads a year — which makes it the strongest yield per won in the lower range.",
+    rko: "높이 550mm의 좌식 구조로 거실 소파 앞이나 다용도실에 놓기 좋습니다. 2인용보다 25% 많은 연 225포기를 생산해, 하위 가격대에서 가격 대비 생산량 효율이 가장 우수합니다." },
+  four: { price: 4500000, motor: "20W × 1", led: "6 × 10W = 60W", motorKwh: "175.2", ledKwh: "350.4", totKwh: "525.6",
+    netKwh: "1,194.17", elec: 179126, heads: 270, veg: 405000, total: 584126, mkTotal: 989126, pbCons: "7.7", pbMkt: "4.5",
+    ren: "Standard 750mm height, so it replaces an ordinary dining table outright. The most balanced model for a family of three or four — the same running power as the floor table, with 20% more yield.",
+    rko: "표준 높이 750mm의 입식 구조로 일반 식탁을 그대로 대체합니다. 3~4인 가족에게 가장 균형이 좋은 모델이며, 좌식과 운영 전력은 같으면서 생산량은 20% 많습니다." },
+  dining: { price: 6000000, motor: "20W × 2 = 40W", led: "12 × 10W = 120W", motorKwh: "350.4", ledKwh: "700.8", totKwh: "1,051.2",
+    netKwh: "668.57", elec: 100286, heads: 1170, veg: 1755000, total: 1855286, mkTotal: 3610286, pbCons: "3.2", pbMkt: "1.7",
+    ren: "It draws the most power of the range, and returns the most. Three-tier vertical growing above and aquaponics below yield approximately 1,170 heads a year — worth ₩3.51M at market price — which is why it pays for itself fastest despite the highest running cost.",
+    rko: "전 모델 중 운영 전력이 가장 높지만, 돌려주는 것도 가장 많습니다. 상단 3단 수직 재배와 하단 아쿠아포닉스가 연 약 1,170포기(시장가 기준 351만 원어치)를 생산하므로, 운영비가 가장 높아도 회수는 가장 빠릅니다." }
+};
+
+const ECON_BASIS = [
+  { en: "AI substitution rates applied: humidifier 95.5%, air purifier 89.3%, deodoriser 74.2% — the effective average of nine AI systems, with the 270% outlier excluded.",
+    ko: "적용 AI 대체율: 가습기 95.5% · 공기청정기 89.3% · 냄새제거기 74.2%. 9개 AI의 실효 평균이며, 270% 이상치는 제외했습니다." },
+  { en: "Appliances replaced, at typical use: humidifier 400W × 10h, air purifier 50W × 10h, deodoriser 150W × 4h — 1,719.77 kWh a year, the same for every model.",
+    ko: "대체 대상 가전의 통상 사용 기준: 가습기 400W×10h, 공기청정기 50W×10h, 탈취기 150W×4h — 연 1,719.77 kWh로 전 모델 동일합니다." },
+  { en: "LJR's own consumption is subtracted in full: the motor runs 24 hours a day, the grow lights 16 hours. Nothing is hidden from the total.",
+    ko: "LJR 자체 소비 전력은 전액 차감했습니다. 모터는 24시간, 재배 LED는 16시간 가동 기준입니다. 총계에서 숨긴 항목은 없습니다." },
+  { en: "Electricity at ₩150/kWh, the Korean residential average. Vegetables valued at ₩1,500 a head — deliberately below the ₩2,500–3,500 market price.",
+    ko: "전기요금 150원/kWh(한국 가정용 평균). 채소는 포기당 1,500원으로, 실제 시장가 2,500~3,500원보다 의도적으로 낮게 책정했습니다." },
+  { en: "An engineering and market estimate, not a certified test report. Real returns vary with indoor temperature and humidity, ventilation, crop variety and maintenance.",
+    ko: "공학적·시장 자료에 근거한 추정치이며 국가 공인 시험성적서가 아닙니다. 실제 효과는 실내 온습도, 환기 횟수, 채소 품종, 유지관리 상태에 따라 달라집니다." }
+];
+
 const PRODUCTS = [
-  { id: "dining", ken: "Signature · Dining", kko: "시그니처 · 다이닝", ten: "Six-Seater Dining", tko: "6인용 다이닝", noteEn: "ai sample video", noteKo: "ai 영상 샘플",
-    den: "Hydroponics above, aquaponics in the dual-structure aquarium below. Both growing methods run inside one table — about 1,170 plants a year over nine cycles, measured.",
-    dko: "상단은 수경재배, 이중구조 수족관부는 아쿠아포닉스. 두 재배 방식이 한 테이블 안에서 함께 돌아갑니다. 연 9회전으로 약 1,170포기를 실측했습니다.",
-    s: [["Price", "가격", "₩6,000,000"], ["Size", "규격", "1,800 × 900 × 750 (+1,150)"], ["Yield", "연간 수확", ["1,170", "1,170포기"]], ["For", "대상", ["Home · office", "가정 · 오피스"]]] },
-  { id: "conference", ken: "B2B / B2G · Climate Asset", kko: "B2B / B2G · 기후 자산", ten: "Conference Table", tko: "회의실 테이블",
-    den: "A climate asset that returns space, power and carbon at once. Sized for executive rooms, PB centers, law firms and premium gallery lounges.",
-    dko: "공간·전력·탄소를 동시에 되돌리는 기후 자산. 임원 회의실, PB센터, 로펌, 프리미엄 갤러리 접견실을 위한 규격입니다.",
-    s: [["Price", "가격", "₩10,000,000~"], ["Size", "규격", "2,200 × 1,100 × 750"], ["Planting", "식생", ["35 stems", "35주"]], ["Included", "기본 탑재", ["4K beam · speaker", "4K 빔 · 스피커"]]] },
-  { id: "four", ken: "Family · Smart Home", kko: "패밀리 · 스마트홈", ten: "Four-Seater Dining", tko: "4인용 다이닝",
-    den: "The everyday table becomes the family's wellness hub. 270–275 plants a year grow right where you eat.",
-    dko: "매일의 식탁이 가족의 웰니스 허브가 됩니다. 연 270~275포기의 채소가 식탁에서 바로 자랍니다.",
-    s: [["Price", "가격", "₩4,500,000"], ["Size", "규격", "1,500 × 1,000 × 750"], ["Yield", "연간 수확", ["270–275", "270~275포기"]], ["Net gain", "연간 순이익", "≈ ₩1,039,850"]] },
-  { id: "two", ken: "Compact · Entry", kko: "컴팩트 · 엔트리", ten: "Folding, Two to Four", tko: "접이식 2인용 → 4인용",
+  { id: "ttable", ken: "Bespoke · T Table", kko: "비스포크 · T 테이블", ten: "T Table", tko: "T 테이블",
+    den: "A bespoke line whose T-form anchors the center of a room. Dimensions and shape are built freely to the space.",
+    dko: "T자 구조로 공간의 중심을 잡는 비스포크 라인. 규격과 형태를 공간에 맞춰 자유롭게 제작합니다.",
+    s: [["Price", "가격", ["Consult", "상담 후 결정"]], ["Size", "규격", ["Made to order", "주문 제작"]], ["Forms", "형태", ["Ceiling · 4D frame", "천장형 · 4D 프레임"]], ["For", "대상", ["Bespoke", "비스포크"]]] },
+  { id: "two", ken: "Compact · Entry", kko: "컴팩트 · 엔트리", ten: "Two-Seater Table", tko: "2인용 테이블",
     den: "Living nature for a smaller space. Suited to one- and two-person homes, small offices, hotels and coffee shops.",
     dko: "작은 공간에 들이는 살아 있는 자연. 1~2인 가정, 소규모 오피스, 호텔, 커피숍에 적합합니다.",
     s: [["Price", "가격", "₩2,500,000"], ["Size", "규격", "800 × 850 × 750"], ["Yield", "연간 수확", ["≈ 180", "약 180포기"]], ["For", "대상", ["Home · office · hotel", "가정 · 오피스 · 호텔"]]] },
@@ -1424,10 +1543,18 @@ const PRODUCTS = [
     den: "Closest to nature, at floor level. Solid-wood floor structure with optional flower planting and aquascaping.",
     dko: "바닥에서 자연과 가장 가까이. 원목 좌식 구조에 플라워 식생과 아쿠아스케이핑을 더할 수 있습니다.",
     s: [["Price", "가격", "₩3,500,000"], ["Size", "규격", "1,200 × 700 × 550"], ["Yield", "연간 수확", ["≈ 225", "약 225포기"]], ["For", "대상", ["Home · hotel · cafe", "가정 · 호텔 · 카페"]]] },
-  { id: "ttable", ken: "Bespoke · T Table", kko: "비스포크 · T 테이블", ten: "T Table", tko: "T 테이블",
-    den: "A bespoke line whose T-form anchors the center of a room. Dimensions and shape are built freely to the space.",
-    dko: "T자 구조로 공간의 중심을 잡는 비스포크 라인. 규격과 형태를 공간에 맞춰 자유롭게 제작합니다.",
-    s: [["Price", "가격", ["Consult", "상담 후 결정"]], ["Size", "규격", ["Made to order", "주문 제작"]], ["Forms", "형태", ["Ceiling · 4D frame", "천장형 · 4D 프레임"]], ["For", "대상", ["Bespoke", "비스포크"]]] }
+  { id: "four", ken: "Family · Smart Home", kko: "패밀리 · 스마트홈", ten: "Four-Seater Table", tko: "4인용 테이블",
+    den: "The everyday table becomes the family's wellness hub. 270–275 plants a year grow right where you eat.",
+    dko: "매일의 식탁이 가족의 웰니스 허브가 됩니다. 연 270~275포기의 채소가 식탁에서 바로 자랍니다.",
+    s: [["Price", "가격", "₩4,500,000"], ["Size", "규격", "1,500 × 1,000 × 750"], ["Yield", "연간 수확", ["270–275", "270~275포기"]], ["Net gain", "연간 순이익", "≈ ₩1,039,850"]] },
+  { id: "dining", ken: "Signature · Dining", kko: "시그니처 · 다이닝", ten: "Four-to-Five-Seater Dining", tko: "4~5인용 식탁", noteEn: "ai sample video", noteKo: "ai 영상 샘플",
+    den: "Hydroponics above, aquaponics in the dual-structure aquarium below. Both growing methods run inside one table — approximately 1,170 plants a year over nine cycles.",
+    dko: "상단은 수경재배, 이중구조 수족관부는 아쿠아포닉스. 두 재배 방식이 한 테이블 안에서 함께 돌아갑니다. 연 9회전으로 약 1,170포기입니다.",
+    s: [["Price", "가격", "₩6,000,000"], ["Size", "규격", "1,800 × 1,000 × 750"], ["Yield", "연간 수확", ["approx. 1,170", "약 1,170포기"]], ["For", "대상", ["Home · office", "가정 · 오피스"]]] },
+  { id: "conference", ken: "B2B / B2G · Climate Asset", kko: "B2B / B2G · 기후 자산", ten: "Conference Table", tko: "회의실 테이블",
+    den: "A climate asset that returns space, power and carbon at once. Sized for executive rooms, PB centers, law firms and premium gallery lounges.",
+    dko: "공간·전력·탄소를 동시에 되돌리는 기후 자산. 임원 회의실, PB센터, 로펌, 프리미엄 갤러리 접견실을 위한 규격입니다.",
+    s: [["Price", "가격", ["Consult", "상담 후 결정"]], ["Size", "규격", "2,200 × 1,100 × 750"], ["Planting", "식생", ["35 stems", "35주"]], ["Included", "기본 탑재", ["4K beam · speaker", "4K 빔 · 스피커"]]] }
 ];
 
 const FEATURES = [
@@ -1436,7 +1563,7 @@ const FEATURES = [
   { c: "Air", en: ["Odor and gas removal", "The water film adsorbs CO₂, CO, VOCs and ammonia that purifiers miss."], ko: ["냄새 · 가스 제거", "공기청정기가 못 잡는 CO₂·CO·VOCs·암모니아를 수막이 흡착."] },
   { c: "Air", en: ["Power-free diffuser", "Scent carried on flowing water. Replaces electric diffusers."], ko: ["무전력 디퓨저", "흐르는 물에 향을 실어 은은하게. 전자식 디퓨저 대체."] },
   { c: "Grow", en: ["Aquaponic vegetables", "Ornamental fish waste becomes nutrient — an organic loop with no fertilizer."], ko: ["아쿠아포닉스 채소 재배", "관상어 배설물이 영양이 되는 무비료 유기순환."] },
-  { c: "Grow", en: ["Hydroponics on top", "About 1,170 plants a year over nine cycles, measured. Leafy greens at scale."], ko: ["상단 수경재배", "연 9회전으로 약 1,170포기(실측). 잎채소 대량 자급."] },
+  { c: "Grow", en: ["Hydroponics on top", "Approximately 1,170 plants a year over nine cycles. Leafy greens at scale."], ko: ["상단 수경재배", "연 9회전으로 약 1,170포기. 잎채소 대량 자급."] },
   { c: "Water", en: ["Dual-tank cleaning-free loop", "The flow carries waste out and the roots purify it, removing the labor of water changes."], ko: ["이중수조 무청소 순환", "물길이 실어 내고 뿌리가 정화하는 물리 설계. 환수·청소 노동 제거."] },
   { c: "Water", en: ["A living aquarium", "Ornamental fish swimming in the table. Every meal becomes a landscape."], ko: ["살아 있는 수족관", "관상어가 헤엄치는 식탁. 매일의 식사가 하나의 풍경이 됩니다."] },
   { c: "Wellness", en: ["Contactless wellness monitoring", "Camera-based reference measurement. Not a medical diagnosis."], ko: ["비접촉 웰니스 모니터링", "카메라 기반 참고 측정. 의료 진단이 아닌 참고용입니다."] },
@@ -1696,12 +1823,12 @@ const SHEETS = {
     t: { en: "Product catalogue", ko: "카탈로그" },
     intro: { en: "Five tables, the bespoke T Table and one large tank, with prices and dimensions. The full catalogue PDF, including installation drawings and the verification appendix, is sent on request.", ko: "다섯 개의 식탁과 테이블, 비스포크 T 테이블, 그리고 대형 수조의 가격과 규격입니다. 설치 도면과 검증 부록을 포함한 카탈로그 PDF는 요청 시 보내드립니다." },
     rows: [
-      { k: { en: "Folding, two to four", ko: "접이식 2인용 → 4인용" }, v: { en: "₩2,500,000 · 800 × 850 × 750", ko: "₩2,500,000 · 800 × 850 × 750" } },
-      { k: { en: "Floor Table", ko: "좌식 테이블" }, v: { en: "₩3,500,000 · 1,200 × 700 × 550", ko: "₩3,500,000 · 1,200 × 700 × 550" } },
-      { k: { en: "Four-Seater Dining", ko: "4인용 다이닝" }, v: { en: "₩4,500,000 · 1,500 × 1,000 × 750", ko: "₩4,500,000 · 1,500 × 1,000 × 750" } },
-      { k: { en: "Six-Seater Dining", ko: "6인용 다이닝" }, v: { en: "₩6,000,000 · 1,800 × 900 × 750", ko: "₩6,000,000 · 1,800 × 900 × 750" } },
-      { k: { en: "Conference Table", ko: "회의실 테이블" }, v: { en: "₩10,000,000~ · 2,200 × 1,100 × 750", ko: "₩10,000,000~ · 2,200 × 1,100 × 750" } },
       { k: { en: "T Table", ko: "T 테이블" }, v: { en: "On consultation · bespoke", ko: "상담 후 결정 · 비스포크" } },
+      { k: { en: "Two-Seater Table", ko: "2인용 테이블" }, v: { en: "₩2,500,000 · 800 × 850 × 750", ko: "₩2,500,000 · 800 × 850 × 750" } },
+      { k: { en: "Floor Table", ko: "좌식 테이블" }, v: { en: "₩3,500,000 · 1,200 × 700 × 550", ko: "₩3,500,000 · 1,200 × 700 × 550" } },
+      { k: { en: "Four-Seater Table", ko: "4인용 테이블" }, v: { en: "₩4,500,000 · 1,500 × 1,000 × 750", ko: "₩4,500,000 · 1,500 × 1,000 × 750" } },
+      { k: { en: "Four-to-Five-Seater Dining", ko: "4~5인용 식탁" }, v: { en: "₩6,000,000 · 1,800 × 1,000 × 750", ko: "₩6,000,000 · 1,800 × 1,000 × 750" } },
+      { k: { en: "Conference Table", ko: "회의실 테이블" }, v: { en: "On consultation · 2,200 × 1,100 × 750", ko: "상담 후 결정 · 2,200 × 1,100 × 750" } },
       { k: { en: "Large tank", ko: "대형 수조" }, v: { en: "On consultation · 2,500 × 1,100", ko: "상담 후 결정 · 2,500 × 1,100" } }
     ],
     notes: [
@@ -1760,25 +1887,25 @@ const EC_POWER = [
 ];
 
 const EC_ROWS = [
-  { nen: "Folding, Two to Four", nko: "접이식 2인용 → 4인용", p: "₩2,500,000", gen: "20 standing", gko: "상시 20포기", pw: 300000, gv: 455800 },
+  { nen: "T Table", nko: "T 테이블", p: "", gen: "bespoke", gko: "비스포크", pw: 0, gv: 0, quote: true },
+  { nen: "Two-Seater Table", nko: "2인용 테이블", p: "₩2,500,000", gen: "20 standing", gko: "상시 20포기", pw: 300000, gv: 455800 },
   { nen: "Floor Table", nko: "좌식 테이블", p: "₩3,500,000", gen: "25 standing", gko: "상시 25포기", pw: 320000, gv: 569800 },
-  { nen: "Four-Seater Dining", nko: "4인용 다이닝", p: "₩4,500,000", gen: "30 standing", gko: "상시 30포기", pw: 356140, gv: 683710, plan: true },
-  { nen: "Six-Seater Dining", nko: "6인용 다이닝", p: "₩6,000,000", gen: "130 standing", gko: "상시 130포기", pw: 390000, gv: 2962700 },
-  { nen: "Conference Table", nko: "회의실 테이블", p: "₩10,000,000", gen: "35 stems, flowers", gko: "생화 35본", pw: 400000, gv: 0 },
-  { nen: "T Table", nko: "T 테이블", p: "", gen: "bespoke", gko: "비스포크", pw: 0, gv: 0, quote: true }
+  { nen: "Four-Seater Table", nko: "4인용 테이블", p: "₩4,500,000", gen: "30 standing", gko: "상시 30포기", pw: 356140, gv: 683710, plan: true },
+  { nen: "Four-to-Five-Seater Dining", nko: "4~5인용 식탁", p: "₩6,000,000", gen: "130 standing", gko: "상시 130포기", pw: 390000, gv: 2962700 },
+  { nen: "Conference Table", nko: "회의실 테이블", p: "", gen: "35 stems, flowers", gko: "생화 35본", pw: 400000, gv: 0 }
 ];
 
 const PRICES = [
-  { go: "products", nen: "Folding, Two to Four", nko: "접이식 2인용 → 4인용", v: "₩2,500,000", sen: "Small space · cafe · office", sko: "소규모 · 카페 · 오피스" },
+  { go: "products", nen: "T Table", nko: "T 테이블", v: "On consultation", vko: "상담 후 결정", sen: "Bespoke · any form", sko: "비스포크 · 자유 제작" },
+  { go: "products", nen: "Two-Seater Table", nko: "2인용 테이블", v: "₩2,500,000", sen: "Small space · cafe · office", sko: "소규모 · 카페 · 오피스" },
   { go: "products", nen: "Floor Table", nko: "좌식 테이블", v: "₩3,500,000", sen: "Home · hotel", sko: "가정 · 호텔" },
-  { go: "products", nen: "Four-Seater Dining", nko: "4인용 다이닝", v: "₩4,500,000", sen: "Family · lounge", sko: "4인 가정 · 휴게실" },
-  { go: "products", nen: "Six-Seater Dining", nko: "6인용 다이닝", v: "₩6,000,000", sen: "High-end · 1,170 plants a year", sko: "하이엔드 · 연 1,170포기" },
-  { go: "products", nen: "Conference Table", nko: "회의실 테이블", v: "₩10,000,000~", sen: "Corporate · public sector", sko: "기업 · 관공서" },
-  { go: "products", nen: "T Table", nko: "T 테이블", v: "On consultation", vko: "상담 후 결정", sen: "Bespoke · any form", sko: "비스포크 · 자유 제작" }
+  { go: "products", nen: "Four-Seater Table", nko: "4인용 테이블", v: "₩4,500,000", sen: "Family · lounge", sko: "4인 가정 · 휴게실" },
+  { go: "products", nen: "Four-to-Five-Seater Dining", nko: "4~5인용 식탁", v: "₩6,000,000", sen: "High-end · approx. 1,170 a year", sko: "하이엔드 · 연 약 1,170포기" },
+  { go: "products", nen: "Conference Table", nko: "회의실 테이블", v: "On consultation", vko: "상담 후 결정", sen: "Corporate · public sector", sko: "기업 · 관공서" }
 ];
 
 class Component extends DCLogic {
-  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null, boardOpen: false };
+  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null, boardOpen: false, econ: null };
 
   bgm() { return document.getElementById("bgm"); }
 
@@ -2235,6 +2362,15 @@ class Component extends DCLogic {
     const sl = SLIDES[i];
     const L = (o, k) => ko ? o[k + "ko"] : o[k + "en"];
     const S = this.state.sheet ? SHEETS[this.state.sheet] : null;
+    const E = this.state.econ ? ECON[this.state.econ] : null;
+    const EP = E ? PRODUCTS.filter(p => p.id === this.state.econ)[0] : null;
+    const w = (n) => "₩" + n.toLocaleString("en-US");
+    const er = (k, v, hi) => ({
+      k: k, v: v,
+      bg: hi ? "#F3F8F7" : "#FFFFFF",
+      w: hi ? "700" : "400", vw: hi ? "700" : "600",
+      fg: hi ? "#1F2227" : "rgba(31,34,39,.6)", vfg: hi ? "#6E5408" : "#1F2227"
+    });
 
     const flat = [];
     NAV.forEach(n => {
@@ -2270,6 +2406,57 @@ class Component extends DCLogic {
       goProducts: () => this.go("products"),
       aiNames: AIS.map(a => ({ n: a.n })),
       srRows: SR_ROWS,
+      econOpen: !!E,
+      closeEcon: () => this.setState({ econ: null }),
+      econT: E ? (ko ? EP.tko : EP.ten) : "",
+      econPrice: E ? (ko ? "제품 가격 " : "Price ") + w(E.price) : "",
+      econHero: E ? [
+        { l: ko ? "연간 총 순이익" : "Annual net return", v: w(E.total), n: ko ? "전기료 절감 + 채소 가치" : "electricity saved + produce" },
+        { l: ko ? "투자 회수 (보수적)" : "Payback, conservative", v: E.pbCons + (ko ? "년" : " yrs"), n: ko ? "포기당 1,500원 기준" : "at ₩1,500 a head" },
+        { l: ko ? "투자 회수 (시장가)" : "Payback, at market", v: E.pbMkt + (ko ? "년" : " yrs"), n: ko ? "포기당 3,000원 기준" : "at ₩3,000 a head" }
+      ] : [],
+      econBlocks: E ? [
+        { h: ko ? "전력 정산 — 숨김 없이" : "Power, fully accounted",
+          rows: [
+            er(ko ? "기존 가전 대체 전력량" : "Appliance power replaced", "1,719.77 kWh"),
+            er(ko ? "모터 소비 (24h 가동)" : "Motor draw (24h)", E.motor + " · " + E.motorKwh + " kWh"),
+            er(ko ? "재배 LED 소비 (16h 점등)" : "Grow lights (16h)", E.led + " · " + E.ledKwh + " kWh"),
+            er(ko ? "LJR 총 운영 전력" : "LJR total consumption", E.totKwh + " kWh"),
+            er(ko ? "순수 절감 전력" : "Net power saved", E.netKwh + " kWh", true)
+          ] },
+        { h: ko ? "연간 이익" : "Annual return",
+          rows: [
+            er(ko ? "전기료 절감액" : "Electricity saved", w(E.elec)),
+            er(ko ? "연간 수확" : "Annual harvest", (ko ? "약 " : "approx. ") + E.heads.toLocaleString("en-US") + (ko ? "포기" : " heads")),
+            er(ko ? "채소 생산 가치 (1,500원/포기)" : "Produce value (₩1,500/head)", w(E.veg)),
+            er(ko ? "연간 총 순이익" : "Total net return", w(E.total), true)
+          ] },
+        { h: ko ? "시장가를 적용하면" : "At market price",
+          rows: [
+            er(ko ? "채소 가치 (3,000원/포기)" : "Produce value (₩3,000/head)", w(E.heads * 3000)),
+            er(ko ? "연간 총 순이익" : "Total net return", w(E.mkTotal), true),
+            er(ko ? "투자 회수 기간" : "Payback period", E.pbMkt + (ko ? "년" : " yrs"), true)
+          ] }
+      ] : [],
+      econRead: E ? (ko ? E.rko : E.ren) : "",
+      econBasis: ECON_BASIS.map(n => ({ t: ko ? n.ko : n.en })),
+
+      exModels: ["two", "floor", "four", "dining"].map(id => {
+        const m = ECON[id];
+        const pr = PRODUCTS.filter(p => p.id === id)[0];
+        return {
+          n: ko ? pr.tko : pr.ten,
+          p: w(m.price),
+          net: w(m.total),
+          rows: [
+            { k: ko ? "연간 수확" : "Annual harvest", v: (ko ? "약 " : "approx. ") + m.heads.toLocaleString("en-US") + (ko ? "포기" : " heads"), c: "#1F2227" },
+            { k: ko ? "순수 절감 전력" : "Net power saved", v: m.netKwh + " kWh", c: "#1F2227" },
+            { k: ko ? "전기료 절감액" : "Electricity saved", v: w(m.elec), c: "#1F2227" },
+            { k: ko ? "회수 · 보수적" : "Payback, conservative", v: m.pbCons + (ko ? "년" : " yrs"), c: "rgba(31,34,39,.66)" },
+            { k: ko ? "회수 · 시장가" : "Payback, at market", v: m.pbMkt + (ko ? "년" : " yrs"), c: "#6E5408" }
+          ]
+        };
+      }),
       cbRows: CB_ROWS.map(r => ({ n: r.n, c: r.c, t: r.t, f: (ko && r.fko) ? r.fko : r.f })),
       cbAvg: CB_AVG.map(s => ({ l: L(s, "l"), v: s.v, n: L(s, "n") })),
       cbNotes: CB_NOTES.map(n => ({ h: L(n, "h"), b: L(n, "b") })),
@@ -2340,7 +2527,11 @@ class Component extends DCLogic {
         note: ko ? (p.noteKo || "") : (p.noteEn || ""),
         d: ko ? p.dko : p.den,
         src: p.id + ".mp4", poster: p.id + ".jpg",
-        s: p.s.map(row => ({ k: ko ? row[1] : row[0], v: Array.isArray(row[2]) ? (ko ? row[2][1] : row[2][0]) : row[2] }))
+        s: p.s.map(row => ({ k: ko ? row[1] : row[0], v: Array.isArray(row[2]) ? (ko ? row[2][1] : row[2][0]) : row[2] })),
+        hasEcon: !!ECON[p.id],
+        econLabel: ko ? "경제성 자세히 보기" : "See the economics",
+        econNet: ECON[p.id] ? (ko ? "연 " : "") + w(ECON[p.id].total) + (ko ? "" : " a year") : "",
+        openEcon: () => this.setState({ econ: p.id })
       })),
       features: FEATURES.map(f => ({ c: f.c, n: (ko ? f.ko : f.en)[0], d: (ko ? f.ko : f.en)[1] })),
       scale: SCALE.map(s => ({ u: L(s, "u"), v: s.v, n: ko ? s.nko : s.n })),
