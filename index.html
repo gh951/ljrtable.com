@@ -2058,7 +2058,7 @@ const BOARD = [
 ];
 
 // Bump whenever any lang/*.json changes — old caches are then discarded.
-const DICT_VER = "2026-08-05h";
+const DICT_VER = "2026-08-05i";
 
 const LANGS = [
   { c: "en", s: "EN", n: "English", ready: true },
@@ -2073,7 +2073,7 @@ const LANGS = [
   { c: "nl", s: "NL", n: "Nederlands", ready: true },
   { c: "sv", s: "SV", n: "Svenska", ready: true },
   { c: "no", s: "NO", n: "Norsk", ready: true },
-  { c: "da", s: "DA", n: "Dansk", ready: false },
+  { c: "da", s: "DA", n: "Dansk", ready: true },
   { c: "pl", s: "PL", n: "Polski", ready: false },
   { c: "pt", s: "PT", n: "Português", ready: false },
   { c: "ar", s: "AR", n: "العربية", ready: false },
@@ -2923,7 +2923,9 @@ class Component extends DCLogic {
     const RG = (this.state.reg === null || this.state.reg === undefined) ? null : REG[this.state.reg];
     const F = (this.state.fn === null || this.state.fn === undefined) ? null : FN20[this.state.fn];
     const EP = E ? PRODUCTS.filter(p => p.id === this.state.econ)[0] : null;
-    const w = (n) => "₩" + n.toLocaleString("en-US");
+    const wLoc = ["de","es","it","nl","sv","no","da","pt","pl","id","tr","ru","uk","vi"].indexOf(this.state.lang) >= 0 ? "de-DE" : (this.state.lang === "fr" ? "fr-FR" : "en-US");
+    const wPost = ["de","es","it","nl","sv","no","da","pl","fr"].indexOf(this.state.lang) >= 0;
+    const w = (n) => wPost ? n.toLocaleString(wLoc) + " ₩" : "₩" + n.toLocaleString(wLoc);
     const er = (k, v, hi) => ({
       k: k, v: v,
       bg: hi ? "#F3F8F7" : "#FFFFFF",
@@ -3004,11 +3006,11 @@ class Component extends DCLogic {
       econOpen: !!E,
       closeEcon: () => this.setState({ econ: null }),
       econT: E ? (ko ? EP.tko : EP.ten) : "",
-      econPrice: E ? (ko ? "제품 가격 " : "Price ") + w(E.price) : "",
+      econPrice: E ? (ko ? "제품 가격 " : tr("Price ", "")) + w(E.price) : "",
       econHero: E ? [
         { l: ko ? "연간 총 순이익" : "Annual net return", v: w(E.total), n: ko ? "전기료 절감 + 채소 가치" : "electricity saved + produce" },
-        { l: ko ? "투자 회수 (보수적)" : "Payback, conservative", v: E.pbCons + (ko ? "년" : " yrs"), n: ko ? "포기당 1,500원 기준" : "at ₩1,500 a head" },
-        { l: ko ? "투자 회수 (시장가)" : "Payback, at market", v: E.pbMkt + (ko ? "년" : " yrs"), n: ko ? "포기당 3,000원 기준" : "at ₩3,000 a head" }
+        { l: ko ? "투자 회수 (보수적)" : "Payback, conservative", v: E.pbCons + (ko ? "년" : tr(" yrs", "")), n: ko ? "포기당 1,500원 기준" : "at ₩1,500 a head" },
+        { l: ko ? "투자 회수 (시장가)" : "Payback, at market", v: E.pbMkt + (ko ? "년" : tr(" yrs", "")), n: ko ? "포기당 3,000원 기준" : "at ₩3,000 a head" }
       ] : [],
       econBlocks: E ? [
         { h: ko ? "전력 정산 — 숨김 없이" : "Power, fully accounted",
@@ -3022,7 +3024,7 @@ class Component extends DCLogic {
         { h: ko ? "연간 이익" : "Annual return",
           rows: [
             er(ko ? "전기료 절감액" : "Electricity saved", w(E.elec)),
-            er(ko ? "연간 수확" : "Annual harvest", (ko ? "약 " : "approx. ") + E.heads.toLocaleString("en-US") + (ko ? "포기" : " heads")),
+            er(ko ? "연간 수확" : "Annual harvest", (ko ? "약 " : tr("approx. ", "")) + E.heads.toLocaleString(wLoc) + (ko ? "포기" : tr(" heads", ""))),
             er(ko ? "채소 생산 가치 (1,500원/포기)" : "Produce value (₩1,500/head)", w(E.veg)),
             er(ko ? "연간 총 순이익" : "Total net return", w(E.total), true)
           ] },
@@ -3030,7 +3032,7 @@ class Component extends DCLogic {
           rows: [
             er(ko ? "채소 가치 (3,000원/포기)" : "Produce value (₩3,000/head)", w(E.heads * 3000)),
             er(ko ? "연간 총 순이익" : "Total net return", w(E.mkTotal), true),
-            er(ko ? "투자 회수 기간" : "Payback period", E.pbMkt + (ko ? "년" : " yrs"), true)
+            er(ko ? "투자 회수 기간" : "Payback period", E.pbMkt + (ko ? "년" : tr(" yrs", "")), true)
           ] }
       ] : [],
       econRead: E ? (ko ? E.rko : E.ren) : "",
@@ -3060,11 +3062,11 @@ class Component extends DCLogic {
           p: w(m.price),
           net: w(m.total),
           rows: [
-            { k: ko ? "연간 수확" : "Annual harvest", v: (ko ? "약 " : "approx. ") + m.heads.toLocaleString("en-US") + (ko ? "포기" : " heads"), c: "#1F2227" },
+            { k: ko ? "연간 수확" : "Annual harvest", v: (ko ? "약 " : tr("approx. ", "")) + m.heads.toLocaleString(wLoc) + (ko ? "포기" : tr(" heads", "")), c: "#1F2227" },
             { k: ko ? "순수 절감 전력" : "Net power saved", v: m.netKwh + " kWh", c: "#1F2227" },
             { k: ko ? "전기료 절감액" : "Electricity saved", v: w(m.elec), c: "#1F2227" },
-            { k: ko ? "회수 · 보수적" : "Payback, conservative", v: m.pbCons + (ko ? "년" : " yrs"), c: "rgba(31,34,39,.66)" },
-            { k: ko ? "회수 · 시장가" : "Payback, at market", v: m.pbMkt + (ko ? "년" : " yrs"), c: "#6E5408" }
+            { k: ko ? "회수 · 보수적" : "Payback, conservative", v: m.pbCons + (ko ? "년" : tr(" yrs", "")), c: "rgba(31,34,39,.66)" },
+            { k: ko ? "회수 · 시장가" : "Payback, at market", v: m.pbMkt + (ko ? "년" : tr(" yrs", "")), c: "#6E5408" }
           ]
         };
       }),
@@ -3158,7 +3160,7 @@ class Component extends DCLogic {
         s: p.s.map(row => ({ k: ko ? row[1] : row[0], v: Array.isArray(row[2]) ? (ko ? row[2][1] : row[2][0]) : row[2] })),
         hasEcon: !!ECON[p.id],
         econLabel: ko ? "경제성 자세히 보기" : "See the economics",
-        econNet: ECON[p.id] ? (ko ? "연 " : "") + w(ECON[p.id].total) + (ko ? "" : " a year") : "",
+        econNet: ECON[p.id] ? (ko ? "연 " : "") + w(ECON[p.id].total) + (ko ? "" : tr(" a year", "")) : "",
         openEcon: () => this.setState({ econ: p.id })
       })),
       scale: SCALE.map(s => ({ u: L(s, "u"), v: s.v, n: ko ? s.nko : s.n })),
