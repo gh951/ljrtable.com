@@ -1594,7 +1594,7 @@ const DICT = {
 
 const NAV = [
   { go: "home", en: "Home", ko: "홈" },
-  { key: "company", en: "Company", ko: "회사소개", sub: [
+  { key: "company", en: "Company profile", ko: "회사소개", sub: [
     { go: "greeting", en: "A word from the founder", ko: "대표자 인사말" },
     { go: "core", en: "Core technology · Zero power", ko: "원천기술 · 실질적인 무전력" },
     { go: "clean", en: "Core technology · Zero cleaning", ko: "원천기술 · 실질적인 무청소" },
@@ -2058,7 +2058,7 @@ const BOARD = [
 ];
 
 // Bump whenever any lang/*.json changes — old caches are then discarded.
-const DICT_VER = "2026-08-05f";
+const DICT_VER = "2026-08-05g";
 
 const LANGS = [
   { c: "en", s: "EN", n: "English", ready: true },
@@ -2931,16 +2931,21 @@ class Component extends DCLogic {
       fg: hi ? "#1F2227" : "rgba(31,34,39,.6)", vfg: hi ? "#6E5408" : "#1F2227"
     });
 
+    const tr = (en, kox) => {
+      if (ko) return kox;
+      if (this.dict && this.dict[en]) return this.dict[en];
+      return en;
+    };
     const flat = [];
     NAV.forEach((n, k) => {
       const hasSub = !!(n.sub && n.sub.length);
       const isOpen = this.state.mopen === k;
       flat.push({
-        label: (ko ? n.ko : n.en) + (hasSub ? (isOpen ? "  −" : "  +") : ""),
+        label: tr(n.en, n.ko) + (hasSub ? (isOpen ? "  −" : "  +") : ""),
         size: "17px", weight: "600", color: "rgba(255,255,255,.95)", pad: "12px 0",
         click: hasSub ? () => this.setState(st => ({ mopen: st.mopen === k ? null : k })) : (n.go ? () => this.go(n.go) : () => {})
       });
-      if (hasSub && isOpen) n.sub.forEach(s => flat.push({ label: ko ? s.ko : s.en, size: "14.5px", weight: "400", color: "rgba(255,255,255,.62)", pad: "10px 0 10px 16px", click: () => this.subGo(s) }));
+      if (hasSub && isOpen) n.sub.forEach(s => flat.push({ label: tr(s.en, s.ko), size: "14.5px", weight: "400", color: "rgba(255,255,255,.62)", pad: "10px 0 10px 16px", click: () => this.subGo(s) }));
     });
 
     return {
