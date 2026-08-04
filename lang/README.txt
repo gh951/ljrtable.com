@@ -40,4 +40,18 @@ TONE
   says so — keep that qualification in the translation. It is the point.
 
 CURRENT COUNT
-  782 strings.
+  789 strings.
+
+AVAILABLE
+  ja.json  Japanese
+  zh.json  Chinese (simplified)
+  de.json  German
+
+AFTER EDITING A DICTIONARY
+  Browsers keep a copy of each language file, so an edited file will not
+  reach returning visitors on its own. Open index.html, find
+
+    const DICT_VER = "...";
+
+  and change the value (any new string; a date works well). Old copies are
+  then discarded and every visitor receives the corrected file.
