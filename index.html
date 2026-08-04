@@ -109,9 +109,9 @@
       <section style="background:#07100D;padding:clamp(50px,7vh,90px) clamp(20px,5vw,70px)">
         <div style="max-width:1360px;margin:0 auto">
           <div data-i18n="sm_basis" style="margin-bottom:14px;font-size:12.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(87,195,154,.75)">Four-Seater Table as the basis</div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:#07100D;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden">
             <sc-for list="{{ summary }}" as="s" hint-placeholder-count="7">
-              <a onClick="{{ s.click }}" style="background:#07100D;padding:clamp(22px,2.5vw,34px);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .4s ease" style-hover="background:#0D1A16">
+              <a onClick="{{ s.click }}" style="background:#07100D;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(22px,2.5vw,34px);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .4s ease" style-hover="background:#0D1A16">
                 <div style="font-size:clamp(20px,2.1vw,29px);font-weight:700;letter-spacing:-.035em;color:#57C39A;line-height:1.1">{{ s.v }}</div>
                 <div style="font-size:13.5px;font-weight:500;color:rgba(255,255,255,.9)">{{ s.l }}</div>
                 <div style="font-size:12.5px;font-weight:400;line-height:1.6;color:rgba(255,255,255,.45)">{{ s.n }}</div>
@@ -120,9 +120,9 @@
           </div>
 
           <div data-i18n="sm_basis2" style="margin:clamp(26px,3.4vh,42px) 0 14px;font-size:12.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(87,195,154,.75)">Four-to-Five-Seater Dining as the basis</div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:#07100D;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden">
             <sc-for list="{{ summary2 }}" as="s" hint-placeholder-count="7">
-              <a onClick="{{ s.click }}" style="background:#07100D;padding:clamp(22px,2.5vw,34px);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .4s ease" style-hover="background:#0D1A16">
+              <a onClick="{{ s.click }}" style="background:#07100D;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(22px,2.5vw,34px);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .4s ease" style-hover="background:#0D1A16">
                 <div style="font-size:clamp(20px,2.1vw,29px);font-weight:700;letter-spacing:-.035em;color:#57C39A;line-height:1.1">{{ s.v }}</div>
                 <div style="font-size:13.5px;font-weight:500;color:rgba(255,255,255,.9)">{{ s.l }}</div>
                 <div style="font-size:12.5px;font-weight:400;line-height:1.6;color:rgba(255,255,255,.45)">{{ s.n }}</div>
@@ -139,7 +139,7 @@
             <a onClick="{{ goCore }}" data-rv="1" style="border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(26px,3vw,44px);display:flex;flex-direction:column;gap:14px;cursor:pointer;background:#0A1613;transition:border-color .35s ease" style-hover="border-color:rgba(87,195,154,.5)">
               <span data-i18n="dg_1k" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(87,195,154,.85)">Core technology</span>
               <h3 data-i18n="dg_1t" style="margin:0;font-size:clamp(23px,2.8vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#FFFFFF;text-wrap:balance">Substantially power-free</h3>
-              <p data-i18n="dg_1b" style="margin:0;font-size:15px;line-height:1.75;color:rgba(255,255,255,.6);text-wrap:pretty">The 20W a fish already needs, reallocated into a four-sided falling water film that cleans, humidifies and deodorizes the room.</p>
+              <p data-i18n="dg_1b" style="margin:0;font-size:15px;line-height:1.75;color:rgba(255,255,255,.6);text-wrap:pretty">The 20W the filtration motor already draws to keep the fish alive, reallocated into a four-sided falling water film that cleans the air, humidifies it and removes odour.</p>
               <div style="display:flex;align-items:baseline;gap:12px;margin-top:6px">
                 <span style="font-size:clamp(30px,3.4vw,48px);font-weight:800;letter-spacing:-.05em;color:#57C39A">0W</span>
                 <span data-i18n="dg_1n" style="font-size:13.5px;color:rgba(255,255,255,.5)">incremental power draw</span>
@@ -149,7 +149,7 @@
             <a onClick="{{ goClean }}" data-rv="1" style="border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(26px,3vw,44px);display:flex;flex-direction:column;gap:14px;cursor:pointer;background:#0A1613;transition:border-color .35s ease" style-hover="border-color:rgba(87,195,154,.5)">
               <span data-i18n="dg_2k" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(87,195,154,.85)">Core technology</span>
               <h3 data-i18n="dg_2t" style="margin:0;font-size:clamp(23px,2.8vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#FFFFFF;text-wrap:balance">Substantially cleaning-free</h3>
-              <p data-i18n="dg_2b" style="margin:0;font-size:15px;line-height:1.75;color:rgba(255,255,255,.6);text-wrap:pretty">Waste settles, and the current carries it out to the outer tank. Nitrogen is taken up and purified by the roots of the vegetables and flowers above, and seven filtration stages return clean water.</p>
+              <p data-i18n="dg_2b" style="margin:0;font-size:15px;line-height:1.75;color:rgba(255,255,255,.6);text-wrap:pretty">The dual-aquarium structure discharges waste and sediment on its own, while seven filtration stages and the plant roots purify the water. All a person does is top up what has evaporated.</p>
               <div style="display:flex;align-items:baseline;gap:12px;margin-top:6px">
                 <span style="font-size:clamp(30px,3.4vw,48px);font-weight:800;letter-spacing:-.05em;color:#57C39A">0</span>
                 <span data-i18n="dg_2n" style="font-size:13.5px;color:rgba(255,255,255,.5)">water changes · deep cleans · human hands</span>
@@ -166,9 +166,9 @@
               </div>
               <a onClick="{{ goFeatures }}" data-i18n="db_more" style="font-size:13.5px;font-weight:600;color:rgba(87,195,154,.9);cursor:pointer">All twenty functions →</a>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden;margin-top:clamp(20px,2.6vh,32px)">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:#0A1613;border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden;margin-top:clamp(20px,2.6vh,32px)">
               <sc-for list="{{ dash }}" as="d" hint-placeholder-count="6">
-                <div style="background:#0A1613;padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:7px">
+                <div style="background:#0A1613;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:7px">
                   <span style="font-size:12px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.5)">{{ d.l }}</span>
                   <span style="font-size:clamp(23px,2.6vw,36px);font-weight:700;letter-spacing:-.045em;line-height:1;color:#57C39A">{{ d.v }}</span>
                   <span style="font-size:12px;color:rgba(255,255,255,.4)">{{ d.u }}</span>
@@ -180,14 +180,34 @@
           <div data-rv="1" style="border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(24px,3vw,42px)">
             <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px">
               <div style="display:flex;flex-direction:column;gap:8px">
+                <span data-i18n="wd_k" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(87,195,154,.85)">Wellness dashboard</span>
+                <h3 data-i18n="wd_t" style="margin:0;font-size:clamp(21px,2.4vw,34px);font-weight:700;letter-spacing:-.032em;color:#FFFFFF">Health, in numbers.</h3>
+              </div>
+              <a onClick="{{ goFeatures }}" data-i18n="db_more" style="font-size:13.5px;font-weight:600;color:rgba(87,195,154,.9);cursor:pointer">All twenty functions →</a>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:#0A1613;border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden;margin-top:clamp(20px,2.6vh,32px)">
+              <sc-for list="{{ body }}" as="d" hint-placeholder-count="4">
+                <div style="background:#0A1613;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:7px">
+                  <span style="font-size:12px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.5)">{{ d.l }}</span>
+                  <span style="font-size:clamp(23px,2.6vw,36px);font-weight:700;letter-spacing:-.045em;line-height:1;color:#57C39A">{{ d.v }}</span>
+                  <span style="font-size:12px;color:rgba(255,255,255,.4)">{{ d.u }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p data-i18n="wd_n" style="margin:14px 0 0;font-size:12px;line-height:1.7;color:rgba(255,255,255,.4)">Sample values · wellness reference indicators, not a certified medical device.</p>
+          </div>
+
+          <div data-rv="1" style="border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(24px,3vw,42px)">
+            <div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px">
+              <div style="display:flex;flex-direction:column;gap:8px">
                 <span data-i18n="k_products" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(87,195,154,.85)">Products</span>
                 <h3 data-i18n="dg_3t" style="margin:0;font-size:clamp(21px,2.4vw,34px);font-weight:700;letter-spacing:-.032em;color:#FFFFFF">Six tables, one principle.</h3>
               </div>
               <a onClick="{{ goProducts }}" data-i18n="dg_3more" style="font-size:13.5px;font-weight:600;color:rgba(87,195,154,.9);cursor:pointer">All products and specs →</a>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden;margin-top:clamp(20px,2.6vh,32px)">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:#0A1613;border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden;margin-top:clamp(20px,2.6vh,32px)">
               <sc-for list="{{ prices }}" as="p" hint-placeholder-count="6">
-                <a onClick="{{ p.click }}" style="background:#0A1613;padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:7px;cursor:pointer;transition:background .35s ease" style-hover="background:#10201B">
+                <a onClick="{{ p.click }}" style="background:#0A1613;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:7px;cursor:pointer;transition:background .35s ease" style-hover="background:#10201B">
                   <span style="font-size:13.5px;font-weight:500;color:rgba(255,255,255,.88)">{{ p.n }}</span>
                   <span style="font-size:clamp(17px,1.9vw,24px);font-weight:700;letter-spacing:-.035em;color:#FFFFFF">{{ p.v }}</span>
                   <span style="font-size:12px;line-height:1.55;color:rgba(255,255,255,.42)">{{ p.s }}</span>
@@ -198,8 +218,8 @@
 
           <a onClick="{{ goProof }}" data-rv="1" style="border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(26px,3vw,44px);display:flex;flex-direction:column;gap:14px;cursor:pointer;transition:border-color .35s ease" style-hover="border-color:rgba(87,195,154,.5)">
             <span data-i18n="k_verify" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(87,195,154,.85)">Engineering proof</span>
-            <h3 data-i18n="dg_4t" style="margin:0;font-size:clamp(23px,2.8vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#FFFFFF;text-wrap:balance">Nine AI systems, one conclusion.</h3>
-            <p data-i18n="dg_4b" style="margin:0;font-size:15px;line-height:1.75;color:rgba(255,255,255,.6);max-width:70ch;text-wrap:pretty">Independent engineering review of zero incremental power (ΔP = 0) and the cleaning-free circulation. Every transcript is published — the questions as well as the answers.</p>
+            <h3 data-i18n="dg_4t" style="margin:0;font-size:clamp(23px,2.8vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#FFFFFF;text-wrap:balance">Cross-verified by nine global AI models.</h3>
+            <p data-i18n="dg_4b" style="margin:0;font-size:15px;line-height:1.75;color:rgba(255,255,255,.6);max-width:70ch;text-wrap:pretty">Zero incremental power draw (ΔP = 0) and the effectiveness of the cleaning-free circulation were independently reviewed and simulated as engineering problems. For the sake of trust, the full transcripts of every AI conversation and review are published openly.</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
               <sc-for list="{{ aiNames }}" as="a" hint-placeholder-count="9">
                 <span style="font-size:12.5px;font-weight:500;padding:8px 15px;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.72)">{{ a.n }}</span>
@@ -281,9 +301,9 @@
           </sc-for>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(28px,4vh,48px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:#07100D;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(28px,4vh,48px)">
           <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
-            <div style="background:#07100D;padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:8px">
+            <div style="background:#07100D;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:8px">
               <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:#C19702">{{ s.k }}</span>
               <span style="font-size:clamp(17px,1.8vw,23px);font-weight:600;letter-spacing:-.02em;color:#FFFFFF">{{ s.v }}</span>
               <span style="font-size:13px;font-weight:400;line-height:1.6;color:rgba(255,255,255,.48)">{{ s.sub }}</span>
@@ -376,9 +396,9 @@
         <p data-i18n="vf_b" style="margin:22px 0 0;font-size:clamp(16px,1.9vw,26px);font-weight:400;line-height:1.55;color:rgba(255,255,255,.74);max-width:840px;text-wrap:pretty">Nine different AI systems independently reviewed zero incremental power (ΔP = 0) and the cleaning-free circulation by pure engineering simulation. Every transcript is published as it is — questions included.</p>
         <p data-i18n="vf_b2" style="margin:18px 0 0;font-size:15px;font-weight:400;line-height:1.78;color:rgba(255,255,255,.5);max-width:780px;text-wrap:pretty">National certification is in preparation. No category yet exists for a table that grows food while replacing household appliances, so published AI engineering verification is the smallest evidence LJR can offer. A single AI simulation can hallucinate, so the same questionnaire was put to nine of them, and what follows is the predictive verification they produced. Until a category exists for a table that grows food and cleans air at once, open engineering review is the most honest evidence we can offer.</p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(38px,5.5vh,64px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:#07100D;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(38px,5.5vh,64px)">
           <sc-for list="{{ ais }}" as="a" hint-placeholder-count="9">
-            <div style="background:#07100D;padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px">
+            <div style="background:#07100D;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:14px">
               <div style="display:flex;align-items:baseline;gap:11px">
                 <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.2em;color:rgba(87,195,154,.7)">{{ a.i }}</span>
                 <span style="font-size:18px;font-weight:600;color:#FFFFFF">{{ a.n }}</span>
@@ -408,9 +428,9 @@
         <div style="padding:0 clamp(18px,2.6vw,34px) clamp(26px,3.4vw,40px)">
           <p data-i18n="sr_b" style="margin:0;font-size:clamp(14.5px,1.6vw,18px);font-weight:400;line-height:1.75;color:rgba(255,255,255,.66);max-width:820px;text-wrap:pretty">Each of the nine systems was given the same questionnaire — film dimensions, room conditions, the seven filtration stages — and asked what share of a humidifier, an air purifier and a deodoriser the water film replaces. Ranges were converted to midpoints. Nothing was discarded.</p>
 
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.4vh,52px)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:#0A1613;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.4vh,52px)">
             <sc-for list="{{ srAvg }}" as="s" hint-placeholder-count="3">
-              <div style="background:#0A1613;padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:8px">
+              <div style="background:#0A1613;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:8px">
                 <span style="font-size:12.5px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,.52)">{{ s.l }}</span>
                 <span style="font-size:clamp(28px,3.4vw,46px);font-weight:800;letter-spacing:-.05em;line-height:1;color:#57C39A">{{ s.v }}</span>
                 <span style="font-size:12px;line-height:1.6;color:rgba(255,255,255,.4)">{{ s.n }}</span>
@@ -469,9 +489,9 @@
             <div style="padding:0 clamp(18px,2.6vw,34px) clamp(26px,3.4vw,40px)">
               <p data-i18n="zc_b" style="margin:0;font-size:clamp(14.5px,1.6vw,18px);font-weight:400;line-height:1.75;color:rgba(255,255,255,.66);max-width:820px;text-wrap:pretty">Still water grows moss; running water does not. The reason an aquarium needs scrubbing is that its water sits still. LJR never lets it settle. The same nine systems were given one questionnaire — 15 LPM flow, the rising vortex, seven filtration stages, 270 heads of lettuce in cultivation — and asked to assess four things: physical discharge, whether water changes become unnecessary, filter performance recovery, and the annual reduction in cleaning.</p>
 
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.4vh,52px)">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:#0A1613;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.4vh,52px)">
                 <sc-for list="{{ zcAvg }}" as="s" hint-placeholder-count="4">
-                  <div style="background:#0A1613;padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:8px">
+                  <div style="background:#0A1613;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:8px">
                     <span style="font-size:12.5px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,.52)">{{ s.l }}</span>
                     <span style="font-size:clamp(26px,3.2vw,42px);font-weight:800;letter-spacing:-.05em;line-height:1;color:#57C39A">{{ s.v }}</span>
                     <span style="font-size:12px;line-height:1.6;color:rgba(255,255,255,.4)">{{ s.n }}</span>
@@ -534,9 +554,9 @@
             <div style="padding:0 clamp(18px,2.6vw,34px) clamp(26px,3.4vw,40px)">
               <p data-i18n="cb_b" style="margin:0;font-size:clamp(14.5px,1.6vw,18px);font-weight:400;line-height:1.75;color:rgba(255,255,255,.66);max-width:820px;text-wrap:pretty">One pine absorbs about 6.6kg of CO₂ a year. Given the same power saving — 5,387.4 kWh — each of the nine systems applied its own grid emission factor and its own assumption about running hours. We publish the whole spread rather than the number that flatters us most.</p>
 
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.4vh,52px)">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:#0A1613;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.4vh,52px)">
                 <sc-for list="{{ cbAvg }}" as="s" hint-placeholder-count="4">
-                  <div style="background:#0A1613;padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:8px">
+                  <div style="background:#0A1613;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(20px,2.4vw,30px);display:flex;flex-direction:column;gap:8px">
                     <span style="font-size:12.5px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,.52)">{{ s.l }}</span>
                     <span style="font-size:clamp(26px,3.2vw,42px);font-weight:800;letter-spacing:-.05em;line-height:1;color:#57C39A">{{ s.v }}</span>
                     <span style="font-size:12px;line-height:1.6;color:rgba(255,255,255,.4)">{{ s.n }}</span>
@@ -704,9 +724,9 @@
             </div>
             <span data-i18n="db_n" style="font-size:12.5px;color:rgba(255,255,255,.42)">Sample values · Google Nest Hub linked</span>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden;margin-top:clamp(20px,2.6vh,32px)">
-            <sc-for list="{{ dash }}" as="d" hint-placeholder-count="6">
-              <div style="background:#0A1613;padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:7px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:#0A1613;border:1px solid rgba(255,255,255,.13);border-radius:14px;overflow:hidden;margin-top:clamp(20px,2.6vh,32px)">
+            <sc-for list="{{ dash }}" as="d" hint-placeholder-count="9">
+              <div style="background:#0A1613;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(18px,2vw,26px);display:flex;flex-direction:column;gap:7px">
                 <span style="font-size:12px;font-weight:500;letter-spacing:.08em;color:rgba(255,255,255,.5)">{{ d.l }}</span>
                 <span style="font-size:clamp(23px,2.6vw,36px);font-weight:700;letter-spacing:-.045em;line-height:1;color:#57C39A">{{ d.v }}</span>
                 <span style="font-size:12px;color:rgba(255,255,255,.4)">{{ d.u }}</span>
@@ -715,11 +735,15 @@
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(28px,4vh,48px)">
+        <p data-i18n="fn_note" style="margin:clamp(22px,3vh,34px) 0 0;font-size:13.5px;line-height:1.75;color:rgba(31,34,39,.6)">“Standard” functions are fitted to the product as shipped; “Option” functions are optional.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:#FFFFFF;border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(16px,2.2vh,26px)">
           <sc-for list="{{ fn20 }}" as="f" hint-placeholder-count="20">
-            <button onClick="{{ f.open }}" style="font-family:inherit;text-align:left;background:#FFFFFF;border:0;padding:clamp(18px,2.1vw,26px);display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;transition:background .25s ease" style-hover="background:#FBFDFC">
+            <button onClick="{{ f.open }}" style="font-family:inherit;text-align:left;background:#FFFFFF;box-shadow:1px 0 0 rgba(31,34,39,.12),0 1px 0 rgba(31,34,39,.12);border:0;padding:clamp(18px,2.1vw,26px);display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;transition:background .25s ease" style-hover="background:#FBFDFC">
               <span style="display:flex;flex-direction:column;gap:7px">
-                <span style="font-family:'Cormorant Garamond',serif;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:#C19702">{{ f.c }}</span>
+                <span style="display:flex;align-items:center;gap:9px">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:#C19702">{{ f.c }}</span>
+                  <span style="font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:999px;background:{{ f.tagBg }};color:{{ f.tagFg }}">{{ f.tag }}</span>
+                </span>
                 <span style="font-size:15px;font-weight:600;letter-spacing:-.018em;line-height:1.4;color:#1F2227">{{ f.t }}</span>
               </span>
               <span style="flex:none;font-size:13px;color:rgba(193,151,2,.85)">▶</span>
@@ -758,9 +782,9 @@
         </div>
 
         <h2 data-i18n="sc_t" style="margin:clamp(50px,7.5vh,86px) 0 0;font-size:clamp(24px,3.4vw,50px);font-weight:700;letter-spacing:-.035em;line-height:1.1;max-width:22ch;text-wrap:balance">One table changes a room. A million change a grid.</h2>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(20px,3vh,34px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:#FBFDFC;border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(20px,3vh,34px)">
           <sc-for list="{{ scale }}" as="s" hint-placeholder-count="5">
-            <div style="background:#FBFDFC;padding:clamp(20px,2.2vw,30px);display:flex;flex-direction:column;gap:7px">
+            <div style="background:#FBFDFC;box-shadow:1px 0 0 rgba(31,34,39,.12),0 1px 0 rgba(31,34,39,.12);padding:clamp(20px,2.2vw,30px);display:flex;flex-direction:column;gap:7px">
               <span style="font-size:12.5px;font-weight:500;letter-spacing:.06em;color:rgba(31,34,39,.55)">{{ s.u }}</span>
               <span style="font-size:clamp(26px,3vw,42px);font-weight:700;letter-spacing:-.045em;line-height:1;color:#1F2227">{{ s.v }}</span>
               <span style="font-size:12.5px;font-weight:400;line-height:1.6;color:rgba(31,34,39,.55)">{{ s.n }}</span>
@@ -784,9 +808,9 @@
 
         <span data-i18n="k_media" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">Media</span>
         <h1 data-i18n="pz_t" style="margin:20px 0 0;font-size:clamp(30px,4.8vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.04;text-wrap:balance">In the press.</h1>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(38px,5.5vh,64px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:#FFFFFF;border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(38px,5.5vh,64px)">
           <sc-for list="{{ press }}" as="p" hint-placeholder-count="14">
-            <a href="{{ p.u }}" target="_blank" rel="noopener" style="background:#FFFFFF;padding:clamp(20px,2.2vw,30px);display:flex;align-items:center;justify-content:space-between;gap:12px;color:inherit;transition:background .3s ease" style-hover="background:#F7FBFA">
+            <a href="{{ p.u }}" target="_blank" rel="noopener" style="background:#FFFFFF;box-shadow:1px 0 0 rgba(31,34,39,.12),0 1px 0 rgba(31,34,39,.12);padding:clamp(20px,2.2vw,30px);display:flex;align-items:center;justify-content:space-between;gap:12px;color:inherit;transition:background .3s ease" style-hover="background:#F7FBFA">
               <span style="font-size:15.5px;font-weight:600;letter-spacing:-.015em">{{ p.o }}</span>
               <span style="font-size:14px;color:#C19702">→</span>
             </a>
@@ -801,7 +825,7 @@
       <div style="max-width:1360px;margin:0 auto">
         <span data-i18n="k_dist" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#6E5408">Distribution</span>
         <h1 data-i18n="ds_t" style="margin:20px 0 0;font-size:clamp(30px,4.8vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.04;text-wrap:balance">Patented in 153 countries. Open in 22.</h1>
-        <p data-i18n="ds_b" style="margin:22px 0 0;font-size:clamp(15px,1.6vw,20px);line-height:1.72;color:rgba(31,34,39,.7);max-width:700px;text-wrap:pretty">National distribution and regional dealerships are open. Exclusive territory, full technical training, and four years of operational field data shared with every partner.</p>
+        <p data-i18n="ds_b" style="margin:22px 0 0;font-size:clamp(15px,1.6vw,20px);line-height:1.72;color:rgba(31,34,39,.7);max-width:700px;text-wrap:pretty">National distribution and regional dealerships are open. Exclusive territory, full technical training, and our own operating records shared with every partner.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(13px,1.5vw,22px);margin-top:clamp(38px,5.5vh,64px)">
           <sc-for list="{{ dTiles }}" as="t" hint-placeholder-count="4">
             <button onClick="{{ t.click }}" data-rv="1" style="font-family:inherit;text-align:left;background:#FBFDFC;border:1px solid rgba(31,34,39,.14);border-radius:18px;padding:clamp(22px,2.6vw,34px);display:flex;flex-direction:column;gap:11px;cursor:pointer;transition:all .3s ease" style-hover="border-color:#C19702;transform:translateY(-3px)">
@@ -813,13 +837,50 @@
           </sc-for>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.5vh,52px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:#FFFFFF;border:1px solid rgba(31,34,39,.12);border-radius:16px;overflow:hidden;margin-top:clamp(30px,4.5vh,52px)">
           <sc-for list="{{ distrib }}" as="d" hint-placeholder-count="22">
-            <div style="background:#FFFFFF;padding:clamp(16px,1.8vw,24px);display:flex;flex-direction:column;gap:5px">
+            <div style="background:#FFFFFF;box-shadow:1px 0 0 rgba(31,34,39,.12),0 1px 0 rgba(31,34,39,.12);padding:clamp(16px,1.8vw,24px);display:flex;flex-direction:column;gap:5px">
               <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.2em;color:#C19702">{{ d.c }}</span>
               <span style="font-size:14.5px;font-weight:500;letter-spacing:-.01em">{{ d.n }}</span>
             </div>
           </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isReg }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#07100D;color:#FFFFFF;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:1360px;margin:0 auto">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px">
+          <span data-i18n="k_reg" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:rgba(87,195,154,.85)">Regulation</span>
+          <button onClick="{{ goTerms }}" title="{{ backTitle }}" style="flex:none;width:38px;height:38px;font-family:inherit;font-size:18px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:transparent;color:#FFFFFF;cursor:pointer;transition:all .3s ease" style-hover="border-color:rgba(87,195,154,.6)">✕</button>
+        </div>
+        <h1 data-i18n="rg_t" style="margin:20px 0 0;font-size:clamp(30px,4.8vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.04;color:#FFFFFF;text-wrap:balance">Twenty-three countries already require it.</h1>
+        <p data-i18n="rg_b" style="margin:22px 0 0;font-size:clamp(15px,1.6vw,20px);line-height:1.72;color:rgba(255,255,255,.66);max-width:760px;text-wrap:pretty">Public bodies and large corporations in these markets are legally obliged to reduce and disclose emissions. LJR is not asking them to choose an environmental product — it gives them a quantified figure for an obligation they already carry. Each card sets out the statute, the duty it imposes, and how our published data answers it.</p>
+
+        <sc-for list="{{ regGroups }}" as="g" hint-placeholder-count="6">
+          <div style="margin-top:clamp(44px,6vh,76px)">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:12.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(87,195,154,.8);margin-bottom:16px">{{ g.t }}</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:clamp(12px,1.4vw,20px)">
+              <sc-for list="{{ g.items }}" as="c" hint-placeholder-count="4">
+                <button onClick="{{ c.open }}" data-rv="1" style="font-family:inherit;text-align:left;background:#0A1613;border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:clamp(20px,2.3vw,30px);display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:all .3s ease" style-hover="border-color:rgba(87,195,154,.55);transform:translateY(-3px)">
+                  <span style="font-size:26px;line-height:1">{{ c.f }}</span>
+                  <span style="font-size:16px;font-weight:700;letter-spacing:-.02em;color:#FFFFFF">{{ c.n }}</span>
+                  <span style="font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.55)">{{ c.l }}</span>
+                  <span data-i18n="rg_open" style="margin-top:2px;font-size:12.5px;font-weight:600;color:rgba(87,195,154,.9)">Open →</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+
+        <div style="margin-top:clamp(52px,7vh,88px);padding-top:clamp(32px,4.5vh,52px);border-top:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;gap:16px">
+          <p data-i18n="rg_note" style="margin:0;font-size:13px;line-height:1.85;color:rgba(255,255,255,.5);max-width:860px;text-wrap:pretty">Statutes and article numbers are quoted as published by each government. Our figures are the engineering estimates set out on this site, cross-checked by nine AI systems, not certified test reports. Partners are asked to confirm the current text of the law in their own territory before submitting to a tender.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <a onClick="{{ goDist }}" data-i18n="rg_cta" style="padding:15px 30px;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">Become a partner →</a>
+            <a onClick="{{ goProof }}" data-i18n="lnk_proof" style="padding:15px 30px;border-radius:999px;border:1px solid rgba(255,255,255,.24);color:#FFFFFF;font-size:15px;font-weight:600;cursor:pointer">Nine AI systems →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -878,6 +939,18 @@
           <p style="margin:0;font-size:clamp(14.5px,1.5vw,17px);line-height:1.85;color:rgba(31,34,39,.72);text-wrap:pretty">{{ introA }}</p>
         </sc-if>
 
+        <sc-if value="{{ hasCondsA }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(12px,1.4vw,20px);margin:clamp(8px,1.2vh,16px) 0">
+            <sc-for list="{{ condsA }}" as="c" hint-placeholder-count="9">
+              <div style="background:#FFFFFF;border-radius:16px;padding:clamp(20px,2.3vw,30px);display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 22px rgba(31,34,39,.05)">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.22em;color:#C19702">{{ c.n }}</span>
+                <span style="font-size:16.5px;font-weight:700;letter-spacing:-.024em;line-height:1.3;color:#1F2227;text-wrap:balance">{{ c.h }}</span>
+                <p style="margin:0;font-size:13.5px;line-height:1.82;color:rgba(31,34,39,.66);text-wrap:pretty">{{ c.b }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
         <sc-if value="{{ hasRowsA }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;flex-direction:column;gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:12px;overflow:hidden">
             <sc-for list="{{ rowsA }}" as="r" hint-placeholder-count="6">
@@ -886,6 +959,31 @@
                 <span style="font-size:14.5px;font-weight:600;letter-spacing:-.015em;text-align:right;line-height:1.55">{{ r.v }}</span>
               </div>
             </sc-for>
+          </div>
+        </sc-if>
+
+        <button onClick="{{ goReg }}" style="width:100%;font-family:inherit;text-align:left;margin-top:clamp(8px,1.2vh,16px);background:#07100D;border:0;border-radius:18px;padding:clamp(24px,2.9vw,40px);display:flex;flex-direction:column;gap:12px;cursor:pointer;transition:transform .3s ease" style-hover="transform:translateY(-3px)">
+          <span data-i18n="k_reg" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:rgba(87,195,154,.85)">Regulation</span>
+          <span data-i18n="rg_t" style="font-size:clamp(20px,2.4vw,32px);font-weight:700;letter-spacing:-.034em;line-height:1.14;color:#FFFFFF;text-wrap:balance">Twenty-three countries already require it.</span>
+          <span data-i18n="tm_reg" style="font-size:14px;line-height:1.75;color:rgba(255,255,255,.62);max-width:70ch;text-wrap:pretty">Before you weigh the terms, look at the demand. Public bodies and large corporations in these markets are legally obliged to reduce and disclose emissions — and LJR hands them the figure. The statute for each country, and how our published data answers it.</span>
+          <span data-i18n="rg_open" style="margin-top:4px;font-size:13.5px;font-weight:600;color:rgba(87,195,154,.9)">Open →</span>
+        </button>
+
+        <sc-if value="{{ hasStepsA }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:clamp(12px,1.6vh,22px)">
+            <div data-i18n="tm_steps" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#6E5408;margin-bottom:14px">How a territory opens</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:#FFFFFF;border:1px solid rgba(31,34,39,.12);border-radius:14px;overflow:hidden">
+              <sc-for list="{{ stepsA }}" as="t" hint-placeholder-count="4">
+                <div style="background:#FFFFFF;box-shadow:1px 0 0 rgba(31,34,39,.12),0 1px 0 rgba(31,34,39,.12);padding:clamp(18px,2.1vw,26px);display:flex;flex-direction:column;gap:8px">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.22em;color:#C19702">{{ t.n }}</span>
+                  <span style="font-size:15px;font-weight:700;letter-spacing:-.02em;color:#1F2227">{{ t.h }}</span>
+                  <span style="font-size:12.5px;line-height:1.7;color:rgba(31,34,39,.6)">{{ t.b }}</span>
+                  <sc-if value="{{ t.mail }}" hint-placeholder-val="{{ false }}">
+                    <a href="mailto:ljrtable@gmail.com?subject=%5BLJR%5D%20Partner%20application" data-i18n="tm_apply" style="margin-top:2px;font-size:12.5px;font-weight:700;color:#6E5408">Apply now →</a>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
           </div>
         </sc-if>
 
@@ -1154,7 +1252,10 @@
       <div onClick="{{ stop }}" style="width:100%;max-width:600px;max-height:88vh;overflow-y:auto;background:#FFFFFF;border-radius:20px;padding:clamp(24px,3.2vw,44px);display:flex;flex-direction:column;gap:20px;box-shadow:0 30px 80px rgba(5,11,9,.42)">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
           <div style="display:flex;flex-direction:column;gap:10px">
-            <span style="font-family:'Cormorant Garamond',serif;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#C19702">{{ fnC }}</span>
+            <span style="display:flex;align-items:center;gap:10px">
+              <span style="font-family:'Cormorant Garamond',serif;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:#C19702">{{ fnC }}</span>
+              <span style="font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:999px;background:rgba(31,34,39,.07);color:rgba(31,34,39,.62)">{{ fnTag }}</span>
+            </span>
             <h3 style="margin:0;font-size:clamp(21px,2.5vw,32px);font-weight:700;letter-spacing:-.034em;line-height:1.16;text-wrap:balance">{{ fnT }}</h3>
           </div>
           <button onClick="{{ closeFn }}" style="flex:none;width:34px;height:34px;font-family:inherit;font-size:17px;border:0;border-radius:999px;background:#EDF6F5;color:#1F2227;cursor:pointer">✕</button>
@@ -1164,6 +1265,40 @@
           <button onClick="{{ fnPrev }}" data-i18n="fn_prev" style="font-family:inherit;padding:12px 22px;border:1px solid rgba(31,34,39,.2);border-radius:999px;background:transparent;color:#1F2227;font-size:13.5px;font-weight:600;cursor:pointer">← Previous</button>
           <button onClick="{{ fnNext }}" data-i18n="fn_next" style="font-family:inherit;padding:12px 22px;border:1px solid rgba(31,34,39,.2);border-radius:999px;background:transparent;color:#1F2227;font-size:13.5px;font-weight:600;cursor:pointer">Next →</button>
           <button onClick="{{ closeFn }}" data-i18n="df_close" style="font-family:inherit;padding:12px 22px;border:0;border-radius:999px;background:#1F2227;color:#FFFFFF;font-size:13.5px;font-weight:600;cursor:pointer">Close</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ regOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeReg }}" style="position:fixed;inset:0;z-index:210;background:rgba(5,11,9,.68);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);display:flex;align-items:center;justify-content:center;padding:clamp(12px,3.5vw,40px);animation:ljrFade .26s ease">
+      <div onClick="{{ stop }}" style="width:100%;max-width:700px;max-height:90vh;overflow-y:auto;background:#FFFFFF;border-radius:20px;padding:clamp(22px,3.2vw,44px);display:flex;flex-direction:column;gap:22px;box-shadow:0 30px 80px rgba(5,11,9,.42)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font-size:32px;line-height:1">{{ regF }}</span>
+            <h3 style="margin:0;font-size:clamp(22px,2.6vw,34px);font-weight:700;letter-spacing:-.034em;line-height:1.12">{{ regN }}</h3>
+            <span style="font-size:13.5px;font-weight:600;line-height:1.5;color:#6E5408">{{ regL }}</span>
+          </div>
+          <button onClick="{{ closeReg }}" style="flex:none;width:34px;height:34px;font-family:inherit;font-size:17px;border:0;border-radius:999px;background:#EDF6F5;color:#1F2227;cursor:pointer">✕</button>
+        </div>
+
+        <p style="margin:0;padding-left:16px;border-left:2px solid rgba(193,151,2,.5);font-size:14px;line-height:1.8;color:rgba(31,34,39,.6);text-wrap:pretty">{{ regM }}</p>
+
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <span data-i18n="rg_duty" style="font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(31,34,39,.45)">The legal duty</span>
+          <p style="margin:0;font-size:14.5px;line-height:1.85;color:rgba(31,34,39,.78);text-wrap:pretty">{{ regD }}</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:9px;padding:clamp(18px,2.2vw,26px);border-radius:14px;background:#F3F8F7">
+          <span data-i18n="rg_ans" style="font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1F7A5A">How LJR answers it</span>
+          <p style="margin:0;font-size:14.5px;line-height:1.85;color:rgba(31,34,39,.8);text-wrap:pretty">{{ regA }}</p>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <sc-if value="{{ regHasUrl }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ regU }}" target="_blank" rel="noopener" data-i18n="rg_src" style="padding:14px 28px;border-radius:999px;background:#1F2227;color:#FFFFFF;font-size:14.5px;font-weight:600">Official text of the law →</a>
+          </sc-if>
+          <button onClick="{{ closeReg }}" data-i18n="df_close" style="font-family:inherit;padding:14px 28px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:14.5px;font-weight:600;cursor:pointer">Close</button>
         </div>
       </div>
     </div>
@@ -1182,9 +1317,9 @@
           <button onClick="{{ closeEcon }}" style="flex:none;width:34px;height:34px;font-family:inherit;font-size:17px;border:0;border-radius:999px;background:#EDF6F5;color:#1F2227;cursor:pointer">✕</button>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:rgba(31,34,39,.12);border:1px solid rgba(31,34,39,.12);border-radius:14px;overflow:hidden">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:#FBFDFC;border:1px solid rgba(31,34,39,.12);border-radius:14px;overflow:hidden">
           <sc-for list="{{ econHero }}" as="s" hint-placeholder-count="3">
-            <div style="background:#FBFDFC;padding:clamp(18px,2.2vw,26px);display:flex;flex-direction:column;gap:7px">
+            <div style="background:#FBFDFC;box-shadow:1px 0 0 rgba(31,34,39,.12),0 1px 0 rgba(31,34,39,.12);padding:clamp(18px,2.2vw,26px);display:flex;flex-direction:column;gap:7px">
               <span style="font-size:12px;font-weight:500;color:rgba(31,34,39,.52)">{{ s.l }}</span>
               <span style="font-size:clamp(19px,2.3vw,29px);font-weight:800;letter-spacing:-.045em;line-height:1;color:#1F2227">{{ s.v }}</span>
               <span style="font-size:11.5px;line-height:1.55;color:rgba(31,34,39,.45)">{{ s.n }}</span>
@@ -1273,9 +1408,9 @@
           <p data-i18n="or_b" style="margin:0;font-size:clamp(15px,1.6vw,20px);line-height:1.7;color:rgba(255,255,255,.62);max-width:620px;text-wrap:pretty">Every table is built to the room it will live in. Tell us the space, and we will tell you what is possible.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(38px,5.5vh,64px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:#07100D;border:1px solid rgba(255,255,255,.13);border-radius:16px;overflow:hidden;margin-top:clamp(38px,5.5vh,64px)">
           <sc-for list="{{ prices }}" as="p" hint-placeholder-count="6">
-            <a onClick="{{ p.click }}" style="background:#07100D;padding:clamp(20px,2.4vw,32px);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .35s ease" style-hover="background:#0D1A16">
+            <a onClick="{{ p.click }}" style="background:#07100D;box-shadow:1px 0 0 rgba(255,255,255,.13),0 1px 0 rgba(255,255,255,.13);padding:clamp(20px,2.4vw,32px);display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background .35s ease" style-hover="background:#0D1A16">
               <span style="font-size:14px;font-weight:500;color:rgba(255,255,255,.9)">{{ p.n }}</span>
               <span style="font-size:clamp(19px,2vw,26px);font-weight:700;letter-spacing:-.035em;color:#57C39A">{{ p.v }}</span>
               <span style="font-size:12.5px;line-height:1.6;color:rgba(255,255,255,.45)">{{ p.s }}</span>
@@ -1315,16 +1450,16 @@ const DICT = {
   scroll: "아래로",
   k_explore: "더 보기", ex_t: "모든 것은 한 번의 클릭 안에.", more_ko: "자세히 보기 →",
   dg_1k: "원천기술", dg_1t: "실질적인 무전력",
-  dg_1b: "관상어에게 이미 필요한 20W를 4면 수막의 낙하로 재배치합니다. 그 물이 공기를 씻고, 가습하고, 냄새를 잡습니다.",
+  dg_1b: "관상어 생존에 필요한 여과기(여과 모터) 20W를 4면 수막의 낙하로 재배치합니다. 그 물이 공기를 씻고, 가습하고, 냄새를 잡습니다.",
   dg_1n: "증분 전력 소비", dg_more: "원천기술 자세히 보기 →",
   dg_2k: "원천기술", dg_2t: "실질적인 무청소",
-  dg_2b: "가라앉은 배설물은 물길이 외부 수조로 실어 냅니다. 질소 성분은 채소와 생화의 뿌리가 흡수해 정화하고, 7단계 여과가 물을 정화해 되돌립니다.",
+  dg_2b: "이중 수족관 구조가 배설물과 찌꺼기를 자동 배출하고, 7단계 여과와 식물 뿌리가 물을 정화합니다. 사람은 기화된 만큼의 물만 보충하면 됩니다.",
   dg_2n: "물갈이 · 대청소 · 사람의 손",
   sm_basis: "4인용 테이블 기준", sm_basis2: "4~5인용 식탁 기준",
   db_more: "기능 20가지 전체 보기 →",
   dg_3t: "여섯 개의 식탁, 하나의 원리.", dg_3more: "제품·규격 전체 보기 →",
-  dg_4t: "9대 AI가 같은 결론에 도달하다.",
-  dg_4b: "증분 전력 0(ΔP = 0)과 무청소 순환 구조를 독립적으로 공학 검토했습니다. 답만이 아니라 질문지까지 대화 원문 전문을 공개합니다.",
+  dg_4t: "9대 글로벌 AI 모델을 통한 공학적 교차 검증 완료.",
+  dg_4b: "증분 전력 제로(ΔP = 0)와 무청소 순환 구조의 실효성을 독립적으로 공학 검토 및 시뮬레이션했습니다. 신뢰성을 위해 AI와의 대화 및 검토 원문 전문을 투명하게 공개합니다.",
   dg_4more: "검증 원문 읽기 →",
   k_message: "인사말", gr_t: "대표자 인사말", gr_ceo: "대표이사 박 수 형",
   ai_sample: "ai 영상 샘플", real_l: "실물 영상",
@@ -1378,11 +1513,20 @@ const DICT = {
   fn_b: "여섯 대 모두 기능 검증을 목적으로 제작한 실물입니다. 디자인보다 원리의 완성을 앞세웠기에 마감은 조잡하지만, 기능은 완성되었습니다.",
   fn_b2: "이제 AI 설계의 도움으로 세련되고 단순한 형태, 그리고 공간이 요구하는 어떤 구조든 제작할 수 있습니다.",
   k_features: "제품효과", fe_t: "하나의 테이블, 스무 가지 기능.",
+  wd_k: "웰니스 대시보드", wd_t: "건강을, 숫자로.", wd_n: "예시 값 · 국가 인증 의료기기가 아닌 웰니스 참고 지표입니다.",
   db_k: "실시간 대시보드", db_t: "공간을, 숫자로.", db_n: "예시 값 · 구글 넥스트 허브 연동",
   sc_t: "한 대는 방을 바꾸고, 백만 대는 전력망을 바꿉니다.",
   k_media: "미디어", pz_t: "언론 보도.",
   k_dist: "총판·대리점", ds_t: "153개국 특허, 22개국 오픈.",
+  k_reg: "국가별 법령", rg_t: "이미 23개국이 요구하고 있습니다.",
+  rg_b: "이 시장의 공공기관과 대기업은 법적으로 배출을 감축하고 공시할 의무를 지고 있습니다. LJR은 친환경 제품을 골라 달라고 요청하지 않습니다. 이미 지고 있는 의무에 대해 정량화된 수치를 제공합니다. 각 카드는 해당 법령과 그 의무, 그리고 우리의 공개 데이터가 그 의무에 어떻게 대응하는지를 담고 있습니다.",
+  rg_open: "열어보기 →", rg_duty: "법적 의무 조항", rg_ans: "LJR의 대응", rg_src: "공식 법령 원문 →",
+  rg_cta: "파트너 되기 →", tm_steps: "권역 개설 절차", tm_apply: "지금 신청하기 →",
+  tm_reg: "조건을 따져보기 전에, 수요를 먼저 보십시오. 이 시장의 공공기관과 대기업은 법적으로 배출을 감축하고 공시할 의무를 지고 있으며, LJR은 그들에게 필요한 수치를 건넵니다. 국가별 법령과, 우리의 공개 데이터가 그 의무에 어떻게 대응하는지를 담았습니다.",
+  rg_tile: "가장 강력한 논거는 이 테이블이 환경에 좋다는 것이 아닙니다. 귀사의 권역에 있는 공공기관과 대기업이 이미 법적으로 감축과 공시의 의무를 지고 있다는 것, 그리고 우리가 그들에게 필요한 수치를 건넨다는 것입니다.",
+  rg_note: "법령명과 조항 번호는 각국 정부가 공표한 원문을 인용했습니다. 우리 수치는 이 사이트에 명시된 공학적 산출값이며 9개 AI가 교차 검토한 것으로, 국가 공인 시험성적서가 아닙니다. 파트너께서는 입찰 제출 전 해당 권역의 현행 법령 원문을 직접 확인해 주시기 바랍니다.",
   fn_prev: "← 이전", fn_next: "다음 →",
+  fn_note: "‘기본’은 제품에 부착되어 출고되는 기능이며, ‘선택’은 선택 사양입니다.",
   en_k: "경제성", en_basis: "산출 근거", en_cta: "이 모델 문의하기 →",
   ex_k: "경제성", ex_t: "그 기능들이 1년에 돌려주는 것.",
   ex_b: "두 가지를 따로, 그리고 보수적으로 계산했습니다. 더 이상 쓰지 않게 된 전기, 그리고 직접 길러 얻는 수확. LJR 자체 소비 전력 — 모터 24시간, 재배 LED 16시간 — 은 전액 차감했습니다.",
@@ -1391,7 +1535,7 @@ const DICT = {
   df_co: "회사명", df_country: "국가 / 권역", df_contact: "연락처 (이메일 또는 전화)", df_msg: "주문 또는 문의 내용",
   df_close: "닫기", df_back: "총판·대리점으로 돌아가기", df_back2: "고객지원으로 돌아가기",
   df_note: "모든 파트너 문서는 최초 상담 이후 발행됩니다. 권역과 물량, 조건은 계약 서명 전에 서면으로 합의합니다.",
-  ds_b: "국가 총판과 지역 대리점을 엽니다. 독점 권역, 기술 교육 일체, 그리고 4년간 축적한 현장 운용 데이터를 모든 파트너와 공유합니다.",
+  ds_b: "국가 총판과 지역 대리점을 엽니다. 독점 권역, 기술 교육 일체, 그리고 본사의 실제 운용 기록을 모든 파트너와 공유합니다.",
   k_support: "고객지원", sp_t: "가장 많이 받는 질문.",
   bd_k: "고객 게시판", bd_t: "무엇이든 물어보십시오. 공개로 답합니다.",
   bd_b: "질문과 의심, 요청을 들어온 그대로 이곳에 올립니다. 감출 것이 없습니다. 어려운 질문이라면 오히려 모두가 읽을 수 있는 자리에서 답하고 싶습니다.",
@@ -1455,7 +1599,7 @@ const HUB = [
   { go: "products", ken: "Products", kko: "제품", ten: "Six tables", tko: "여섯 개의 식탁", den: "Dining, conference, four-seater, two-seater, floor and the bespoke T Table.", dko: "식탁, 회의실, 4인용, 2인용, 좌식, 그리고 비스포크 T 테이블." },
   { go: "features", ken: "Effects", kko: "제품효과", ten: "Twenty functions, one dashboard", tko: "20가지 기능과 대시보드", den: "Air, growing, water, wellness, living and data — with a live indoor environment dashboard.", dko: "공기·재배·물·웰니스·리빙·데이터. 실시간 실내환경 대시보드까지." },
   { go: "press", ken: "Media", kko: "미디어", ten: "In the press", tko: "언론 보도", den: "Fourteen outlets covered the technology.", dko: "14개 매체가 이 기술을 보도했습니다." },
-  { go: "distributor", ken: "Distribution", kko: "총판·대리점", ten: "Patented in 153, open in 22", tko: "153개국 특허, 22개국 오픈", den: "Exclusive territory, technical training, and four years of field data.", dko: "독점 권역, 기술 교육, 4년의 현장 데이터." },
+  { go: "distributor", ken: "Distribution", kko: "총판·대리점", ten: "Patented in 153, open in 22", tko: "153개국 특허, 22개국 오픈", den: "Exclusive territory, technical training, and our operating records.", dko: "독점 권역, 기술 교육, 실제 운용 기록." },
   { go: "support", ken: "Support", kko: "고객지원", ten: "Questions we are asked most", tko: "가장 많이 받는 질문", den: "Cleaning, electricity, harvest, wellness and installation, answered plainly.", dko: "청소·전기·수확·웰니스·설치에 대한 솔직한 답." }
 ];
 
@@ -1471,8 +1615,8 @@ const SLIDES = [
 const SUMMARY = [
   { go: "core", ven: "Zero power", vko: "실질적인 무전력", len: "No additional draw", lko: "추가 소비 전력 없음", nen: "One 20W motor replaces four appliances", nko: "20W 모터 하나가 4가지 가전을 대신" },
   { go: "clean", ven: "Zero cleaning", vko: "실질적인 무청소", len: "No water change", lko: "물갈이·대청소 없음", nen: "A rising vortex and a closed ecosystem do it", nko: "상승 와류와 생태계 순환이 대신" },
-  { go: "features", ven: "≈ ₩179,000", vko: "약 18만 원", len: "Saved each year", lko: "연간 전기 절감", nen: "Four-Seater Table · after its own draw", nko: "4인용 테이블 기준 · 자체 소비 전력 차감 후" },
-  { go: "features", ven: "≈ 1,194 kWh", vko: "약 1,194kWh", len: "Energy saved a year", lko: "연간 절감 전력", nen: "Four-Seater Table · net of its own draw", nko: "4인용 테이블 기준 · 자체 소비 전력 차감 후" },
+  { go: "features", ven: "≈ ₩179,000", vko: "약 18만 원", len: "Saved each year", lko: "연간 전기 절감", nen: "After the table's own draw", nko: "자체 소비 전력 차감 후" },
+  { go: "features", ven: "≈ 1,194 kWh", vko: "약 1,194kWh", len: "Energy saved a year", lko: "연간 절감 전력", nen: "Net of the table's own draw", nko: "자체 소비 전력 차감 후" },
   { go: "features", ven: "≈ 2–3 py", vko: "약 2~3평", len: "Garden replaced", lko: "텃밭 대체 면적", nen: "Open-field double cropping · approx. 270 plants", nko: "노지 2모작 기준 · 약 270포기" },
   { go: "products", ven: "≈ 270", vko: "약 270포기", len: "Plants a year", lko: "연간 채소 수확", nen: "About 30 plants × 9 cycles", nko: "약 30포기 × 연 9회전" },
   { go: "features", ven: "≈ ₩584,000", vko: "약 58만 원", len: "Net return a year", lko: "연간 총 순이익", nen: "Electricity saved plus produce grown", nko: "전기 절감 + 채소 생산 가치" }
@@ -1495,6 +1639,14 @@ const DASH = [
   { len: "VOCs", lko: "휘발성유기화합물", v: "0.21", u: "mg/m³" },
   { len: "Incremental power", lko: "증분 전력", v: "0", u: "W" },
   { len: "Plants growing", lko: "재배 중", v: "130", uen: "plants", uko: "포기" }
+];
+
+const BODY = [
+  { len: "Pulse", lko: "맥박", v: "72", uen: "bpm · fingertip sensor", uko: "bpm · 손가락 센서" },
+  { len: "Blood oxygen", lko: "혈중 산소", v: "98", uen: "%SpO₂ · fingertip sensor", uko: "%SpO₂ · 손가락 센서" },
+  { len: "Vitality scan", lko: "생기 스캔", v: "81", uen: "points · six zones", uko: "점 · 6부위 종합" },
+  { len: "Sleep · fatigue", lko: "수면 · 피로", v: "74", uen: "recovery · chronic fatigue", uko: "회복력 · 만성피로" },
+  { len: "Skin · appearance", lko: "피부 · 외관", v: "86", uen: "complexion · elasticity", uko: "혈색 · 탄력" }
 ];
 
 const CREDENTIALS = [];
@@ -1637,16 +1789,16 @@ const FN20 = [
   { cen: "Data", cko: "데이터", ten: "Energy monitoring", tko: "에너지 사용량 모니터링 기능",
     den: "Consumption is monitored as a whole — the lighting, climate and appliances of the linked smart home together with the table's own draw. Cumulative use is logged and analysed over time, showing the household's power efficiency and its economic effect at a glance.",
     dko: "테이블과 연동된 스마트홈 전체의 조명·공조·가전과 테이블 자체의 전력 소비량을 통합하여 모니터링합니다. 시간에 따른 누적 에너지 사용량을 기록하고 분석하여, 가정 전체의 전력 효율과 경제적 효과를 직관적으로 보여줍니다." },
-  { cen: "Health", cko: "건강", ten: "Fingertip health check", tko: "손가락 건강 체크 기능",
+  { cen: "Health", cko: "건강", opt: true, ten: "Fingertip health check", tko: "손가락 건강 체크 기능",
     den: "A high-precision optical sensor in the tabletop reads pulse and blood-oxygen saturation accurately in seconds. No wearable to keep charged, no appointment to book — rest a finger on the table and your daily condition is measured where you sit.",
     dko: "상판에 내장된 고정밀 광학 센서가 단 몇 초 만에 맥박과 혈중 산소포화도를 정확히 측정합니다. 따로 충전해야 하는 웨어러블 기기를 착용하거나 병원을 예약할 필요 없이, 테이블에 앉아 손가락을 가볍게 올려두는 것만으로 일상의 건강을 실시간으로 관리할 수 있습니다." },
-  { cen: "Health", cko: "건강", ten: "Six-zone AI vitality scan", tko: "6부위 AI 생기 스캔 기능",
-    den: "A contactless scan through the display camera: face, tongue, eyes, skin and both sides of the hand — six zones in a single two-minute-forty pass. An rPPG algorithm and AI analyse the skin's vitality waveform to read both your present condition and the longer trend of your health.",
-    dko: "테이블 디스플레이의 카메라를 통해 얼굴, 혀, 눈, 피부, 손(손등·손바닥) 등 6개 부위를 단 한 번 스캔(2분 40초)하는 비접촉식 기능입니다. 첨단 rPPG 알고리즘과 AI 기술을 통해 피부 생기 파동을 정밀 분석하며, 사용자의 현재 컨디션은 물론 만성적인 건강 흐름까지 종합적으로 진단해 줍니다." },
+  { cen: "Health", cko: "건강", opt: true, ten: "Six-zone AI vitality scan", tko: "6부위 AI 생기 스캔 기능",
+    den: "A contactless scan through the display camera: face, tongue, eyes, skin and both sides of the hand — six zones in a single two-minute-forty pass. An rPPG algorithm and AI analyse the skin's vitality waveform to read both your present condition and the longer trend of your health. Capture time by zone: face 60s, tongue 20s, eyes 20s, skin 30s, back of hand 15s, palm 15s.",
+    dko: "테이블 디스플레이의 카메라를 통해 얼굴, 혀, 눈, 피부, 손(손등·손바닥) 등 6개 부위를 단 한 번 스캔(2분 40초)하는 비접촉식 기능입니다. 첨단 rPPG 알고리즘과 AI 기술을 통해 피부 생기 파동을 정밀 분석하며, 사용자의 현재 컨디션은 물론 만성적인 건강 흐름까지 종합적으로 진단해 줍니다. 부위별 촬영 시간은 얼굴 60초, 혀 20초, 눈 20초, 피부 30초, 손등 15초, 손바닥 15초입니다." },
   { cen: "Air", cko: "공기", ten: "Diffuser", tko: "디퓨저 기능",
     den: "Nothing is heated on a plate and nothing is pushed by a fan. Scent is diffused by the fine vibration of the tank motor and the sound waves of the AI speaker resonating through the enclosure — even, quiet, and drawing no additional power.",
     dko: "열을 가해 데우거나 인위적인 팬으로 밀어내지 않고, 수조 모터의 미세한 진동과 AI 스피커의 소리 파동(인클로저 진동)을 활용해 향을 은은하게 확산시킵니다. 소음과 추가 전력 소모 없이 고르고 조용한 발향을 구현합니다." },
-  { cen: "Beauty", cko: "뷰티", ten: "AR AI makeup", tko: "AR AI 메이크업 기능",
+  { cen: "Beauty", cko: "뷰티", opt: true, ten: "AR AI makeup", tko: "AR AI 메이크업 기능",
     den: "Try personal colour on your own face in real time through the display camera: a curated 600-shade palette, extended to 120,000 by hue, saturation and lightness adjustment — a range the industry has been held back from by ghosting. A patented ultra-light algorithm keeps the image locked as you turn your head sharply — no ghosting, no lag, no heat — across lip, cheek, eye and base. Scan the barcodes of the cosmetics you already own into the app and the AI composes the best combinations for your face from the products in your drawer.",
     dko: "테이블 디스플레이의 카메라를 통해 퍼스널 컬러를 얼굴에 실시간으로 입혀보는 AR 메이크업 기능입니다. 600색 큐레이션 팔레트에 색조·채도·명도 미세 조정을 더해 12만 색을 구현합니다. 잔상 때문에 업계가 수백 색에 머물러 있는 영역입니다. 특허 기반의 초경량 알고리즘을 적용하여 고개를 심하게 움직여도 잔상이 남거나 화면이 밀리지 않고, 기기가 뜨거워지는 발열도 없이 립·볼·아이·베이스 메이크업을 가상으로 정밀하게 체험할 수 있습니다. 특히 내가 가진 화장품의 바코드를 스캔해 앱에 등록해 두면, 현재 보유한 제품들 안에서 내 얼굴에 가장 잘 어울리는 최적의 메이크업 조화와 연출법을 AI가 직접 조합하고 제안해 줍니다." }
 ];
@@ -1859,7 +2011,7 @@ const BOARD = [
   { tag: { en: "Answered", ko: "답변완료" },
     t: { en: "Distribution enquiry — Middle East", ko: "총판 문의 — 중동" },
     b: { en: "We distribute premium home appliances in the UAE and Saudi Arabia. Is exclusive territory still available, and what are the minimum commitments?", ko: "아랍에미리트와 사우디아라비아에서 프리미엄 가전을 유통합니다. 독점 권역이 아직 열려 있는지, 최소 조건은 무엇인지 알고 싶습니다." },
-    reply: { en: "Both territories are open. Exclusive rights, full technical training and our four years of field data are included. Please write to ljrtable@gmail.com and we will send the partner pack.", ko: "두 권역 모두 열려 있습니다. 독점 판권, 기술 교육 일체, 4년간의 현장 데이터가 포함됩니다. ljrtable@gmail.com 으로 연락 주시면 파트너 자료를 보내드립니다." },
+    reply: { en: "Both territories are open. Exclusive rights, full technical training and our operating records are included. Please write to ljrtable@gmail.com and we will send the partner pack.", ko: "두 권역 모두 열려 있습니다. 독점 판권, 기술 교육 일체, 본사의 실제 운용 기록이 포함됩니다. ljrtable@gmail.com 으로 연락 주시면 파트너 자료를 보내드립니다." },
     who: { en: "Al-Rashid Trading", ko: "Al-Rashid Trading" }, when: { en: "28 Jun 2026", ko: "2026.06.28" } },
   { tag: { en: "Answered", ko: "답변완료" },
     t: { en: "What happens if we go on holiday for two weeks?", ko: "2주간 여행을 가면 어떻게 되나요?" },
@@ -1868,24 +2020,236 @@ const BOARD = [
     who: { en: "Park, Jeonju", ko: "박OO · 전주" }, when: { en: "19 Jun 2026", ko: "2026.06.19" } }
 ];
 
+const REG = [
+  { r: "kr", f: "🇰🇷", nen: "South Korea", nko: "대한민국",
+    len: "Green Product Purchase Act, Art. 6 (Act No. 17244)", lko: "녹색제품구매법 제6조 (법률 제17244호)",
+    men: "The home market, and the one where carbon obligations on public bodies are already fully enforced.", mko: "본국이며, 공공기관에 대한 탄소 규제가 이미 강제되고 있는 시장입니다.",
+    den: "Under Article 6, every local authority, education office and public institution — 12,390 bodies in all — must purchase green products each year and publish the record. Purchasing performance is disclosed and assessed annually, so procurement officers need products that carry a quantified figure.",
+    dko: "제6조에 의거, 전국의 모든 지자체·교육청·공공기관 12,390개소는 매년 의무적으로 녹색제품을 구매하고 그 실적을 공시해야 합니다. 구매 실적이 매년 공개·평가되므로, 조달 담당자는 정량 지표를 갖춘 제품을 필요로 합니다.",
+    aen: "An annual reduction of about 2.29 tonnes of CO₂ per table — roughly equivalent to 347 pines — is a figure that can be entered directly into a Public Procurement Service listing or a negotiated public contract. For a partner it means competing on a technical score rather than on price alone.",
+    ako: "테이블 한 대당 연간 약 2.29t의 CO₂ 감축(소나무 약 347그루 상당)은 조달청 우수제품 등록과 관공서 수의계약 서류에 그대로 기재할 수 있는 수치입니다. 파트너 입장에서는 가격이 아니라 기술 점수로 경쟁하게 된다는 뜻입니다.", u: "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=276711&chrClsCd=010202&urlMode=lsInfoP&efYd=20251001&ancYnChk=0#0000" },
+
+  { r: "ap", f: "🇯🇵", nen: "Japan", nko: "일본",
+    len: "Green Purchasing Law, Arts. 3 & 7 (Act No. 100)", lko: "그린구입법 제7조·제3조 (법률 제100호)",
+    men: "Asia's largest public procurement market, and the one that binds environmental purchasing most tightly in law.", mko: "국가 차원의 친환경 물품 조달을 법으로 강제하는 아시아 최대의 공공 조달 시장입니다.",
+    den: "Under Article 7(1), all central ministries, independent administrative agencies and local governments must procure products meeting the state's environmental judgement criteria for designated categories. Article 3 further places a duty of effort on businesses themselves to use environmentally sound materials and components.",
+    dko: "제7조 제1항에 의거, 모든 중앙정부 부처·독립행정법인·지자체는 특정 조달품목에 대해 국가가 정한 환경 판단 기준을 만족하는 제품을 의무적으로 조달해야 합니다. 동법 제3조에 따라 사업자 역시 친환경 원료와 부품을 사용하도록 노력할 법적 의무를 집니다.",
+    aen: "Submitting the annual 2.29-tonne reduction data at tender meets the environmental judgement criteria the law sets. Since conventional furniture carries no such figure, the comparison is made on technical score, where the structure is the argument.",
+    ako: "입찰 시 연간 약 2.29t 감축 데이터를 제출하면 그린구입법의 환경 판단 기준을 충족합니다. 기성 가구는 이러한 수치를 갖고 있지 않으므로, 비교는 기술 점수에서 이루어지며 그 지점에서 구조 자체가 논거가 됩니다.", u: "https://laws.e-gov.go.jp/law/412AC1000000100/" },
+
+  { r: "ap", f: "🇸🇬", nen: "Singapore", nko: "싱가포르",
+    len: "Building Control Act · BCA Green Mark", lko: "건축물관리법 · BCA 그린마크 인증",
+    men: "A centre of green finance, where a building's certification grade shapes both its asset value and its borrowing rate.", mko: "친환경 건축인증 등급이 건물의 자산 가치와 대출 금리를 함께 결정하는 녹색 금융의 중심지입니다.",
+    den: "Under the Building Control Act and the Environmental Sustainability Regulations, every new building — and every existing building undergoing addition or alteration above a set scale — must reach at least the minimum BCA Green Mark standard before occupancy is granted.",
+    dko: "건축물관리법 및 환경지속가능성 규정에 의거, 모든 신축 건축물과 일정 규모 이상의 증개축 기존 건축물은 BCA 그린마크 인증의 최소 기준 이상을 획득해야 준공 허가가 납니다.",
+    aen: "Consolidating several separate appliances into one 20W circulation lowers the building's Scope 2 consumption, which raises its Green Mark score. That score feeds directly into sustainability-linked loan pricing, so the table is assessed as financial infrastructure rather than furniture.",
+    ako: "개별 가전 여러 대를 20W 순환 하나로 통합해 빌딩 전체의 Scope 2 소비 전력을 낮추므로 그린마크 점수가 올라갑니다. 이 점수는 지속가능성 연계대출(SLL) 금리 심사에 직접 반영되어, 가구가 아니라 재무 인프라로 평가됩니다.", u: "https://sso.agc.gov.sg/SL/BCA1989-S383-2013?DocDate=20250908&ValidDate=20260401" },
+
+  { r: "ap", f: "🇨🇳", nen: "China", nko: "중국",
+    len: "Ecological and Environmental Code, Book 5", lko: "생태환경법전 제5편 (법률책임)",
+    men: "China has moved from policy guidance to legal enforcement, with total-emission control replacing dual energy management.", mko: "정책 권고에서 법적 강제로 이행했으며, 에너지 소비 이중관리에서 총탄소배출량 규제 체계로 전면 전환되었습니다.",
+    den: "Adopted by the National People\u2019s Congress on 12 March 2026 and in force from 15 August 2026, the Code runs to five books and 1,242 articles and repeals ten earlier environmental statutes. Under the legal liability provisions of Book 5, enterprises and infrastructure that fail to offset their carbon allowance, or emit without a permit, face penalties of five to ten times the market rate together with suspension orders. Compliance is no longer optional for public bodies or corporate headquarters.",
+    dko: "2026년 3월 12일 전국인민대표대회에서 통과되어 2026년 8월 15일부터 시행됩니다. 5편 1,242조로 구성되며 환경보호법 등 기존 10개 법률을 대체합니다. 제5편 법률책임 규정에 의거, 탄소 배출 할당량을 상쇄하지 못하거나 허가 없이 배출하는 기업 및 인프라는 시장 평균가의 5~10배에 달하는 과징금과 강제 생산 정지 명령을 받게 됩니다. 공공기관과 기업 사옥에 컴플라이언스는 더 이상 선택이 아닙니다.",
+    aen: "A zero incremental draw statement (ΔP = 0) and the accompanying reduction data meet the Code's tightened compliance criteria — a straightforward answer for institutions carrying penalty risk.",
+    ako: "증분 전력 제로(ΔP = 0) 명세와 감축 데이터를 제출하면 생태환경법전의 강화된 컴플라이언스 기준을 충족합니다. 과징금 리스크를 안고 있는 기관에게는 명확한 해답이 됩니다.", u: "https://www.mee.gov.cn/ywgz/fgbz/fl/202603/t20260313_1146496.shtml" },
+
+  { r: "ap", f: "🇹🇼", nen: "Taiwan", nko: "대만",
+    len: "Climate Change Response Act, Art. 4 · Carbon Fee", lko: "기후변화대응법 제4조 · 탄소요금 체계",
+    men: "As a core node of the global semiconductor supply chain, Taiwanese firms face Scope 2 disclosure pressure from their multinational customers.", mko: "글로벌 반도체 공급망의 핵심 기지로, 빅테크 고객사들로부터 탄소 정보 공개(Scope 2) 압박을 직접 받는 국가입니다.",
+    den: "Article 4 writes net zero by 2050 into national law, and a three-tier carbon fee is now levied on designated high-emitting companies, internalising the cost of emissions.",
+    dko: "제4조에 '2050년 넷제로 도달'을 국가 감축 목표로 명문화했으며, 고탄소 배출 지정 기업을 대상으로 탄소요금 3대 체계를 시행하여 비용을 내부화하고 있습니다.",
+    aen: "Replacing conference-room furniture reduces measurable annual consumption, and the reduction is evidenced through the Nest Hub and AIoT sensor record. That record supports an approved voluntary reduction plan, which in turn qualifies for preferential carbon-fee rates.",
+    ako: "회의실 가구 교체만으로 연간 전력을 정량 감축하며, 그 실적이 네스트 허브와 AIoT 센서 기록으로 증빙됩니다. 이 기록은 자발적 감축 계획 승인의 근거가 되고, 승인은 다시 탄소요금 우대 요율로 이어집니다.", u: "https://lawplayer.com/act/6437d29ae800e5f0b9305f58/0" },
+
+  { r: "ap", f: "🇦🇺", nen: "Australia", nko: "호주",
+    len: "Climate Change Act 2022 · Safeguard Mechanism", lko: "기후변화법 2022 · 세이프가드 메커니즘",
+    men: "Australia mandates emissions disclosure and low-emission investment for large facilities by federal statute.", mko: "대형 시설의 배출량 공개와 저배출 기술 투자를 연방 법률로 강제하는 국가입니다.",
+    den: "Under the Climate Change Act 2022 and the amended EPBC Act, all major developments and energy projects must disclose greenhouse emissions through approval and operation. Facilities emitting over 100,000 tonnes a year are bound by the Safeguard Mechanism to cut emissions by an average of 4.9% every year.",
+    dko: "기후변화법 2022 및 개정된 환경보호·생물다양성보전법(EPBC)에 의거, 모든 대형 개발 및 에너지 프로젝트는 승인과 운영 과정에서 온실가스 배출량을 의무 공개해야 합니다. 연간 10만 톤 이상 배출 시설은 세이프가드 메커니즘에 묶여 매년 평균 4.9%씩 감축해야 합니다.",
+    aen: "Reduction logged continuously as sensor data is difficult to dispute, and converts directly into a sustainability-linked loan asset for submission to the four major banks.",
+    ako: "센서로 연속 기록된 감축 실적은 이견을 달기 어려운 자료이며, 4대 시중은행에 제출하는 지속가능성 연계대출(SLL) 자산으로 그대로 전환됩니다.", u: "https://www.legislation.gov.au/C2022A00037/2025-02-20/2025-02-20/text/original/epub/OEBPS/document_1/document_1.html#_Toc191547163" },
+
+  { r: "ap", f: "🇮🇳", nen: "India", nko: "인도",
+    len: "National Clean Air Programme (NCAP)", lko: "국가 청정 공기 프로그램 (NCAP)",
+    men: "Behind rapid growth sits severe urban air pollution, and the state has begun compelling reduction city by city.", mko: "빠른 경제 성장 뒤에 심각한 대기오염이 있으며, 국가가 도시 단위로 감축을 강제하기 시작했습니다.",
+    den: "Approved by the Ministry of Environment, Forest and Climate Change under the National Action Plan on Climate Change, the NCAP requires a nationwide air monitoring network and compels prevention, control and abatement of air pollution city by city.",
+    dko: "환경·산림·기후변화부가 기후변화 국가행동계획에 근거해 승인한 NCAP에 의거, 전국 대기 모니터링 네트워크를 구축하고 도시별 대기오염 방지·통제·저감을 전략 법령으로 강제하고 있습니다.",
+    aen: "In high-density metropolitan offices, conventional purification means a recurring filter bill every year. Power-free four-sided film purification and aquaponic oxygen supply meet NCAP air-quality targets continuously, without that consumable cost.",
+    ako: "초밀집 대도시 오피스에서 기존 방식의 정화는 매년 반복되는 필터 교체 비용을 뜻합니다. 무전력 4면 수막 정화와 아쿠아포닉스 산소 공급은 그 소모품 비용 없이 NCAP 대기질 기준에 상시 대응합니다.", u: "https://prana.cpcb.gov.in/" },
+
+  { r: "ap", f: "🇮🇩", nen: "Indonesia", nko: "인도네시아",
+    len: "Ministerial Reg. No. 8 · Building Law PP 16/2021", lko: "환경친화적 건축물 장관령 제8호 · 건축물법 PP 16/2021",
+    men: "Beyond the Jakarta green building bylaw, Indonesia now controls occupancy approval through a national environmental standard.", mko: "자카르타 녹색 빌딩 조례를 넘어, 국가 차원의 친환경 건축 기준으로 준공 허가를 통제하는 국가입니다.",
+    den: "Building permits (IMB) have been wholly replaced by building approvals (PBG). Large offices, hotels and shopping centres must demonstrate energy efficiency, water saving and indoor air quality before approval is granted.",
+    dko: "기존 건축허가(IMB)가 건축승인(PBG)으로 전면 대체되었습니다. 대형 사무실·호텔·쇼핑몰은 에너지 효율성, 물 절약, 실내 대기질 등 지속가능성 요소를 충족해야 건축 승인이 납니다.",
+    aen: "A single closed circulation satisfies all three criteria at once — energy, water and indoor air — which is unusual for one fixture and simplifies the approval submission considerably.",
+    ako: "하나의 밀폐 순환 구조가 에너지·물·실내 대기질 세 기준을 동시에 충족합니다. 단일 설비로는 드문 경우이며, 승인 서류를 크게 단순화합니다.", u: "https://peraturan.bpk.go.id/Details/161846/pp-no-16-tahun-2021" },
+
+  { r: "am", f: "🇺🇸", nen: "United States (California)", nko: "미국 (캘리포니아)",
+    len: "Climate Corporate Data Accountability Act (SB 253)", lko: "기후기업데이터책임법 (SB 253)",
+    men: "State law leads the federal standard here, and this is the world's largest market for mandatory climate disclosure.", mko: "주 정부의 법령이 연방 표준을 이끌며, 기후 공시를 법으로 강제하는 세계 최대의 시장입니다.",
+    den: "Administered by the California Air Resources Board, SB 253 and the Mandatory Reporting Regulation require every company doing business in the state with revenue above one billion dollars to disclose Scope 1 and Scope 2 emissions annually. Scope 2 covers in-building appliance and electricity consumption, and false reporting draws immediate penalties.",
+    dko: "캘리포니아 대기자원위원회(CARB)가 관할하는 SB 253 및 의무보고규정에 의거, 주 내에서 사업하며 연 매출 10억 달러를 초과하는 모든 기업은 Scope 1과 Scope 2 배출량을 매년 의무 공시해야 합니다. Scope 2는 사옥 내 가전 및 전력 소비를 포함하며, 허위 보고 시 즉시 과태료가 부과됩니다.",
+    aen: "Replacing several appliances with one 20W circulation lowers the Scope 2 figure numerically. For a finance or ESG team it is a defensible line item, backed by continuous sensor data rather than an estimate.",
+    ako: "여러 대의 가전을 20W 순환 하나로 대체하여 Scope 2 수치를 정량적으로 낮춥니다. 재무·ESG 팀 입장에서는 추정이 아니라 연속 센서 데이터로 뒷받침되는 근거 있는 항목이 됩니다.", u: "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB253" },
+
+  { r: "am", f: "🇨🇦", nen: "Canada", nko: "캐나다",
+    len: "Greenhouse Gas Pollution Pricing Act, Art. 166 · Part 2", lko: "온실가스오염가격법(GGPPA) 제166조 · 제2부 (OBPS)",
+    men: "Canada controls carbon pricing by federal statute, which gives low-carbon equipment a clearly costed advantage.", mko: "탄소세와 산업별 배출 가격을 연방 법률로 통제하여, 저탄소 기기에 명확한 비용 우위를 부여하는 국가입니다.",
+    den: "Under Article 166(1) and the output-based pricing system of Part 2, all large facilities and industrial infrastructure are charged a set carbon price per tonne once emissions exceed the federal benchmark.",
+    dko: "제166조 제1항 및 제2부 출력기반 가격책정 체계(OBPS)에 의거, 모든 대형 시설 및 산업 인프라는 정부가 정한 기준을 초과하는 탄소 배출에 대해 톤당 정해진 탄소 가격 부담금을 적용받습니다.",
+    aen: "An annual reduction of about 2.29 tonnes per table offsets directly against that benchmark, and gives federal procurement officers a quantified entry rather than a general environmental claim.",
+    ako: "테이블 한 대당 연간 약 2.29t 감축은 그 기준에 대한 직접적인 상쇄분이며, 연방 조달관에게 막연한 친환경 주장이 아닌 정량 지표를 제공합니다.", u: "https://laws-lois.justice.gc.ca/eng/acts/G-11.55/section-166.html" },
+
+  { r: "am", f: "🇧🇷", nen: "Brazil", nko: "브라질",
+    len: "Public Procurement Law 14,133, Arts. 5 & 11", lko: "신공공조달법 제11조·제5조 (Lei 14.133/2021)",
+    men: "Latin America's largest market has made sustainability a legal duty and a scored criterion in every public contract.", mko: "ESG 지속가능성 기준을 법적 의무이자 평가 항목으로 전면 강제화한 남미 최대의 시장입니다.",
+    den: "Under Article 11(IV), all administrative bodies and municipalities must treat sustainable national development as the primary objective in procurement. Article 5 makes environmental sustainability a core principle of every tender and a required parameter of contract performance.",
+    dko: "제11조 제4항에 의거, 모든 행정기관과 지자체는 물품 조달 및 계약 시 '지속 가능한 국가 개발'을 최우선 목표로 삼아야 합니다. 동법 제5조에 따라 환경적 지속가능성이 모든 공공 입찰의 핵심 원칙이자 계약 이행의 필수 파라미터로 작동합니다.",
+    aen: "The published reduction data satisfies both the environmental technical score and the sustainability weighting the law requires.",
+    ako: "공개된 감축 데이터가 신공공조달법이 규정한 환경 기술 점수와 지속가능성 가중치 요건을 함께 충족합니다.", u: "https://www.gov.br/compras/pt-br/nllc/LeideLicitaeseContratos14133traduzidaemingles.pdf" },
+
+  { r: "am", f: "🇲🇽", nen: "Mexico", nko: "멕시코",
+    len: "General Climate Change Law (LGCC) · IEPS carbon tax", lko: "기후변화일반법(LGCC) · 특별소비세법(IEPS) 탄소세",
+    men: "The first developing country to legislate on climate change, and it enforces carbon costs on business directly.", mko: "개발도상국 중 최초로 기후변화대응법을 법제화하고, 기업 탄소 배출에 세금 부담금을 집행하는 국가입니다.",
+    den: "Administered by SEMARNAT, the LGCC and the IEPS carbon tax expose large facilities exceeding the emission threshold to a mandatory carbon charge, and require quantitative disclosure under the RENE reporting system and the emissions trading scheme.",
+    dko: "환경자연자원부(SEMARNAT)가 관할하는 LGCC 및 특별소비세법 탄소세 규정에 의거, 배출 기준을 초과하는 대형 시설은 탄소 비용 부담금에 노출되며, 배출권거래제와 RENE 보고 체계에 따라 배출량을 정량 공시해야 합니다.",
+    aen: "Lowering Scope 2 consumption offsets the carbon charge, and the same record supports preferential terms on sustainability-linked lending from the international banks operating locally.",
+    ako: "Scope 2 소비 전력을 낮춰 탄소세 부담을 상쇄하며, 같은 기록이 현지에 진출한 글로벌 은행의 지속가능성 연계대출 우대 조건 심사에도 활용됩니다.", u: "https://world.moleg.go.kr/web/wli/lgslInfoReadPage.do?CTS_SEQ=25747&AST_SEQ=205" },
+
+  { r: "me", f: "🇸🇦", nen: "Saudi Arabia", nko: "사우디아라비아",
+    len: "Saudi Green Building Code (SBC 1001) · Water Conservation", lko: "사우디 녹색건축코드(SBC 1001) · 수자원 보존 규격",
+    men: "Under Vision 2030 the kingdom mandates green technology in construction, and water reuse is a legal requirement in a country of severe scarcity.", mko: "비전 2030에 따라 건설 인프라에 친환경 기술을 법으로 강제하며, 극심한 물 부족으로 수자원 재활용을 필수 의무화한 중동 최대의 자본 시장입니다.",
+    den: "Under the SBC 1001 water conservation specification and the Plumbing and Sanitation Codes, every new building and major renovation must meet the national water-saving fixture standards and control contaminant discharge at source. Non-compliance blocks occupancy approval outright.",
+    dko: "SBC 1001 수자원 보존 규격 및 배관·위생 코드에 의거, 모든 신축 및 개보수 건축물은 국가가 정한 수자원 절약 기준을 준수하고 오염원 유출을 원천 통제해야 합니다. 위반 시 건축 준공 허가가 불허됩니다.",
+    aen: "One 20W motor drives a four-sided film that purifies air and humidifies simultaneously, entirely within a closed circulation. In a country where water is the constraint, a fixture that recirculates rather than consumes answers the code directly.",
+    ako: "20W 모터 하나가 4면 수막을 가동해 공기 정화와 가습을 밀폐 순환 안에서 동시에 처리합니다. 물이 제약 조건인 나라에서, 소비하지 않고 순환시키는 설비는 코드에 직접 대응합니다.", u: "https://sbc.gov.sa/ar/BC/Documents/tableofcontent2018/SBC%201001/SBC%201001%20CR_T2018.pdf" },
+
+  { r: "me", f: "🇦🇪", nen: "United Arab Emirates", nko: "아랍에미리트",
+    len: "Estidama Pearl Rating System · Precious Water", lko: "에스티다마 펄 레이팅 시스템(PRS) · Precious Water 지침",
+    men: "The UAE wrote its own green building law for a desert climate, and governs both approval and lending rates through water data.", mko: "사막 기후에 맞춘 독자적 친환경 건축법을 제정하고, 건물 승인과 대출 금리를 물 순환 데이터로 통제하는 시장입니다.",
+    den: "Administered by the Abu Dhabi Department of Municipalities and Transport, the Estidama framework requires public buildings to achieve at least 2 Pearls and general buildings at least 1 Pearl before approval and operation. Indoor water efficiency and reuse carry the most demanding scoring of all categories.",
+    dko: "아부다비 자치행정부(DMT)가 관할하는 에스티다마 프레임워크에 의거, 모든 공공 빌딩은 최소 2 펄, 일반 건물은 최소 1 펄 이상을 획득해야 준공 및 운영이 가능합니다. 실내 수자원 효율화와 재사용 배점이 전 항목 중 가장 까다롭게 작용합니다.",
+    aen: "Hydroponic growing and water-film air cleaning run inside a single closed loop, which addresses the Precious Water and Resourceful Energy pillars together rather than one at a time.",
+    ako: "수경재배와 수막 공기정화가 하나의 밀폐 순환 안에서 이루어져, Precious Water와 Resourceful Energy 두 축을 따로가 아니라 동시에 충족합니다.", u: "https://www.dmt.gov.ae/-/media/Project/DMT/DMT/E-Library/0001-Manuals/PRRS/PRRS-Version-10.pdf" },
+
+  { r: "eu", f: "🇩🇪", nen: "Germany", nko: "독일",
+    len: "Federal Climate Protection Act (KSG), Art. 3 · GWB Art. 97", lko: "연방기후보호법(KSG) 제3조 · 공공조달법(GWB) 제97조",
+    men: "Europe's strictest carbon neutrality legislation, applied to every public purchase through quantified climate assessment.", mko: "유럽에서 가장 엄격한 탄소 중립 법안을 시행하며, 모든 공공 물품 구매 시 기후 영향을 계량화하여 평가하는 국가입니다.",
+    den: "Under Article 3 of the KSG and Article 97 of the GWB, all federal agencies, municipalities and public infrastructure must give substantial weight in procurement to products that quantitatively demonstrate greenhouse gas reduction.",
+    dko: "KSG 제3조 법적 감축 의무 및 연방공공조달법(GWB) 제97조에 의거, 모든 연방 기관·지자체·공공 인프라는 물품 조달 계약 시 온실가스 감축 성과를 정량적으로 입증한 제품에 큰 가중치를 부여해야 합니다.",
+    aen: "The annual 2.29-tonne reduction meets the environmental technical-score requirement the KSG sets, in a market where that score frequently decides the award.",
+    ako: "연간 약 2.29t 감축 데이터가 KSG가 규정한 환경 기술 점수 요건을 충족합니다. 이 점수가 낙찰을 좌우하는 경우가 많은 시장입니다.", u: "https://www.gesetze-im-internet.de/ksg/" },
+
+  { r: "eu", f: "🇫🇷", nen: "France", nko: "프랑스",
+    len: "Energy Transition Act (LTECV) · RE2020", lko: "녹색성장및에너지전환법(LTECV) · RE2020",
+    men: "France regulates the energy use and emissions of commercial buildings at the level of the individual building.", mko: "상업용 빌딩의 에너지 소비와 온실가스 배출량을 건물 단위로 규제하는 국가입니다.",
+    den: "Administered by ADEME, the LTECV and the RE2020 building regulation require corporate headquarters and commercial buildings to reduce Scope 2 indirect emissions in the course of operation, with a punitive carbon charge where targets are missed.",
+    dko: "환경에너지관리청(ADEME)이 관할하는 LTECV 및 신축 건물 환경 규정(RE2020)에 의거, 중견·대기업 사옥과 상업용 빌딩은 운영 과정에서 Scope 2 간접 배출을 의무 감축해야 하며, 미충족 시 징벌적 탄소 부담금이 부과됩니다.",
+    aen: "Consolidating several appliances into one circulation lowers building consumption, supporting both RE2020 compliance and the preferential terms local banks offer on sustainability-linked lending.",
+    ako: "여러 가전을 하나의 순환으로 통합해 빌딩 전력 소비를 낮추므로, RE2020 규격 충족과 현지 은행의 지속가능성 연계대출 우대 조건을 함께 뒷받침합니다.", u: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031044385/" },
+
+  { r: "eu", f: "🇮🇹", nen: "Italy", nko: "이탈리아",
+    len: "Public Procurement Code, Art. 34 · CAM", lko: "공공조달법 제34조 · 최소환경기준(CAM)",
+    men: "Italy was the first in the EU to make environmental criteria a binding legal duty in public purchasing.", mko: "유럽 연합 내에서 공공기관 물품 구매의 친환경 기준을 가장 먼저 법적 강제 의무로 규정한 시장입니다.",
+    den: "Under Article 34 of the Public Procurement Code, all central and local government bodies may only tender for furniture, appliances and infrastructure that fully satisfy the national Minimum Environmental Criteria (CAM).",
+    dko: "공공조달법 제34조에 의거, 모든 중앙정부 부처와 지방자치단체는 가구·가전·인프라 구매 시 국가가 지정한 최소환경기준(CAM)을 100% 만족하는 제품만 입찰에 부쳐 조달해야 합니다.",
+    aen: "The circulation structure and its verified reduction data meet the circular-economy provisions the CAM criteria require — a category where conventional furniture cannot qualify at all.",
+    ako: "순환 구조와 검증된 감축 데이터가 CAM이 요구하는 순환 경제 조항을 충족합니다. 기성 가구는 애초에 자격을 갖추지 못하는 항목입니다.", u: "https://www.codicecontrattipubblici.com/parte-i/art-34-criteri-di-sostenibilita-energetica-e-ambientale/" },
+
+  { r: "eu", f: "🇪🇸", nen: "Spain", nko: "스페인",
+    len: "Climate Change and Energy Transition Act, Art. 20 (Ley 7/2021)", lko: "기후변화및에너지전환법 제20조 (Ley 7/2021)",
+    men: "Spain mandates climate risk disclosure for large companies and ties financial incentives to low-carbon infrastructure.", mko: "대기업의 기후 리스크 공시를 의무화하고, 저탄소 인프라에 금융 인센티브를 연동한 시장입니다.",
+    den: "Under Article 20, listed and large companies must report greenhouse gas reduction performance annually — including Scope 2 emissions from their own premises — in order to maintain their bank credit standing.",
+    dko: "제20조(기후 변화 및 에너지 전환 지표 공시)에 의거, 상장기업과 대기업은 사옥 내 전력 배출량(Scope 2)을 포함한 온실가스 감축 실적을 매년 투명하게 보고해야 은행 신용 등급을 유지할 수 있습니다.",
+    aen: "Sensor-logged reduction data forms part of that annual disclosure, and is submitted to the major domestic lenders as supporting evidence.",
+    ako: "센서로 기록된 감축 데이터가 그 연간 공시의 일부가 되며, 주요 시중은행에 증빙 자료로 제출됩니다.", u: "https://www.boe.es/buscar/act.php?id=BOE-A-2021-8447" },
+
+  { r: "eu", f: "🇳🇱", nen: "Netherlands", nko: "네덜란드",
+    len: "Climate Act (Klimaatwet) · Circular Economy 2050", lko: "기후법(Klimaatwet) · 순환경제 2050 지침",
+    men: "The Netherlands governs resource circulation, water management and office infrastructure at statute level.", mko: "자원 순환과 물 관리, 친환경 오피스 인프라 구축을 법률 수준으로 통제하는 국가입니다.",
+    den: "Under the Klimaatwet and the Circular Economy 2050 guidance, government departments and major commercial infrastructure must cut raw material use by 50% by 2030, and must meet indoor air quality and near-zero-energy building standards before occupancy approval.",
+    dko: "기후법 및 순환경제 2050 지침에 의거, 정부 부처와 주요 상업용 인프라는 2030년까지 원자재 사용량을 50% 감축해야 하며, 실내 대기질 및 에너지 제로 빌딩 기준을 충족해야 준공 허가가 납니다.",
+    aen: "A closed loop that performs air cleaning and food growing without incremental power sits squarely within the circular economy definition, rather than being argued into it.",
+    ako: "추가 전력 없이 공기 정화와 재배를 수행하는 밀폐 순환 구조는 순환경제 정의에 억지로 끼워 맞추는 것이 아니라 그 안에 그대로 들어맞습니다.", u: "https://wetten.overheid.nl/BWBR0042394/2026-01-01" },
+
+  { r: "no", f: "🇸🇪", nen: "Sweden", nko: "스웨덴",
+    len: "Climate Act (SFS 2017:720), Art. 3 · LOU 2016:1145", lko: "기후법(SFS 2017:720) 제3조 · 공공조달법(LOU 2016:1145)",
+    men: "Sweden legislated on carbon neutrality and resource circulation earlier than almost anywhere else.", mko: "탄소 중립과 자원 순환 법제화를 세계에서 가장 선제적으로 도입한 국가입니다.",
+    den: "Under Article 3 of the Climate Act and the Public Procurement Act, federal agencies, municipalities and state enterprises are expressly prohibited from procuring furniture and office infrastructure on price alone; life-cycle carbon assessment must be reflected in every tender evaluation.",
+    dko: "기후법 제3조 감축 의무 및 공공조달법에 의거, 연방 기관·지자체·국영 기업은 가구 및 사무 인프라를 조달할 때 가격만으로 판단하는 것이 명시적으로 금지되며, 제품의 전 생애주기 탄소 배출량(LCC) 평가를 입찰 심사에 반영해야 합니다.",
+    aen: "The published reduction data satisfies the life-cycle weighting the Climate Act requires, in a market where price competition alone is not permitted.",
+    ako: "공개된 감축 데이터가 기후법이 규정한 전 생애주기 가중치 요건을 충족합니다. 가격 경쟁만으로는 입찰이 성립하지 않는 시장입니다.", u: "https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/klimatlag-2017720_sfs-2017-720/" },
+
+  { r: "no", f: "🇳🇴", nen: "Norway", nko: "노르웨이",
+    len: "Public Procurement Act (Anskaffelsesloven), Art. 5", lko: "공공조달법(Anskaffelsesloven) 제5조",
+    men: "Norway fixed environmental performance at a minimum 30% of the evaluation weighting — the strictest such threshold anywhere.", mko: "환경적 요소를 참고가 아닌 법적 '최소 30% 가중치'로 명문화한, 규제 장벽이 가장 강력한 국가입니다.",
+    den: "Under Article 5, every procurement contract run by a public department or local government must allocate at least 30% of the evaluation weighting to environmental and carbon reduction performance for the tender to be valid.",
+    dko: "제5조(환경, 인간존중 및 근로조건) 지침에 의거, 모든 공공 부처 및 지방 정부의 물품 조달 계약은 환경 및 탄소 저감 성능에 최소 30% 이상의 평가 배점을 할당해야 입찰이 성립합니다.",
+    aen: "Consolidating several appliances into one 20W circulation gives procurement officers a furniture category that can genuinely fill the mandatory 30% — most cannot.",
+    ako: "여러 가전을 20W 순환 하나로 통합하므로, 조달관이 법적 의무 배점 30%를 실제로 채울 수 있는 가구 항목이 됩니다. 대부분의 가구는 그러지 못합니다.", u: "https://lovdata.no/dokument/NL/lov/2016-06-17-73" },
+
+  { r: "no", f: "🇩🇰", nen: "Denmark", nko: "덴마크",
+    len: "Climate Act (Klimaloven, Lov nr 965), Art. 1", lko: "기후법(Klimaloven, Lov nr 965) 제1조 · 국가 녹색 공공 조달 전략",
+    men: "A leader in ESG standards, requiring commercial emissions to be disclosed and managed as quantitative data.", mko: "상업용 사무실의 온실가스 배출량을 정량 데이터로 공시하고 관리하게 만드는 글로벌 ESG 표준 선도국입니다.",
+    den: "Under Article 1, a 70% reduction by 2030 is mandated. Large companies and public partners must report emissions annually — including building electricity — to retain their credit standing and access state funding.",
+    dko: "제1조에 2030년 70% 감축 목표가 의무화되어 있습니다. 대기업과 공공 협력체는 사옥 전력 배출량을 포함한 감축 실적을 매년 보고해야 신용 등급 유지와 정부 자금 지원을 받을 수 있습니다.",
+    aen: "Sensor-verified reduction data is submitted directly as part of that annual reporting, without needing separate measurement.",
+    ako: "센서로 검증된 감축 데이터를 별도 측정 없이 연간 보고 자료로 그대로 제출할 수 있습니다.", u: "https://www.retsinformation.dk/eli/lta/2020/965" },
+
+  { r: "no", f: "🇵🇱", nen: "Poland", nko: "폴란드",
+    len: "Environmental Protection Act (POŚ), Art. 4", lko: "환경보호법(POŚ) 제4조 · 국가 순환경제 로드맵",
+    men: "Eastern Europe's large manufacturing and office hub, applying EU environmental fund conditions as national law.", mko: "동유럽의 거대한 제조 및 오피스 허브로, EU 환경 기금 지침을 법률 수준으로 적용하는 국가입니다.",
+    den: "Under Article 4 and the national circular economy roadmap, government departments and major commercial infrastructure must demonstrate energy efficiency, resource saving and indoor air quality to receive both occupancy approval and EU subsidy.",
+    dko: "제4조 및 국가 순환경제 로드맵 지침에 의거, 정부 부처와 주요 상업용 인프라는 에너지 효율성, 자원 절약, 실내 대기질 요소를 충족해야 준공 허가와 EU 보조금 승인이 납니다.",
+    aen: "One structure satisfies the energy, resource and air-quality criteria that both the national act and the EU circular economy framework require — and EU subsidy approval often turns on exactly that combination.",
+    ako: "하나의 구조가 폴란드 환경보호법과 EU 순환경제 규격이 요구하는 에너지·자원·대기질 기준을 함께 충족합니다. EU 보조금 승인은 바로 이 조합에서 갈리는 경우가 많습니다.", u: "https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20010620627" }
+];
+
+const REG_GROUPS = [
+  { id: "kr", en: "Home market", ko: "본국" },
+  { id: "ap", en: "Asia-Pacific", ko: "아시아 · 태평양" },
+  { id: "am", en: "North & Latin America", ko: "북미 · 중남미" },
+  { id: "me", en: "Middle East", ko: "중동" },
+  { id: "eu", en: "European Union", ko: "유럽 연합" },
+  { id: "no", en: "Nordics & Eastern Europe", ko: "북유럽 · 동유럽" }
+];
+
 const SHEETS = {
   terms: {
     k: { en: "01 · Terms", ko: "01 · 개설 조건" },
-    t: { en: "Conditions for opening a territory", ko: "개설 조건" },
-    intro: { en: "We open one national distributor per country and regional dealerships beneath it. The conditions below are the starting point of every conversation, not a fixed price list.", ko: "국가별 총판 1사, 그 아래 지역 대리점을 둡니다. 아래 조건은 모든 협의의 출발점이며 고정된 가격표가 아닙니다." },
-    rows: [
-      { k: { en: "Territory", ko: "권역" }, v: { en: "Exclusive, by country or region", ko: "국가 또는 권역 단위 독점" } },
-      { k: { en: "Term", ko: "계약 기간" }, v: { en: "3 years, renewable", ko: "3년 · 갱신 가능" } },
-      { k: { en: "Showroom", ko: "쇼룸" }, v: { en: "One display unit required", ko: "전시 1대 필수" } },
-      { k: { en: "Training", ko: "교육" }, v: { en: "Install and maintenance, provided by LJR", ko: "설치·유지관리 교육 · LJR 제공" } },
-      { k: { en: "Field data", ko: "현장 데이터" }, v: { en: "Four years of operational data shared", ko: "4년 운용 데이터 공유" } },
-      { k: { en: "Localisation", ko: "현지화" }, v: { en: "Site and materials in your language", ko: "현지 언어 웹사이트·자료 지원" } },
-      { k: { en: "Minimum volume", ko: "최소 물량" }, v: { en: "Agreed per territory", ko: "권역별 협의" } },
-      { k: { en: "Deposit", ko: "보증금" }, v: { en: "Agreed per territory", ko: "권역별 협의" } }
+    t: { en: "Conditions for opening a territory", ko: "개설 조건 및 파트너십 원칙" },
+    intro: { en: "These are not rigid rules or a fixed price list. They are the opening point of a conversation, set out by a company that has spent years in the field, so that both sides can find a sound and reasonable place to begin. Everything below is adjusted to the conditions of your market.", ko: "아래 조건들은 엄격한 규정이나 고정된 가격표가 아닙니다. 오랜 시간 현장을 다져온 본사가 파트너 여러분과 가장 건강하고 합리적인 출발점을 찾기 위한 열린 대화의 시작점입니다. 지역별 시장 상황에 맞추어 유연하게 조율해 나가겠습니다." },
+    conds: [
+      { h: { en: "Exclusive territory, by country or region", ko: "독점 권역 보장 (국가 또는 권역 단위)" },
+        b: { en: "To avoid unnecessary competition and protect the value of the brand, we appoint a single national distributor per country or major region, with a network of regional dealerships beneath it. Your position in the market is protected from the start.", ko: "무분별한 경쟁을 지양하고 브랜드의 가치를 지키기 위해, 국가 또는 주요 권역 단위로 신뢰할 수 있는 총판 1사를 두고 그 아래 지역 대리점망을 구성합니다. 파트너가 안정적으로 시장에 안착할 수 있는 독점적 기반을 보장합니다." } },
+      { h: { en: "Three-year term, renewable together", ko: "계약 기간 및 상생 갱신 (최초 3년)" },
+        b: { en: "Rather than measure you on short-term results, we guarantee an initial three years so you can take root in the local market. Renewal and extension are discussed openly, on the basis of mutual trust and performance.", ko: "단기적인 성과에 연연하기보다, 현지 시장에서 깊이 뿌리내릴 수 있도록 최초 3년의 계약 기간을 보장합니다. 상호 간의 신뢰와 성과를 바탕으로 언제든 투명하게 갱신 및 연장 협의가 가능합니다." } },
+      { h: { en: "One display unit in your showroom", ko: "필수 쇼룸 구축 (전시 모델 1대)" },
+        b: { en: "Public buyers, corporate finance officers and end customers need to see the structure working. We ask each partner to keep one standard display unit at their base, where the power-free circulation and the finish can be judged in person.", ko: "지역 내 공공기관 바이어, 기업 재무 담당자, 최종 소비자가 무전력·무청소 구조와 디자인 완성도를 직접 보고 체감할 수 있도록, 거점 내 표준 전시 모델 1대의 편성을 부탁드리고 있습니다." } },
+      { h: { en: "Full technical and maintenance training", ko: "전문 기술 및 유지관리 교육 전수" },
+        b: { en: "After-sales capability is the core of this business. From the principles of flow control to the management of the filtration cycle, we transfer the whole of our accumulated technical training free of charge, so your team can stand on its own.", ko: "완벽한 사후 관리와 고객 만족은 비즈니스의 핵심입니다. 유속 제어 원리부터 순환 필터 사이클 관리까지, 본사가 축적해 온 정밀 기술 교육을 무상으로 전수해 드려 현장의 기술적 자립을 돕습니다." } },
+      { h: { en: "Operating records and manuals, shared", ko: "실제 운용 기록 및 매뉴얼 무상 공유" },
+        b: { en: "So that you do not repeat our trial and error, we share what we actually have — the operating records kept while running the tables ourselves, and the standard maintenance manuals written from them.", ko: "시행착오를 줄이실 수 있도록, 본사가 실제로 가지고 있는 것을 그대로 공유합니다. 직접 가동하며 남긴 운용 기록과, 그것을 바탕으로 정리한 표준 유지관리 매뉴얼입니다." } },
+      { h: { en: "Localisation and marketing infrastructure", ko: "현지화 마케팅 및 인프라 지원" },
+        b: { en: "From a website interface in your country's official language to the technical material needed for buyer negotiations, the head office supports it closely, so the partner can concentrate on selling.", ko: "진입 국가의 공식 언어에 최적화된 웹사이트 인터페이스부터 바이어 협상용 기술 자료 일체를 본사에서 밀착 지원하여, 파트너사가 현지 영업에만 집중할 수 있도록 돕습니다." } },
+      { h: { en: "Local production where it makes sense (KD · CKD)", ko: "현실에 따른 유연한 현지화 생산 (KD·CKD)" },
+        b: { en: "Freight costs, tariff barriers and local-content requirements differ in every market. We keep open the option of component-level export (KD/CKD) and local assembly, so that price competitiveness can be built where the product is sold rather than only where it is made.", ko: "물류 비용과 관세 장벽, 각국 조달 시장의 조건(예: 자국산 부품 비율 요구)에 유연하게 대응하기 위해, 부품 단위 수출(KD/CKD) 및 현지 조립·생산 협력 체계를 열어두고 있습니다. 완제품 수입의 한계를 넘어 현지에서 가장 유리한 가격 경쟁력을 갖출 수 있도록 함께 협의합니다." } },
+      { h: { en: "Minimum volume and deposit, agreed together", ko: "유연한 최소 물량(MOQ) 및 보증금 조율" },
+        b: { en: "We do not impose a uniform figure. The population, the size of the furniture market and the character of public procurement in your territory are examined together, and the terms are set where they are reasonable for both sides.", ko: "획일적인 기준을 강요하지 않습니다. 진입 권역의 인구 통계, 가구 시장 규모, 공공 조달 환경의 특수성을 함께 검토하여 양측 모두에게 합리적이고 부담 없는 선에서 조율합니다." } },
+      { h: { en: "Recurring revenue beyond the hardware", ko: "지속적인 반복 매출 구조" },
+        b: { en: "The relationship does not end at the sale of a table. Exclusive regional supply rights for the consumables the system needs — scent capsules, aquaponic seed packages, and the on-device condition report subscription — are granted with the territory.", ko: "하드웨어 단품 판매에서 끝나지 않습니다. 시스템에 주기적으로 소요되는 전용 향기 캡슐, 아쿠아포닉스 특화 씨앗 패키지, 온디바이스 컨디션 리포트 이용권의 지역 공급 권한을 권역과 함께 독점 부여합니다." } }
     ],
     notes: [
-      { en: "We do not charge a franchise fee. What we ask for is a partner who can explain the engineering, not only sell furniture.", ko: "가맹비는 받지 않습니다. 우리가 요청하는 것은 가구를 파는 것이 아니라 기술을 설명할 수 있는 파트너입니다." },
-      { en: "National certification is in progress. Partners receive every verification transcript so they can answer questions honestly.", ko: "국가 인증은 진행 중입니다. 파트너에게는 모든 검증 원문을 제공하여 정직하게 답할 수 있게 합니다." }
+      { en: "We charge no franchise fee. What we ask for is a partner who can explain the engineering, not only sell furniture.", ko: "가맹비는 받지 않습니다. 우리가 요청하는 것은 가구를 파는 것이 아니라 기술을 설명할 수 있는 파트너입니다." },
+      { en: "Rather than open outlets indiscriminately, we select a small number of partners who will take responsibility for their market, and we intend to grow with them over the long term.", ko: "무분별한 가맹점 확장 대신, 해당 지역의 시장을 책임감 있게 운영할 소수의 정예 파트너만을 엄선하여 장기적인 상생과 상호 성장을 지향합니다." },
+      { en: "National certification is in preparation. Every partner receives the full verification transcripts, so that questions can be answered honestly.", ko: "국가 인증은 현재 준비 중입니다. 파트너에게는 모든 검증 원문을 제공하여 정직하게 답할 수 있게 합니다." }
+    ],
+    steps: [
+      { n: "01", mail: true, h: { en: "Application", ko: "파트너 신청" }, b: { en: "Write to us with your company, territory and capability. We reply to every enquiry.", ko: "회사명, 희망 권역, 사업 역량을 적어 보내주십시오. 모든 문의에 회신드립니다." } },
+      { n: "02", h: { en: "Review", ko: "타당성 검토" }, b: { en: "A first interview with our technical and management team, examining local standing and capability.", ko: "본사 기술 및 경영진 1차 인터뷰를 통한 지역적 입지 및 사업 역량 분석." } },
+      { n: "03", h: { en: "Agreement", ko: "독점 계약" }, b: { en: "Territory scope and guaranteed volume agreed in writing before signature.", ko: "유통 권역 범위 및 상호 보장 물량 서면 계약 체결." } },
+      { n: "04", h: { en: "Incubation", ko: "인큐베이팅" }, b: { en: "Core technical training and transfer of the operating records, then the territory opens.", ko: "본사 핵심 기술 교육 및 운용 기록 전수 후 공식 권역 오픈." } }
     ],
     cta: { en: "Enquire about a territory", ko: "권역 문의하기" },
     subject: { en: "Territory enquiry", ko: "개설 조건 문의" }
@@ -1959,7 +2323,7 @@ const PRICES = [
 ];
 
 class Component extends DCLogic {
-  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null, boardOpen: false, econ: null, fn: null };
+  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null, boardOpen: false, econ: null, fn: null, reg: null };
 
   bgm() { return document.getElementById("bgm"); }
 
@@ -2053,7 +2417,7 @@ class Component extends DCLogic {
     this.__lastPage = this.state.page;
     this.stack = ["home"]; this.pos = 0;
     const fromHash = (location.hash || "").replace("#", "");
-    const valid = ["home","greeting","core","clean","tech","proof","products","features","press","distributor","support","order","terms","catalog","contract","dorder","board","post"];
+    const valid = ["home","greeting","core","clean","tech","proof","products","features","press","distributor","regulation","support","order","terms","catalog","contract","dorder","board","post"];
     try { history.replaceState({ ljr: 1, i: 0, p: "home" }, "", location.hash || "#home"); } catch (e) {}
     if (fromHash && valid.indexOf(fromHash) >= 0 && fromHash !== "home") this.go(fromHash);
 
@@ -2079,10 +2443,10 @@ class Component extends DCLogic {
     [0, 40, 160, 400].forEach(t => setTimeout(() => this.chrome(), t));
     if (this.__lastPage !== this.state.page) {
       this.__lastPage = this.state.page;
-      const top = () => window.scrollTo(0, 0);
+      const top = () => { window.scrollTo(0, 0); this.reveal(); };
       top();
       requestAnimationFrame(top);
-      [0, 40, 120, 260].forEach(t => setTimeout(top, t));
+      [0, 40, 120, 260, 500].forEach(t => setTimeout(top, t));
       setTimeout(() => { this.syncVideo(); this.chrome(); }, 60);
     }
   }
@@ -2154,6 +2518,12 @@ class Component extends DCLogic {
     o["k" + N] = ko ? S.k.ko : S.k.en;
     o["t" + N] = ko ? S.t.ko : S.t.en;
     o["intro" + N] = S.intro ? (ko ? S.intro.ko : S.intro.en) : "";
+    o["hasConds" + N] = !!S.conds;
+    o["conds" + N] = S.conds ? S.conds.map((c, i) => ({ n: (i + 1 < 10 ? "0" : "") + (i + 1), h: ko ? c.h.ko : c.h.en, b: ko ? c.b.ko : c.b.en })) : [];
+    o["hasSteps" + N] = !!S.steps;
+    o["steps" + N] = S.steps ? S.steps.map(t => ({
+      n: t.n, h: ko ? t.h.ko : t.h.en, b: ko ? t.b.ko : t.b.en, mail: !!t.mail
+    })) : [];
     o["hasRows" + N] = !!S.rows;
     o["rows" + N] = S.rows ? S.rows.map(r => ({ k: ko ? r.k.ko : r.k.en, v: ko ? r.v.ko : r.v.en })) : [];
     o["hasNotes" + N] = !!S.notes;
@@ -2252,7 +2622,7 @@ class Component extends DCLogic {
     const op = document.getElementById("op");
     const dark = this.state.page === "home"
       ? (!op || window.scrollY < op.offsetHeight * 0.72)
-      : ["core", "proof", "order"].indexOf(this.state.page) >= 0;
+      : ["core", "proof", "order", "regulation"].indexOf(this.state.page) >= 0;
     hdr.__dark = dark;
     const bg = (this.state.page === "home" && dark && window.scrollY < 40)
       ? "rgba(7,16,13,0)" : (dark ? "rgba(7,16,13,.5)" : "rgba(255,255,255,.9)");
@@ -2424,6 +2794,7 @@ class Component extends DCLogic {
     const L = (o, k) => ko ? o[k + "ko"] : o[k + "en"];
     const S = this.state.sheet ? SHEETS[this.state.sheet] : null;
     const E = this.state.econ ? ECON[this.state.econ] : null;
+    const RG = (this.state.reg === null || this.state.reg === undefined) ? null : REG[this.state.reg];
     const F = (this.state.fn === null || this.state.fn === undefined) ? null : FN20[this.state.fn];
     const EP = E ? PRODUCTS.filter(p => p.id === this.state.econ)[0] : null;
     const w = (n) => "₩" + n.toLocaleString("en-US");
@@ -2435,9 +2806,15 @@ class Component extends DCLogic {
     });
 
     const flat = [];
-    NAV.forEach(n => {
-      flat.push({ label: ko ? n.ko : n.en, size: "17px", weight: "600", color: "rgba(255,255,255,.95)", pad: "12px 0", click: n.go ? () => this.go(n.go) : () => {} });
-      (n.sub || []).forEach(s => flat.push({ label: ko ? s.ko : s.en, size: "14.5px", weight: "400", color: "rgba(255,255,255,.62)", pad: "10px 0 10px 16px", click: () => this.subGo(s) }));
+    NAV.forEach((n, k) => {
+      const hasSub = !!(n.sub && n.sub.length);
+      const isOpen = this.state.mopen === k;
+      flat.push({
+        label: (ko ? n.ko : n.en) + (hasSub ? (isOpen ? "  −" : "  +") : ""),
+        size: "17px", weight: "600", color: "rgba(255,255,255,.95)", pad: "12px 0",
+        click: hasSub ? () => this.setState(st => ({ mopen: st.mopen === k ? null : k })) : (n.go ? () => this.go(n.go) : () => {})
+      });
+      if (hasSub && isOpen) n.sub.forEach(s => flat.push({ label: ko ? s.ko : s.en, size: "14.5px", weight: "400", color: "rgba(255,255,255,.62)", pad: "10px 0 10px 16px", click: () => this.subGo(s) }));
     });
 
     return {
@@ -2449,6 +2826,23 @@ class Component extends DCLogic {
       goClean: () => this.go("clean"),
       goProof: () => this.go("proof"),
       goDist: () => this.go("distributor"),
+      goReg: () => this.go("regulation"),
+      goTerms: () => this.go("terms"),
+      regGroups: REG_GROUPS.map(g => ({
+        t: ko ? g.ko : g.en,
+        items: REG.filter(c => c.r === g.id).map((c, i) => ({
+          f: c.f, n: ko ? c.nko : c.nen, l: ko ? c.lko : c.len,
+          open: () => this.setState({ reg: REG.indexOf(c) })
+        }))
+      })),
+      regOpen: RG !== null,
+      regF: RG ? RG.f : "", regN: RG ? (ko ? RG.nko : RG.nen) : "",
+      regL: RG ? (ko ? RG.lko : RG.len) : "",
+      regM: RG ? (ko ? RG.mko : RG.men) : "",
+      regD: RG ? (ko ? RG.dko : RG.den) : "",
+      regA: RG ? (ko ? RG.ako : RG.aen) : "",
+      regU: RG ? RG.u : "", regHasUrl: !!(RG && RG.u),
+      closeReg: () => this.setState({ reg: null }),
       goFeatures: () => this.go("features"),
       back: () => { if (this.canBack()) history.back(); },
       fwd: () => { if (this.canFwd()) history.forward(); },
@@ -2503,10 +2897,17 @@ class Component extends DCLogic {
       econRead: E ? (ko ? E.rko : E.ren) : "",
       econBasis: ECON_BASIS.map(n => ({ t: ko ? n.ko : n.en })),
 
-      fn20: FN20.map((f, i) => ({ c: ko ? f.cko : f.cen, t: ko ? f.tko : f.ten, open: () => this.setState({ fn: i }) })),
+      fn20: FN20.map((f, i) => ({
+        c: ko ? f.cko : f.cen, t: ko ? f.tko : f.ten,
+        tag: f.opt ? (ko ? "선택" : "Option") : (ko ? "기본" : "Standard"),
+        tagFg: f.opt ? "#6E5408" : "#1F7A5A",
+        tagBg: f.opt ? "rgba(193,151,2,.12)" : "rgba(87,195,154,.16)",
+        open: () => this.setState({ fn: i })
+      })),
       fnOpen: this.state.fn !== null && this.state.fn !== undefined,
       fnC: F ? (ko ? F.cko : F.cen) : "",
       fnT: F ? (ko ? F.tko : F.ten) : "",
+      fnTag: F ? (F.opt ? (ko ? "선택 사양" : "Option") : (ko ? "기본 탑재" : "Standard")) : "",
       fnD: F ? (ko ? F.dko : F.den) : "",
       closeFn: () => this.setState({ fn: null }),
       fnPrev: () => this.setState({ fn: (this.state.fn + FN20.length - 1) % FN20.length }),
@@ -2557,7 +2958,7 @@ class Component extends DCLogic {
         try { localStorage.setItem("ljr_lang", next); } catch (e) {}
         this.setState({ lang: next, menu: false, open: null });
       },
-      toggleMenu: () => this.setState(s => ({ menu: !s.menu, open: null })),
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu, open: null, mopen: null })),
       menuLabel: this.state.menu ? "✕" : "MENU",
       nav: NAV.map((n, k) => ({
         label: ko ? n.ko : n.en,
@@ -2570,7 +2971,7 @@ class Component extends DCLogic {
       isHome: page === "home", isGreeting: page === "greeting", isCore: page === "core",
       isClean: page === "clean", isTech: page === "tech", isProof: page === "proof",
       isProducts: page === "products", isFeatures: page === "features", isPress: page === "press",
-      isDist: page === "distributor", isSupport: page === "support", isOrder: page === "order",
+      isDist: page === "distributor", isReg: page === "regulation", isSupport: page === "support", isOrder: page === "order",
 
 
       slideEn: ko ? sl.kko : sl.k,
@@ -2594,6 +2995,7 @@ class Component extends DCLogic {
       clean: CLEANC.map(c => ({ img: c.img, k: c.k, h: ko ? c.hko : c.hen, p: ko ? c.pko : c.pen })),
       steps: STEPS.map(s => ({ k: L(s, "k"), v: L(s, "v"), sub: ko ? s.sko : s.sen })),
       filters: FILTERS.map(f => ({ c: f.c, n: (ko ? f.ko : f.en)[0], d: (ko ? f.ko : f.en)[1] })),
+      body: BODY.map(d => ({ l: ko ? d.lko : d.len, v: d.v, u: d.uko && ko ? d.uko : (d.uen || d.u) })),
       dash: DASH.map(d => ({ l: ko ? d.lko : d.len, v: d.v, u: d.uko && ko ? d.uko : (d.uen || d.u) })),
       products: PRODUCTS.map(p => ({
         k: ko ? p.kko : p.ken, t: ko ? p.tko : p.ten,
