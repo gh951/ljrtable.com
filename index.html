@@ -849,12 +849,34 @@
     </div>
   </sc-if>
 
+  <sc-if value="{{ lockOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#EDF6F5;min-height:100vh;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
+      <div style="max-width:520px;margin:0 auto;background:#FFFFFF;border-radius:20px;padding:clamp(28px,3.4vw,46px);display:flex;flex-direction:column;gap:18px;box-shadow:0 1px 30px rgba(31,34,39,.07)">
+        <span data-i18n="lk_k" style="font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#6E5408">Partners only</span>
+        <h1 data-i18n="lk_t" style="margin:0;font-size:clamp(22px,2.6vw,34px);font-weight:700;letter-spacing:-.034em;line-height:1.16;text-wrap:balance">This section is for registered partners.</h1>
+        <p data-i18n="lk_b" style="margin:0;font-size:14.5px;line-height:1.8;color:rgba(31,34,39,.66);text-wrap:pretty">Catalogue pricing, the draft agreement and the order desk are held behind a password. If you are a distributor or dealer and do not have it, write to us and we will issue one after a first conversation.</p>
+        <label style="display:flex;flex-direction:column;gap:8px">
+          <span data-i18n="lk_pw" style="font-size:13px;font-weight:600;color:rgba(31,34,39,.68)">Partner password</span>
+          <input id="lock-pw" type="password" onKeyDown="{{ lockKey }}" autocomplete="off" style="font-family:inherit;font-size:16px;letter-spacing:.06em;padding:14px 16px;border:1px solid rgba(31,34,39,.2);border-radius:10px;background:#FBFDFC;color:#1F2227;outline:none" style-focus="border-color:#57C39A">
+        </label>
+        <sc-if value="{{ lockErr }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:13px;font-weight:600;color:#A33B2A">{{ lockErr }}</p>
+        </sc-if>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button onClick="{{ lockSubmit }}" data-i18n="lk_go" style="font-family:inherit;padding:14px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">Enter</button>
+          <a href="mailto:ljrtable@gmail.com?subject=%5BLJR%5D%20Partner%20password" style="padding:14px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;color:#1F2227;font-size:15px;font-weight:600;word-break:break-all">ljrtable@gmail.com</a>
+          <button onClick="{{ goTerms }}" data-i18n="lk_back" style="font-family:inherit;padding:14px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Terms of opening</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ isReg }}" hint-placeholder-val="{{ false }}">
     <div style="background:#07100D;color:#FFFFFF;padding:calc(clamp(56px,6vh,68px) + clamp(70px,10vh,130px)) clamp(20px,5vw,70px) clamp(100px,14vh,180px)">
       <div style="max-width:1360px;margin:0 auto">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px">
           <span data-i18n="k_reg" style="font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:rgba(87,195,154,.85)">Regulation</span>
-          <button onClick="{{ goTerms }}" title="{{ backTitle }}" style="flex:none;width:38px;height:38px;font-family:inherit;font-size:18px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:transparent;color:#FFFFFF;cursor:pointer;transition:all .3s ease" style-hover="border-color:rgba(87,195,154,.6)">✕</button>
+          <button onClick="{{ goTerms }}" title="{{ backTitle }}" style="position:fixed;top:clamp(70px,8.5vh,92px);right:clamp(20px,5vw,70px);width:40px;height:40px;font-family:inherit;font-size:18px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(7,16,13,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#FFFFFF;cursor:pointer;z-index:118;transition:border-color .3s ease" style-hover="border-color:rgba(87,195,154,.7)">✕</button>
         </div>
         <h1 data-i18n="rg_t" style="margin:20px 0 0;font-size:clamp(30px,4.8vw,72px);font-weight:700;letter-spacing:-.04em;line-height:1.04;color:#FFFFFF;text-wrap:balance">Twenty-three countries already require it.</h1>
         <p data-i18n="rg_b" style="margin:22px 0 0;font-size:clamp(15px,1.6vw,20px);line-height:1.72;color:rgba(255,255,255,.66);max-width:760px;text-wrap:pretty">Public bodies and large corporations in these markets are legally obliged to reduce and disclose emissions. LJR is not asking them to choose an environmental product — it gives them a quantified figure for an obligation they already carry. Each card sets out the statute, the duty it imposes, and how our published data answers it.</p>
@@ -979,7 +1001,7 @@
                   <span style="font-size:15px;font-weight:700;letter-spacing:-.02em;color:#1F2227">{{ t.h }}</span>
                   <span style="font-size:12.5px;line-height:1.7;color:rgba(31,34,39,.6)">{{ t.b }}</span>
                   <sc-if value="{{ t.mail }}" hint-placeholder-val="{{ false }}">
-                    <a href="mailto:ljrtable@gmail.com?subject=%5BLJR%5D%20Partner%20application" data-i18n="tm_apply" style="margin-top:2px;font-size:12.5px;font-weight:700;color:#6E5408">Apply now →</a>
+                    <a href="mailto:ljrtable@gmail.com?subject=%5BLJR%5D%20Partner%20application" style="margin-top:2px;font-size:13px;font-weight:700;color:#6E5408;word-break:break-all">ljrtable@gmail.com</a>
                   </sc-if>
                 </div>
               </sc-for>
@@ -1018,6 +1040,7 @@
 
         <div style="display:flex;flex-wrap:wrap;gap:10px">
           <button onClick="{{ sendA }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaA }}</button>
+          <a href="mailto:ljrtable@gmail.com" style="padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;color:#1F2227;font-size:15px;font-weight:600;word-break:break-all">ljrtable@gmail.com</a>
           <button onClick="{{ closeA }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
         </div>
         <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
@@ -1079,6 +1102,7 @@
 
         <div style="display:flex;flex-wrap:wrap;gap:10px">
           <button onClick="{{ sendB }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaB }}</button>
+          <a href="mailto:ljrtable@gmail.com" style="padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;color:#1F2227;font-size:15px;font-weight:600;word-break:break-all">ljrtable@gmail.com</a>
           <button onClick="{{ closeB }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
         </div>
         <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
@@ -1140,6 +1164,7 @@
 
         <div style="display:flex;flex-wrap:wrap;gap:10px">
           <button onClick="{{ sendC }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaC }}</button>
+          <a href="mailto:ljrtable@gmail.com" style="padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;color:#1F2227;font-size:15px;font-weight:600;word-break:break-all">ljrtable@gmail.com</a>
           <button onClick="{{ closeC }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
         </div>
         <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
@@ -1201,6 +1226,7 @@
 
         <div style="display:flex;flex-wrap:wrap;gap:10px">
           <button onClick="{{ sendD }}" style="font-family:inherit;padding:15px 30px;border:0;border-radius:999px;background:#57C39A;color:#07100D;font-size:15px;font-weight:700;cursor:pointer">{{ ctaD }}</button>
+          <a href="mailto:ljrtable@gmail.com" style="padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;color:#1F2227;font-size:15px;font-weight:600;word-break:break-all">ljrtable@gmail.com</a>
           <button onClick="{{ closeD }}" data-i18n="df_back" style="font-family:inherit;padding:15px 30px;border:1px solid rgba(31,34,39,.22);border-radius:999px;background:transparent;color:#1F2227;font-size:15px;font-weight:600;cursor:pointer">Back to distribution</button>
         </div>
         <p data-i18n="df_note" style="margin:0;font-size:12.5px;line-height:1.75;color:rgba(31,34,39,.5)">All partner documents are issued after a first conversation. Territory, volume and terms are agreed in writing before any contract is signed.</p>
@@ -1522,6 +1548,9 @@ const DICT = {
   rg_b: "이 시장의 공공기관과 대기업은 법적으로 배출을 감축하고 공시할 의무를 지고 있습니다. LJR은 친환경 제품을 골라 달라고 요청하지 않습니다. 이미 지고 있는 의무에 대해 정량화된 수치를 제공합니다. 각 카드는 해당 법령과 그 의무, 그리고 우리의 공개 데이터가 그 의무에 어떻게 대응하는지를 담고 있습니다.",
   rg_open: "열어보기 →", rg_duty: "법적 의무 조항", rg_ans: "LJR의 대응", rg_src: "공식 법령 원문 →",
   rg_cta: "파트너 되기 →", tm_steps: "권역 개설 절차", tm_apply: "지금 신청하기 →",
+  lk_k: "파트너 전용", lk_t: "등록된 파트너만 열람할 수 있습니다.",
+  lk_b: "카탈로그 가격, 계약서 초안, 주문 창구는 비밀번호로 보호됩니다. 총판 또는 대리점이시고 비밀번호가 없으시다면 연락 주십시오. 최초 상담 이후 발급해 드립니다.",
+  lk_pw: "파트너 비밀번호", lk_go: "입력", lk_back: "개설 조건 보기",
   tm_reg: "조건을 따져보기 전에, 수요를 먼저 보십시오. 이 시장의 공공기관과 대기업은 법적으로 배출을 감축하고 공시할 의무를 지고 있으며, LJR은 그들에게 필요한 수치를 건넵니다. 국가별 법령과, 우리의 공개 데이터가 그 의무에 어떻게 대응하는지를 담았습니다.",
   rg_tile: "가장 강력한 논거는 이 테이블이 환경에 좋다는 것이 아닙니다. 귀사의 권역에 있는 공공기관과 대기업이 이미 법적으로 감축과 공시의 의무를 지고 있다는 것, 그리고 우리가 그들에게 필요한 수치를 건넨다는 것입니다.",
   rg_note: "법령명과 조항 번호는 각국 정부가 공표한 원문을 인용했습니다. 우리 수치는 이 사이트에 명시된 공학적 산출값이며 9개 AI가 교차 검토한 것으로, 국가 공인 시험성적서가 아닙니다. 파트너께서는 입찰 제출 전 해당 권역의 현행 법령 원문을 직접 확인해 주시기 바랍니다.",
@@ -2323,7 +2352,7 @@ const PRICES = [
 ];
 
 class Component extends DCLogic {
-  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null, boardOpen: false, econ: null, fn: null, reg: null };
+  state = { lang: "en", page: "home", menu: false, open: null, idx: 0, sound: true, faqOpen: 0, postOpen: false, postErr: "", sheet: null, boardOpen: false, econ: null, fn: null, reg: null, unlocked: false, lockErr: false };
 
   bgm() { return document.getElementById("bgm"); }
 
@@ -2415,6 +2444,7 @@ class Component extends DCLogic {
 
     try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) {}
     this.__lastPage = this.state.page;
+    try { if (sessionStorage.getItem("ljr_partner") === "1") this.setState({ unlocked: true }); } catch (e) {}
     this.stack = ["home"]; this.pos = 0;
     const fromHash = (location.hash || "").replace("#", "");
     const valid = ["home","greeting","core","clean","tech","proof","products","features","press","distributor","regulation","support","order","terms","catalog","contract","dorder","board","post"];
@@ -2514,7 +2544,8 @@ class Component extends DCLogic {
   sheetVals(key, N, ko) {
     const S = SHEETS[key];
     const o = {};
-    o["open" + N] = this.state.page === key;
+    const gated = ["catalog", "contract", "dorder"].indexOf(key) >= 0;
+    o["open" + N] = this.state.page === key && (!gated || this.state.unlocked);
     o["k" + N] = ko ? S.k.ko : S.k.en;
     o["t" + N] = ko ? S.t.ko : S.t.en;
     o["intro" + N] = S.intro ? (ko ? S.intro.ko : S.intro.en) : "";
@@ -2828,6 +2859,15 @@ class Component extends DCLogic {
       goDist: () => this.go("distributor"),
       goReg: () => this.go("regulation"),
       goTerms: () => this.go("terms"),
+      lockOpen: ["catalog", "contract", "dorder"].indexOf(this.state.page) >= 0 && !this.state.unlocked,
+      lockErr: this.state.lockErr ? (ko ? "비밀번호가 일치하지 않습니다. 다시 시도해 주십시오." : "That password does not match. Please try again.") : "",
+      lockSubmit: () => {
+        const el = document.getElementById("lock-pw");
+        const v = el ? el.value.trim() : "";
+        if (v === "@ABCD1234") { try { sessionStorage.setItem("ljr_partner", "1"); } catch (e) {} this.setState({ unlocked: true, lockErr: false }); }
+        else this.setState({ lockErr: true });
+      },
+      lockKey: (e) => { if (e.key === "Enter") { e.preventDefault(); this.renderVals().lockSubmit(); } },
       regGroups: REG_GROUPS.map(g => ({
         t: ko ? g.ko : g.en,
         items: REG.filter(c => c.r === g.id).map((c, i) => ({
