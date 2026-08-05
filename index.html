@@ -2063,25 +2063,25 @@ const BOARD = [
 const DICT_VER = "2026-08-05s";
 
 const LANGS = [
-  { c: "en", s: "EN", n: "English", ready: true },
   { c: "ko", s: "KO", n: "한국어", ready: true },
-  { c: "ja", s: "JA", n: "日本語", ready: true },
+  { c: "en", s: "EN", n: "English", ready: true },
   { c: "zh", s: "ZH", n: "简体中文", ready: true },
-  { c: "zh-TW", s: "TW", n: "繁體中文", ready: true },
+  { c: "ja", s: "JA", n: "日本語", ready: true },
   { c: "de", s: "DE", n: "Deutsch", ready: true },
+  { c: "ru", s: "RU", n: "Русский", ready: true },
+  { c: "hi", s: "HI", n: "हिन्दी", ready: true },
   { c: "fr", s: "FR", n: "Français", ready: true },
   { c: "es", s: "ES", n: "Español", ready: true },
+  { c: "pt", s: "PT", n: "Português", ready: true },
   { c: "it", s: "IT", n: "Italiano", ready: true },
+  { c: "id", s: "ID", n: "Bahasa Indonesia", ready: true },
+  { c: "ar", s: "AR", n: "العربية", ready: true },
+  { c: "zh-TW", s: "TW", n: "繁體中文", ready: true },
+  { c: "pl", s: "PL", n: "Polski", ready: true },
   { c: "nl", s: "NL", n: "Nederlands", ready: true },
   { c: "sv", s: "SV", n: "Svenska", ready: true },
   { c: "no", s: "NO", n: "Norsk", ready: true },
-  { c: "da", s: "DA", n: "Dansk", ready: true },
-  { c: "pl", s: "PL", n: "Polski", ready: true },
-  { c: "pt", s: "PT", n: "Português", ready: true },
-  { c: "ru", s: "RU", n: "Русский", ready: true },
-  { c: "ar", s: "AR", n: "العربية", ready: true },
-  { c: "hi", s: "HI", n: "हिन्दी", ready: true },
-  { c: "id", s: "ID", n: "Bahasa Indonesia", ready: true }
+  { c: "da", s: "DA", n: "Dansk", ready: true }
 ];
 
 const REG = [
@@ -2424,9 +2424,20 @@ class Component extends DCLogic {
   componentDidMount() {
     let saved = null;
     try { saved = localStorage.getItem("ljr_lang"); } catch (e) {}
-    if (saved && saved !== this.state.lang) {
-      if (saved === "en" || saved === "ko") this.setState({ lang: saved });
-      else this.setLang(saved);
+    const known = LANGS.some(l => l.c === saved);
+    if (known) {
+      // 사용자가 한 번 고른 언어는 영구 고정 — 브라우저 언어로 덮어쓰지 않음
+      if (saved !== this.state.lang) {
+        if (saved === "en" || saved === "ko") this.setState({ lang: saved });
+        else this.setLang(saved);
+      }
+    } else {
+      const first = this.detectLang();
+      this.saveLang(first);
+      if (first !== this.state.lang) {
+        if (first === "en" || first === "ko") this.setState({ lang: first });
+        else this.setLang(first);
+      }
     }
 
     this.applyLang(); this.resolveImages(); this.reveal();
@@ -2631,6 +2642,19 @@ class Component extends DCLogic {
 
   canBack() { return !!this.stack && this.pos > 0; }
   canFwd() { return !!this.stack && this.pos < this.stack.length - 1; }
+
+  detectLang() {
+    let list = [];
+    try { list = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "ko"]); } catch (e) { list = ["ko"]; }
+    for (const raw of list) {
+      const t = String(raw || "").toLowerCase();
+      if (t.indexOf("zh") === 0) return (t.indexOf("tw") > -1 || t.indexOf("hk") > -1 || t.indexOf("hant") > -1) ? "zh-TW" : "zh";
+      const base = t.split("-")[0];
+      const hit = LANGS.find(l => l.c === base);
+      if (hit) return hit.c;
+    }
+    return "ko";
+  }
 
   saveLang(code) { try { localStorage.setItem("ljr_lang", code); } catch (e) {} }
 
