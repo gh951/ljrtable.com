@@ -2058,7 +2058,7 @@ const BOARD = [
 ];
 
 // Bump whenever any lang/*.json changes — old caches are then discarded.
-const DICT_VER = "2026-08-05i";
+const DICT_VER = "2026-08-05k";
 
 const LANGS = [
   { c: "en", s: "EN", n: "English", ready: true },
@@ -2074,8 +2074,8 @@ const LANGS = [
   { c: "sv", s: "SV", n: "Svenska", ready: true },
   { c: "no", s: "NO", n: "Norsk", ready: true },
   { c: "da", s: "DA", n: "Dansk", ready: true },
-  { c: "pl", s: "PL", n: "Polski", ready: false },
-  { c: "pt", s: "PT", n: "Português", ready: false },
+  { c: "pl", s: "PL", n: "Polski", ready: true },
+  { c: "pt", s: "PT", n: "Português", ready: true },
   { c: "ar", s: "AR", n: "العربية", ready: false },
   { c: "hi", s: "HI", n: "हिन्दी", ready: false },
   { c: "id", s: "ID", n: "Bahasa Indonesia", ready: false }
@@ -2923,8 +2923,9 @@ class Component extends DCLogic {
     const RG = (this.state.reg === null || this.state.reg === undefined) ? null : REG[this.state.reg];
     const F = (this.state.fn === null || this.state.fn === undefined) ? null : FN20[this.state.fn];
     const EP = E ? PRODUCTS.filter(p => p.id === this.state.econ)[0] : null;
-    const wLoc = ["de","es","it","nl","sv","no","da","pt","pl","id","tr","ru","uk","vi"].indexOf(this.state.lang) >= 0 ? "de-DE" : (this.state.lang === "fr" ? "fr-FR" : "en-US");
-    const wPost = ["de","es","it","nl","sv","no","da","pl","fr"].indexOf(this.state.lang) >= 0;
+    const wLoc = this.state.lang === "pl" ? "pl-PL" : (this.state.lang === "pt" ? "pt-BR" : (this.state.lang === "fr" ? "fr-FR" : (["de","es","it","nl","sv","no","da","id","tr","ru","uk","vi"].indexOf(this.state.lang) >= 0 ? "de-DE" : "en-US")));
+    const num = (x) => { const n = parseFloat(String(x).replace(/,/g, "")); return isNaN(n) ? x : n.toLocaleString(wLoc, { maximumFractionDigits: 2 }); };
+    const wPost = ["de","es","it","nl","sv","no","da","pl","fr","pt"].indexOf(this.state.lang) >= 0;
     const w = (n) => wPost ? n.toLocaleString(wLoc) + " ₩" : "₩" + n.toLocaleString(wLoc);
     const er = (k, v, hi) => ({
       k: k, v: v,
@@ -3009,17 +3010,17 @@ class Component extends DCLogic {
       econPrice: E ? (ko ? "제품 가격 " : tr("Price ", "")) + w(E.price) : "",
       econHero: E ? [
         { l: ko ? "연간 총 순이익" : "Annual net return", v: w(E.total), n: ko ? "전기료 절감 + 채소 가치" : "electricity saved + produce" },
-        { l: ko ? "투자 회수 (보수적)" : "Payback, conservative", v: E.pbCons + (ko ? "년" : tr(" yrs", "")), n: ko ? "포기당 1,500원 기준" : "at ₩1,500 a head" },
-        { l: ko ? "투자 회수 (시장가)" : "Payback, at market", v: E.pbMkt + (ko ? "년" : tr(" yrs", "")), n: ko ? "포기당 3,000원 기준" : "at ₩3,000 a head" }
+        { l: ko ? "투자 회수 (보수적)" : "Payback, conservative", v: num(E.pbCons) + (ko ? "년" : tr(" yrs", "")), n: ko ? "포기당 1,500원 기준" : "at ₩1,500 a head" },
+        { l: ko ? "투자 회수 (시장가)" : "Payback, at market", v: num(E.pbMkt) + (ko ? "년" : tr(" yrs", "")), n: ko ? "포기당 3,000원 기준" : "at ₩3,000 a head" }
       ] : [],
       econBlocks: E ? [
         { h: ko ? "전력 정산 — 숨김 없이" : "Power, fully accounted",
           rows: [
-            er(ko ? "기존 가전 대체 전력량" : "Appliance power replaced", "1,719.77 kWh"),
-            er(ko ? "모터 소비 (24h 가동)" : "Motor draw (24h)", E.motor + " · " + E.motorKwh + " kWh"),
-            er(ko ? "재배 LED 소비 (16h 점등)" : "Grow lights (16h)", E.led + " · " + E.ledKwh + " kWh"),
-            er(ko ? "LJR 총 운영 전력" : "LJR total consumption", E.totKwh + " kWh"),
-            er(ko ? "순수 절감 전력" : "Net power saved", E.netKwh + " kWh", true)
+            er(ko ? "기존 가전 대체 전력량" : "Appliance power replaced", num("1719.77") + " kWh"),
+            er(ko ? "모터 소비 (24h 가동)" : "Motor draw (24h)", E.motor + " · " + num(E.motorKwh) + " kWh"),
+            er(ko ? "재배 LED 소비 (16h 점등)" : "Grow lights (16h)", E.led + " · " + num(E.ledKwh) + " kWh"),
+            er(ko ? "LJR 총 운영 전력" : "LJR total consumption", num(E.totKwh) + " kWh"),
+            er(ko ? "순수 절감 전력" : "Net power saved", num(E.netKwh) + " kWh", true)
           ] },
         { h: ko ? "연간 이익" : "Annual return",
           rows: [
@@ -3032,7 +3033,7 @@ class Component extends DCLogic {
           rows: [
             er(ko ? "채소 가치 (3,000원/포기)" : "Produce value (₩3,000/head)", w(E.heads * 3000)),
             er(ko ? "연간 총 순이익" : "Total net return", w(E.mkTotal), true),
-            er(ko ? "투자 회수 기간" : "Payback period", E.pbMkt + (ko ? "년" : tr(" yrs", "")), true)
+            er(ko ? "투자 회수 기간" : "Payback period", num(E.pbMkt) + (ko ? "년" : tr(" yrs", "")), true)
           ] }
       ] : [],
       econRead: E ? (ko ? E.rko : E.ren) : "",
@@ -3063,10 +3064,10 @@ class Component extends DCLogic {
           net: w(m.total),
           rows: [
             { k: ko ? "연간 수확" : "Annual harvest", v: (ko ? "약 " : tr("approx. ", "")) + m.heads.toLocaleString(wLoc) + (ko ? "포기" : tr(" heads", "")), c: "#1F2227" },
-            { k: ko ? "순수 절감 전력" : "Net power saved", v: m.netKwh + " kWh", c: "#1F2227" },
+            { k: ko ? "순수 절감 전력" : "Net power saved", v: num(m.netKwh) + " kWh", c: "#1F2227" },
             { k: ko ? "전기료 절감액" : "Electricity saved", v: w(m.elec), c: "#1F2227" },
-            { k: ko ? "회수 · 보수적" : "Payback, conservative", v: m.pbCons + (ko ? "년" : tr(" yrs", "")), c: "rgba(31,34,39,.66)" },
-            { k: ko ? "회수 · 시장가" : "Payback, at market", v: m.pbMkt + (ko ? "년" : tr(" yrs", "")), c: "#6E5408" }
+            { k: ko ? "회수 · 보수적" : "Payback, conservative", v: num(m.pbCons) + (ko ? "년" : tr(" yrs", "")), c: "rgba(31,34,39,.66)" },
+            { k: ko ? "회수 · 시장가" : "Payback, at market", v: num(m.pbMkt) + (ko ? "년" : tr(" yrs", "")), c: "#6E5408" }
           ]
         };
       }),
