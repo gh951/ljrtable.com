@@ -2723,20 +2723,33 @@ class Component extends DCLogic {
       const raw = el.getAttribute("data-src") || el.getAttribute("src") || "";
       if (!raw || raw.indexOf("{{") >= 0) { el.__busy = false; return; }
       const base = raw.replace(/\.[a-z0-9]+$/i, "");
-      const exts = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "webp", "WEBP", "gif", "GIF"];
-      let cands = [raw, base];
-      [base, raw].forEach(s => exts.forEach(e => cands.push(s + "." + e)));
+      // 한 번 성공한 확장자를 기억해 두 번째 이미지부터는 곧바로 적중
+      Component.__ext = Component.__ext || null;
+      const exts = ["png", "jpg", "jpeg", "webp", "gif", "PNG", "JPG", "JPEG", "WEBP", "GIF"];
+      let cands = [];
+      if (Component.__ext) cands.push(base + "." + Component.__ext);
+      cands.push(raw);
+      exts.forEach(e => cands.push(base + "." + e));
+      cands.push(base);
       cands = cands.filter((v, i, a) => v && a.indexOf(v) === i);
-      let i = 0;
-      const next = () => {
-        if (i >= cands.length) { el.__busy = false; el.__done = true; return; }
-        const url = cands[i++];
-        const im = new Image();
-        im.onload = () => { if (el.getAttribute("src") !== url) el.setAttribute("src", url); el.__done = true; el.__busy = false; };
-        im.onerror = next;
-        im.src = url;
+
+      let bestIdx = Infinity;
+      const win = (url, idx) => {
+        if (idx >= bestIdx) return;
+        bestIdx = idx; el.__done = true; el.__busy = false;
+        if (el.getAttribute("src") !== url) el.setAttribute("src", url);
+        const m = url.match(/\.([a-z0-9]+)$/i);
+        if (m) Component.__ext = m[1];
       };
-      next();
+      // 후보를 병렬로 동시에 시도 — 순차 대기 제거. 앞순위가 늦게 도착하면 그것으로 교체
+      let pending = cands.length;
+      cands.forEach((url, idx) => {
+        const im = new Image();
+        im.decoding = "async";
+        im.onload = () => win(url, idx);
+        im.onerror = () => { if (--pending <= 0 && bestIdx === Infinity) { el.__busy = false; el.__done = true; } };
+        im.src = url;
+      });
     });
   }
 
@@ -2860,6 +2873,14 @@ class Component extends DCLogic {
   }
 
   prewarm(page) {
+    // 해당 페이지에서 곧 보게 될 정지 이미지를 즉시 확보 (영상보다 훨씬 가벼움)
+    const IMGS = {
+      products: ["ttable.jpg", "two.jpg", "floor.jpg", "four.jpg", "dining.jpg", "conference.jpg", "bigtank.jpg"],
+      core: ["core1.png", "core2.png", "core3.png"],
+      clean: ["clean1.png", "clean2.png", "clean3.png"]
+    };
+    (IMGS[page] || []).forEach(src => { try { const i = new Image(); i.decoding = "async"; i.src = src; } catch (e) {} });
+
     const TOP = { home: "hero.mp4", greeting: "greeting.mp4", products: "products.mp4", effects: "effects.mp4", media: "media.mp4" };
     const f = TOP[page];
     if (!f) return;
