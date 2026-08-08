@@ -2638,34 +2638,123 @@ class Component extends DCLogic {
 
 
   perfInit() {
-    if (this.__perfBox) return;
-    var off = false;
-    try { off = localStorage.getItem("ljr_perf_off") === "1"; } catch (e) {}
-    if (off) return;
-    var box = document.createElement("div");
-    box.setAttribute("data-ljr-perf", "1");
-    box.style.cssText = "position:fixed;left:16px;bottom:16px;z-index:99999;background:#fff;border:2px solid #1F2227;padding:10px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.35;color:#1F2227;max-width:250px;box-shadow:0 6px 18px rgba(31,34,39,.14)";
+    if (window.__ljrSpeed) return;
+    var self = this;
+    var isKo = function () { return self.state.lang === "ko"; };
+    var pos = null;
+    try { pos = JSON.parse(localStorage.getItem("ljr_speed_pos") || "null"); } catch (e) {}
+    var open = false;
+    try { open = localStorage.getItem("ljr_speed_open") === "1"; } catch (e) {}
+
+    var wrap = document.createElement("div");
+    wrap.style.cssText = "position:fixed;z-index:99998;left:" + (pos && pos.l != null ? pos.l + "px" : "24px") + ";top:" + (pos && pos.t != null ? pos.t + "px" : "auto") + ";" + (pos && pos.t != null ? "" : "bottom:24px;") + "touch-action:none;user-select:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace";
+
+    var pill = document.createElement("button");
+    pill.type = "button";
+    pill.style.cssText = "display:flex;align-items:center;gap:8px;height:34px;padding:0 15px;border:0;border-radius:999px;background:rgba(31,34,39,.92);color:#fff;font:600 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;cursor:pointer;box-shadow:0 6px 20px rgba(31,34,39,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)";
+    var dot = document.createElement("span");
+    dot.style.cssText = "width:6px;height:6px;border-radius:999px;background:#57C39A;flex:0 0 6px";
+    var pillTxt = document.createElement("span");
+    pill.appendChild(dot); pill.appendChild(pillTxt);
+
+    var panel = document.createElement("div");
+    panel.style.cssText = "display:none;min-width:214px;padding:14px 16px 13px;border-radius:16px;background:rgba(255,255,255,.94);border:1px solid rgba(31,34,39,.12);box-shadow:0 14px 40px rgba(31,34,39,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#1F2227";
+
     var head = document.createElement("div");
-    head.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;letter-spacing:.06em;margin-bottom:6px";
-    var title = document.createElement("span");
-    title.textContent = "SWITCH SPEED";
-    var x = document.createElement("span");
-    x.textContent = "\u2715";
-    x.style.cssText = "cursor:pointer;opacity:.5";
-    x.onclick = function () {
-      try { localStorage.setItem("ljr_perf_off", "1"); } catch (e) {}
-      box.parentNode && box.parentNode.removeChild(box);
-    };
-    head.appendChild(title); head.appendChild(x);
+    head.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:grab";
+    var ttl = document.createElement("span");
+    ttl.textContent = "SWITCH SPEED";
+    ttl.style.cssText = "font:600 9.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;color:rgba(31,34,39,.55)";
+    var fold = document.createElement("span");
+    fold.textContent = "\u2015";
+    fold.style.cssText = "cursor:pointer;font-size:13px;line-height:1;color:rgba(31,34,39,.4);padding:2px 4px";
+    head.appendChild(ttl); head.appendChild(fold);
+
     var big = document.createElement("div");
-    big.style.cssText = "font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums";
-    big.textContent = "\u2014";
+    big.style.cssText = "margin-top:8px;font:700 34px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#1F2227";
+    big.textContent = "0.000";
+    var unit = document.createElement("span");
+    unit.style.cssText = "font-size:15px;font-weight:600;margin-left:3px;color:rgba(31,34,39,.55)";
+
     var sub = document.createElement("div");
-    sub.style.cssText = "opacity:.62;margin-top:4px";
-    sub.textContent = "\uBA54\uB274\uB098 \uC5B8\uC5B4\uB97C \uB20C\uB7EC \uBCF4\uC138\uC694";
-    box.appendChild(head); box.appendChild(big); box.appendChild(sub);
-    document.body.appendChild(box);
-    this.__perfBox = box; this.__perfBig = big; this.__perfSub = sub; this.__perfTimes = [];
+    sub.style.cssText = "margin-top:7px;font:400 10.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(31,34,39,.55)";
+    var bar = document.createElement("div");
+    bar.style.cssText = "margin-top:10px;height:2px;background:rgba(31,34,39,.1);overflow:hidden";
+    var fill = document.createElement("div");
+    fill.style.cssText = "height:100%;width:0;background:#57C39A;transition:width .3s ease";
+    bar.appendChild(fill);
+
+    panel.appendChild(head); panel.appendChild(big); panel.appendChild(sub); panel.appendChild(bar);
+    wrap.appendChild(pill); wrap.appendChild(panel);
+    document.body.appendChild(wrap);
+
+    this.__perfWrap = wrap;
+    var S = { big: big, unit: unit, sub: sub, fill: fill, times: [], open: open };
+    window.__ljrSpeed = S;
+    big.appendChild(unit);
+
+    var syncLabels = function () {
+      pillTxt.textContent = isKo() ? "\uC804\uD658 \uC18D\uB3C4 \uCE21\uC815" : "SWITCH SPEED";
+      if (!S.times.length) {
+        sub.textContent = isKo() ? "\uBA54\uB274\u00B7\uC5B8\uC5B4\uB97C \uB20C\uB7EC \uBCF4\uC138\uC694" : "tap a menu or a language";
+        unit.textContent = isKo() ? "\uCD08" : "s";
+      }
+    };
+    this.__perfSync = syncLabels;
+    syncLabels();
+
+    var render = function () {
+      pill.style.display = S.open ? "none" : "flex";
+      panel.style.display = S.open ? "block" : "none";
+    };
+    render();
+
+    var savePos = function () {
+      var r = wrap.getBoundingClientRect();
+      try { localStorage.setItem("ljr_speed_pos", JSON.stringify({ l: Math.round(r.left), t: Math.round(r.top) })); } catch (e) {}
+    };
+
+    var drag = null;
+    var onDown = function (e) {
+      var r = wrap.getBoundingClientRect();
+      drag = { x: e.clientX, y: e.clientY, l: r.left, t: r.top, moved: false };
+      wrap.setPointerCapture && wrap.setPointerCapture(e.pointerId);
+    };
+    var onMove = function (e) {
+      if (!drag) return;
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
+      drag.moved = true;
+      var w = wrap.offsetWidth, h = wrap.offsetHeight;
+      var l = Math.min(Math.max(8, drag.l + dx), window.innerWidth - w - 8);
+      var tp = Math.min(Math.max(8, drag.t + dy), window.innerHeight - h - 8);
+      wrap.style.left = l + "px"; wrap.style.top = tp + "px"; wrap.style.bottom = "auto";
+    };
+    var onUp = function () {
+      if (drag && drag.moved) savePos();
+      var wasMoved = drag && drag.moved;
+      drag = null;
+      return wasMoved;
+    };
+    pill.addEventListener("pointerdown", onDown);
+    head.addEventListener("pointerdown", onDown);
+    wrap.addEventListener("pointermove", onMove);
+    wrap.addEventListener("pointerup", function () {
+      var moved = onUp();
+      if (!moved) { /* click handled below */ }
+    });
+    pill.addEventListener("click", function (e) {
+      if (drag && drag.moved) return;
+      S.open = true;
+      try { localStorage.setItem("ljr_speed_open", "1"); } catch (er) {}
+      render();
+    });
+    fold.addEventListener("click", function (e) {
+      e.stopPropagation();
+      S.open = false;
+      try { localStorage.setItem("ljr_speed_open", "0"); } catch (er) {}
+      render();
+    });
   }
   perfStart(label) { this.__pt0 = performance.now(); this.__plabel = label; }
   perfStop() {
@@ -2675,12 +2764,19 @@ class Component extends DCLogic {
     requestAnimationFrame(function () { self.perfShow(performance.now() - t0, lb); });
   }
   perfShow(dt, label) {
-    if (!this.__perfBig) return;
-    this.__perfTimes.push(dt);
-    var best = Math.min.apply(null, this.__perfTimes) / 1000;
-    this.__perfBig.textContent = (dt / 1000).toFixed(3) + "\uCD08";
-    this.__perfSub.textContent = label + " \u00B7 " + this.__perfTimes.length + "\uD68C \u00B7 \uCD5C\uB2E8 " + best.toFixed(3) + "\uCD08";
+    var S = window.__ljrSpeed;
+    if (!S) return;
+    if (dt > 1500) return; // \uBC31\uADF8\uB77C\uC6B4\uB4DC \uD540 \uc0dd\uB7B5
+    S.times.push(dt);
+    var isKo = this.state.lang === "ko";
+    var best = Math.min.apply(null, S.times) / 1000;
+    S.big.firstChild.nodeValue = (dt / 1000).toFixed(3);
+    S.unit.textContent = isKo ? "\uCD08" : "s";
+    S.sub.textContent = label + "  \u00B7  " + S.times.length + (isKo ? "\uD68C" : "x") + "  \u00B7  " + (isKo ? "\uCD5C\uB2E8 " : "best ") + best.toFixed(3);
+    var pct = Math.max(4, Math.min(100, (dt / 200) * 100));
+    S.fill.style.width = pct + "%";
   }
+
   go(page) {
     if (page === this.state.page) { this.setState({ menu: false, open: null }); return; }
     this.perfStart("\uD398\uC774\uC9C0 " + page);
