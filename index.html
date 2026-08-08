@@ -2514,9 +2514,11 @@ class Component extends DCLogic {
     window.addEventListener("popstate", this.onPop);
 
     this.chrome(); this.responsive(); this.syncVideo();
+    this.perfInit();
   }
 
   componentDidUpdate(prevProps, prevState) {
+    this.perfStop();
     this.applyLang(); this.resolveImages(); this.reveal(); this.applySound();
     this.__small = null; this.responsive();
     this.chrome();
@@ -2634,8 +2636,54 @@ class Component extends DCLogic {
     window.open(url, "_blank", "noopener");
   }
 
+
+  perfInit() {
+    if (this.__perfBox) return;
+    var off = false;
+    try { off = localStorage.getItem("ljr_perf_off") === "1"; } catch (e) {}
+    if (off) return;
+    var box = document.createElement("div");
+    box.setAttribute("data-ljr-perf", "1");
+    box.style.cssText = "position:fixed;left:16px;bottom:16px;z-index:99999;background:#fff;border:2px solid #1F2227;padding:10px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.35;color:#1F2227;max-width:250px;box-shadow:0 6px 18px rgba(31,34,39,.14)";
+    var head = document.createElement("div");
+    head.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;letter-spacing:.06em;margin-bottom:6px";
+    var title = document.createElement("span");
+    title.textContent = "SWITCH SPEED";
+    var x = document.createElement("span");
+    x.textContent = "\u2715";
+    x.style.cssText = "cursor:pointer;opacity:.5";
+    x.onclick = function () {
+      try { localStorage.setItem("ljr_perf_off", "1"); } catch (e) {}
+      box.parentNode && box.parentNode.removeChild(box);
+    };
+    head.appendChild(title); head.appendChild(x);
+    var big = document.createElement("div");
+    big.style.cssText = "font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums";
+    big.textContent = "\u2014";
+    var sub = document.createElement("div");
+    sub.style.cssText = "opacity:.62;margin-top:4px";
+    sub.textContent = "\uBA54\uB274\uB098 \uC5B8\uC5B4\uB97C \uB20C\uB7EC \uBCF4\uC138\uC694";
+    box.appendChild(head); box.appendChild(big); box.appendChild(sub);
+    document.body.appendChild(box);
+    this.__perfBox = box; this.__perfBig = big; this.__perfSub = sub; this.__perfTimes = [];
+  }
+  perfStart(label) { this.__pt0 = performance.now(); this.__plabel = label; }
+  perfStop() {
+    if (this.__pt0 == null) return;
+    var t0 = this.__pt0, lb = this.__plabel, self = this;
+    this.__pt0 = null;
+    requestAnimationFrame(function () { self.perfShow(performance.now() - t0, lb); });
+  }
+  perfShow(dt, label) {
+    if (!this.__perfBig) return;
+    this.__perfTimes.push(dt);
+    var best = Math.min.apply(null, this.__perfTimes) / 1000;
+    this.__perfBig.textContent = (dt / 1000).toFixed(3) + "\uCD08";
+    this.__perfSub.textContent = label + " \u00B7 " + this.__perfTimes.length + "\uD68C \u00B7 \uCD5C\uB2E8 " + best.toFixed(3) + "\uCD08";
+  }
   go(page) {
     if (page === this.state.page) { this.setState({ menu: false, open: null }); return; }
+    this.perfStart("\uD398\uC774\uC9C0 " + page);
     if (!this.stack) { this.stack = ["home"]; this.pos = 0; }
     this.stack = this.stack.slice(0, this.pos + 1);
     this.stack.push(page);
@@ -2665,6 +2713,7 @@ class Component extends DCLogic {
   saveLang(code) { try { localStorage.setItem("ljr_lang", code); } catch (e) {} }
 
   setLang(code) {
+    this.perfStart("\uC5B8\uC5B4 " + code);
     if (code === "en" || code === "ko") {
       this.dict = null; this.saveLang(code);
       this.setState({ lang: code, langMenu: false, langBusy: "" });
