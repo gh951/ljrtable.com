@@ -2637,47 +2637,72 @@ class Component extends DCLogic {
   }
 
 
+  perfI18N() {
+    return {
+      ko: { t: "\uC804\uD658 \uC18D\uB3C4", h: "\uBA54\uB274\uB098 \uC5B8\uC5B4\uB97C \uB20C\uB7EC \uBCF4\uC138\uC694", u: "\uCD08", x: "\uD68C", b: "\uCD5C\uB2E8" },
+      en: { t: "SWITCH SPEED", h: "tap a menu or a language", u: "s", x: "x", b: "best" },
+      zh: { t: "\u5207\u6362\u901F\u5EA6", h: "\u8BF7\u70B9\u51FB\u83DC\u5355\u6216\u8BED\u8A00", u: "\u79D2", x: "\u6B21", b: "\u6700\u5FEB" },
+      "zh-TW": { t: "\u5207\u63DB\u901F\u5EA6", h: "\u8ACB\u9EDE\u9078\u9078\u55AE\u6216\u8A9E\u8A00", u: "\u79D2", x: "\u6B21", b: "\u6700\u5FEB" },
+      ja: { t: "\u5207\u66FF\u901F\u5EA6", h: "\u30E1\u30CB\u30E5\u30FC\u3084\u8A00\u8A9E\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044", u: "\u79D2", x: "\u56DE", b: "\u6700\u77ED" },
+      de: { t: "UMSCHALTZEIT", h: "Men\u00FC oder Sprache antippen", u: "s", x: "x", b: "best" },
+      ru: { t: "\u0421\u041A\u041E\u0420\u041E\u0421\u0422\u042C", h: "\u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043C\u0435\u043D\u044E \u0438\u043B\u0438 \u044F\u0437\u044B\u043A", u: "\u0441", x: "\u0440\u0430\u0437", b: "\u043B\u0443\u0447\u0448\u0435\u0435" },
+      hi: { t: "\u0938\u094D\u0935\u093F\u091A \u0917\u0924\u093F", h: "\u092E\u0947\u0928\u0942 \u092F\u093E \u092D\u093E\u0937\u093E \u0926\u092C\u093E\u0947\u0902", u: "\u0938\u0947", x: "x", b: "\u0938\u0930\u094D\u0935\u094B\u0924\u094D\u0924\u092E" },
+      fr: { t: "VITESSE", h: "touchez un menu ou une langue", u: "s", x: "x", b: "record" },
+      es: { t: "VELOCIDAD", h: "toque un men\u00FA o un idioma", u: "s", x: "x", b: "mejor" },
+      pt: { t: "VELOCIDADE", h: "toque num menu ou idioma", u: "s", x: "x", b: "melhor" },
+      it: { t: "VELOCIT\u00C0", h: "tocca un menu o una lingua", u: "s", x: "x", b: "record" },
+      id: { t: "KECEPATAN", h: "ketuk menu atau bahasa", u: "s", x: "x", b: "terbaik" },
+      ar: { t: "\u0633\u0631\u0639\u0629 \u0627\u0644\u062A\u0628\u062F\u064A\u0644", h: "\u0627\u0646\u0642\u0631 \u0639\u0644\u0649 \u0642\u0627\u0626\u0645\u0629 \u0623\u0648 \u0644\u063A\u0629", u: "\u062B", x: "x", b: "\u0627\u0644\u0623\u0641\u0636\u0644" },
+      pl: { t: "SZYBKO\u015A\u0106", h: "kliknij menu lub j\u0119zyk", u: "s", x: "x", b: "najlepszy" },
+      nl: { t: "SCHAKELTIJD", h: "tik op een menu of taal", u: "s", x: "x", b: "beste" },
+      sv: { t: "V\u00C4XLINGSTID", h: "tryck p\u00E5 en meny eller ett spr\u00E5k", u: "s", x: "x", b: "b\u00E4st" },
+      no: { t: "BYTTETID", h: "trykk p\u00E5 en meny eller et spr\u00E5k", u: "s", x: "x", b: "beste" },
+      da: { t: "SKIFTETID", h: "tryk p\u00E5 en menu eller et sprog", u: "s", x: "x", b: "bedste" }
+    };
+  }
+  perfWords() {
+    var all = this.perfI18N();
+    return all[this.state.lang] || all.en;
+  }
   perfInit() {
     if (window.__ljrSpeed) return;
     var self = this;
-    var isKo = function () { return self.state.lang === "ko"; };
     var pos = null;
     try { pos = JSON.parse(localStorage.getItem("ljr_speed_pos") || "null"); } catch (e) {}
     var open = false;
     try { open = localStorage.getItem("ljr_speed_open") === "1"; } catch (e) {}
 
     var wrap = document.createElement("div");
-    wrap.style.cssText = "position:fixed;z-index:99998;left:" + (pos && pos.l != null ? pos.l + "px" : "24px") + ";top:" + (pos && pos.t != null ? pos.t + "px" : "auto") + ";" + (pos && pos.t != null ? "" : "bottom:24px;") + "touch-action:none;user-select:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace";
+    wrap.style.cssText = "position:fixed;z-index:99998;left:" + (pos && pos.l != null ? pos.l + "px" : "24px") + ";" + (pos && pos.t != null ? "top:" + pos.t + "px;" : "bottom:24px;") + "user-select:none;-webkit-user-select:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace";
 
-    var pill = document.createElement("button");
-    pill.type = "button";
-    pill.style.cssText = "display:flex;align-items:center;gap:8px;height:34px;padding:0 15px;border:0;border-radius:999px;background:rgba(31,34,39,.92);color:#fff;font:600 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;cursor:pointer;box-shadow:0 6px 20px rgba(31,34,39,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)";
+    var pill = document.createElement("div");
+    pill.style.cssText = "display:flex;align-items:center;gap:8px;height:34px;padding:0 15px;border-radius:999px;background:rgba(31,34,39,.92);color:#fff;font-size:10.5px;font-weight:600;letter-spacing:.14em;cursor:pointer;box-shadow:0 6px 20px rgba(31,34,39,.22)";
     var dot = document.createElement("span");
     dot.style.cssText = "width:6px;height:6px;border-radius:999px;background:#57C39A;flex:0 0 6px";
     var pillTxt = document.createElement("span");
     pill.appendChild(dot); pill.appendChild(pillTxt);
 
     var panel = document.createElement("div");
-    panel.style.cssText = "display:none;min-width:214px;padding:14px 16px 13px;border-radius:16px;background:rgba(255,255,255,.94);border:1px solid rgba(31,34,39,.12);box-shadow:0 14px 40px rgba(31,34,39,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#1F2227";
+    panel.style.cssText = "display:none;min-width:216px;padding:14px 16px 13px;border-radius:16px;background:rgba(255,255,255,.95);border:1px solid rgba(31,34,39,.12);box-shadow:0 14px 40px rgba(31,34,39,.18);color:#1F2227;cursor:move";
 
     var head = document.createElement("div");
-    head.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:grab";
+    head.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:12px";
     var ttl = document.createElement("span");
-    ttl.textContent = "SWITCH SPEED";
-    ttl.style.cssText = "font:600 9.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;color:rgba(31,34,39,.55)";
+    ttl.style.cssText = "font-size:9.5px;font-weight:600;letter-spacing:.16em;color:rgba(31,34,39,.55)";
     var fold = document.createElement("span");
-    fold.textContent = "\u2015";
-    fold.style.cssText = "cursor:pointer;font-size:13px;line-height:1;color:rgba(31,34,39,.4);padding:2px 4px";
+    fold.textContent = "\u2013";
+    fold.style.cssText = "cursor:pointer;font-size:15px;line-height:1;color:rgba(31,34,39,.45);padding:0 4px";
     head.appendChild(ttl); head.appendChild(fold);
 
     var big = document.createElement("div");
-    big.style.cssText = "margin-top:8px;font:700 34px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:#1F2227";
-    big.textContent = "0.000";
+    big.style.cssText = "margin-top:8px;font-size:34px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1";
+    var num = document.createTextNode("0.000");
     var unit = document.createElement("span");
     unit.style.cssText = "font-size:15px;font-weight:600;margin-left:3px;color:rgba(31,34,39,.55)";
+    big.appendChild(num); big.appendChild(unit);
 
     var sub = document.createElement("div");
-    sub.style.cssText = "margin-top:7px;font:400 10.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(31,34,39,.55)";
+    sub.style.cssText = "margin-top:7px;font-size:10.5px;line-height:1.5;color:rgba(31,34,39,.55)";
     var bar = document.createElement("div");
     bar.style.cssText = "margin-top:10px;height:2px;background:rgba(31,34,39,.1);overflow:hidden";
     var fill = document.createElement("div");
@@ -2688,93 +2713,86 @@ class Component extends DCLogic {
     wrap.appendChild(pill); wrap.appendChild(panel);
     document.body.appendChild(wrap);
 
-    this.__perfWrap = wrap;
-    var S = { big: big, unit: unit, sub: sub, fill: fill, times: [], open: open };
+    var S = { wrap: wrap, pill: pill, panel: panel, ttl: ttl, pillTxt: pillTxt, num: num, unit: unit, sub: sub, fill: fill, times: [], open: open, last: null, label: "" };
     window.__ljrSpeed = S;
-    big.appendChild(unit);
 
-    var syncLabels = function () {
-      pillTxt.textContent = isKo() ? "\uC804\uD658 \uC18D\uB3C4 \uCE21\uC815" : "SWITCH SPEED";
-      if (!S.times.length) {
-        sub.textContent = isKo() ? "\uBA54\uB274\u00B7\uC5B8\uC5B4\uB97C \uB20C\uB7EC \uBCF4\uC138\uC694" : "tap a menu or a language";
-        unit.textContent = isKo() ? "\uCD08" : "s";
-      }
+    S.render = function () {
+      S.pill.style.display = S.open ? "none" : "flex";
+      S.panel.style.display = S.open ? "block" : "none";
     };
-    this.__perfSync = syncLabels;
-    syncLabels();
+    S.render();
+    this.perfText();
 
-    var render = function () {
-      pill.style.display = S.open ? "none" : "flex";
-      panel.style.display = S.open ? "block" : "none";
+    var setOpen = function (v) {
+      S.open = v;
+      try { localStorage.setItem("ljr_speed_open", v ? "1" : "0"); } catch (e) {}
+      S.render();
+      self.perfText();
     };
-    render();
+    pill.onclick = function () { if (!S.moved) setOpen(true); };
+    fold.onclick = function (e) { e.stopPropagation(); setOpen(false); };
 
-    var savePos = function () {
-      var r = wrap.getBoundingClientRect();
-      try { localStorage.setItem("ljr_speed_pos", JSON.stringify({ l: Math.round(r.left), t: Math.round(r.top) })); } catch (e) {}
-    };
-
-    var drag = null;
+    var down = null;
     var onDown = function (e) {
+      var p = e.touches ? e.touches[0] : e;
       var r = wrap.getBoundingClientRect();
-      drag = { x: e.clientX, y: e.clientY, l: r.left, t: r.top, moved: false };
-      wrap.setPointerCapture && wrap.setPointerCapture(e.pointerId);
+      down = { x: p.clientX, y: p.clientY, l: r.left, t: r.top };
+      S.moved = false;
     };
     var onMove = function (e) {
-      if (!drag) return;
-      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
-      if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
-      drag.moved = true;
-      var w = wrap.offsetWidth, h = wrap.offsetHeight;
-      var l = Math.min(Math.max(8, drag.l + dx), window.innerWidth - w - 8);
-      var tp = Math.min(Math.max(8, drag.t + dy), window.innerHeight - h - 8);
+      if (!down) return;
+      var p = e.touches ? e.touches[0] : e;
+      var dx = p.clientX - down.x, dy = p.clientY - down.y;
+      if (!S.moved && Math.abs(dx) + Math.abs(dy) < 5) return;
+      S.moved = true;
+      var l = Math.min(Math.max(8, down.l + dx), window.innerWidth - wrap.offsetWidth - 8);
+      var tp = Math.min(Math.max(8, down.t + dy), window.innerHeight - wrap.offsetHeight - 8);
       wrap.style.left = l + "px"; wrap.style.top = tp + "px"; wrap.style.bottom = "auto";
+      if (e.cancelable) e.preventDefault();
     };
     var onUp = function () {
-      if (drag && drag.moved) savePos();
-      var wasMoved = drag && drag.moved;
-      drag = null;
-      return wasMoved;
+      if (!down) return;
+      if (S.moved) {
+        var r = wrap.getBoundingClientRect();
+        try { localStorage.setItem("ljr_speed_pos", JSON.stringify({ l: Math.round(r.left), t: Math.round(r.top) })); } catch (e) {}
+        setTimeout(function () { S.moved = false; }, 60);
+      }
+      down = null;
     };
-    pill.addEventListener("pointerdown", onDown);
-    head.addEventListener("pointerdown", onDown);
-    wrap.addEventListener("pointermove", onMove);
-    wrap.addEventListener("pointerup", function () {
-      var moved = onUp();
-      if (!moved) { /* click handled below */ }
-    });
-    pill.addEventListener("click", function (e) {
-      if (drag && drag.moved) return;
-      S.open = true;
-      try { localStorage.setItem("ljr_speed_open", "1"); } catch (er) {}
-      render();
-    });
-    fold.addEventListener("click", function (e) {
-      e.stopPropagation();
-      S.open = false;
-      try { localStorage.setItem("ljr_speed_open", "0"); } catch (er) {}
-      render();
-    });
+    wrap.addEventListener("mousedown", onDown);
+    wrap.addEventListener("touchstart", onDown, { passive: true });
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("touchmove", onMove, { passive: false });
+    document.addEventListener("mouseup", onUp);
+    document.addEventListener("touchend", onUp);
   }
-  perfStart(label) { this.__pt0 = performance.now(); this.__plabel = label; }
+  perfText() {
+    var S = window.__ljrSpeed;
+    if (!S) return;
+    var w = this.perfWords();
+    S.ttl.textContent = w.t;
+    S.pillTxt.textContent = w.t;
+    S.unit.textContent = w.u;
+    if (S.last == null) { S.sub.textContent = w.h; return; }
+    var best = Math.min.apply(null, S.times) / 1000;
+    S.sub.textContent = S.label + "  \u00B7  " + S.times.length + w.x + "  \u00B7  " + w.b + " " + best.toFixed(3);
+  }
+  perfStart(label) { window.__ljrPend = { t0: performance.now(), lb: label }; }
   perfStop() {
-    if (this.__pt0 == null) return;
-    var t0 = this.__pt0, lb = this.__plabel, self = this;
-    this.__pt0 = null;
+    var p = window.__ljrPend;
+    if (!p) { if (window.__ljrSpeed) this.perfText(); return; }
+    var t0 = p.t0, lb = p.lb, self = this;
+    window.__ljrPend = null;
     requestAnimationFrame(function () { self.perfShow(performance.now() - t0, lb); });
   }
   perfShow(dt, label) {
     var S = window.__ljrSpeed;
     if (!S) return;
-    if (dt > 1500) return; // \uBC31\uADF8\uB77C\uC6B4\uB4DC \uD540 \uc0dd\uB7B5
-    S.times.push(dt);
-    var isKo = this.state.lang === "ko";
-    var best = Math.min.apply(null, S.times) / 1000;
-    S.big.firstChild.nodeValue = (dt / 1000).toFixed(3);
-    S.unit.textContent = isKo ? "\uCD08" : "s";
-    S.sub.textContent = label + "  \u00B7  " + S.times.length + (isKo ? "\uD68C" : "x") + "  \u00B7  " + (isKo ? "\uCD5C\uB2E8 " : "best ") + best.toFixed(3);
-    var pct = Math.max(4, Math.min(100, (dt / 200) * 100));
-    S.fill.style.width = pct + "%";
+    if (dt > 1500) return;
+    S.times.push(dt); S.last = dt; S.label = label;
+    S.num.nodeValue = (dt / 1000).toFixed(3);
+    S.fill.style.width = Math.max(4, Math.min(100, (dt / 200) * 100)) + "%";
+    this.perfText();
   }
 
   go(page) {
