@@ -2655,30 +2655,30 @@ class Component extends DCLogic {
     wrap.style.cssText = "position:fixed;z-index:99998;left:" + (pos && pos.l != null ? pos.l + "px" : "24px") + ";" + (pos && pos.t != null ? "top:" + pos.t + "px;" : "bottom:24px;") + "user-select:none;-webkit-user-select:none;font-family:ui-monospace,SFMono-Regular,Menlo,monospace";
 
     var pill = document.createElement("div");
-    pill.style.cssText = "display:flex;align-items:center;gap:8px;height:34px;padding:0 15px;border-radius:999px;background:rgba(31,34,39,.92);color:#fff;font-size:10.5px;font-weight:600;letter-spacing:.14em;cursor:pointer;box-shadow:0 6px 20px rgba(31,34,39,.22);white-space:nowrap";
+    pill.style.cssText = "display:flex;align-items:center;gap:8px;height:34px;padding:0 15px;border-radius:999px;background:#101215;color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;cursor:pointer;box-shadow:0 6px 20px rgba(31,34,39,.22);white-space:nowrap";
     var dot = document.createElement("span");
     dot.style.cssText = "width:6px;height:6px;border-radius:999px;background:#57C39A;flex:0 0 6px";
     var pillTxt = document.createElement("span");
     pill.appendChild(dot); pill.appendChild(pillTxt);
 
     var panel = document.createElement("div");
-    panel.style.cssText = "display:none;width:224px;padding:14px 16px 13px;border-radius:16px;background:rgba(255,255,255,.95);border:1px solid rgba(31,34,39,.12);box-shadow:0 14px 40px rgba(31,34,39,.18);color:#1F2227;cursor:move";
+    panel.style.cssText = "display:none;width:252px;padding:14px 16px 13px;border-radius:16px;background:#fff;border:2px solid #1F2227;box-shadow:0 14px 40px rgba(31,34,39,.18);color:#1F2227;cursor:move";
     var head = document.createElement("div");
     head.style.cssText = "display:flex;align-items:center;justify-content:space-between;gap:12px";
     var ttl = document.createElement("span");
-    ttl.style.cssText = "font-size:9.5px;font-weight:600;letter-spacing:.16em;color:rgba(31,34,39,.55);white-space:nowrap";
+    ttl.style.cssText = "font-size:9.5px;font-weight:700;letter-spacing:.16em;color:#1F2227;white-space:nowrap";
     var fold = document.createElement("span");
     fold.textContent = "\u2013";
-    fold.style.cssText = "cursor:pointer;font-size:15px;line-height:1;color:rgba(31,34,39,.45);padding:0 4px";
+    fold.style.cssText = "cursor:pointer;font-size:15px;line-height:1;color:#1F2227;padding:0 4px";
     head.appendChild(ttl); head.appendChild(fold);
     var big = document.createElement("div");
-    big.style.cssText = "margin-top:8px;font-size:34px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1";
+    big.style.cssText = "margin-top:8px;font-size:34px;font-weight:800;letter-spacing:-.02em;color:#101215;font-variant-numeric:tabular-nums;line-height:1";
     var num = document.createTextNode("0.000");
     var unit = document.createElement("span");
-    unit.style.cssText = "font-size:15px;font-weight:600;margin-left:3px;color:rgba(31,34,39,.55)";
+    unit.style.cssText = "font-size:15px;font-weight:700;margin-left:3px;color:#1F2227";
     big.appendChild(num); big.appendChild(unit);
     var sub = document.createElement("div");
-    sub.style.cssText = "margin-top:7px;font-size:10.5px;line-height:1.5;color:rgba(31,34,39,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis";
+    sub.style.cssText = "margin-top:7px;font-size:10px;line-height:1.5;color:#1F2227;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis";
     var bar = document.createElement("div");
     bar.style.cssText = "margin-top:10px;height:2px;background:rgba(31,34,39,.1);overflow:hidden";
     var fill = document.createElement("div");
@@ -2743,43 +2743,41 @@ class Component extends DCLogic {
     document.addEventListener("mouseup", onUp);
     document.addEventListener("touchend", onUp);
 
-    // 해당 클릭 자체에서 재는 구조 — 어햄 내부 구현과 무관하게 동작
-    document.addEventListener("click", function (e) {
-      if (wrap.contains(e.target)) return;
-      var t0 = performance.now();
-      var hash0 = location.hash, lang0 = self.state.lang;
-      var done = false;
-      var finish = function () {
-        if (done) return; done = true;
-        obs.disconnect(); clearTimeout(timer);
-        var show = function (dt) {
-          if (dt > 1200) return;
-          var w = words();
-          var label = w.s;
-          if (location.hash !== hash0) label = w.p + " " + location.hash.replace("#", "");
-          else if (self.state.lang !== lang0) label = w.l + " " + self.state.lang;
-          S.times.push(dt); S.last = dt; S.label = label;
-          num.nodeValue = (dt / 1000).toFixed(3);
-          fill.style.width = Math.max(4, Math.min(100, (dt / 200) * 100)) + "%";
-          text();
-        };
-        show(performance.now() - t0);
-        requestAnimationFrame(function () {
-          var dtp = performance.now() - t0;
-          if (dtp <= 1200 && S.times.length) { S.times[S.times.length - 1] = dtp; S.last = dtp; num.nodeValue = (dtp / 1000).toFixed(3); text(); }
-        });
-      };
-      var obs = new MutationObserver(finish);
-      obs.observe(document.body, { childList: true, subtree: true, characterData: true });
-      var timer = setTimeout(function () { done = true; obs.disconnect(); }, 800);
-    }, true);
+    S.show = function (dt, label) {
+      if (dt > 1200) return;
+      var w = words();
+      S.times.push(dt); S.last = dt; S.label = label || w.s;
+      num.nodeValue = (dt / 1000).toFixed(3);
+      fill.style.width = Math.max(4, Math.min(100, (dt / 200) * 100)) + "%";
+      text();
+    };
+    S.replace = function (dt) {
+      if (dt > 1200 || !S.times.length) return;
+      S.times[S.times.length - 1] = dt; S.last = dt;
+      num.nodeValue = (dt / 1000).toFixed(3);
+      text();
+    };
+    S.words = words;
   }
-  perfStart() {}
-  perfStop() { if (window.__ljrSpeed && window.__ljrSpeed.text) window.__ljrSpeed.text(); }
+  perfStart(label) { window.__ljrPend = { t0: performance.now(), lb: label }; }
+  perfStop() {
+    var S = window.__ljrSpeed, p = window.__ljrPend;
+    if (!S) return;
+    if (!p) { S.text && S.text(); return; }
+    window.__ljrPend = null;
+    var t0 = p.t0, lb = p.lb, w = S.words ? S.words() : null;
+    var label = lb;
+    if (w) {
+      if (lb && lb.indexOf("page:") === 0) label = w.p + " " + lb.slice(5);
+      else if (lb && lb.indexOf("lang:") === 0) label = w.l + " " + lb.slice(5);
+    }
+    S.show(performance.now() - t0, label);
+    requestAnimationFrame(function () { S.replace(performance.now() - t0); });
+  }
 
   go(page) {
     if (page === this.state.page) { this.setState({ menu: false, open: null }); return; }
-    this.perfStart("\uD398\uC774\uC9C0 " + page);
+    this.perfStart("page:" + page);
     if (!this.stack) { this.stack = ["home"]; this.pos = 0; }
     this.stack = this.stack.slice(0, this.pos + 1);
     this.stack.push(page);
@@ -2809,7 +2807,7 @@ class Component extends DCLogic {
   saveLang(code) { try { localStorage.setItem("ljr_lang", code); } catch (e) {} }
 
   setLang(code) {
-    this.perfStart("\uC5B8\uC5B4 " + code);
+    this.perfStart("lang:" + code);
     if (code === "en" || code === "ko") {
       this.dict = null; this.saveLang(code);
       this.setState({ lang: code, langMenu: false, langBusy: "" });
