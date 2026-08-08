@@ -2772,7 +2772,6 @@ class Component extends DCLogic {
       else if (lb && lb.indexOf("lang:") === 0) label = w.l + " " + lb.slice(5);
     }
     S.show(performance.now() - t0, label);
-    requestAnimationFrame(function () { S.replace(performance.now() - t0); });
   }
 
   go(page) {
